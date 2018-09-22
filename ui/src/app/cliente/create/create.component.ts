@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-import {Cliente} from "../cliente.model";
-import {MyMaskUtil} from "../../../shared/mask/my-mask.util";
+import {Component, OnInit} from '@angular/core';
+import {MyMaskUtil} from '../../shared/mask/my-mask.util';
+import {Cliente} from '../../core/model';
 
 @Component({
   selector: 'app-create',
