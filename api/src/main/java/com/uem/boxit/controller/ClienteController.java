@@ -1,5 +1,6 @@
 package com.uem.boxit.controller;
 
+import com.uem.boxit.exception.ObjectNotFoundException;
 import com.uem.boxit.model.Cliente;
 import com.uem.boxit.service.ClienteService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,11 +23,7 @@ public class ClienteController {
     private ClienteService clienteService;
 
     @GetMapping
-    public ResponseEntity<?> listAll(Pageable pageable) {
-        Page<Cliente> page = clienteService.getAll(pageable);
-        if (page.getTotalElements() > 0)
-            return ResponseEntity.ok(page);
-        else
-            return ResponseEntity.notFound().build();
+    public Page<Cliente> listAll(Pageable pageable) {
+        return clienteService.getAll(pageable);
     }
 }

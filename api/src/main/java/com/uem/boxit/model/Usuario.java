@@ -9,12 +9,16 @@ import java.util.Date;
 
 @Entity
 @Data
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@DiscriminatorColumn(name = "tipo", length = 1, discriminatorType = DiscriminatorType.STRING)
+@DiscriminatorValue("U")
 public class Usuario {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
+    @JsonIgnore
     @Column(unique = true)
     private String username;
 
@@ -24,19 +28,22 @@ public class Usuario {
     @JsonIgnore
     private String password;
 
+    @JsonIgnore
     private Boolean enable;
     private String telefone;
+
+    @JsonIgnore
     private String confirmCode;
+
+    @JsonIgnore
     private String passwordResetCode;
     private String nome;
 
+    @JsonIgnore
     @Temporal(TemporalType.TIMESTAMP)
     private Date passwordRestCodeExpiryDate;
 
-    @OneToOne
-    @JoinColumn(name = "cliente_id")
-    private Cliente cliente;
-
+    @JsonIgnore
     @Enumerated(EnumType.STRING)
     private Role role;
 }
