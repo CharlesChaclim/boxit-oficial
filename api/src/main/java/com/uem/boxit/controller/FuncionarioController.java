@@ -55,12 +55,14 @@ public class FuncionarioController {
     }
 
     @PutMapping("/{id}/password")
-    public ResponseEntity<?> updatePassword(@PathVariable Integer id, @RequestBody NewPasswordDTO dto) {
+    public ResponseEntity<Void> updatePassword(@PathVariable Integer id, @RequestBody NewPasswordDTO dto) {
         funcionarioService.updatePassword(id, dto.getPassword());
+        return ResponseEntity.ok().build();
     }
 
     @DeleteMapping("/{id}")
-    public void deactivate(@PathVariable Integer id) {
+    public ResponseEntity<Void> deactivate(@PathVariable Integer id) {
         funcionarioService.delete(id);
+        return ResponseEntity.ok().build();
     }
 }
