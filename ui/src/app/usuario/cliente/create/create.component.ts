@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {Cliente} from "../cliente.model";
 import {MyMaskUtil} from "../../../shared/mask/my-mask.util";
-import {printLine} from "tslint/lib/verify/lines";
 
 @Component({
   selector: 'app-create',

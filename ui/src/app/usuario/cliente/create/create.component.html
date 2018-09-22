@@ -11,7 +11,7 @@
         </div>
         <input type="text" class="form-control" required [spMask]="cnpjMask" maxlength="18" minlength="18"
                [spKeepMask]="true" [(ngModel)]="c.cnpj" placeholder="00.000.000/0000-00" name="cnpj" #cnpj="ngModel"
-               [ngClass]="(cnpj.invalid && cnpj.touched) ? 'is-invalid' : ''">
+               [ngClass]="( cnpj.invalid && cnpj.touched) ? 'is-invalid' : ''">
       </div>
       <div class="input-group mb-3">
         <div class="input-group-prepend">
@@ -52,7 +52,7 @@
 
       <div class="input-group mb-3">
         <div class="input-group-prepend">
-          <span class="input-group-text" mask=""  id="cep"><span class="text-danger">* &#160;</span>CEP</span>
+          <span class="input-group-text"  id="cep"><span class="text-danger">* &#160;</span>CEP</span>
         </div>
         <input type="text" class="form-control" required [spMask]="cepMask" maxlength="9" minlength="9"
                [spKeepMask]="true" [(ngModel)]="c.cep" placeholder="00000-000" name="cep" #cep="ngModel"
