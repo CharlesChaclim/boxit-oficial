@@ -1,6 +1,7 @@
 package com.uem.boxit.controller;
 
 import com.uem.boxit.dto.NewFuncionarioDTO;
+import com.uem.boxit.dto.NewPasswordDTO;
 import com.uem.boxit.event.FuncionarioCreateEvent;
 import com.uem.boxit.model.Funcionario;
 import com.uem.boxit.service.FuncionarioService;
@@ -51,6 +52,11 @@ public class FuncionarioController {
     public ResponseEntity<Funcionario> update(@PathVariable Integer id, @RequestBody Funcionario f) {
         Funcionario func = funcionarioService.update(id, f);
         return ResponseEntity.ok(func);
+    }
+
+    @PutMapping("/{id}/password")
+    public ResponseEntity<?> updatePassword(@PathVariable Integer id, @RequestBody NewPasswordDTO dto) {
+        funcionarioService.updatePassword(id, dto.getPassword());
     }
 
     @DeleteMapping("/{id}")

@@ -47,6 +47,11 @@ public class FuncionarioService {
         return funcionarioRepository.save(f);
     }
 
+    public void updatePassword(Integer id, String password) {
+        Funcionario f = funcionarioRepository.getOne(id);
+        f.setPassword(encoder.encode(password));
+    }
+
     public void delete(Integer id) {
         Funcionario f = funcionarioRepository.getOne(id);
         f.setEnable(false);
