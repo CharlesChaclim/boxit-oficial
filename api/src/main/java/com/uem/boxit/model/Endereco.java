@@ -13,10 +13,8 @@ public class Endereco {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private String cep;
-    private String logadouro;
-    private String numero;
     private String complemento;
-    private String bairro;
+    private String endereco;
 
     @JsonIgnore
     @OneToOne
