@@ -5,6 +5,7 @@ import com.uem.boxit.model.enums.Role;
 import lombok.Data;
 
 import javax.persistence.*;
+import javax.validation.constraints.Email;
 import java.util.Date;
 
 @Entity
@@ -23,6 +24,7 @@ public class Usuario {
     private String username;
 
     @Column(unique = true)
+    @Email
     private String email;
 
     @JsonIgnore
