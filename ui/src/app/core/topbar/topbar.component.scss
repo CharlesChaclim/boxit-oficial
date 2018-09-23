@@ -1,0 +1,8 @@
+li {
+  &.nav-item {
+    > a {
+      display: block;
+      padding: 10px;
+    }
+  }
+}
