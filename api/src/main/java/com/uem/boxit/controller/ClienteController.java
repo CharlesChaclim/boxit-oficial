@@ -2,10 +2,12 @@ package com.uem.boxit.controller;
 
 import com.uem.boxit.dto.CnpjDTO;
 import com.uem.boxit.dto.NewClienteDTO;
+import com.uem.boxit.event.UsuarioCreateEvent;
 import com.uem.boxit.model.Cliente;
 import com.uem.boxit.dto.NewPasswordDTO;
 import com.uem.boxit.service.ClienteService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
@@ -23,6 +25,8 @@ import java.util.Optional;
 )
 public class ClienteController {
 
+    @Autowired
+    private ApplicationEventPublisher publisher;
 
     @Autowired
     private ClienteService clienteService;
@@ -46,7 +50,7 @@ public class ClienteController {
     @PostMapping
     public ResponseEntity<Cliente> create(@RequestBody NewClienteDTO dto, HttpServletResponse resp){
         Cliente cliente = clienteService.create(dto);
-            //falta
+        publisher.publishEvent(new UsuarioCreateEvent(this, cliente.getId(), cliente.getConfirmCode(), resp));
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
@@ -56,13 +60,13 @@ public class ClienteController {
         return ResponseEntity.ok(exist);
     }
 
-    @PutMapping("/id")
+    @PutMapping("/{id}")
     public ResponseEntity<Cliente> update(@PathVariable Integer id, @RequestBody Cliente cliente){
         Cliente cli = clienteService.update(id, cliente);
         return ResponseEntity.ok(cli);
     }
 
-    @PutMapping("/cnpj")
+    @PutMapping("/{id}/cnpj")
     public ResponseEntity<Cliente> updateCnpj(@PathVariable Integer id, @RequestBody Cliente cliente){
         Cliente cli = clienteService.updateCnpj(id, cliente);
         return ResponseEntity.ok(cli);

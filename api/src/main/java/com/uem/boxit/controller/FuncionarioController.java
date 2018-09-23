@@ -3,7 +3,7 @@ package com.uem.boxit.controller;
 import com.uem.boxit.dto.CpfDTO;
 import com.uem.boxit.dto.NewFuncionarioDTO;
 import com.uem.boxit.dto.NewPasswordDTO;
-import com.uem.boxit.event.FuncionarioCreateEvent;
+import com.uem.boxit.event.UsuarioCreateEvent;
 import com.uem.boxit.model.Funcionario;
 import com.uem.boxit.service.FuncionarioService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,7 +45,7 @@ public class FuncionarioController {
     @PostMapping
     public ResponseEntity<Funcionario> create(@RequestBody NewFuncionarioDTO dto, HttpServletResponse resp) {
         Funcionario f = funcionarioService.create(dto);
-        publisher.publishEvent(new FuncionarioCreateEvent(f, resp));
+        publisher.publishEvent(new UsuarioCreateEvent(this, f.getId(), f.getConfirmCode(), resp));
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 

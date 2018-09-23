@@ -2,7 +2,9 @@ package com.uem.boxit.service;
 
 import com.uem.boxit.dto.NewClienteDTO;
 import com.uem.boxit.model.Cliente;
+import com.uem.boxit.model.Endereco;
 import com.uem.boxit.repository.ClienteRepository;
+import com.uem.boxit.repository.EnderecoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -19,6 +21,9 @@ public class ClienteService {
 
     @Autowired
     private ClienteRepository clienteRepository;
+
+    @Autowired
+    private EnderecoRepository enderecoRepository;
 
     @Autowired
     private PasswordEncoder encoder;
@@ -77,7 +82,9 @@ public class ClienteService {
         Cliente cliente = new Cliente();
         cliente.setNomeFantasia(dto.getNomeFantasia());
         cliente.setCnpj(dto.getCnpj());
-        cliente.setEndereco(dto.getEndereco());
+        Endereco e = new Endereco(dto.getCep(), dto.getComplemento(), dto.getEndereco(), dto.getBairro(), dto.getNumero(), dto.getCidade(), dto.getEstado());
+        enderecoRepository.save(e);
+        cliente.setEndereco(e);
         cliente.setNome(dto.getNome());
         cliente.setCpf(dto.getCpf());
         cliente.setTelefone(dto.getTelefone());
