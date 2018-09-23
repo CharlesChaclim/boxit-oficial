@@ -6,8 +6,8 @@ import {CreateComponent} from './create/create.component';
 
 const routes: Routes = [
   {path: 'cliente', component: ListComponent},
-  {path: 'cliente/:id', component: EditComponent},
-  {path: 'cliente/new', component: CreateComponent}
+  {path: 'cliente/new', component: CreateComponent},
+  {path: 'cliente/:id', component: EditComponent}
 ];
 
 export const ClienteRoute: ModuleWithProviders = RouterModule.forChild(routes);
