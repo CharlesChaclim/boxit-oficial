@@ -89,7 +89,7 @@ public class ClienteService {
         cliente.setCpf(dto.getCpf());
         cliente.setTelefone(dto.getTelefone());
         cliente.setEmail(dto.getEmail());
-        cliente.setUsername(dto.getUsername());
+        cliente.setUsername(dto.getCnpj().replace(".","").replace("/","").replace("-",""));
         cliente.setEnable(false);
         cliente.setConfirmCode(UUID.randomUUID().toString());
         cliente.setPassword(encoder.encode(dto.getPassword()));

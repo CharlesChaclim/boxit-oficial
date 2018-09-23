@@ -13,7 +13,6 @@ public class NewClienteDTO {
     private String cpf;
     private String telefone;
     private String email;
-    private String username;
     private String password;
     private String cep;
     private String complemento;
