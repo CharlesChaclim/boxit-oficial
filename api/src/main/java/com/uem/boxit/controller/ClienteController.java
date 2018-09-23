@@ -1,7 +1,6 @@
 package com.uem.boxit.controller;
 
 import com.uem.boxit.dto.CnpjDTO;
-import com.uem.boxit.dto.CpfDTO;
 import com.uem.boxit.dto.NewClienteDTO;
 import com.uem.boxit.model.Cliente;
 import com.uem.boxit.dto.NewPasswordDTO;
@@ -33,6 +32,11 @@ public class ClienteController {
         return clienteService.getAll(pageable);
     }
 
+    @GetMapping("/enable")
+    public Page<Cliente> listAllValido(Pageable pageable) {
+        return clienteService.getAllValido(pageable);
+    }
+
     @GetMapping("/{id}")
     public ResponseEntity<Cliente> getOne(@PathVariable Integer id){
         Optional<Cliente> cliente = clienteService.getOne(id);
@@ -58,9 +62,9 @@ public class ClienteController {
         return ResponseEntity.ok(cli);
     }
 
-    @PutMapping("/id")
+    @PutMapping("/cnpj")
     public ResponseEntity<Cliente> updateCnpj(@PathVariable Integer id, @RequestBody Cliente cliente){
-        Cliente cli = clienteService.update(id, cliente);
+        Cliente cli = clienteService.updateCnpj(id, cliente);
         return ResponseEntity.ok(cli);
     }
 

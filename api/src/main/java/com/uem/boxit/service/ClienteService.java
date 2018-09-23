@@ -27,6 +27,10 @@ public class ClienteService {
         return clienteRepository.findAll(pageable);
     }
 
+    public Page<Cliente> getAllValido(Pageable pageable) {
+        return clienteRepository.findByEnableIsTrue(pageable);
+    }
+
     public Optional<Cliente> getOne(Integer id){
         return clienteRepository.findById(id);
     }
@@ -52,10 +56,10 @@ public class ClienteService {
     }
 
     @Transactional
-    public void updateCnpj(Integer id, Cliente cliente){
+    public Cliente updateCnpj(Integer id, Cliente cliente){
         Cliente cli = clienteRepository.getOne(id);
         cli.setCnpj(cliente.getCnpj());
-        clienteRepository.save(cli);
+        return clienteRepository.save(cli);
     }
 
     public void updatePassword(Integer id, String senha){
