@@ -12,7 +12,6 @@ import {SweetAlert2Module} from '@toverux/ngx-sweetalert2';
 import {CurrencyMaskModule} from 'ng2-currency-mask';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {ToastrModule} from 'ngx-toastr';
-import {HttpClientModule} from '@angular/common/http';
 
 @NgModule({
   imports: [
@@ -36,7 +35,6 @@ import {HttpClientModule} from '@angular/common/http';
       timeOut: 10000,
       positionClass: 'toast-bottom-left'
     }),
-    HttpClientModule
   ],
   declarations: [
     NotFoundComponent,

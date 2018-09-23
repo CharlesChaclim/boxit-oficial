@@ -15,8 +15,6 @@ public class Endereco {
     private String cep;
     private String complemento;
     private String endereco;
-    private String bairro;
-    private String numero;
 
     @JsonIgnore
     @OneToOne
