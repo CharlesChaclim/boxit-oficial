@@ -48,6 +48,7 @@ public class FuncionarioService {
             f.setRole(Role.GERENTE);
         f.setNome(funcionario.getNome());
         f.setTelefone(funcionario.getTelefone());
+        f.setEmail(funcionario.getEmail());
         return funcionarioRepository.save(f);
     }
 
