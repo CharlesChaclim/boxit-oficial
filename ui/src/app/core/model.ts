@@ -3,6 +3,8 @@ export class Cliente {
   cnpj: string;
   nomef:	string;
   endereco:	string;
+  bairro: string;
+  numero: string;
   complemento:	string;
   cidade:	string;
   estado:	string;
@@ -13,4 +15,12 @@ export class Cliente {
   email:	string;
   senha:	string;
   csenha:	string;
+}
+
+export class Endereco {
+  endereco: string;
+  bairro: string;
+  cidade: string;
+  uf: string;
+  cep: string;
 }
