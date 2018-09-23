@@ -17,13 +17,23 @@ public class Endereco {
     private String endereco;
     private String bairro;
     private String numero;
+    private String cidade;
+    private String estado;
 
     @JsonIgnore
     @OneToOne
     @JoinColumn(name = "user_id")
     private Usuario user;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "cidade_id")
-    private Cidade cidade;
+    public Endereco(String cep, String complemento, String endereco, String bairro, String numero, String cidade, String estado) {
+        this.cep = cep;
+        this.complemento = complemento;
+        this.endereco = endereco;
+        this.bairro = bairro;
+        this.numero = numero;
+        this.cidade = cidade;
+        this.estado = estado;
+    }
+
+    public Endereco() { }
 }

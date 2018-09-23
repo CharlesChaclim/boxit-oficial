@@ -1,10 +1,10 @@
 package com.uem.boxit.exception;
 
-public class ObjectNotFoundException extends RuntimeException {
+public class CnpjJaExisteException extends RuntimeException {
 
     private static final long serialVersionUID = 1L;
 
-    public ObjectNotFoundException(String msg) {
+    public CnpjJaExisteException(String msg) {
         super(msg);
     }
 }

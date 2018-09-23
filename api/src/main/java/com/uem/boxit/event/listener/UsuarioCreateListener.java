@@ -1,17 +1,17 @@
 package com.uem.boxit.event.listener;
 
-import com.uem.boxit.event.FuncionarioCreateEvent;
-import com.uem.boxit.model.Funcionario;
+import com.uem.boxit.event.UsuarioCreateEvent;
 import org.springframework.context.ApplicationListener;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import javax.servlet.http.HttpServletResponse;
 import java.net.URI;
 
-public class FuncionarioCreateListener implements ApplicationListener<FuncionarioCreateEvent> {
+public class UsuarioCreateListener implements ApplicationListener<UsuarioCreateEvent> {
     @Override
-    public void onApplicationEvent(FuncionarioCreateEvent e) {
-        Integer id = e.getFuncionarioId();
+    public void onApplicationEvent(UsuarioCreateEvent e) {
+        Integer id = e.getId();
+        String confirmationCode = e.getConfirmationCode();
         HttpServletResponse response = e.getResponse();
         adicionarHeaderLocation(response, id);
     }
