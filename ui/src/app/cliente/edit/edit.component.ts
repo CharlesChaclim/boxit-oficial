@@ -16,6 +16,7 @@ export class EditComponent implements OnInit {
   public cepMask = MyMaskUtil.CEP_MASK_GENERATOR;
   public phoneMask = MyMaskUtil.DYNAMIC_PHONE_MASK_GENERATOR;
   c = new Cliente();
+  csenha = '';
   constructor(
     private correiosService: CorreiosService,
     private servico: ClienteService,
@@ -37,7 +38,7 @@ export class EditComponent implements OnInit {
   }
 
   confirmasenha(): boolean {
-    return this.c.senha !== this.c.csenha;
+    return this.c.senha !== this.csenha;
   }
 
   editar() {

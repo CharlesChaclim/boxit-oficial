@@ -7,7 +7,7 @@ import {environment} from '../../environments/environment';
   providedIn: 'root'
 })
 export class CorreiosService {
-  url = 'https://webmaniabr.com/api/1/cep/';
+  url = environment.correios_url;
   constructor(
     private http: HttpClient
   ) { }

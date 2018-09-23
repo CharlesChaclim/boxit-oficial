@@ -17,7 +17,7 @@
         <div class="form-group row">
           <label class="col-md-2 col-form-label">Nome fantasia <span class="text-danger">*</span></label>
           <div class="col-md-10">
-            <input type="text" class="form-control" required [(ngModel)]="c.nomef" placeholder="Boxit" name="nomef"
+            <input type="text" class="form-control" required [(ngModel)]="c.nomeFantasia" placeholder="Boxit" name="nomef"
                    #nomef="ngModel" [ngClass]="(nomef.invalid && nomef.touched) ? 'is-invalid' : ''">
           </div>
         </div>
@@ -148,9 +148,9 @@
         <div class="form-group row">
           <label class="col-md-2 col-form-label" style="font-size: 15px">Confirme sua senha </label>
           <div class="col-md-10">
-            <input type="password" class="form-control" [(ngModel)]="c.csenha" placeholder="********"
+            <input type="password" class="form-control" [(ngModel)]="csenha" placeholder="********"
                    name="csenha"
-                   #csenha="ngModel" [ngClass]="(confirmasenha()) ? 'is-invalid' : ''">
+                   #csenhaf="ngModel" [ngClass]="(confirmasenha()) ? 'is-invalid' : ''">
           </div>
         </div>
 

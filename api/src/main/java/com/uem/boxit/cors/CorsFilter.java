@@ -1,6 +1,8 @@
 package com.uem.boxit.cors;
 
 import com.uem.boxit.config.property.BoxItApiProperty;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;
@@ -15,12 +17,14 @@ import java.io.IOException;
 @Order(Ordered.HIGHEST_PRECEDENCE)
 public class CorsFilter implements Filter {
 
+    private static final Logger logger = LoggerFactory.getLogger(CorsFilter.class);
+
     @Autowired
     private BoxItApiProperty property;
 
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
-
+        logger.info("Iniciando CORS filter");
     }
 
     @Override
@@ -43,5 +47,7 @@ public class CorsFilter implements Filter {
     }
 
     @Override
-    public void destroy() { }
+    public void destroy() {
+        logger.info("Destruindo CORS filter");
+    }
 }

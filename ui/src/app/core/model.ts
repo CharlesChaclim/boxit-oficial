@@ -1,20 +1,18 @@
 export class Cliente {
-  id: string;
-  cnpj: string;
-  nomef:	string;
-  logadouro:	string;
   bairro: string;
-  numero: string;
-  complemento:	string;
-  cidade:	string;
-  estado:	string;
   cep:	string;
+  cidade:	string;
+  complemento:	string;
   cpf:	string;
-  nome:	string;
-  telefone:	string;
   email:	string;
+  logadouro:	string;
+  estado:	string;
+  cnpj: string;
+  nome:	string;
+  nomeFantasia:	string;
+  numero: string;
   senha:	string;
-  csenha:	string;
+  telefone:	string;
 }
 
 export class Endereco {

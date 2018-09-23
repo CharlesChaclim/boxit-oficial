@@ -13,6 +13,7 @@ import {CurrencyMaskModule} from 'ng2-currency-mask';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {ToastrModule} from 'ngx-toastr';
 import {HttpClientModule} from '@angular/common/http';
+import {FuncionarioModule} from '../funcionario/funcionario.module';
 
 @NgModule({
   imports: [
@@ -36,7 +37,8 @@ import {HttpClientModule} from '@angular/common/http';
       timeOut: 10000,
       positionClass: 'toast-bottom-left'
     }),
-    HttpClientModule
+    HttpClientModule,
+    FuncionarioModule
   ],
   declarations: [
     NotFoundComponent,

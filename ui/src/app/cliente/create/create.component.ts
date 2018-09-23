@@ -17,11 +17,18 @@ export class CreateComponent implements OnInit {
   public cepMask = MyMaskUtil.CEP_MASK_GENERATOR;
   public phoneMask = MyMaskUtil.DYNAMIC_PHONE_MASK_GENERATOR;
   c = new Cliente();
+  cnpjvalid: any;
+  emailvalid: any;
+  showEmailError = false;
+  showCnpjError = false;
+  csenha = '';
+
   constructor(
     private correiosService: CorreiosService,
     private servico: ClienteService,
     private route: Router
-  ) { }
+  ) {
+  }
 
   ngOnInit() {
   }
@@ -38,33 +45,41 @@ export class CreateComponent implements OnInit {
   }
 
   confirmasenha(): boolean {
-    return this.c.senha !== this.c.csenha;
+    return this.c.senha !== this.csenha;
   }
 
   confimacnpj(): boolean {
-    this.servico.cnpjExist(this.c).subscribe(() => {
+    this.servico.cnpjExist(this.c.cnpj).subscribe(r => {
+      if (r) {
         swal(
           'Erro!',
           'CNPJ já cadastrado',
           'error'
         );
-        return true;
+        this.showCnpjError = true;
+      }
+      this.cnpjvalid = r;
+      this.showCnpjError = false;
       }
     );
     return false;
   }
 
   confimaemail(): boolean {
-    this.servico.emailExist(this.c).subscribe(() => {
-        swal(
-          'Erro!',
-          'Email já cadastrado',
-          'error'
-        );
-        return true;
+    this.servico.emailExist(this.c.email).subscribe(r => {
+        if (r) {
+          swal(
+            'Erro!',
+            'Email já cadastrado',
+            'error'
+          );
+          this.showEmailError = true;
+        }
+        this.showEmailError = false;
+        this.emailvalid = r;
       }
     );
-    return false;
+    return;
   }
 
   cadastrar() {
