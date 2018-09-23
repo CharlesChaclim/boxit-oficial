@@ -7,13 +7,34 @@ import {UnauthorizedComponent} from './unauthorized/unauthorized.component';
 import {AppRouting} from '../app.routing';
 import { TopbarComponent } from './topbar/topbar.component';
 import { FooterComponent } from './footer/footer.component';
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import {SweetAlert2Module} from '@toverux/ngx-sweetalert2';
+import {CurrencyMaskModule} from 'ng2-currency-mask';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {ToastrModule} from 'ngx-toastr';
 
 @NgModule({
   imports: [
     CommonModule,
     EstoqueModule,
     ClienteModule,
-    AppRouting
+    AppRouting,
+    NgbModule.forRoot(),
+    SweetAlert2Module.forRoot({
+      buttonsStyling: false,
+      confirmButtonClass: 'btn btn-primary',
+      cancelButtonClass: 'btn btn-secondary'
+    }),
+    CurrencyMaskModule,
+    BrowserAnimationsModule,
+    ToastrModule.forRoot({
+      progressBar: true,
+      preventDuplicates: true,
+      progressAnimation: 'increasing',
+      resetTimeoutOnDuplicate: true,
+      timeOut: 10000,
+      positionClass: 'toast-bottom-left'
+    }),
   ],
   declarations: [
     NotFoundComponent,
