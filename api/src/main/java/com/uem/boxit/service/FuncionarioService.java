@@ -76,6 +76,7 @@ public class FuncionarioService {
         } else {
             f.setRole(Role.FUNCIONARIO);
         }
+        f.setEmail(dto.getEmail());
         f.setEnable(false);
         f.setConfirmCode(UUID.randomUUID().toString());
         return f;
