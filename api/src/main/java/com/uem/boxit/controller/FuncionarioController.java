@@ -1,5 +1,6 @@
 package com.uem.boxit.controller;
 
+import com.uem.boxit.dto.CpfDTO;
 import com.uem.boxit.dto.NewFuncionarioDTO;
 import com.uem.boxit.dto.NewPasswordDTO;
 import com.uem.boxit.event.FuncionarioCreateEvent;
@@ -46,6 +47,12 @@ public class FuncionarioController {
         Funcionario f = funcionarioService.create(dto);
         publisher.publishEvent(new FuncionarioCreateEvent(f, resp));
         return ResponseEntity.status(HttpStatus.CREATED).build();
+    }
+
+    @PostMapping("/cpf")
+    public ResponseEntity<Boolean> cpfExist(@RequestBody CpfDTO dto) {
+        Boolean exist = funcionarioService.cpfExist(dto.getCpf());
+        return ResponseEntity.ok(exist);
     }
 
     @PutMapping("/{id}")

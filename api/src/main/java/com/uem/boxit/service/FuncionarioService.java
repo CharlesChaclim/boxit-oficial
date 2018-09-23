@@ -36,6 +36,10 @@ public class FuncionarioService {
         return funcionarioRepository.save(f);
     }
 
+    public Boolean cpfExist(String cpf) {
+        return funcionarioRepository.findByCpf(cpf).isPresent();
+    }
+
     @Transactional
     public Funcionario update(Integer id, Funcionario funcionario) {
         Funcionario f = funcionarioRepository.getOne(id);
