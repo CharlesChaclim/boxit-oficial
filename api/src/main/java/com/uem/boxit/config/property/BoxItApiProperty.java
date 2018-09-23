@@ -8,6 +8,8 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 @Setter
 @ConfigurationProperties("boxit")
 public class BoxItApiProperty {
+    private String originPermitida = "http://localhost:8000";
+
     private final S3 s3 = new S3();
 
     @Getter
