@@ -10,4 +10,5 @@ import java.util.Optional;
 public interface ClienteRepository extends JpaRepository<Cliente, Integer> {
     Optional<Cliente> findByCnpj(String cnpj);
     Page<Cliente> findByEnableIsTrue(Pageable pageable);
+    Optional<Cliente> findByEmail(String email);
 }

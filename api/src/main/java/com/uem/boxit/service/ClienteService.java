@@ -3,6 +3,7 @@ package com.uem.boxit.service;
 import com.uem.boxit.dto.NewClienteDTO;
 import com.uem.boxit.model.Cliente;
 import com.uem.boxit.model.Endereco;
+import com.uem.boxit.model.enums.Role;
 import com.uem.boxit.repository.ClienteRepository;
 import com.uem.boxit.repository.EnderecoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -49,6 +50,8 @@ public class ClienteService {
         return clienteRepository.findByCnpj(cnpj).isPresent();
     }
 
+    public Boolean emailExist(String email){return clienteRepository.findByEmail(email).isPresent();}
+
     @Transactional
     public Cliente update(Integer id, Cliente cliente){
         Cliente cli = clienteRepository.getOne(id);
@@ -57,6 +60,8 @@ public class ClienteService {
         cli.setCpf(cliente.getCpf());
         cli.setNome(cliente.getNome());
         cli.setTelefone(cliente.getEmail());
+        if(cliente.getPassword() != null)
+            updatePassword(id, cliente.getPassword());
         return clienteRepository.save(cli);
     }
 
@@ -82,15 +87,16 @@ public class ClienteService {
         Cliente cliente = new Cliente();
         cliente.setNomeFantasia(dto.getNomeFantasia());
         cliente.setCnpj(dto.getCnpj());
-        Endereco e = new Endereco(dto.getCep(), dto.getComplemento(), dto.getEndereco(), dto.getBairro(), dto.getNumero(), dto.getCidade(), dto.getEstado());
-        enderecoRepository.save(e);
-        cliente.setEndereco(e);
+        Endereco endereco = new Endereco(dto.getCep(), dto.getComplemento(), dto.getEndereco(), dto.getBairro(), dto.getNumero(), dto.getCidade(), dto.getEstado());
+        enderecoRepository.save(endereco);
+        cliente.setEndereco(endereco);
         cliente.setNome(dto.getNome());
         cliente.setCpf(dto.getCpf());
         cliente.setTelefone(dto.getTelefone());
         cliente.setEmail(dto.getEmail());
         cliente.setUsername(dto.getCnpj().replace(".","").replace("/","").replace("-",""));
         cliente.setEnable(false);
+        cliente.setRole(Role.CLIENTE);
         cliente.setConfirmCode(UUID.randomUUID().toString());
         cliente.setPassword(encoder.encode(dto.getPassword()));
         return cliente;

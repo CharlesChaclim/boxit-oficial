@@ -2,7 +2,7 @@ export class Cliente {
   id: string;
   cnpj: string;
   nomef:	string;
-  endereco:	string;
+  logadouro:	string;
   bairro: string;
   numero: string;
   complemento:	string;

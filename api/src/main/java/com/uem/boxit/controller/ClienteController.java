@@ -1,6 +1,7 @@
 package com.uem.boxit.controller;
 
 import com.uem.boxit.dto.CnpjDTO;
+import com.uem.boxit.dto.EmailDTO;
 import com.uem.boxit.dto.NewClienteDTO;
 import com.uem.boxit.event.UsuarioCreateEvent;
 import com.uem.boxit.model.Cliente;
@@ -57,6 +58,12 @@ public class ClienteController {
     @PostMapping("/cnpj")
     public ResponseEntity<Boolean> cnpjExist(@RequestBody CnpjDTO dto){
         Boolean exist = clienteService.cnpjExist(dto.getCnpj());
+        return ResponseEntity.ok(exist);
+    }
+
+    @PostMapping("/email")
+    public ResponseEntity<Boolean> emailExist(@RequestBody EmailDTO dto){
+        Boolean exist = clienteService.emailExist(dto.getEmail());
         return ResponseEntity.ok(exist);
     }
 

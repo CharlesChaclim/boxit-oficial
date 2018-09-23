@@ -1,114 +1,163 @@
-<div class="card col-12 offset-md-3 col-md-6">
-  <div class="card-header text-center">
-    Editar Cliente
-  </div>
-  <form #cform="ngForm">
+<div class="col-12 offset-lg-1 col-lg-10">
+  <div class="card">
+    <div class="card-header text-center">
+      Editar Cadastro
+    </div>
     <div class="card-body">
       <h5 class="card-title">Informações da Empresa</h5>
-      <div class="input-group mb-3">
-        <div class="input-group-prepend">
-          <span class="input-group-text" id="cnpj"><span class="text-danger">* &#160;</span>CNPJ</span>
+      <form #cform="ngForm">
+        <div class="form-group row">
+          <label class="col-md-2 col-form-label">CNPJ <span class="text-danger">*</span></label>
+          <div class="col-md-10">
+            <input type="text" class="form-control" required [spMask]="cnpjMask" maxlength="18" minlength="18"
+                   [spKeepMask]="true" [(ngModel)]="c.cnpj" placeholder="00.000.000/0000-00" name="cnpj" #cnpj="ngModel"
+                   [ngClass]="( cnpj.invalid && cnpj.touched) ? 'is-invalid' : ''">
+          </div>
         </div>
-        <input type="text" class="form-control" required [spMask]="cnpjMask" maxlength="18" minlength="18"
-               [spKeepMask]="true" [(ngModel)]="c.cnpj" placeholder="00.000.000/0000-00" name="cnpj" #cnpj="ngModel"
-               [ngClass]="( cnpj.invalid && cnpj.touched) ? 'is-invalid' : ''">
-      </div>
-      <div class="input-group mb-3">
-        <div class="input-group-prepend">
-          <span class="input-group-text" id="nomef"><span class="text-danger">* &#160;</span>Nome fantasia</span>
+        <div class="form-group row">
+          <label class="col-md-2 col-form-label">Nome fantasia <span class="text-danger">*</span></label>
+          <div class="col-md-10">
+            <input type="text" class="form-control" required [(ngModel)]="c.nomef" placeholder="Boxit" name="nomef"
+                   #nomef="ngModel" [ngClass]="(nomef.invalid && nomef.touched) ? 'is-invalid' : ''">
+          </div>
         </div>
-        <input type="text" class="form-control" required [(ngModel)]="c.nomef" placeholder="Boxit" name="nomef"
-               #nomef="ngModel" [ngClass]="(nomef.invalid && nomef.touched) ? 'is-invalid' : ''">
-      </div>
+        <div class="form-group row">
+          <label class="col-md-2 col-form-label">CEP <span class="text-danger">*</span></label>
+          <div class="col-md-10">
+            <input type="text" class="form-control" required [spMask]="cepMask" maxlength="9" minlength="9"
+                   [spKeepMask]="true" [(ngModel)]="c.cep" placeholder="00000-000" name="cep" #cep="ngModel"
+                   [ngClass]="(cep.invalid && cep.touched) ? 'is-invalid' : ''" (blur)="buscaEndereco()">
+          </div>
+        </div>
 
-      <div class="input-group mb-3">
-        <div class="input-group-prepend">
-          <span class="input-group-text" id="endereco"><span class="text-danger">* &#160;</span>Endereço</span>
+        <div class="form-row">
+          <div class="col-md-6">
+            <div class="form-group row">
+              <label class="col-md-4 col-form-label">Logadouro <span class="text-danger">*</span></label>
+              <div class="col-md-8">
+                <input type="text" class="form-control" required [(ngModel)]="c.logadouro"
+                       placeholder="AV. Brasil"
+                       name="logadouro" #logadouro="ngModel"
+                       [ngClass]="(logadouro.invalid && logadouro.touched) ? 'is-invalid' : ''">
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="form-group row">
+              <label class="col-md-3 col-form-label">Bairro </label>
+              <div class="col-md-9">
+                <input type="text" class="form-control" [(ngModel)]="c.bairro"
+                       placeholder="Centro"
+                       name="bairro" #bairro="ngModel">
+              </div>
+            </div>
+          </div>
         </div>
-        <input type="text" class="form-control" required [(ngModel)]="c.endereco" placeholder="AV. Brasil, 366, Centro"
-               name="endereco" #endereco="ngModel" [ngClass]="(endereco.invalid && endereco.touched) ? 'is-invalid' : ''">
-      </div>
 
-      <div class="input-group mb-3">
-        <div class="input-group-prepend">
-          <span class="input-group-text"  id="comp">Complemento</span>
+        <div class="form-row">
+          <div class="col-md-6">
+            <div class="form-group row">
+              <label class="col-md-4 col-form-label">Cidade <span class="text-danger">*</span></label>
+              <div class="col-md-8">
+                <input type="text" class="form-control" required [(ngModel)]="c.cidade" placeholder="Maringá"
+                       name="cidade"
+                       #cidade="ngModel" [ngClass]="(cidade.invalid && cidade.touched) ? 'is-invalid' : ''">
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="form-group row">
+              <label class="col-md-3 col-form-label">Estado <span class="text-danger">*</span></label>
+              <div class="col-md-9">
+                <input type="text" class="form-control" required [(ngModel)]="c.estado" placeholder="Paraná"
+                       name="estado"
+                       #estado="ngModel" [ngClass]="(estado.invalid && estado.touched) ? 'is-invalid' : ''">
+              </div>
+            </div>
+          </div>
         </div>
-        <input type="text" class="form-control" [(ngModel)]="c.complemento" placeholder="Ponto de referência"
-               name="complemento" #complemento="ngModel" [ngClass]="(complemento.invalid && complemento.touched) ? 'is-invalid' : ''">
-      </div>
 
-      <div class="input-group mb-3">
-        <div class="input-group-prepend">
-          <span class="input-group-text" id="cidade"><span class="text-danger">* &#160;</span>Cidade</span>
+        <div class="form-row">
+          <div class="col-md-6">
+            <div class="form-group row">
+              <label class="col-md-4 col-form-label">Número</label>
+              <div class="col-md-8">
+                <input type="number" class="form-control" [(ngModel)]="c.numero"
+                       placeholder="1029"
+                       name="numero" #numero="ngModel">
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="form-group row">
+              <label class="col-md-3 col-form-label">Complemento</label>
+              <div class="col-md-9">
+                <input type="text" class="form-control" [(ngModel)]="c.complemento" placeholder="Ponto de referência"
+                       name="complemento" #complemento="ngModel"
+                       [ngClass]="(complemento.invalid && complemento.touched) ? 'is-invalid' : ''">
+              </div>
+            </div>
+          </div>
         </div>
-        <input type="text" class="form-control" required [(ngModel)]="c.cidade" placeholder="Maringá" name="cidade"
-               #cidade="ngModel" [ngClass]="(cidade.invalid && cidade.touched) ? 'is-invalid' : ''">
-        <div class="input-group-prepend">
-          <span class="input-group-text" id="estado"><span class="text-danger">* &#160;</span>Estado</span>
-        </div>
-        <input type="text" class="form-control" required [(ngModel)]="c.estado" placeholder="Paraná" name="estado"
-               #estado="ngModel" [ngClass]="(estado.invalid && estado.touched) ? 'is-invalid' : ''">
-      </div>
 
-      <div class="input-group mb-3">
-        <div class="input-group-prepend">
-          <span class="input-group-text"  id="cep"><span class="text-danger">* &#160;</span>CEP</span>
-        </div>
-        <input type="text" class="form-control" required [spMask]="cepMask" maxlength="9" minlength="9"
-               [spKeepMask]="true" [(ngModel)]="c.cep" placeholder="00000-000" name="cep" #cep="ngModel"
-               [ngClass]="(cep.invalid && cep.touched) ? 'is-invalid' : ''">
-      </div>
+        <h5 class="card-title">Informações do Responsável</h5>
 
-      <h5 class="card-title">Informações do Responsável</h5>
-      <div class="input-group mb-3">
-        <div class="input-group-prepend">
-          <span class="input-group-text" id="cpf"><span class="text-danger">* &#160;</span>CPF</span>
+        <div class="form-group row">
+          <label class="col-md-2 col-form-label">CPF <span class="text-danger">*</span></label>
+          <div class="col-md-10">
+            <input type="text" class="form-control" required [spMask]="cpfMask" maxlength="14" minlength="14"
+                   [spKeepMask]="true" [(ngModel)]="c.cpf" placeholder="000.000.000-00" name="cpf" #cpf="ngModel"
+                   [ngClass]="(cpf.invalid && cpf.touched) ? 'is-invalid' : ''">
+          </div>
         </div>
-        <input type="text" class="form-control" required [spMask]="cpfMask" maxlength="14" minlength="14"
-               [spKeepMask]="true" [(ngModel)]="c.cpf" placeholder="000.000.000-00" name="cpf" #cpf="ngModel"
-               [ngClass]="(cpf.invalid && cpf.touched) ? 'is-invalid' : ''">
-      </div>
-      <div class="input-group mb-3">
-        <div class="input-group-prepend">
-          <span class="input-group-text"  id="nome"><span class="text-danger">* &#160;</span>Nome</span>
+
+        <div class="form-group row">
+          <label class="col-md-2 col-form-label">Nome <span class="text-danger">*</span></label>
+          <div class="col-md-10">
+            <input type="text" class="form-control" required [(ngModel)]="c.nome" placeholder="Senor Abravanel"
+                   name="nome" #nome="ngModel" [ngClass]="(nome.invalid && nome.touched) ? 'is-invalid' : ''">
+          </div>
         </div>
-        <input type="text" class="form-control" required [(ngModel)]="c.nome" placeholder="Senor Abravanel"
-               name="nome" #nome="ngModel" [ngClass]="(nome.invalid && nome.touched) ? 'is-invalid' : ''">
-      </div>
-      <div class="input-group mb-3">
-        <div class="input-group-prepend">
-          <span class="input-group-text"  id="telefone"><span class="text-danger">* &#160;</span>Telefone</span>
+
+        <div class="form-group row">
+          <label class="col-md-2 col-form-label">Telefone <span class="text-danger">*</span></label>
+          <div class="col-md-10">
+            <input type="text" class="form-control" required [spMask]="phoneMask" maxlength="15" minlength="14"
+                   [spKeepMask]="true" [(ngModel)]="c.telefone" placeholder="(00) 0000-0000" name="telefone"
+                   #telefone="ngModel" [ngClass]="(telefone.invalid && telefone.touched) ? 'is-invalid' : ''">
+          </div>
         </div>
-        <input type="text" class="form-control" required [spMask]="phoneMask" maxlength="15" minlength="14"
-               [spKeepMask]="true" [(ngModel)]="c.telefone" placeholder="(00) 0000-0000" name="telefone"
-               #telefone="ngModel" [ngClass]="(telefone.invalid && telefone.touched) ? 'is-invalid' : ''">
-      </div>
-      <div class="input-group mb-3">
-        <div class="input-group-prepend">
-          <span class="input-group-text"  id="email"><span class="text-danger">* &#160;</span>Email</span>
+
+        <div class="form-group row">
+          <label class="col-md-2 col-form-label">Email <span class="text-danger">*</span></label>
+          <div class="col-md-10">
+            <input type="text" pattern="^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$"
+                   class="form-control" required [(ngModel)]="c.email" placeholder="test@gmail.com" name="email"
+                   #email="ngModel" [ngClass]="(email.invalid && email.touched) ? 'is-invalid' : ''">
+          </div>
         </div>
-        <input type="text" pattern="^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$"
-               class="form-control" required [(ngModel)]="c.email" placeholder="test@gmail.com" name="email"
-               #email="ngModel" [ngClass]="(email.invalid && email.touched) ? 'is-invalid' : ''">
-      </div>
-      <div class="input-group mb-3">
-        <div class="input-group-prepend">
-          <span class="input-group-text"  id="senha"><span class="text-danger">* &#160;</span>Senha</span>
+
+        <div class="form-group row">
+          <label class="col-md-2 col-form-label">Senha </label>
+          <div class="col-md-10">
+            <input type="password" class="form-control" [(ngModel)]="c.senha" placeholder="********"
+                   name="senha" #senha="ngModel">
+          </div>
         </div>
-        <input type="password" class="form-control" required [(ngModel)]="c.senha" placeholder="********" name="senha"
-               #senha="ngModel" [ngClass]="(senha.invalid && senha.touched) ? 'is-invalid' : ''">
-      </div>
-      <div class="input-group mb-3">
-        <div class="input-group-prepend">
-          <span class="input-group-text"  id="csenha"><span class="text-danger">* &#160;</span>Confirme sua senha</span>
+
+        <div class="form-group row">
+          <label class="col-md-2 col-form-label" style="font-size: 15px">Confirme sua senha </label>
+          <div class="col-md-10">
+            <input type="password" class="form-control" [(ngModel)]="c.csenha" placeholder="********"
+                   name="csenha"
+                   #csenha="ngModel" [ngClass]="(confirmasenha()) ? 'is-invalid' : ''">
+          </div>
         </div>
-        <input type="password" class="form-control" required [(ngModel)]="c.csenha" placeholder="********" name="csenha"
-               #csenha="ngModel" [ngClass]="((csenha != senha) && csenha.touched) ? 'is-invalid' : ''">
-      </div>
-      <div class="mb-3">
+
         <button href="#" class="btn btn-block btn-primary" (click)="editar()" type="submit"
-                [disabled]="cform.invalid || confirmasenha()">Cadastrar</button>
-      </div>
+                [disabled]="cform.invalid || confirmasenha()">Salvar
+        </button>
+      </form>
     </div>
-  </form>
+  </div>
 </div>

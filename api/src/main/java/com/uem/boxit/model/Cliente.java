@@ -19,6 +19,7 @@ public class Cliente extends Usuario {
     private String nomeFantasia;
 
     @CNPJ
+    @Column(unique = true)
     private String cnpj;
 
     @CPF
