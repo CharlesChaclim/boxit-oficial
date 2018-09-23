@@ -12,7 +12,13 @@ public class CustomExceptionHandler extends ResponseEntityExceptionHandler {
 
     @ExceptionHandler(ObjectNotFoundException.class)
     public ResponseEntity<Object> objectNotFound(ObjectNotFoundException e) {
-        StandError apiError = new StandError(HttpStatus.NOT_FOUND, e.getLocalizedMessage(), "Resource Not Found");
+        StandError apiError = new StandError(HttpStatus.NOT_FOUND, e.getLocalizedMessage(), "Recurso não encontrado");
+        return new ResponseEntity<>(apiError, new HttpHeaders(), apiError.getStatus());
+    }
+
+    @ExceptionHandler(CnpjJaExisteException.class)
+    public ResponseEntity<Object> cnpjJaExiste(ObjectNotFoundException e) {
+        StandError apiError = new StandError(HttpStatus.NOT_FOUND, e.getLocalizedMessage(), "CNPJ já cadastrado");
         return new ResponseEntity<>(apiError, new HttpHeaders(), apiError.getStatus());
     }
 
