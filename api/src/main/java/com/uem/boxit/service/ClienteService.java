@@ -87,7 +87,7 @@ public class ClienteService {
         Cliente cliente = new Cliente();
         cliente.setNomeFantasia(dto.getNomeFantasia());
         cliente.setCnpj(dto.getCnpj());
-        Endereco endereco = new Endereco(dto.getCep(), dto.getComplemento(), dto.getEndereco(), dto.getBairro(), dto.getNumero(), dto.getCidade(), dto.getEstado());
+        Endereco endereco = new Endereco(dto.getCep(), dto.getComplemento(), dto.getLogadouro(), dto.getBairro(), dto.getNumero(), dto.getCidade(), dto.getEstado());
         enderecoRepository.save(endereco);
         cliente.setEndereco(endereco);
         cliente.setNome(dto.getNome());

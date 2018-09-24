@@ -11,16 +11,21 @@ export class Cliente {
   nome:	string;
   nomeFantasia:	string;
   numero: string;
-  senha:	string;
+  password:	string;
   telefone:	string;
+  endereco: Endereco;
 }
 
 export class Endereco {
-  endereco: string;
+  logadouro: string;
   bairro: string;
   cidade: string;
-  uf: string;
+  estado: string;
   cep: string;
+  numero: string;
+  complemento: string;
+  endereco: string;
+  uf: string;
 }
 
 export class Login {

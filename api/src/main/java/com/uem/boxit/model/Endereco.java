@@ -14,7 +14,7 @@ public class Endereco {
     private Integer id;
     private String cep;
     private String complemento;
-    private String endereco;
+    private String logadouro;
     private String bairro;
     private String numero;
     private String cidade;
@@ -25,10 +25,10 @@ public class Endereco {
     @JoinColumn(name = "user_id")
     private Usuario user;
 
-    public Endereco(String cep, String complemento, String endereco, String bairro, String numero, String cidade, String estado) {
+    public Endereco(String cep, String complemento, String logadouro, String bairro, String numero, String cidade, String estado) {
         this.cep = cep;
         this.complemento = complemento;
-        this.endereco = endereco;
+        this.logadouro = logadouro;
         this.bairro = bairro;
         this.numero = numero;
         this.cidade = cidade;

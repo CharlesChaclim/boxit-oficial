@@ -16,7 +16,7 @@ public class NewClienteDTO {
     private String password;
     private String cep;
     private String complemento;
-    private String endereco;
+    private String logadouro;
     private String bairro;
     private String numero;
     private String cidade;
