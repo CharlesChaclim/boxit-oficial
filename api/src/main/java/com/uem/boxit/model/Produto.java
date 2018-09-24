@@ -4,14 +4,12 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 
 import javax.persistence.*;
-import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 
 @Entity
 @Data
-public class Produto implements Serializable {
-    private static final long serialVersionUID = 1L;
+public class Produto {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
