@@ -5,10 +5,12 @@ import lombok.Data;
 
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
+import java.io.Serializable;
 
 @Entity
 @Data
-public class ItemPedido {
+public class ItemPedido implements Serializable {
+    private static final long serialVersionUID = 1L;
 
     @JsonIgnore
     @EmbeddedId

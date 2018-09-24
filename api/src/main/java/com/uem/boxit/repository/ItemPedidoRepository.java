@@ -1,6 +1,5 @@
 package com.uem.boxit.repository;
 
-import com.uem.boxit.model.Historico;
 import com.uem.boxit.model.ItemPedido;
 import org.springframework.data.jpa.repository.JpaRepository;
 

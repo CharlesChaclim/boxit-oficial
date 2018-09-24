@@ -44,7 +44,7 @@ public class FuncionarioService {
     public Funcionario update(Integer id, Funcionario funcionario) {
         Funcionario f = funcionarioRepository.getOne(id);
         f.setCargo(funcionario.getCargo());
-        if (funcionario.getCargo().toLowerCase().equals("gerente") && !funcionario.getRole().equals(Role.GERENTE))
+        if (funcionario.getCargo().equalsIgnoreCase("gerente") && !funcionario.getRole().equals(Role.GERENTE))
             f.setRole(Role.GERENTE);
         f.setNome(funcionario.getNome());
         f.setTelefone(funcionario.getTelefone());
@@ -62,7 +62,7 @@ public class FuncionarioService {
         funcionarioRepository.save(f);
     }
 
-    private Function<NewFuncionarioDTO, Funcionario> toFuncionario = (dto) -> {
+    private Function<NewFuncionarioDTO, Funcionario> toFuncionario = dto -> {
         Funcionario f = new Funcionario();
         f.setUsername(dto.getUsername());
         f.setPassword(encoder.encode(dto.getPassword()));
@@ -71,7 +71,7 @@ public class FuncionarioService {
         f.setTelefone(dto.getTelefone());
         f.setEmail(dto.getEmail());
         f.setCargo(dto.getCargo());
-        if (dto.getCargo().toLowerCase().equals("gerente")) {
+        if (dto.getCargo().equalsIgnoreCase("gerente")) {
             f.setRole(Role.GERENTE);
         } else {
             f.setRole(Role.FUNCIONARIO);

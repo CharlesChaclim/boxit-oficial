@@ -1,21 +1,19 @@
 package com.uem.boxit.controller;
 
-import com.uem.boxit.config.property.BoxItApiProperty;
 import com.uem.boxit.dto.EmailDTO;
 import com.uem.boxit.dto.UsernameDTO;
 import com.uem.boxit.exception.ObjectNotFoundException;
-import com.uem.boxit.mail.SendGridEmailService;
 import com.uem.boxit.model.Cliente;
 import com.uem.boxit.service.AuthService;
 import com.uem.boxit.service.ClienteService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
-import javax.xml.ws.Response;
-import java.util.*;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Optional;
 
 @RestController
 @RequestMapping(
@@ -42,7 +40,7 @@ public class AuthController {
     }
 
     @PostMapping("/confirmation")
-    public ResponseEntity<?> confirmNewUser(@RequestParam String code) {
+    public ResponseEntity confirmNewUser(@RequestParam String code) {
         Optional<Cliente> cliente = authService.findByConfirmationCode(code);
         if (cliente.isPresent()) {
             authService.confirmCliente(cliente.get());
@@ -53,7 +51,7 @@ public class AuthController {
     }
 
     @PostMapping("/forgot_password")
-    public ResponseEntity<?> requestResetPasswordCode(@RequestParam String email) {
+    public ResponseEntity requestResetPasswordCode(@RequestParam String email) {
         Optional<Cliente> cliente = authService.fincByEmail(email);
         if (cliente.isPresent()) {
             authService.sendPasswordResetToken(cliente.get());
@@ -64,7 +62,7 @@ public class AuthController {
     }
 
     @PostMapping("/reset_password")
-    public ResponseEntity<?> resetPassword(@RequestParam String token, @RequestParam String password) {
+    public ResponseEntity resetPassword(@RequestParam String token, @RequestParam String password) {
         Map<String, String> msg = new HashMap<>();
         Optional<Cliente> cli = authService.findByPasswordResetToken(token);
         if (cli.isPresent()) {

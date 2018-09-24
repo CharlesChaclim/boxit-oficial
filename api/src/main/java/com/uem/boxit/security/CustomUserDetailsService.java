@@ -22,7 +22,7 @@ public class CustomUserDetailsService implements UserDetailsService {
     private UsuarioRepository usuarioRepository;
 
     @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+    public UserDetails loadUserByUsername(String username) {
         Optional<Usuario> useropt = usuarioRepository.findByUsername(username);
         Usuario usuario = useropt.orElseThrow(() -> new UsernameNotFoundException("Usuario e/ou senha incorreto!"));
         return new UserSS(usuario, getAuthorities(usuario.getRole()));

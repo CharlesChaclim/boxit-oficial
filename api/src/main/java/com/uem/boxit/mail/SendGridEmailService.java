@@ -2,11 +2,14 @@ package com.uem.boxit.mail;
 
 import com.sendgrid.*;
 import com.uem.boxit.exception.MailException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
 public class SendGridEmailService {
+    private static final Logger logger = LoggerFactory.getLogger(SendGridEmailService.class);
 
     @Autowired
     private SendGrid sg;
@@ -21,9 +24,9 @@ public class SendGridEmailService {
             request.setMethod(Method.POST);
             request.setEndpoint("mail/send");
             request.setBody(mail.build());
-            Response response = sg.api(request);
+            sg.api(request);
         } catch (Exception e) {
-            System.out.println(e.getMessage());
+            logger.info(e.getMessage());
             throw new MailException("Falha ao enviar email de confirmação");
         }
     }

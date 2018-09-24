@@ -1,7 +1,6 @@
 package com.uem.boxit.service;
 
 import com.uem.boxit.dto.NewClienteDTO;
-import com.uem.boxit.exception.MailException;
 import com.uem.boxit.model.Cliente;
 import com.uem.boxit.model.Endereco;
 import com.uem.boxit.model.enums.Role;
@@ -90,7 +89,7 @@ public class ClienteService {
         clienteRepository.delete(c);
     }
 
-    private Function<NewClienteDTO, Cliente> toCliente = (dto) -> {
+    private Function<NewClienteDTO, Cliente> toCliente = dto -> {
         Cliente cliente = new Cliente();
         cliente.setNomeFantasia(dto.getNomeFantasia());
         cliente.setCnpj(dto.getCnpj());

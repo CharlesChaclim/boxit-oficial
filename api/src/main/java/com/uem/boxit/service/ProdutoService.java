@@ -28,7 +28,7 @@ public class ProdutoService {
         return produtoRepository.save(p);
     }
 
-    private Function<NewProdutoDTO, Produto> toProduto = (dto) -> {
+    private Function<NewProdutoDTO, Produto> toProduto = dto -> {
         Produto p = new Produto();
         p.setCategoria(categoriaRepository.getOne(dto.getCategoriaId()));
         p.setNome(dto.getNome());
