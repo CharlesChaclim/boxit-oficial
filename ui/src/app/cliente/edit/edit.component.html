@@ -9,9 +9,9 @@
         <div class="form-group row">
           <label class="col-md-2 col-form-label">CNPJ <span class="text-danger">*</span></label>
           <div class="col-md-10">
-            <input type="text" class="form-control" required [spMask]="cnpjMask" maxlength="18" minlength="18"
+            <input type="text" class="form-control" required [spMask]="cnpjMask" maxlength="18" minlength="18" (blur)="confimacnpj()" (invalid)="cnpjvalid"
                    [spKeepMask]="true" [(ngModel)]="c.cnpj" placeholder="00.000.000/0000-00" name="cnpj" #cnpj="ngModel"
-                   [ngClass]="( cnpj.invalid && cnpj.touched) ? 'is-invalid' : ''">
+                   [ngClass]="((cnpj.invalid && cnpj.touched) || cnpjvalid) ? 'is-invalid' : ''">
           </div>
         </div>
         <div class="form-group row">
@@ -133,7 +133,7 @@
           <div class="col-md-10">
             <input type="text" pattern="^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$"
                    class="form-control" required [(ngModel)]="c.email" placeholder="test@gmail.com" name="email"
-                   #email="ngModel" [ngClass]="(email.invalid && email.touched) ? 'is-invalid' : ''">
+                   #email="ngModel" (blur)="confimaemail()" (invalid)="emailvalid" [ngClass]="(emailvalid || (email.invalid && email.touched)) ? 'is-invalid' : ''">
           </div>
         </div>
 
@@ -141,7 +141,7 @@
           <label class="col-md-2 col-form-label">Senha </label>
           <div class="col-md-10">
             <input type="password" class="form-control" [(ngModel)]="c.password" placeholder="********"
-                   name="senha" #senha="ngModel">
+                   name="password" #password="ngModel">
           </div>
         </div>
 
@@ -154,9 +154,18 @@
           </div>
         </div>
 
-        <button href="#" class="btn btn-block btn-primary" (click)="editar()" type="submit"
-                [disabled]="cform.invalid || confirmasenha()">Salvar
-        </button>
+        <div class="row">
+          <div class="col">
+            <button href="#" class="btn btn-block btn-primary" (click)="editar()" type="submit"
+                    [disabled]="cform.invalid || confirmasenha()">Salvar
+            </button>
+          </div>
+          <div class="col">
+            <div>
+              <button class="btn btn-secondary btn-block" (click)="back()"><i class="fal fa-arrow-left"></i> Voltar</button>
+            </div>
+          </div>
+        </div>
       </form>
     </div>
   </div>

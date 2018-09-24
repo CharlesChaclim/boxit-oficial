@@ -11,7 +11,7 @@
           <div class="col-md-10">
             <input type="text" class="form-control" required [spMask]="cnpjMask" maxlength="18" minlength="18" (blur)="confimacnpj()" (invalid)="cnpjvalid"
                    [spKeepMask]="true" [(ngModel)]="c.cnpj" placeholder="00.000.000/0000-00" name="cnpj" #cnpj="ngModel"
-                   [ngClass]="(cnpj.invalid && cnpj.touched) ? 'is-invalid' : ''">
+                   [ngClass]="((cnpj.invalid && cnpj.touched) || cnpjvalid) ? 'is-invalid' : ''">
             <span class="text-danger" *ngIf="showCnpjError">CNPJ já cadastrado!</span>
           </div>
         </div>
@@ -83,7 +83,7 @@
             <div class="form-group row">
               <label class="col-md-4 col-form-label">Número</label>
               <div class="col-md-8">
-                <input type="text" class="form-control" [(ngModel)]="c.numero"
+                <input type="number" class="form-control" [(ngModel)]="c.numero"
                        placeholder="1029"
                        name="numero" #numero="ngModel">
               </div>
@@ -134,7 +134,7 @@
           <div class="col-md-10">
             <input type="text" pattern="^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$"
                    class="form-control" required [(ngModel)]="c.email" placeholder="test@gmail.com" name="email"
-                   #email="ngModel" (blur)="confimaemail()" (invalid)="email" [ngClass]="(email.invalid && email.touched) ? 'is-invalid' : ''">
+                   #email="ngModel" (blur)="confimaemail()" (invalid)="emailvalid" [ngClass]="(emailvalid || (email.invalid && email.touched)) ? 'is-invalid' : ''">
             <span class="text-danger" *ngIf="showEmailError">Email já cadastrado!</span>
           </div>
         </div>
@@ -143,8 +143,8 @@
           <label class="col-md-2 col-form-label">Senha <span class="text-danger">*</span></label>
           <div class="col-md-10">
             <input type="password" class="form-control" required [(ngModel)]="c.password" placeholder="********"
-                   name="senha"
-                   #senha="ngModel" [ngClass]="(senha.invalid && senha.touched) ? 'is-invalid' : ''">
+                   name="password"
+                   #password="ngModel" [ngClass]="(password.invalid && password.touched) ? 'is-invalid' : ''">
           </div>
         </div>
 

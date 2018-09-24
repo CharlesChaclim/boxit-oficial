@@ -20,7 +20,6 @@ export class Endereco {
   bairro: string;
   cidade: string;
   uf: string;
-  cep: string;
 }
 
 export class Login {

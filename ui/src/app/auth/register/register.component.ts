@@ -21,8 +21,8 @@ export class RegisterComponent implements OnInit {
   public cepMask = MyMaskUtil.CEP_MASK_GENERATOR;
   public phoneMask = MyMaskUtil.DYNAMIC_PHONE_MASK_GENERATOR;
   c = new Cliente();
-  cnpjvalid: any;
-  emailvalid: any;
+  cnpjvalid = false;
+  emailvalid = false;
   showEmailError = false;
   showCnpjError = false;
   csenha = '';
@@ -64,8 +64,8 @@ export class RegisterComponent implements OnInit {
             'error'
           );
           this.showCnpjError = true;
-        }
-        this.cnpjvalid = r;
+          this.cnpjvalid = true;
+        } else {this.cnpjvalid = false; }
         this.showCnpjError = false;
       }
     );
@@ -81,12 +81,12 @@ export class RegisterComponent implements OnInit {
             'error'
           );
           this.showEmailError = true;
-        }
+          this.emailvalid = true;
+        } else {this.emailvalid = false; }
         this.showEmailError = false;
-        this.emailvalid = r;
       }
     );
-    return;
+    return false;
   }
 
   cadastrar() {
