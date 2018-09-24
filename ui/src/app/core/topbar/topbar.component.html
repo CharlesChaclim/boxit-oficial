@@ -2,19 +2,36 @@
   <a class="navbar-brand">
     <img src="assets/img/icon.png" width="30" height="30" alt=""> BoxIt
   </a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+  <button class="navbar-toggler" type="button"
+          (click)="toggle()" [attr.aria-expanded]="navbar"
+          aria-controls="navbarText" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
-  <div class="collapse navbar-collapse" id="navbarText">
+  <div class="collapse navbar-collapse" id="navbarText" [ngbCollapse]="!navbar">
     <ul class="navbar-nav ml-auto">
-      <li class="nav-item">
-        <a class="nav-link" routerLink="cliente">Cliente</a>
+      <li ngbDropdown class="nav-item dropdown">
+        <a id="topbar-cliente" class="dropdown-toggle" style="cursor: pointer;" role="button" ngbDropdownToggle><i
+          class="fal fa-user"></i> Cliente</a>
+        <div ngbDropdownMenu aria-labelledby="topbar-cliente" class="dropdown-menu">
+          <a (click)="toggle()" class="dropdown-item" routerLink="/cliente"><i class="fal fa-list-ul"></i> Listar</a>
+          <a (click)="toggle()" class="dropdown-item" routerLink="/cliente/new"><i class="fal fa-plus"></i> Novo</a>
+        </div>
       </li>
-      <li class="nav-item">
-        <a class="nav-link" routerLink="cliente/new">Novo Cliente</a>
+      <li ngbDropdown class="nav-item dropdown">
+        <a id="topbar-funcionario" class="dropdown-toggle" style="cursor: pointer;" role="button" ngbDropdownToggle><i
+          class="fal fa-user"></i> Funcionario</a>
+        <div ngbDropdownMenu aria-labelledby="topbar-funcionario" class="dropdown-menu">
+          <a (click)="toggle()" class="dropdown-item" routerLink="/funcionario"><i class="fal fa-list-ul"></i> Listar</a>
+          <a (click)="toggle()" class="dropdown-item" routerLink="/funcionario/new"><i class="fal fa-plus"></i> Novo</a>
+        </div>
       </li>
-      <li class="nav-item">
-        <a class="nav-link" routerLink="cliente/1">Editar Cliente</a>
+      <li ngbDropdown class="nav-item dropdown">
+        <a id="topbar-produto" class="dropdown-toggle" style="cursor: pointer;" role="button" ngbDropdownToggle>
+          <i class="fal fa-inventory"></i> Produto</a>
+        <div ngbDropdownMenu aria-labelledby="topbar-produto" class="dropdown-menu">
+          <a (click)="toggle()" class="dropdown-item" routerLink="/produto"><i class="fal fa-list-ul"></i> Listar</a>
+          <a (click)="toggle()" class="dropdown-item" routerLink="/produto/new"><i class="fal fa-plus"></i> Novo</a>
+        </div>
       </li>
     </ul>
   </div>
