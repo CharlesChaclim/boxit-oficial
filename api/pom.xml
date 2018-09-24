@@ -113,6 +113,11 @@
             <artifactId>aws-java-sdk</artifactId>
             <version>${aws-java-sdk.version}</version>
         </dependency>
+        <dependency>
+            <groupId>com.sendgrid</groupId>
+            <artifactId>sendgrid-java</artifactId>
+            <version>4.2.1</version>
+        </dependency>
     </dependencies>
 
     <build>

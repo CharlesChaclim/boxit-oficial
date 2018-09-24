@@ -16,6 +16,12 @@ public class CustomExceptionHandler extends ResponseEntityExceptionHandler {
         return new ResponseEntity<>(apiError, new HttpHeaders(), apiError.getStatus());
     }
 
+    @ExceptionHandler(MailException.class)
+    public ResponseEntity<Object> mailException(MailException e) {
+        StandError apiError = new StandError(HttpStatus.NOT_FOUND, e.getLocalizedMessage(), "Falha ao enviar email");
+        return new ResponseEntity<>(apiError, new HttpHeaders(), apiError.getStatus());
+    }
+
     @ExceptionHandler(CnpjJaExisteException.class)
     public ResponseEntity<Object> cnpjJaExiste(ObjectNotFoundException e) {
         StandError apiError = new StandError(HttpStatus.NOT_FOUND, e.getLocalizedMessage(), "CNPJ já cadastrado");

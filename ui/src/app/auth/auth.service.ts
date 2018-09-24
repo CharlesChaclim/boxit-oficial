@@ -45,7 +45,7 @@ export class AuthService {
 
   create(cliente: Cliente) {
     const headers = new HttpHeaders().set('Content-type', 'application/json');
-    return this.http.post<any>(`${environment.api_url}/registration`, JSON.stringify(cliente)
+    return this.http.post<any>(`${environment.api_url}cliente`, JSON.stringify(cliente)
       , {headers: headers})
       .toPromise()
       .then()
@@ -56,7 +56,7 @@ export class AuthService {
 
   confirmar(codigo: string): Promise<void> {
     const queryParams = new HttpParams().set('code', codigo);
-    return this.http.post<any>(`${environment.api_url}/confirmation`, {}, {params: queryParams})
+    return this.http.post<any>(`${environment.api_url}confirmation`, {}, {params: queryParams})
       .toPromise()
       .then()
       .catch(err => Promise.reject(err));
@@ -127,12 +127,12 @@ export class AuthService {
 
   requestResetPassword(email: string) {
     const params = new HttpParams().set('email', email);
-    return this.http.post(`${environment.api_url}/forgot_password`, {}, {params: params});
+    return this.http.post(`${environment.api_url}forgot_password`, {}, {params: params});
   }
 
   resetPassword(token: string, password: string) {
     const params = new HttpParams().append('token', token).append('password', password);
-    return this.http.post(`${environment.api_url}/reset_password`, {}, {params: params});
+    return this.http.post(`${environment.api_url}reset_password`, {}, {params: params});
   }
 
 }

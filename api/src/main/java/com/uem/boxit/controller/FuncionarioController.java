@@ -3,7 +3,6 @@ package com.uem.boxit.controller;
 import com.uem.boxit.dto.CpfDTO;
 import com.uem.boxit.dto.NewFuncionarioDTO;
 import com.uem.boxit.dto.NewPasswordDTO;
-import com.uem.boxit.event.UsuarioCreateEvent;
 import com.uem.boxit.model.Funcionario;
 import com.uem.boxit.service.FuncionarioService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,8 +13,10 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import javax.servlet.http.HttpServletResponse;
+import java.net.URI;
 import java.util.Optional;
 
 @RestController
@@ -43,10 +44,11 @@ public class FuncionarioController {
     }
 
     @PostMapping
-    public ResponseEntity<Funcionario> create(@RequestBody NewFuncionarioDTO dto, HttpServletResponse resp) {
+    public ResponseEntity<Funcionario> create(@RequestBody NewFuncionarioDTO dto) {
         Funcionario f = funcionarioService.create(dto);
-        publisher.publishEvent(new UsuarioCreateEvent(this, f.getId(), f.getConfirmCode(), resp));
-        return ResponseEntity.status(HttpStatus.CREATED).build();
+        URI uri = ServletUriComponentsBuilder.fromCurrentRequestUri().path("/{codigo}")
+                .buildAndExpand(f.getId()).toUri();
+        return ResponseEntity.created(uri).build();
     }
 
     @PostMapping("/cpf")

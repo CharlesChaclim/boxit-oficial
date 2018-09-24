@@ -11,7 +11,7 @@ export class Cliente {
   nome:	string;
   nomeFantasia:	string;
   numero: string;
-  senha:	string;
+  password:	string;
   telefone:	string;
 }
 

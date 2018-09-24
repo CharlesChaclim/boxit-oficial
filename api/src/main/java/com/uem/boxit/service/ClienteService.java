@@ -1,6 +1,7 @@
 package com.uem.boxit.service;
 
 import com.uem.boxit.dto.NewClienteDTO;
+import com.uem.boxit.exception.MailException;
 import com.uem.boxit.model.Cliente;
 import com.uem.boxit.model.Endereco;
 import com.uem.boxit.model.enums.Role;
@@ -41,6 +42,7 @@ public class ClienteService {
         return clienteRepository.findById(id);
     }
 
+    @Transactional(rollbackOn = MailException.class)
     public Cliente create(NewClienteDTO dto){
         Cliente cliente = toCliente.apply(dto);
         return clienteRepository.save(cliente);

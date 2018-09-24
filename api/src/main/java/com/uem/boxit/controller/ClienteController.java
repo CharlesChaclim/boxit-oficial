@@ -3,7 +3,7 @@ package com.uem.boxit.controller;
 import com.uem.boxit.dto.CnpjDTO;
 import com.uem.boxit.dto.EmailDTO;
 import com.uem.boxit.dto.NewClienteDTO;
-import com.uem.boxit.event.UsuarioCreateEvent;
+import com.uem.boxit.event.SendConfirmationCodeEvent;
 import com.uem.boxit.model.Cliente;
 import com.uem.boxit.dto.NewPasswordDTO;
 import com.uem.boxit.service.ClienteService;
@@ -15,8 +15,10 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import javax.servlet.http.HttpServletResponse;
+import java.net.URI;
 import java.util.Optional;
 
 @RestController
@@ -49,10 +51,12 @@ public class ClienteController {
     }
 
     @PostMapping
-    public ResponseEntity<Cliente> create(@RequestBody NewClienteDTO dto, HttpServletResponse resp){
+    public ResponseEntity<Cliente> create(@RequestBody NewClienteDTO dto){
         Cliente cliente = clienteService.create(dto);
-        publisher.publishEvent(new UsuarioCreateEvent(this, cliente.getId(), cliente.getConfirmCode(), resp));
-        return ResponseEntity.status(HttpStatus.CREATED).build();
+        publisher.publishEvent(new SendConfirmationCodeEvent(this, cliente.getEmail(), cliente.getConfirmCode()));
+        URI uri = ServletUriComponentsBuilder.fromCurrentRequestUri().path("/{codigo}")
+                .buildAndExpand(cliente.getId()).toUri();
+        return ResponseEntity.created(uri).build();
     }
 
     @PostMapping("/cnpj")

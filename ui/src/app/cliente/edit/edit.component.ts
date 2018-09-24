@@ -38,7 +38,7 @@ export class EditComponent implements OnInit {
   }
 
   confirmasenha(): boolean {
-    return this.c.senha !== this.csenha;
+    return this.c.password !== this.csenha;
   }
 
   editar() {
