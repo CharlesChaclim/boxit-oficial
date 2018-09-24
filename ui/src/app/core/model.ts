@@ -15,7 +15,28 @@ export class Cliente {
   telefone:	string;
 }
 
+export class ClienteEdit {
+  cpf:	string;
+  email:	string;
+  cnpj: string;
+  nome:	string;
+  nomeFantasia:	string;
+  password:	string;
+  telefone:	string;
+  endereco: Endereco;
+}
+
 export class Endereco {
+  bairro: string;
+  cidade: string;
+  estado: string;
+  complemento: string;
+  endereco: string;
+  numero: string;
+  cep:	string;
+}
+
+export class EnderecoCorreios {
   endereco: string;
   bairro: string;
   cidade: string;

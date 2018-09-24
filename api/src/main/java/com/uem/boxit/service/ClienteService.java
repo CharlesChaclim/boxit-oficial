@@ -61,9 +61,8 @@ public class ClienteService {
         cli.setEndereco(cliente.getEndereco());
         cli.setCpf(cliente.getCpf());
         cli.setNome(cliente.getNome());
-        cli.setTelefone(cliente.getEmail());
-        if(cliente.getPassword() != null)
-            updatePassword(id, cliente.getPassword());
+        cli.setTelefone(cliente.getTelefone());
+        cli.setEmail(cli.getEmail());
         return clienteRepository.save(cli);
     }
 

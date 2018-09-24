@@ -1,6 +1,6 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {HttpClient, HttpParams} from '@angular/common/http';
-import {Endereco} from '../core/model';
+import {EnderecoCorreios} from '../core/model';
 import {environment} from '../../environments/environment';
 
 @Injectable({
@@ -14,6 +14,6 @@ export class CorreiosService {
 
   getEndereco(cep: string) {
     const params = new HttpParams().append('app_key', environment.correios_key).append('app_secret', environment.correios_secret);
-    return this.http.get<Endereco>(this.url + cep, {params: params});
+    return this.http.get<EnderecoCorreios>(this.url + cep, {params: params});
   }
 }

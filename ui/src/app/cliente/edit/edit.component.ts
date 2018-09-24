@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {MyMaskUtil} from '../../shared/mask/my-mask.util';
-import {Cliente} from '../../core/model';
+import {ClienteEdit} from '../../core/model';
 import {CorreiosService} from '../../shared/correios.service';
 import {ClienteService} from '../cliente.service';
 import {ActivatedRoute, Router} from '@angular/router';
@@ -18,7 +18,7 @@ export class EditComponent implements OnInit {
   public cnpjMask = MyMaskUtil.CNPJ_MASK_GENERATOR;
   public cepMask = MyMaskUtil.CEP_MASK_GENERATOR;
   public phoneMask = MyMaskUtil.DYNAMIC_PHONE_MASK_GENERATOR;
-  c = new Cliente();
+  c = new ClienteEdit();
   cliId: string;
   cnpjvalid = false;
   emailvalid = false;
@@ -41,46 +41,45 @@ export class EditComponent implements OnInit {
     this.activatedRoute.paramMap.subscribe(params => {
       this.cliId = params.get('id');
       if (this.cliId) {
-        this.update = true;
-        this.servico.getOne(this.cliId).subscribe(
-          (s) => {
-            console.log(s);
-            this.c = s;
-            this.c.password = null;
-            this.c.cep = s.endereco['cep'];
-            this.c.bairro = s.endereco['bairro'];
-            this.c.cidade = s.endereco['cidade'];
-            this.c.numero = s.endereco['numero'];
-            this.c.endereco = s.endereco['endereco'];
-            this.c.estado = s.endereco['estado'];
-            this.c.complemento = s.endereco['complemento'];
-          }, () => {
-            swal(
-              'Erro!',
-              'Erro no servidor!',
-              'error'
-            );
-          }
-        );
+        this.populate();
       } else {
         this.router.navigate(['/cliente']);
       }
     });
   }
 
+  populate() {
+    this.update = true;
+    this.servico.getOne(this.cliId).subscribe(
+      s => {
+        this.c = s;
+      }, () => {
+        swal(
+          'Erro!',
+          'Erro no servidor!',
+          'error'
+        );
+      }
+    );
+  }
+
   buscaEndereco() {
-    this.correiosService.getEndereco(this.c.cep).subscribe(
+    this.correiosService.getEndereco(this.c.endereco.cep).subscribe(
       r => {
-        this.c.cidade = r.cidade;
-        this.c.endereco = r.endereco;
-        this.c.bairro = r.bairro;
-        this.c.estado = r.uf;
+        this.c.endereco.cidade = r.cidade;
+        this.c.endereco.endereco = r.endereco;
+        this.c.endereco.bairro = r.bairro;
+        this.c.endereco.estado = r.uf;
       }
     );
   }
 
   confirmasenha(): boolean {
-    return this.c.password !== this.csenha;
+    if (!this.update) {
+      return this.c.password !== this.csenha;
+    } else {
+      return true;
+    }
   }
 
   confimacnpj(): boolean {

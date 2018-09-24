@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import {HttpClient} from '@angular/common/http';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Router} from '@angular/router';
-import {Cliente} from '../core/model';
+import {Cliente, ClienteEdit} from '../core/model';
 import {environment} from '../../environments/environment';
 
 @Injectable({
@@ -24,7 +24,7 @@ export class ClienteService {
   }
 
   getOne(id: string) {
-    return this.http.get<Cliente>(this.url + id);
+    return this.http.get<ClienteEdit>(this.url + id);
   }
 
   emailExist(email: string) {
@@ -39,8 +39,9 @@ export class ClienteService {
     return this.http.post(this.url, JSON.stringify(cliente));
   }
 
-  update(id: string, cliente: Cliente) {
-    return this.http.put(this.url + id, JSON.stringify(cliente));
+  update(id: string, cliente: ClienteEdit) {
+    const headers = new HttpHeaders().set('Content-type', 'application/json');
+    return this.http.put(this.url + id, JSON.stringify(cliente), {headers: headers});
   }
 
 }

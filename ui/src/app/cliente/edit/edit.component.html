@@ -24,8 +24,8 @@
         <div class="form-group row">
           <label class="col-md-2 col-form-label">CEP <span class="text-danger">*</span></label>
           <div class="col-md-10">
-            <input type="text" class="form-control" required [spMask]="cepMask" maxlength="9" minlength="9"
-                   [spKeepMask]="true" [(ngModel)]="c.cep" placeholder="00000-000" name="cep" #cep="ngModel"
+            <input type="text" class="form-control" [(ngModel)]="c.endereco.cep" required [spMask]="cepMask" maxlength="9" minlength="9"
+                   [spKeepMask]="true" placeholder="00000-000" name="cep" #cep="ngModel"
                    [ngClass]="(cep.invalid && cep.touched) ? 'is-invalid' : ''" (blur)="buscaEndereco()">
           </div>
         </div>
@@ -35,7 +35,7 @@
             <div class="form-group row">
               <label class="col-md-4 col-form-label">Logadouro <span class="text-danger">*</span></label>
               <div class="col-md-8">
-                <input type="text" class="form-control" required [(ngModel)]="c.endereco"
+                <input type="text" class="form-control" required [(ngModel)]="c.endereco.endereco"
                        placeholder="AV. Brasil"
                        name="logadouro" #logadouro="ngModel"
                        [ngClass]="(logadouro.invalid && logadouro.touched) ? 'is-invalid' : ''">
@@ -46,7 +46,7 @@
             <div class="form-group row">
               <label class="col-md-3 col-form-label">Bairro </label>
               <div class="col-md-9">
-                <input type="text" class="form-control" [(ngModel)]="c.bairro"
+                <input type="text" class="form-control" [(ngModel)]="c.endereco.bairro"
                        placeholder="Centro"
                        name="bairro" #bairro="ngModel">
               </div>
@@ -59,7 +59,7 @@
             <div class="form-group row">
               <label class="col-md-4 col-form-label">Cidade <span class="text-danger">*</span></label>
               <div class="col-md-8">
-                <input type="text" class="form-control" required [(ngModel)]="c.cidade" placeholder="Maringá"
+                <input type="text" class="form-control" required [(ngModel)]="c.endereco.cidade" placeholder="Maringá"
                        name="cidade"
                        #cidade="ngModel" [ngClass]="(cidade.invalid && cidade.touched) ? 'is-invalid' : ''">
               </div>
@@ -69,7 +69,7 @@
             <div class="form-group row">
               <label class="col-md-3 col-form-label">Estado <span class="text-danger">*</span></label>
               <div class="col-md-9">
-                <input type="text" class="form-control" required [(ngModel)]="c.estado" placeholder="Paraná"
+                <input type="text" class="form-control" required [(ngModel)]="c.endereco.estado" placeholder="Paraná"
                        name="estado"
                        #estado="ngModel" [ngClass]="(estado.invalid && estado.touched) ? 'is-invalid' : ''">
               </div>
@@ -82,7 +82,7 @@
             <div class="form-group row">
               <label class="col-md-4 col-form-label">Número</label>
               <div class="col-md-8">
-                <input type="number" class="form-control" [(ngModel)]="c.numero"
+                <input type="number" class="form-control" [(ngModel)]="c.endereco.numero"
                        placeholder="1029"
                        name="numero" #numero="ngModel">
               </div>
@@ -92,7 +92,7 @@
             <div class="form-group row">
               <label class="col-md-3 col-form-label">Complemento</label>
               <div class="col-md-9">
-                <input type="text" class="form-control" [(ngModel)]="c.complemento" placeholder="Ponto de referência"
+                <input type="text" class="form-control" [(ngModel)]="c.endereco.complemento" placeholder="Ponto de referência"
                        name="complemento" #complemento="ngModel"
                        [ngClass]="(complemento.invalid && complemento.touched) ? 'is-invalid' : ''">
               </div>
@@ -137,27 +137,10 @@
           </div>
         </div>
 
-        <div class="form-group row">
-          <label class="col-md-2 col-form-label">Senha </label>
-          <div class="col-md-10">
-            <input type="password" class="form-control" [(ngModel)]="c.password" placeholder="********"
-                   name="password" #password="ngModel">
-          </div>
-        </div>
-
-        <div class="form-group row">
-          <label class="col-md-2 col-form-label" style="font-size: 15px">Confirme sua senha </label>
-          <div class="col-md-10">
-            <input type="password" class="form-control" [(ngModel)]="csenha" placeholder="********"
-                   name="csenha"
-                   #csenhaf="ngModel" [ngClass]="(confirmasenha()) ? 'is-invalid' : ''">
-          </div>
-        </div>
-
         <div class="row">
           <div class="col">
             <button href="#" class="btn btn-block btn-primary" (click)="editar()" type="submit"
-                    [disabled]="cform.invalid || confirmasenha()">Salvar
+                    [disabled]="cform.invalid">Salvar
             </button>
           </div>
           <div class="col">
