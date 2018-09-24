@@ -2,16 +2,20 @@ import {Component, OnInit} from '@angular/core';
 import {MyMaskUtil} from '../../shared/mask/my-mask.util';
 import {Cliente} from '../../core/model';
 import {CorreiosService} from '../../shared/correios.service';
+import {ClienteService} from '../../cliente/cliente.service';
 import {Router} from '@angular/router';
-import {ClienteService} from '../cliente.service';
 import swal from 'sweetalert2';
+import {AuthService} from '../auth.service';
+import {ToastrService} from 'ngx-toastr';
+import {ErrorHandleService} from '../../core/error-handle.service';
 
 @Component({
-  selector: 'app-create',
-  templateUrl: './create.component.html',
-  styleUrls: ['./create.component.scss']
+  selector: 'app-register',
+  templateUrl: './register.component.html',
+  styleUrls: ['./register.component.scss']
 })
-export class CreateComponent implements OnInit {
+export class RegisterComponent implements OnInit {
+
   public cpfMask = MyMaskUtil.CPF_MASK_GENERATOR;
   public cnpjMask = MyMaskUtil.CNPJ_MASK_GENERATOR;
   public cepMask = MyMaskUtil.CEP_MASK_GENERATOR;
@@ -26,7 +30,10 @@ export class CreateComponent implements OnInit {
   constructor(
     private correiosService: CorreiosService,
     private servico: ClienteService,
-    private route: Router
+    private auth: AuthService,
+    private router: Router,
+    private errHandle: ErrorHandleService,
+    private toast: ToastrService,
   ) {
   }
 
@@ -50,16 +57,16 @@ export class CreateComponent implements OnInit {
 
   confimacnpj(): boolean {
     this.servico.cnpjExist(this.c.cnpj).subscribe(r => {
-      if (r) {
-        swal(
-          'Erro!',
-          'CNPJ já cadastrado',
-          'error'
-        );
-        this.showCnpjError = true;
-      }
-      this.cnpjvalid = r;
-      this.showCnpjError = false;
+        if (r) {
+          swal(
+            'Erro!',
+            'CNPJ já cadastrado',
+            'error'
+          );
+          this.showCnpjError = true;
+        }
+        this.cnpjvalid = r;
+        this.showCnpjError = false;
       }
     );
     return false;
@@ -83,17 +90,15 @@ export class CreateComponent implements OnInit {
   }
 
   cadastrar() {
-    this.servico.create(this.c).subscribe(
-      () => {
-        this.route.navigate(['/cliente']);
-      }, (e) => {
-        swal(
-          'Erro!',
-          'Erro na validação com o servidor \n ' + e,
-          'error'
-        );
-      }
-    );
+    this.auth.create(this.c).then(() => {
+      this.router.navigate(['/login']);
+      this.toast.info('Verifique o email ' + this.c.email + ' para confirmar sua conta');
+    }).catch(err => {
+      this.errHandle.handle(err);
+    });
   }
 
+  back() {
+    history.back();
+  }
 }

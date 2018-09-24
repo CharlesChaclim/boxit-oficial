@@ -22,3 +22,8 @@ export class Endereco {
   uf: string;
   cep: string;
 }
+
+export class Login {
+  username: string;
+  password: string;
+}

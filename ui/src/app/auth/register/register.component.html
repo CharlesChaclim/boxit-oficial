@@ -156,10 +156,18 @@
                    #csenhaf="ngModel" [ngClass]="(csenhaf.touched && confirmasenha()) ? 'is-invalid' : ''">
           </div>
         </div>
-
-        <button href="#" class="btn btn-block btn-primary" (click)="cadastrar()" type="submit"
-                [disabled]="cform.invalid || confirmasenha()">Cadastrar
-        </button>
+        <div class="row">
+          <div class="col">
+            <button href="#" class="btn btn-block btn-primary" (click)="cadastrar()" type="submit"
+                    [disabled]="cform.invalid || confirmasenha()">Cadastrar
+            </button>
+          </div>
+          <div class="col">
+            <div>
+              <button class="btn btn-secondary btn-block" (click)="back()"><i class="fal fa-arrow-left"></i> Voltar</button>
+            </div>
+          </div>
+        </div>
       </form>
     </div>
   </div>
