@@ -42,7 +42,7 @@ public class ClienteService {
         return clienteRepository.findById(id);
     }
 
-    @Transactional(rollbackOn = MailException.class)
+    @Transactional
     public Cliente create(NewClienteDTO dto){
         Cliente cliente = toCliente.apply(dto);
         return clienteRepository.save(cliente);
@@ -74,6 +74,7 @@ public class ClienteService {
         return clienteRepository.save(cli);
     }
 
+    @Transactional
     public void updatePassword(Integer id, String senha){
         Cliente cliente = clienteRepository.getOne(id);
         cliente.setPassword(encoder.encode(senha));
@@ -84,6 +85,10 @@ public class ClienteService {
         Cliente cliente = clienteRepository.getOne(id);
         cliente.setEnable(false);
         clienteRepository.save(cliente);
+    }
+
+    public void rollback(Cliente c) {
+        clienteRepository.delete(c);
     }
 
     private Function<NewClienteDTO, Cliente> toCliente = (dto) -> {

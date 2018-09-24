@@ -35,7 +35,7 @@
             <div class="form-group row">
               <label class="col-md-4 col-form-label">Logadouro <span class="text-danger">*</span></label>
               <div class="col-md-8">
-                <input type="text" class="form-control" required [(ngModel)]="c.logadouro"
+                <input type="text" class="form-control" required [(ngModel)]="c.endereco"
                        placeholder="AV. Brasil"
                        name="logadouro" #logadouro="ngModel"
                        [ngClass]="(logadouro.invalid && logadouro.touched) ? 'is-invalid' : ''">

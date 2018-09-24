@@ -1,6 +1,5 @@
 package com.uem.boxit.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -19,11 +18,6 @@ public class Endereco {
     private String numero;
     private String cidade;
     private String estado;
-
-    @JsonIgnore
-    @OneToOne
-    @JoinColumn(name = "user_id")
-    private Usuario user;
 
     public Endereco(String cep, String complemento, String endereco, String bairro, String numero, String cidade, String estado) {
         this.cep = cep;

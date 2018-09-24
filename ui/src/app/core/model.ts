@@ -5,7 +5,7 @@ export class Cliente {
   complemento:	string;
   cpf:	string;
   email:	string;
-  logadouro:	string;
+  endereco:	string;
   estado:	string;
   cnpj: string;
   nome:	string;

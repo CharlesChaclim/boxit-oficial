@@ -23,16 +23,8 @@ import java.util.*;
         produces = MediaType.APPLICATION_JSON_UTF8_VALUE
 )
 public class AuthController {
-    private static final int EXPIRATION = 60 * 24;
-
     @Autowired
     private AuthService authService;
-
-    @Autowired
-    private SendGridEmailService sendGridEmailService;
-
-    @Autowired
-    private BoxItApiProperty property;
 
     @Autowired
     private ClienteService clienteService;
@@ -64,25 +56,7 @@ public class AuthController {
     public ResponseEntity<?> requestResetPasswordCode(@RequestParam String email) {
         Optional<Cliente> cliente = authService.fincByEmail(email);
         if (cliente.isPresent()) {
-            String token = UUID.randomUUID().toString();
-            Calendar cal = Calendar.getInstance();
-            cal.setTimeInMillis(new Date().getTime());
-            cal.add(Calendar.MINUTE, EXPIRATION);
-            Date expiration = new Date(cal.getTime().getTime());
-            Cliente cli = cliente.get();
-            cli.setPasswordResetCode(token);
-            cli.setPasswordRestCodeExpiryDate(expiration);
-            authService.updateResetToken(cli);
-            String to = cli.getEmail();
-            String subject = "Redefina sua senha";
-            String url = property.getOriginPermitida() +
-                    "reset_password?token=" + token;
-            String message = "Alguém solicitou uma redefinição de senha para sua conta.\n"
-                    + "Se não foi você, apenas desconsidere este email.\n"
-                    + "Para redefinir sua senha, clique no link a seguir:\n\n"
-                    + url
-                    + "\n\n";
-            sendGridEmailService.sendMail(subject, message, to);
+            authService.sendPasswordResetToken(cliente.get());
             return ResponseEntity.ok().build();
         } else {
             throw new ObjectNotFoundException("Email não registrado!");

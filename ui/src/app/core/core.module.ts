@@ -32,15 +32,6 @@ registerLocaleData(localePt, 'pt-BR');
       cancelButtonClass: 'btn btn-secondary'
     }),
     CurrencyMaskModule,
-    BrowserAnimationsModule,
-    ToastrModule.forRoot({
-      progressBar: true,
-      preventDuplicates: true,
-      progressAnimation: 'increasing',
-      resetTimeoutOnDuplicate: true,
-      timeOut: 10000,
-      positionClass: 'toast-bottom-left'
-    }),
     HttpClientModule,
     FuncionarioModule,
     AuthModule

@@ -4,6 +4,7 @@ import com.uem.boxit.dto.CnpjDTO;
 import com.uem.boxit.dto.EmailDTO;
 import com.uem.boxit.dto.NewClienteDTO;
 import com.uem.boxit.event.SendConfirmationCodeEvent;
+import com.uem.boxit.exception.ObjectNotFoundException;
 import com.uem.boxit.model.Cliente;
 import com.uem.boxit.dto.NewPasswordDTO;
 import com.uem.boxit.service.ClienteService;
@@ -53,7 +54,12 @@ public class ClienteController {
     @PostMapping
     public ResponseEntity<Cliente> create(@RequestBody NewClienteDTO dto){
         Cliente cliente = clienteService.create(dto);
-        publisher.publishEvent(new SendConfirmationCodeEvent(this, cliente.getEmail(), cliente.getConfirmCode()));
+        try {
+            publisher.publishEvent(new SendConfirmationCodeEvent(this, cliente.getEmail(), cliente.getConfirmCode()));
+        } catch (Exception e) {
+            clienteService.rollback(cliente);
+            throw new ObjectNotFoundException(e.getLocalizedMessage());
+        }
         URI uri = ServletUriComponentsBuilder.fromCurrentRequestUri().path("/{codigo}")
                 .buildAndExpand(cliente.getId()).toUri();
         return ResponseEntity.created(uri).build();

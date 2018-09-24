@@ -30,7 +30,7 @@ export class EditComponent implements OnInit {
     this.correiosService.getEndereco(this.c.cep).subscribe(
       r => {
         this.c.cidade = r.cidade;
-        this.c.logadouro = r.endereco;
+        this.c.endereco = r.endereco;
         this.c.bairro = r.bairro;
         this.c.estado = r.uf;
       }

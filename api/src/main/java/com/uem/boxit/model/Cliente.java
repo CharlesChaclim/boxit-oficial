@@ -25,7 +25,7 @@ public class Cliente extends Usuario {
     @CPF
     private String cpf;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     private Endereco endereco;
 
     @Override

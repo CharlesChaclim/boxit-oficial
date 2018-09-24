@@ -33,7 +33,7 @@ export class RegisterComponent implements OnInit {
     private auth: AuthService,
     private router: Router,
     private errHandle: ErrorHandleService,
-    private toast: ToastrService,
+    private toast: ToastrService
   ) {
   }
 
@@ -44,7 +44,7 @@ export class RegisterComponent implements OnInit {
     this.correiosService.getEndereco(this.c.cep).subscribe(
       r => {
         this.c.cidade = r.cidade;
-        this.c.logadouro = r.endereco;
+        this.c.endereco = r.endereco;
         this.c.bairro = r.bairro;
         this.c.estado = r.uf;
       }
