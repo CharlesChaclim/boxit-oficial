@@ -76,7 +76,7 @@ public class FuncionarioService {
         } else {
             f.setRole(Role.FUNCIONARIO);
         }
-        f.setEnable(false);
+        f.setEnable(true);
         f.setConfirmCode(UUID.randomUUID().toString());
         return f;
     };
