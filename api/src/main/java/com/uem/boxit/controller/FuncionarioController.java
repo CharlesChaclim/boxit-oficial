@@ -3,6 +3,7 @@ package com.uem.boxit.controller;
 import com.uem.boxit.dto.CpfDTO;
 import com.uem.boxit.dto.NewFuncionarioDTO;
 import com.uem.boxit.dto.NewPasswordDTO;
+import com.uem.boxit.exception.ObjectNotFoundException;
 import com.uem.boxit.model.Funcionario;
 import com.uem.boxit.service.FuncionarioService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,6 +34,16 @@ public class FuncionarioController {
     @GetMapping
     public Page<Funcionario> listAll(Pageable pageable) {
         return funcionarioService.getAll(pageable);
+    }
+
+    @GetMapping("/filter")
+    public Page<Funcionario> filter(Pageable pageable, @RequestParam(required = false) String nome, @RequestParam(required = false) String cpf, @RequestParam(required = false) String email) {
+        Page<Funcionario> page = funcionarioService.filter(nome, cpf, email, pageable);
+        if (page != null)
+            return page;
+        else {
+            throw new ObjectNotFoundException("Os argumentos não devem ser nulos");
+        }
     }
 
     @GetMapping("/{id}")

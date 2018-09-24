@@ -47,3 +47,24 @@ export class Login {
   username: string;
   password: string;
 }
+
+export class Funcionario {
+  cargo: string;
+  cpf: string;
+  email: string;
+  nome: string;
+  telefone: string;
+}
+
+export class Page {
+  content: any;
+  first: boolean;
+  last: boolean;
+  number: number;
+  numberOfElements: number;
+  pageable: any;
+  size: number;
+  sort: any;
+  totalElements: number;
+  totalPages: number;
+}
