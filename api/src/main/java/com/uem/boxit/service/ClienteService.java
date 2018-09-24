@@ -77,6 +77,7 @@ public class ClienteService {
     public void updatePassword(Integer id, String senha){
         Cliente cliente = clienteRepository.getOne(id);
         cliente.setPassword(encoder.encode(senha));
+        clienteRepository.save(cliente);
     }
 
     public void delete(Integer id){

@@ -7,7 +7,7 @@ import {ChangePasswordComponent} from './change-password/change-password.compone
 import {environment} from '../../environments/environment';
 import {JwtModule} from '@auth0/angular-jwt';
 import {RegisterComponent} from './register/register.component';
-import {FormsModule} from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {AuthRoute} from './auth.routing';
 import {SharedModule} from '../shared/shared.module';
 
@@ -26,6 +26,7 @@ export function tokenGetter() {
       }
     }),
     FormsModule,
+    ReactiveFormsModule,
     AuthRoute,
     SharedModule
   ],
