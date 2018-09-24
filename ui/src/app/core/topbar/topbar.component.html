@@ -1,5 +1,5 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <a class="navbar-brand">
+  <a class="navbar-brand" routerLink="">
     <img src="assets/img/icon.png" width="30" height="30" alt=""> BoxIt
   </a>
   <button class="navbar-toggler" type="button"
@@ -32,6 +32,9 @@
           <a (click)="toggle()" class="dropdown-item" routerLink="/produto"><i class="fal fa-list-ul"></i> Listar</a>
           <a (click)="toggle()" class="dropdown-item" routerLink="/produto/new"><i class="fal fa-plus"></i> Novo</a>
         </div>
+      </li>
+      <li class="nav-item">
+        <a (click)="toggle()" routerLink="faq" class="text-dark" style="text-decoration: none;"><i class="fal fa-question-circle"></i> FAQ</a>
       </li>
     </ul>
   </div>

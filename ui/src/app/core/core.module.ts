@@ -14,6 +14,7 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {ToastrModule} from 'ngx-toastr';
 import {HttpClientModule} from '@angular/common/http';
 import {FuncionarioModule} from '../funcionario/funcionario.module';
+import {PublicModule} from '../public/public.module';
 
 @NgModule({
   imports: [
@@ -38,7 +39,8 @@ import {FuncionarioModule} from '../funcionario/funcionario.module';
       positionClass: 'toast-bottom-left'
     }),
     HttpClientModule,
-    FuncionarioModule
+    FuncionarioModule,
+    PublicModule
   ],
   declarations: [
     NotFoundComponent,
