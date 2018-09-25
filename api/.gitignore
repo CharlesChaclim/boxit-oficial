@@ -25,3 +25,4 @@
 /.nb-gradle/
 
 sendgrid.env
+/src/main/resources/application.properties

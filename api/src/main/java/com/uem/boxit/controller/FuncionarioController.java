@@ -3,6 +3,7 @@ package com.uem.boxit.controller;
 import com.uem.boxit.dto.CpfDTO;
 import com.uem.boxit.dto.NewFuncionarioDTO;
 import com.uem.boxit.dto.NewPasswordDTO;
+import com.uem.boxit.dto.UpdateFuncionarioDTO;
 import com.uem.boxit.exception.ObjectNotFoundException;
 import com.uem.boxit.model.Funcionario;
 import com.uem.boxit.service.FuncionarioService;
@@ -67,7 +68,7 @@ public class FuncionarioController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Funcionario> update(@PathVariable Integer id, @RequestBody Funcionario f) {
+    public ResponseEntity<Funcionario> update(@PathVariable Integer id, @RequestBody UpdateFuncionarioDTO f) {
         Funcionario func = funcionarioService.update(id, f);
         return ResponseEntity.ok(func);
     }

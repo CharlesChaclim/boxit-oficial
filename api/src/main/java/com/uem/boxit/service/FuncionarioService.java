@@ -1,6 +1,7 @@
 package com.uem.boxit.service;
 
 import com.uem.boxit.dto.NewFuncionarioDTO;
+import com.uem.boxit.dto.UpdateFuncionarioDTO;
 import com.uem.boxit.model.Funcionario;
 import com.uem.boxit.model.Usuario;
 import com.uem.boxit.model.enums.Role;
@@ -67,21 +68,8 @@ public class FuncionarioService {
     }
 
     @Transactional
-    public Funcionario update(Integer id, Funcionario funcionario) {
-        Funcionario f = funcionarioRepository.getOne(id);
-        if(isGerente())
-            f.setCargo(funcionario.getCargo());
-        Boolean containGerente = StringUtils.containsIgnoreCase(funcionario.getCargo(), "gerente");
-        if (!IsMe(funcionario.getId()) && containGerente && !funcionario.getRole().equals(Role.GERENTE))
-            f.setRole(Role.GERENTE);
-        else if (!IsMe(funcionario.getId()) && isGerente() && !containGerente && !funcionario.getRole().equals(Role.FUNCIONARIO))
-            f.setRole(Role.FUNCIONARIO);
-        f.setNome(funcionario.getNome());
-        f.setTelefone(funcionario.getTelefone());
-        if (funcionario.getPassword() != null)
-            f.setPassword(encoder.encode(funcionario.getPassword()));
-        f.setUsername(funcionario.getUsername());
-        f.setEmail(funcionario.getEmail());
+    public Funcionario update(Integer id, UpdateFuncionarioDTO funcionario) {
+        Funcionario f = fromUpdateDTO.apply(funcionario);
         return funcionarioRepository.save(f);
     }
 
@@ -113,6 +101,24 @@ public class FuncionarioService {
         }
         f.setEnable(true);
         f.setConfirmCode(UUID.randomUUID().toString());
+        return f;
+    };
+
+    private Function<UpdateFuncionarioDTO, Funcionario> fromUpdateDTO = dto -> {
+        Funcionario f = funcionarioRepository.getOne(dto.getId());
+        if(isGerente())
+            f.setCargo(dto.getCargo());
+        Boolean containGerente = StringUtils.containsIgnoreCase(dto.getCargo(), "gerente");
+        if (!IsMe(dto.getId()) && containGerente && !f.getRole().equals(Role.GERENTE))
+            f.setRole(Role.GERENTE);
+        else if (!IsMe(dto.getId()) && isGerente() && !containGerente && !f.getRole().equals(Role.FUNCIONARIO))
+            f.setRole(Role.FUNCIONARIO);
+        f.setNome(dto.getNome());
+        f.setTelefone(dto.getTelefone());
+        if (dto.getPassword() != null)
+            f.setPassword(encoder.encode(dto.getPassword()));
+        f.setUsername(dto.getUsername());
+        f.setEmail(dto.getEmail());
         return f;
     };
 

@@ -69,9 +69,6 @@ public class AuthController {
         if (cli.isPresent()) {
             Cliente c = cli.get();
             clienteService.updatePassword(c.getId(), password);
-            c.setPasswordResetCode(null);
-            c.setPasswordRestCodeExpiryDate(null);
-            clienteService.update(c.getId(), c);
             msg.put("success", "Senha alterada com sucesso!");
             return ResponseEntity.ok(msg);
         } else {
