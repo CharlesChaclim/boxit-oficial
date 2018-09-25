@@ -18,6 +18,7 @@ export class Cliente {
 export class ClienteEdit {
   cpf:	string;
   email:	string;
+senha: string;
   cnpj: string;
   nome:	string;
   nomeFantasia:	string;
@@ -69,4 +70,15 @@ export class Page {
   sort: any;
   totalElements: number;
   totalPages: number;
+}
+
+export class Estoque {
+  nome: string;
+  preco: number;
+  descricao: string;
+  unidadeLote: number;
+  qtd: number;
+  sku: string;
+  fotos: Array<string>;
+  categoriaId: number;
 }

@@ -43,10 +43,18 @@ export class RegisterComponent implements OnInit {
   buscaEndereco() {
     this.correiosService.getEndereco(this.c.cep).subscribe(
       r => {
-        this.c.cidade = r.cidade;
-        this.c.endereco = r.endereco;
-        this.c.bairro = r.bairro;
-        this.c.estado = r.uf;
+        if (r.cidade !== '') {
+          this.c.cidade = r.cidade;
+        }
+        if (r.endereco !== '') {
+          this.c.endereco = r.endereco;
+        }
+        if (r.bairro !== '') {
+          this.c.bairro = r.bairro;
+        }
+        if (r.uf !== '') {
+          this.c.estado = r.uf;
+        }
       }
     );
   }

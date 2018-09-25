@@ -6,6 +6,7 @@ import {FormsModule} from '@angular/forms';
 import {SharedModule} from '../shared/shared.module';
 import {RouterModule} from '@angular/router';
 import {ClienteRoute} from './client.routing';
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   imports: [
@@ -13,7 +14,8 @@ import {ClienteRoute} from './client.routing';
     FormsModule,
     SharedModule,
     RouterModule,
-    ClienteRoute
+    ClienteRoute,
+    NgbModule
   ],
   declarations: [
     EditComponent,

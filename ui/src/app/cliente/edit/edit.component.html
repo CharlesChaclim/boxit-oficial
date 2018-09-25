@@ -137,10 +137,26 @@
           </div>
         </div>
 
+        <div class="form-group row">
+          <label class="col-md-2 col-form-label">Senha </label>
+          <div class="col-md-10">
+            <input type="password" class="form-control" [(ngModel)]="c.senha" placeholder="********"
+                   name="password" #password="ngModel">
+          </div>
+        </div>
+        <div class="form-group row">
+          <label class="col-md-2 col-form-label" style="font-size: 15px">Confirme sua senha </label>
+          <div class="col-md-10">
+            <input type="password" class="form-control" [(ngModel)]="csenha" placeholder="********"
+                   name="csenha"
+                   #csenhaf="ngModel" [ngClass]="(confirmasenha()) ? 'is-invalid' : ''">
+          </div>
+        </div>
+
         <div class="row">
           <div class="col">
             <button href="#" class="btn btn-block btn-primary" (click)="editar()" type="submit"
-                    [disabled]="cform.invalid">Salvar
+                    [disabled]="cform.invalid || confirmasenha() || cnpjvalid || emailvalid">Salvar
             </button>
           </div>
           <div class="col">

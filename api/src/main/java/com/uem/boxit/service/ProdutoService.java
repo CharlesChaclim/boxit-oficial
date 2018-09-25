@@ -1,10 +1,12 @@
 package com.uem.boxit.service;
 
 import com.uem.boxit.dto.NewProdutoDTO;
+import com.uem.boxit.model.Categoria;
 import com.uem.boxit.model.Produto;
 import com.uem.boxit.repository.CategoriaRepository;
 import com.uem.boxit.repository.ProdutoRepository;
 import com.uem.boxit.storage.S3;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -52,6 +54,41 @@ public class ProdutoService {
         p.setUnidadeLote(produto.getUnidadeLote());
         p.setQtd(produto.getQtd());
         return produtoRepository.save(p);
+    }
+
+    public Page<Produto> filtrar(String nome, Categoria categoria, Integer enable, Pageable pageable) {
+        if (enable == 2){
+            if(!StringUtils.isEmpty(nome) && !StringUtils.isEmpty(categoria.getNome()))
+                return produtoRepository.findByNomeContainsAndCategoria_NomeContainsAndEnableIsTrue(nome, categoria, pageable);
+            else if(!StringUtils.isEmpty(nome)){
+                return produtoRepository.findByNomeContainsAndEnableIsTrue(nome, pageable);
+            }
+            else if(!StringUtils.isEmpty(nome)){
+                return produtoRepository.findByCategoria_NomeContainsAndEnableIsTrue(categoria, pageable);
+            }
+            else return produtoRepository.findByEnableIsTrue(pageable);
+        }
+        else if(enable == 1){
+            if(!StringUtils.isEmpty(nome) && !StringUtils.isEmpty(categoria.getNome()))
+                return produtoRepository.findByNomeContainsAndCategoria_NomeContainsAndEnableIsFalse(nome, categoria, pageable);
+            else if(!StringUtils.isEmpty(nome)){
+                return produtoRepository.findByNomeContainsAndEnableIsFalse(nome, pageable);
+            }
+            else if(!StringUtils.isEmpty(nome)){
+                return produtoRepository.findByCategoria_NomeContainsAndEnableIsFalse(categoria, pageable);
+            }
+            else return produtoRepository.findByEnableIsFalse(pageable);
+        }else{
+            if(!StringUtils.isEmpty(nome) && !StringUtils.isEmpty(categoria.getNome()))
+                return produtoRepository.findByNomeContainsAndCategoria_NomeContains(nome, categoria, pageable);
+            else if(!StringUtils.isEmpty(nome)){
+                return produtoRepository.findByNomeContains(nome, pageable);
+            }
+            else if(!StringUtils.isEmpty(nome)){
+                return produtoRepository.findByCategoria_NomeContains(categoria, pageable);
+            }
+            else return getAll(pageable);
+        }
     }
 
     public void deletar(Integer id) {

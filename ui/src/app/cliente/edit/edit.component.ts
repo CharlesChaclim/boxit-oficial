@@ -53,6 +53,7 @@ export class EditComponent implements OnInit {
     this.servico.getOne(this.cliId).subscribe(
       s => {
         this.c = s;
+        this.c.senha = null;
       }, () => {
         swal(
           'Erro!',
@@ -66,20 +67,24 @@ export class EditComponent implements OnInit {
   buscaEndereco() {
     this.correiosService.getEndereco(this.c.endereco.cep).subscribe(
       r => {
-        this.c.endereco.cidade = r.cidade;
-        this.c.endereco.endereco = r.endereco;
-        this.c.endereco.bairro = r.bairro;
-        this.c.endereco.estado = r.uf;
+        if (r.cidade !== '') {
+          this.c.endereco.cidade = r.cidade;
+        }
+        if (r.endereco !== '') {
+          this.c.endereco.endereco = r.endereco;
+        }
+        if (r.bairro !== '') {
+          this.c.endereco.bairro = r.bairro;
+        }
+        if (r.uf !== '') {
+          this.c.endereco.estado = r.uf;
+        }
       }
     );
   }
 
   confirmasenha(): boolean {
-    if (!this.update) {
-      return this.c.password !== this.csenha;
-    } else {
-      return true;
-    }
+      return this.c.senha !== this.csenha;
   }
 
   confimacnpj(): boolean {
@@ -134,7 +139,7 @@ export class EditComponent implements OnInit {
 
   editar() {
     this.servico.update(this.cliId, this.c).subscribe(() => {
-        this.router.navigate(['/login']);
+        this.router.navigate(['/cliente']);
       }, () => {
         swal('Erro!',
           'Falha no banco de dados\n Tente mais tarde',
