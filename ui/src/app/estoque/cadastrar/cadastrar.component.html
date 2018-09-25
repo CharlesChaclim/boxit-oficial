@@ -1,3 +1,75 @@
-<p>
-  cadastrar works!
-</p>
+<div class="col-12 offset-lg-1 col-lg-10">
+  <div class="card">
+    <div class="card-header text-center">
+      <h3>Cadastro de Produto</h3>
+    </div>
+    <div class="card-body">
+      <form #pform="ngForm">
+        <div class="form-row">
+          <div class="col-md-6">
+            <div class="form-group row">
+              <label class="col-md-4 col-form-label">Nome <span class="text-danger">*</span></label>
+              <div class="col-md-8">
+                <input type="text" class="form-control" [(ngModel)]="p.nome" placeholder="Memória RAM" name="nome" #nome="ngModel"
+                       [ngClass]="(nome.invalid && nome.touched) ? 'is-invalid' : ''">
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-md-4 col-form-label">Preço <span class="text-danger">*</span></label>
+              <div class="col-md-8">
+                <input type="text" class="form-control" required [(ngModel)]="p.preco"
+                       placeholder="R$ 9.999,99" currencyMask name="preco" #preco="ngModel"
+                       [options]="{prefix: 'R$ ', thousands: '.', decimal: ','}"
+                       [ngClass]="(preco.invalid && preco.touched) ? 'is-invalid' : ''">
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-md-4 col-form-label">Quantidade <span class="text-danger">*</span></label>
+              <div class="col-md-8">
+                <input type="number" class="form-control" required [(ngModel)]="p.qtd"
+                       placeholder="999" name="qtd" #qtd="ngModel" (blur)="qtdPositiva()"
+                       [ngClass]="((qtd.invalid && qtd.touched) || qtd_valid) ? 'is-invalid' : ''">
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="form-group row">
+              <label class="col-md-3 col-form-label">Bairro </label>
+              <div class="col-md-9">
+                <input type="text" class="form-control" [(ngModel)]="c.bairro"
+                       placeholder="Centro"
+                       name="bairro" #bairro="ngModel">
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+
+        <div class="form-group row">
+          <label class="col-md-2 col-form-label">Email <span class="text-danger">*</span></label>
+          <div class="col-md-10">
+            <input type="text" pattern="^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$"
+                   class="form-control" required [(ngModel)]="c.email" placeholder="test@gmail.com" name="email"
+                   #email="ngModel" (blur)="confimaemail()" (invalid)="emailvalid" [ngClass]="(emailvalid || (email.invalid && email.touched)) ? 'is-invalid' : ''">
+            <span class="text-danger" *ngIf="showEmailError">Email já cadastrado!</span>
+          </div>
+        </div>
+
+
+        <div class="row">
+          <div class="col">
+            <button href="#" class="btn btn-block btn-primary" (click)="cadastrar()" type="submit"
+                    [disabled]="pform.invalid">Cadastrar
+            </button>
+          </div>
+          <div class="col">
+            <div>
+              <button class="btn btn-secondary btn-block" (click)="back()"><i class="fal fa-arrow-left"></i> Voltar</button>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

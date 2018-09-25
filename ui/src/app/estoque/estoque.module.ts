@@ -9,6 +9,7 @@ import {FormsModule} from '@angular/forms';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {SharedModule} from '../shared/shared.module';
 import {SweetAlert2Module} from '@toverux/ngx-sweetalert2';
+import {CurrencyMaskModule} from 'ng2-currency-mask';
 
 @NgModule({
   imports: [
@@ -18,7 +19,8 @@ import {SweetAlert2Module} from '@toverux/ngx-sweetalert2';
     FormsModule,
     SharedModule,
     NgbModule,
-    SweetAlert2Module
+    SweetAlert2Module,
+    CurrencyMaskModule
   ],
   declarations: [
     ListarComponent,
