@@ -82,6 +82,17 @@ export class Estoque {
   categoriaId: number;
 }
 
+export class EstoqueEdit {
+  nome: string;
+  preco: number;
+  descricao: string;
+  unidadeLote: number;
+  qtd: number;
+  sku: string;
+  fotos: Array<string>;
+  categoriaId: number;
+}
+
 export class Categoria {
   nome: string;
 }

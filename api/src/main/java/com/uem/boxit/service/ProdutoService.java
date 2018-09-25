@@ -12,6 +12,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
@@ -41,10 +42,15 @@ public class ProdutoService {
         return produtoRepository.save(p);
     }
 
+    public Boolean nomeExist(String nome) {
+        return produtoRepository.findByNome(nome).isPresent();
+    }
+
     public Boolean skuExist(String sku) {
         return produtoRepository.findBySku(sku).isPresent();
     }
 
+    @Transactional
     public Produto atualizar(Integer id, Produto produto) {
         Produto p = produtoRepository.getOne(id);
         p.setNome(produto.getNome());
@@ -56,45 +62,49 @@ public class ProdutoService {
         return produtoRepository.save(p);
     }
 
-    public Page<Produto> filtrar(String nome, Categoria categoria, Integer enable, Pageable pageable) {
+    public Page<Produto> filtrar(String nome, String categoria, Integer enable, Pageable pageable) {
         if (enable == 2){
-            if(!StringUtils.isEmpty(nome) && !StringUtils.isEmpty(categoria.getNome()))
+            if(!StringUtils.isEmpty(nome) && !StringUtils.isEmpty(categoria))
                 return produtoRepository.findByNomeContainsAndCategoria_NomeContainsAndEnableIsTrue(nome, categoria, pageable);
             else if(!StringUtils.isEmpty(nome)){
                 return produtoRepository.findByNomeContainsAndEnableIsTrue(nome, pageable);
             }
-            else if(!StringUtils.isEmpty(nome)){
+            else if(!StringUtils.isEmpty(categoria)){
                 return produtoRepository.findByCategoria_NomeContainsAndEnableIsTrue(categoria, pageable);
             }
             else return produtoRepository.findByEnableIsTrue(pageable);
         }
         else if(enable == 1){
-            if(!StringUtils.isEmpty(nome) && !StringUtils.isEmpty(categoria.getNome()))
+            if(!StringUtils.isEmpty(nome) && !StringUtils.isEmpty(categoria))
                 return produtoRepository.findByNomeContainsAndCategoria_NomeContainsAndEnableIsFalse(nome, categoria, pageable);
             else if(!StringUtils.isEmpty(nome)){
                 return produtoRepository.findByNomeContainsAndEnableIsFalse(nome, pageable);
             }
-            else if(!StringUtils.isEmpty(nome)){
+            else if(!StringUtils.isEmpty(categoria)){
                 return produtoRepository.findByCategoria_NomeContainsAndEnableIsFalse(categoria, pageable);
             }
             else return produtoRepository.findByEnableIsFalse(pageable);
         }else{
-            if(!StringUtils.isEmpty(nome) && !StringUtils.isEmpty(categoria.getNome()))
+            if(!StringUtils.isEmpty(nome) && !StringUtils.isEmpty(categoria))
                 return produtoRepository.findByNomeContainsAndCategoria_NomeContains(nome, categoria, pageable);
             else if(!StringUtils.isEmpty(nome)){
                 return produtoRepository.findByNomeContains(nome, pageable);
             }
-            else if(!StringUtils.isEmpty(nome)){
+            else if(!StringUtils.isEmpty(categoria)){
                 return produtoRepository.findByCategoria_NomeContains(categoria, pageable);
             }
             else return getAll(pageable);
         }
     }
 
-    public void deletar(Integer id) {
-        Produto p = produtoRepository.getOne(id);
-        p.setEnable(false);
-        produtoRepository.save(p);
+    @Transactional
+    public void atualizarEnable(Integer id, Boolean enable){
+        Produto produto = produtoRepository.getOne(id);
+        if(!enable)
+            produto.setEnable(true);
+        else
+            produto.setEnable(false);
+        produtoRepository.save(produto);
     }
 
     private Function<NewProdutoDTO, Produto> toProduto = dto -> {
@@ -106,9 +116,11 @@ public class ProdutoService {
         p.setUnidadeLote(dto.getUnidadeLote());
         p.setQtd(dto.getQtd());
         p.setSku(dto.getSku());
-        Map<String, String> fotos = new HashMap<>();
-        dto.getFotos().forEach(k -> fotos.put(k, s3.configurarUrl(k)));
-        p.setFotos(fotos);
+        if (dto.getFotos() != null) {
+            Map<String, String> fotos = new HashMap<>();
+            dto.getFotos().forEach(k -> fotos.put(k, s3.configurarUrl(k)));
+            p.setFotos(fotos);
+        }
         p.setEnable(true);
         return p;
     };

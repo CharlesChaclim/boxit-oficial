@@ -7,7 +7,7 @@ export class MyMaskUtil {
   private static PHONE_BIG = '(99) 99999-9999';
   private static CPF = '999.999.999-99';
   private static CNPJ = '99.999.999/9999-99';
-  private static SKU = 'AAA9999';
+  private static SKU = 'AAA-9999';
 
   public static PHONE_MASK_GENERATOR: MaskGenerator = {
     generateMask: () =>  MyMaskUtil.PHONE_SMALL,

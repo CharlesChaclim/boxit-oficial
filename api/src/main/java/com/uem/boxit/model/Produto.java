@@ -30,7 +30,7 @@ public class Produto {
     private Categoria categoria;
     private Boolean enable;
 
-    @ElementCollection
+    @ElementCollection(fetch = FetchType.EAGER)
     @CollectionTable(name = "produto_foto")
     private Map<String, String> fotos = new HashMap<>();
 

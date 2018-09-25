@@ -7,7 +7,7 @@ import {Estoque, Page} from '../core/model';
   providedIn: 'root'
 })
 export class EstoqueService {
-  private url = `${environment.api_url}estoque/`;
+  private url = `${environment.api_url}produto/`;
 
   constructor(
     private http: HttpClient
@@ -25,11 +25,11 @@ export class EstoqueService {
     return this.http.get<Page>(this.url, {params: params});
   }
 
-  filtrar(nome: string, cpf: string, email: string, page: string, size: string) {
+  filtrar(nome: string, categoria: string, enable: number, page: string, size: string) {
     let params = new HttpParams();
     params = params.append('nome', nome);
-    params = params.append('cpf', cpf);
-    params = params.append('email', email);
+    params = params.append('categoria', categoria);
+    params = params.append('enable', enable.toString());
     if (page) {
       page = (+page - 1).toString();
       params = params.append('page', page);
@@ -59,7 +59,7 @@ export class EstoqueService {
 
   updateEnable(id: string, enabled: boolean) {
     const headers = new HttpHeaders().set('Content-type', 'application/json');
-    return this.http.put(this.url + id + '/enabled', {enabled}, {headers: headers});
+    return this.http.put(this.url + id + '/enable', {enabled}, {headers: headers});
   }
 
   getOne(id: string) {
