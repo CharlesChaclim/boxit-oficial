@@ -27,6 +27,7 @@ public class Produto {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "categoria_id")
     private Categoria categoria;
+    private Boolean enable;
 
     @ElementCollection
     @CollectionTable(name = "produto_foto")

@@ -1,17 +1,23 @@
 package com.uem.boxit.controller;
 
 import com.uem.boxit.dto.FotoDTO;
+import com.uem.boxit.dto.NewProdutoDTO;
+import com.uem.boxit.dto.SkuDTO;
+import com.uem.boxit.model.Produto;
 import com.uem.boxit.service.ProdutoService;
 import com.uem.boxit.storage.S3;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.io.IOException;
+import java.net.URI;
+import java.util.Optional;
 
 @RestController
 @RequestMapping(
@@ -25,6 +31,43 @@ public class ProdutoController {
 
     @Autowired
     private ProdutoService produtoService;
+
+    @GetMapping
+    public Page<Produto> listAll(Pageable pageable) {
+        return produtoService.getAll(pageable);
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<Produto> getOne(@PathVariable Integer id) {
+        Optional<Produto> p = produtoService.getOne(id);
+        return p.isPresent() ? ResponseEntity.ok(p.get()) : ResponseEntity.notFound().build();
+    }
+
+    @PostMapping
+    public ResponseEntity<Produto> create(@RequestBody NewProdutoDTO dto) {
+        Produto p = produtoService.salvar(dto);
+        URI uri = ServletUriComponentsBuilder.fromCurrentRequestUri().path("/{codigo}")
+                .buildAndExpand(p.getId()).toUri();
+        return ResponseEntity.created(uri).build();
+    }
+
+    @PostMapping("/sku")
+    public ResponseEntity<Boolean> skuExist(@RequestBody SkuDTO dto) {
+        Boolean exist = produtoService.skuExist(dto.getSku());
+        return ResponseEntity.ok(exist);
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<Produto> update(@PathVariable Integer id, @RequestBody Produto p) {
+        Produto prod = produtoService.atualizar(id, p);
+        return ResponseEntity.ok(prod);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deactivate(@PathVariable Integer id) {
+        produtoService.deletar(id);
+        return ResponseEntity.ok().build();
+    }
 
     @PostMapping("/foto")
     public FotoDTO uploadFoto(@RequestParam MultipartFile foto) throws IOException {
