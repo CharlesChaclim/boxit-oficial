@@ -1,10 +1,11 @@
 import {Component, OnInit} from '@angular/core';
 import {FuncionarioService} from '../funcionario.service';
 import {Funcionario} from '../../core/model';
-import {Router} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {ToastrService} from 'ngx-toastr';
 import {ErrorHandleService} from '../../core/error-handle.service';
 import {MyMaskUtil} from '../../shared/mask/my-mask.util';
+import {filter} from 'rxjs/operators';
 
 @Component({
   selector: 'app-view-funcionario',
@@ -27,15 +28,38 @@ export class ViewFuncionarioComponent implements OnInit {
   public phoneMask = MyMaskUtil.DYNAMIC_PHONE_MASK_GENERATOR;
   confirmSenha = '';
   passwordValid = false;
+  funcionarioId: string;
+  changePass = false;
 
   constructor(
     private funcionarioService: FuncionarioService,
     private router: Router,
+    private route: ActivatedRoute,
     private toastr: ToastrService,
     private err: ErrorHandleService
   ) { }
 
   ngOnInit() {
+    this.funcionarioId = this.route.snapshot.params['id'];
+    this.edit = this.route.snapshot.params['edit'];
+    if (this.funcionarioId && !this.edit) {
+      this.view = true;
+    }
+    if (this.funcionarioId !== undefined) {
+      this.funcionarioService.getOne(this.funcionarioId).subscribe(
+        r => {
+          this.f = r;
+          this.mail = r.email;
+          this.username = r.username;
+          this.cpf = r.cpf;
+          if (this.view) {
+            this.title = 'Detalhes de ' + this.f.nome;
+          } else if (this.edit) {
+            this.title = 'Editar ' + this.f.nome;
+            this.buttonText = 'Atualizar';
+          }
+      });
+    }
   }
 
   create() {
@@ -101,6 +125,20 @@ export class ViewFuncionarioComponent implements OnInit {
         }
       );
     }
+  }
+
+  clear() {
+    delete this.f.password;
+    delete this.confirmSenha;
+  }
+
+  update() {
+    this.funcionarioService.update(this.f).subscribe(
+      r => {
+        this.router.navigate(['/funcionario']);
+        this.toastr.success('Funcionário ' + this.f.nome + ' atualizado com sucesso!');
+      }
+    );
   }
 
   confirmasenha(): boolean {

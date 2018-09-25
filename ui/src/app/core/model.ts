@@ -23,7 +23,7 @@ export class ClienteEdit {
   nomeFantasia:	string;
   password:	string;
   telefone:	string;
-  endereco: Endereco;
+  endereco = new Endereco();
 }
 
 export class Endereco {

@@ -9,13 +9,13 @@
           <label class="col-md-2 col-form-label">Nome <span class="text-danger">*</span></label>
           <div class="col-md-10">
             <input type="text" class="form-control" required [(ngModel)]="f.nome" name="nome" #name="ngModel"
-                   [ngClass]="(name.invalid && name.touched) ? 'is-invalid' : ''">
+                   [ngClass]="(name.invalid && name.touched) ? 'is-invalid' : ''" [disabled]="view">
           </div>
         </div>
         <div class="form-group row">
           <label class="col-md-2 col-form-label">Email <span class="text-danger">*</span></label>
           <div class="col-md-10">
-            <input type="text" class="form-control" required [(ngModel)]="f.email" name="email" #email="ngModel" (invalid)="mailValid" (blur)="confirmaEmail()"
+            <input type="text" class="form-control" required [(ngModel)]="f.email" name="email" #email="ngModel" (invalid)="mailValid" (blur)="confirmaEmail()" [disabled]="view"
                    [ngClass]="((email.invalid && email.touched)|| mailValid) ? 'is-invalid' : ''" email pattern="^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$">
             <span class="text-danger" *ngIf="mailValid">Email já cadastrado!</span>
           </div>
@@ -25,7 +25,7 @@
           <div class="col-md-10">
             <input type="text" class="form-control" required [spMask]="cpfMask" maxlength="14" minlength="14"
                    [spKeepMask]="true" [(ngModel)]="f.cpf" placeholder="000.000.000-00" name="cpf" #cpf="ngModel" (invalid)="cpfValid" (blur)="confirmaCpf()"
-                   [ngClass]="((cpf.invalid && cpf.touched)|| cpfValid) ? 'is-invalid' : ''">
+                   [ngClass]="((cpf.invalid && cpf.touched)|| cpfValid) ? 'is-invalid' : ''" [disabled]="view || edit">
             <span class="text-danger" *ngIf="cpfValid">CPF já cadastrado!</span>
           </div>
         </div>
@@ -34,14 +34,14 @@
           <div class="col-md-10">
             <input type="text" class="form-control" required [spMask]="phoneMask" maxlength="15" minlength="14"
                    [spKeepMask]="true" [(ngModel)]="f.telefone" placeholder="(00) 0000-0000" name="telefone"
-                   #telefone="ngModel" [ngClass]="(telefone.invalid && telefone.touched) ? 'is-invalid' : ''">
+                   #telefone="ngModel" [ngClass]="(telefone.invalid && telefone.touched) ? 'is-invalid' : ''" [disabled]="view">
           </div>
         </div>
         <div class="form-group row">
           <label class="col-md-2 col-form-label">Cargo <span class="text-danger">*</span></label>
           <div class="col-md-10">
             <input type="text" class="form-control" required [(ngModel)]="f.cargo" name="cargo" #cargo="ngModel"
-                   [ngClass]="(cargo.invalid && cargo.touched) ? 'is-invalid' : ''">
+                   [ngClass]="(cargo.invalid && cargo.touched) ? 'is-invalid' : ''" [disabled]="view || edit">
           </div>
         </div>
 
@@ -49,12 +49,16 @@
           <label class="col-md-2 col-form-label">Username <span class="text-danger">*</span></label>
           <div class="col-md-10">
             <input type="text" class="form-control" required [(ngModel)]="f.username" name="username" #username="ngModel" (invalid)="usernameValid" (blur)="confirmaUsername()"
-                   [ngClass]="(username.invalid && username.touched) ? 'is-invalid' : ''">
+                   [ngClass]="(username.invalid && username.touched) ? 'is-invalid' : ''" [disabled]="view">
             <span class="text-danger" *ngIf="usernameValid">Username já cadastrado!</span>
           </div>
         </div>
-
-        <div class="form-group row">
+        <div class="custom-control custom-checkbox" *ngIf="edit">
+          <input type="checkbox" class="custom-control-input" [(ngModel)]="changePass" (change)="clear()"
+                 [ngModelOptions]="{standalone: true}" aria-label="Checkbox for Change Password" id="changePass">
+          <label class="custom-control-label" for="changePass">Alterar Senha</label>
+        </div>
+        <div class="form-group row" *ngIf="(edit && changePass) || (!edit && !view)">
           <label class="col-md-2 col-form-label">Senha <span class="text-danger">*</span></label>
           <div class="col-md-10">
             <input type="password" class="form-control" required [(ngModel)]="f.password" placeholder="********"
@@ -63,7 +67,7 @@
           </div>
         </div>
 
-        <div class="form-group row">
+        <div class="form-group row" *ngIf="(edit && changePass) || (!edit && !view)">
           <label class="col-md-2 col-form-label" style="font-size: 15px">Confirme sua senha <span class="text-danger">*</span></label>
           <div class="col-md-10">
             <input type="password" class="form-control" required [(ngModel)]="confirmSenha" placeholder="********"
@@ -74,8 +78,11 @@
       </div>
       <div class="card-footer">
         <div class="row">
-          <div class="col-12 col-md">
+          <div class="col-12 col-md" *ngIf="!view && !edit">
             <button class="btn btn-primary btn-block" (click)="create()" [disabled]="passwordValid || form.invalid">{{buttonText}}</button>
+          </div>
+          <div class="col-12 col-md" *ngIf="!view && edit">
+            <button class="btn btn-primary btn-block" (click)="update()" [disabled]="passwordValid || form.invalid">{{buttonText}}</button>
           </div>
           <div class="col-12 col-md">
             <button class="btn btn-secondary btn-block" (click)="back()"><i class="fas fa-arrow-left"></i> Voltar</button>

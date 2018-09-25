@@ -21,7 +21,6 @@ public class Usuario implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @JsonIgnore
     @Column(unique = true)
     private String username;
 

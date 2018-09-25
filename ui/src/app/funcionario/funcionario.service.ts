@@ -65,4 +65,13 @@ export class FuncionarioService {
     const headers = new HttpHeaders().set('Content-type', 'application/json');
     return this.http.put(this.authUrl + id + '/enabled', {enabled}, {headers: headers});
   }
+
+  getOne(id: string) {
+    return this.http.get<Funcionario>(this.url + id);
+  }
+
+  update(funcionario: Funcionario) {
+    const headers = new HttpHeaders().set('Content-type', 'application/json');
+    return this.http.put(this.url + funcionario['id'], JSON.stringify(funcionario), {headers: headers});
+  }
 }

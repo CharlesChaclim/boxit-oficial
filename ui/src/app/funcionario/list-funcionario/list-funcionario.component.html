@@ -48,7 +48,7 @@
                         style="cursor:pointer;" placement="top" (click)="updateEnabled(funcionario.id, !funcionario.enable)">
                 {{funcionario.enable ? 'Ativo' : 'Inativo'}}</span></td>
               <td><button class="btn btn-primary" routerLink="{{funcionario.id}}"><i class="fal fa-eye"></i></button></td>
-              <td><button class="btn btn-secondary" routerLink="{{funcionario.id}}/edit"><i class="fal fa-edit"></i></button></td>
+              <td><button class="btn btn-secondary" routerLink="{{funcionario.id}}/true"><i class="fal fa-edit"></i></button></td>
               <td><button class="btn btn-danger" [swal]="deleteSwal" (confirm)="delete(funcionario.id)"><i class="fal fa-trash-alt"></i></button></td>
               <swal #deleteSwal title="Confirmar exclusão" text="Essa ação não poderá ser desfeita! Tem certeza?" type="warning"></swal>
             </tr>

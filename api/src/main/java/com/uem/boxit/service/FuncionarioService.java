@@ -2,14 +2,17 @@ package com.uem.boxit.service;
 
 import com.uem.boxit.dto.NewFuncionarioDTO;
 import com.uem.boxit.model.Funcionario;
+import com.uem.boxit.model.Usuario;
 import com.uem.boxit.model.enums.Role;
 import com.uem.boxit.repository.FuncionarioRepository;
+import com.uem.boxit.repository.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-import org.springframework.util.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 
 import javax.transaction.Transactional;
 import java.util.Optional;
@@ -20,6 +23,9 @@ import java.util.function.Function;
 public class FuncionarioService {
     @Autowired
     private FuncionarioRepository funcionarioRepository;
+
+    @Autowired
+    private UsuarioRepository usuarioRepository;
 
     @Autowired
     private PasswordEncoder encoder;
@@ -34,13 +40,13 @@ public class FuncionarioService {
 
     public Page<Funcionario> filter(String nome, String cpf, String email, Pageable pageable) {
         if (!StringUtils.isEmpty(nome) && !StringUtils.isEmpty(cpf) && !StringUtils.isEmpty(email))
-            return funcionarioRepository.findByNomeContainsOrCpfContainsOrEmailContains(nome, cpf, email, pageable);
+            return funcionarioRepository.findByNomeContainsAndCpfContainsAndEmailContains(nome, cpf, email, pageable);
         else if (!StringUtils.isEmpty(nome) && !StringUtils.isEmpty(cpf))
-            return funcionarioRepository.findByNomeContainsOrCpfContains(nome, cpf, pageable);
+            return funcionarioRepository.findByNomeContainsAndCpfContains(nome, cpf, pageable);
         else if (!StringUtils.isEmpty(nome) && !StringUtils.isEmpty(email))
-            return funcionarioRepository.findByNomeContainsOrEmailContains(nome, email, pageable);
+            return funcionarioRepository.findByNomeContainsAndEmailContains(nome, email, pageable);
         else if (!StringUtils.isEmpty(cpf) && !StringUtils.isEmpty(email))
-            return funcionarioRepository.findByCpfContainsOrEmailContains(cpf, email, pageable);
+            return funcionarioRepository.findByCpfContainsAndEmailContains(cpf, email, pageable);
         else if (!StringUtils.isEmpty(nome))
             return funcionarioRepository.findByNomeContains(nome, pageable);
         else if (!StringUtils.isEmpty(email))
@@ -63,17 +69,26 @@ public class FuncionarioService {
     @Transactional
     public Funcionario update(Integer id, Funcionario funcionario) {
         Funcionario f = funcionarioRepository.getOne(id);
-        f.setCargo(funcionario.getCargo());
-        if (funcionario.getCargo().equalsIgnoreCase("gerente") && !funcionario.getRole().equals(Role.GERENTE))
+        if(isGerente())
+            f.setCargo(funcionario.getCargo());
+        Boolean containGerente = StringUtils.containsIgnoreCase(funcionario.getCargo(), "gerente");
+        if (!IsMe(funcionario.getId()) && containGerente && !funcionario.getRole().equals(Role.GERENTE))
             f.setRole(Role.GERENTE);
+        else if (!IsMe(funcionario.getId()) && isGerente() && !containGerente && !funcionario.getRole().equals(Role.FUNCIONARIO))
+            f.setRole(Role.FUNCIONARIO);
         f.setNome(funcionario.getNome());
         f.setTelefone(funcionario.getTelefone());
+        if (funcionario.getPassword() != null)
+            f.setPassword(encoder.encode(funcionario.getPassword()));
+        f.setUsername(funcionario.getUsername());
+        f.setEmail(funcionario.getEmail());
         return funcionarioRepository.save(f);
     }
 
     public void updatePassword(Integer id, String password) {
         Funcionario f = funcionarioRepository.getOne(id);
         f.setPassword(encoder.encode(password));
+        funcionarioRepository.save(f);
     }
 
     @Transactional
@@ -91,7 +106,7 @@ public class FuncionarioService {
         f.setTelefone(dto.getTelefone());
         f.setEmail(dto.getEmail());
         f.setCargo(dto.getCargo());
-        if (dto.getCargo().equalsIgnoreCase("gerente")) {
+        if (StringUtils.containsIgnoreCase(dto.getCargo(), "gerente")) {
             f.setRole(Role.GERENTE);
         } else {
             f.setRole(Role.FUNCIONARIO);
@@ -100,4 +115,16 @@ public class FuncionarioService {
         f.setConfirmCode(UUID.randomUUID().toString());
         return f;
     };
+
+    private boolean isGerente() {
+        String username = SecurityContextHolder.getContext().getAuthentication().getPrincipal().toString();
+        Optional<Usuario> user = usuarioRepository.findByUsername(username);
+        return user.map(usuario -> usuario.getRole().equals(Role.GERENTE)).orElse(false);
+    }
+
+    private boolean IsMe(Integer id) {
+        String username = SecurityContextHolder.getContext().getAuthentication().getPrincipal().toString();
+        Optional<Usuario> user = usuarioRepository.findByUsername(username);
+        return user.map(usuario -> usuario.getId().equals(id)).orElse(false);
+    }
 }

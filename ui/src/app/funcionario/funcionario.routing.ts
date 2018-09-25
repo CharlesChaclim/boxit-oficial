@@ -7,7 +7,7 @@ const routes: Routes = [
   {path: 'funcionario', component: ListFuncionarioComponent},
   {path: 'funcionario/new', component: ViewFuncionarioComponent},
   {path: 'funcionario/:id', component: ViewFuncionarioComponent},
-  {path: 'funcionario/:id/edit', component: ViewFuncionarioComponent}
+  {path: 'funcionario/:id/:edit', component: ViewFuncionarioComponent}
 ];
 
 export const FuncionarioRoute: ModuleWithProviders = RouterModule.forChild(routes);
