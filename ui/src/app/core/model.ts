@@ -85,3 +85,7 @@ export class Estoque {
 export class Categoria {
   nome: string;
 }
+
+export class CategoriaEdit {
+  nome: string;
+}

@@ -10,7 +10,7 @@
             <div class="form-group row">
               <label class="col-md-4 col-form-label">Nome <span class="text-danger">*</span></label>
               <div class="col-md-8">
-                <input type="text" class="form-control" [(ngModel)]="p.nome" placeholder="Memória RAM"
+                <input type="text" class="form-control" required [(ngModel)]="p.nome" placeholder="Memória RAM"
                        name="nome" #nome="ngModel" (invalid)="nome_valido" (blur)="confirmaNome()"
                        [ngClass]="((nome.invalid && nome.touched) || nome_valido) ? 'is-invalid' : ''">
                 <span class="text-danger" *ngIf="nome_valido">Nome já utilizado!</span>

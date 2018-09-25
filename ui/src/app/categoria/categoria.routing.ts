@@ -7,7 +7,8 @@ import {EditarComponent} from './editar/editar.component';
 const routes: Routes = [
   {path: 'categoria/new', component: CriarComponent},
   {path: 'categoria', component: ListarComponent},
-  {path: 'categoria/:id', component: EditarComponent}
+  {path: 'categoria/:id', component: EditarComponent},
+  {path: 'categoria/:id/:edit', component: EditarComponent}
 ];
 
 export const CategoriaRoute: ModuleWithProviders = RouterModule.forChild(routes);

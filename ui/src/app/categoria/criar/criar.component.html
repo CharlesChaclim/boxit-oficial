@@ -4,20 +4,20 @@
       <h3>Cadastro de Categoria</h3>
     </div>
     <div class="card-body">
-      <form #pform="ngForm">
+      <form #cform="ngForm">
         <div class="form-group row">
           <label class="col-md-2 col-form-label">Nome <span class="text-danger">*</span></label>
           <div class="col-md-10">
-            <input type="text" class="form-control" [(ngModel)]="c.nome" placeholder="Processador"
-                   name="nome" #nome="ngModel" (invalid)="nome_valido" (blur)="confirmaNome()"
-                   [ngClass]="((nome.invalid && nome.touched) || nome_valido) ? 'is-invalid' : ''">
+            <input type="text" class="form-control" required [(ngModel)]="c.nome" placeholder="Processador"
+                   name="namae" #namae="ngModel" (invalid)="nome_valido" (blur)="confirmaNome()"
+                   [ngClass]="((namae.invalid && namae.touched) || nome_valido) ? 'is-invalid' : ''">
             <span class="text-danger" *ngIf="nome_valido">Nome já utilizado!</span>
           </div>
         </div>
         <div class="row">
           <div class="col">
             <button href="#" class="btn btn-block btn-primary" (click)="cadastrar()" type="submit"
-                    [disabled]="pform.invalid">Cadastrar
+                    [disabled]="cform.invalid || nome_valido">Cadastrar
             </button>
           </div>
           <div class="col">

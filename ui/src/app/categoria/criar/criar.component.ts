@@ -1,8 +1,9 @@
 import {Component, OnInit} from '@angular/core';
 import {Categoria} from '../../core/model';
 import {CategoriaService} from '../categoria.service';
-import {Router} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {ToastrService} from 'ngx-toastr';
+import {ErrorHandleService} from '../../core/error-handle.service';
 
 @Component({
   selector: 'app-criar',
@@ -26,8 +27,8 @@ export class CriarComponent implements OnInit {
   cadastrar() {
     this.categoriaService.criar(this.c).subscribe(
       r => {
-        this.router.navigate(['/funcionario']);
-        this.toastr.success('Funcionário ' + this.c.nome + ' cadastrado com sucesso!');
+        this.router.navigate(['/categoria']);
+        this.toastr.success('Categoria ' + this.c.nome + ' cadastrada com sucesso!');
       }, e => {
         console.log(e);
       }
