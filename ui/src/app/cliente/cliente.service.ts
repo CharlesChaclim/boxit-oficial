@@ -58,6 +58,7 @@ export class ClienteService {
   }
 
   update(id: string, cliente: ClienteEdit) {
+    console.log(cliente.password);
     const headers = new HttpHeaders().set('Content-type', 'application/json');
     return this.http.put(this.url + id, JSON.stringify(cliente), {headers: headers});
   }

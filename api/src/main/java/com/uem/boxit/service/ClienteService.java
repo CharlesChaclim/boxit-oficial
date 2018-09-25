@@ -1,6 +1,7 @@
 package com.uem.boxit.service;
 
 import com.uem.boxit.dto.NewClienteDTO;
+import com.uem.boxit.dto.UpdateClienteDTO;
 import com.uem.boxit.model.Cliente;
 import com.uem.boxit.model.Endereco;
 import com.uem.boxit.model.enums.Role;
@@ -49,17 +50,8 @@ public class ClienteService {
     }
 
     @Transactional
-    public Cliente update(Integer id, Cliente cliente){
-        if(cliente.getPassword() != null)
-            updatePassword(id, cliente.getPassword());
-        Cliente cli = clienteRepository.getOne(id);
-        cli.setNomeFantasia(cliente.getNomeFantasia());
-        cli.setEndereco(cliente.getEndereco());
-        cli.setCnpj(cliente.getCnpj());
-        cli.setCpf(cliente.getCpf());
-        cli.setNome(cliente.getNome());
-        cli.setTelefone(cliente.getTelefone());
-        cli.setEmail(cliente.getEmail());
+    public Cliente update(Integer id, UpdateClienteDTO cliente){
+        Cliente cli = fromUpdateDTO.apply(cliente);
         return clienteRepository.save(cli);
     }
 
@@ -145,6 +137,8 @@ public class ClienteService {
     public void updatePassword(Integer id, String senha){
         Cliente cliente = clienteRepository.getOne(id);
         cliente.setPassword(encoder.encode(senha));
+        cliente.setPasswordResetCode(null);
+        cliente.setPasswordRestCodeExpiryDate(null);
         clienteRepository.save(cliente);
     }
 
@@ -178,6 +172,19 @@ public class ClienteService {
         cliente.setRole(Role.CLIENTE);
         cliente.setConfirmCode(UUID.randomUUID().toString());
         cliente.setPassword(encoder.encode(dto.getPassword()));
+        return cliente;
+    };
+
+    private Function<UpdateClienteDTO, Cliente> fromUpdateDTO = dto -> {
+        Cliente cliente = clienteRepository.getOne(dto.getId());
+        cliente.setNomeFantasia(dto.getNomeFantasia());
+        enderecoRepository.save(dto.getEndereco());
+        cliente.setNome(dto.getNome());
+        cliente.setCpf(dto.getCpf());
+        cliente.setTelefone(dto.getTelefone());
+        cliente.setEmail(dto.getEmail());
+        if(cliente.getPassword() != null)
+            cliente.setPassword(encoder.encode(dto.getPassword()));
         return cliente;
     };
 }
