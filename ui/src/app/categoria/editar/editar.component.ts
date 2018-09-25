@@ -31,7 +31,7 @@ export class EditarComponent implements OnInit {
       if (this.catID) {
         this.populate();
       } else {
-        this.router.navigate(['/cliente']);
+        this.router.navigate(['/categoria']);
       }
     });
     if (!this.edit) {
@@ -73,8 +73,8 @@ export class EditarComponent implements OnInit {
 
   editar() {
     this.categoriaService.update(this.c).subscribe(() => {
-      this.router.navigate(['/cliente']);
-      this.toastr.success('Funcionário ' + this.c.nome + ' atualizado com sucesso!');
+      this.router.navigate(['/categoria']);
+      this.toastr.success('Categoria ' + this.c.nome + ' atualizado com sucesso!');
       }, () => {
         swal('Erro!',
           'Falha no banco de dados\n Tente mais tarde',

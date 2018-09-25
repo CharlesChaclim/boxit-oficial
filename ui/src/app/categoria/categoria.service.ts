@@ -40,7 +40,7 @@ export class CategoriaService {
 
   updateEnable(id: string, enabled: boolean) {
     const headers = new HttpHeaders().set('Content-type', 'application/json');
-    return this.http.put(this.url + id + '/enabled', {enabled}, {headers: headers});
+    return this.http.put(this.url + id + '/enable', {enabled}, {headers: headers});
   }
 
   getOne(id: string) {

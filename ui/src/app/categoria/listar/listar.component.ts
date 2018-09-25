@@ -48,16 +48,17 @@ export class ListarComponent implements OnInit {
         if (enable) {
           swal(
             'Sucesso!',
-            'Cliente ' + nome + ' desativado com sucesso!',
+            'Categoria ' + nome + ' desativado com sucesso!',
             'success'
           );
         } else {
           swal(
             'Sucesso!',
-            'Cliente ' + nome + ' ativado com sucesso!',
+            'Categoria ' + nome + ' ativado com sucesso!',
             'success'
           );
         }
+        this.populate(null, '20');
       }
     );
   }
