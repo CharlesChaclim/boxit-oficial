@@ -25,7 +25,8 @@ export class EditComponent implements OnInit {
   showEmailError = false;
   showCnpjError = false;
   csenha = null;
-  update = false;
+  edit = false;
+  title: string;
 
   constructor(
     private correiosService: CorreiosService,
@@ -38,6 +39,7 @@ export class EditComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.edit = this.activatedRoute.snapshot.params['edit'];
     this.activatedRoute.paramMap.subscribe(params => {
       this.cliId = params.get('id');
       if (this.cliId) {
@@ -46,14 +48,21 @@ export class EditComponent implements OnInit {
         this.router.navigate(['/cliente']);
       }
     });
+    if (!this.edit) {
+      this.edit = false;
+    }
   }
 
   populate() {
-    this.update = true;
     this.servico.getOne(this.cliId).subscribe(
       s => {
         this.c = s;
-        this.c.senha = null;
+        this.c.password = null;
+        if (this.edit) {
+          this.title = 'Editar o cliente ' + this.c.nomeFantasia;
+        } else {
+          this.title = 'Detalhes do cliente ' + this.c.nomeFantasia;
+        }
       }, () => {
         swal(
           'Erro!',
@@ -84,7 +93,7 @@ export class EditComponent implements OnInit {
   }
 
   confirmasenha(): boolean {
-      return this.c.senha !== this.csenha;
+      return this.c.password !== this.csenha;
   }
 
   confimacnpj(): boolean {
