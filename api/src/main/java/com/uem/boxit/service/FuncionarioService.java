@@ -7,8 +7,10 @@ import com.uem.boxit.repository.FuncionarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
 import javax.transaction.Transactional;
 import java.util.Optional;
@@ -29,6 +31,25 @@ public class FuncionarioService {
 
     public Optional<Funcionario> getOne(Integer id) {
         return funcionarioRepository.findById(id);
+    }
+
+    public Page<Funcionario> filter(String nome, String cpf, String email, Pageable pageable) {
+        if (!StringUtils.isEmpty(nome) && !StringUtils.isEmpty(cpf) && !StringUtils.isEmpty(email))
+            return funcionarioRepository.findAllByNomeLikeOrCpfLikeOrEmailLike(nome, cpf, email, pageable);
+        else if (!StringUtils.isEmpty(nome) && !StringUtils.isEmpty(cpf))
+            return funcionarioRepository.findAllByNomeLikeOrCpfLike(nome, cpf, pageable);
+        else if (!StringUtils.isEmpty(nome) && !StringUtils.isEmpty(email))
+            return funcionarioRepository.findAllByNomeLikeOrEmailLike(nome, email, pageable);
+        else if (!StringUtils.isEmpty(cpf) && !StringUtils.isEmpty(email))
+            return funcionarioRepository.findAllByCpfLikeOrEmailLike(cpf, email, pageable);
+        else if (!StringUtils.isEmpty(nome))
+            return funcionarioRepository.findAllByNomeLike(nome, pageable);
+        else if (!StringUtils.isEmpty(email))
+            return funcionarioRepository.findAllByEmailLike(email, pageable);
+        else if (!StringUtils.isEmpty(cpf))
+            return funcionarioRepository.findAllByCpfLike(cpf, pageable);
+        else
+            return null;
     }
 
     public Funcionario create(NewFuncionarioDTO dto) {

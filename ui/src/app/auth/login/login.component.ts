@@ -25,13 +25,7 @@ export class LoginComponent implements OnInit {
   logar(form: NgForm) {
     this.auth.login(this.login.username, this.login.password)
       .then(() => {
-        if (this.auth.getPermissao()[0] === 'PETIANO') {
-          this.router.navigate(['/dashboard']);
-        } else if (this.auth.getPermissao()[0] === 'HELPER') {
-          this.router.navigate(['/helper/evento']);
-        } else {
-          this.router.navigate(['/']);
-        }
+        this.router.navigate(['/cliente']);
       }).catch(err => {
       form.reset({username: this.login.username});
       this.errHandle.handle(err);

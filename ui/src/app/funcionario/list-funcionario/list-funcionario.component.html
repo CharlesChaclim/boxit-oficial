@@ -1,3 +1,49 @@
-<p>
-  list-funcionario works!
-</p>
+<section class="col-12 offset-lg-1 col-lg-10">
+  <div class="card bg-light">
+    <div class="card-header">
+      <div class="row">
+        <div class="col-12 col-lg">
+          <h3>Lista de Funcionários</h3>
+        </div>
+        <div class="col-12 col-lg">
+          <h3>Filtrar</h3>
+          <div class="row">
+            <div class="col">
+              <input type="text" class="form-control" #nome name="nome" id="nome" placeholder="Nome"
+                     (keyup)="filtrar(nome.value, cpf.value, email.value)">
+            </div>
+            <div class="col">
+              <input type="text" class="form-control" #cpf ngModel name="cpf" id="cpf" placeholder="CPF"
+                     (keyup)="filtrar(nome.value, cpf.value, email.value)">
+            </div>
+            <div class="col">
+              <input type="text" class="form-control" #email ngModel name="email" id="email" placeholder="Email"
+                     (keyup)="filtrar(nome.value, cpf.value, email.value)">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="card-body">
+      <div class="col-12" style="margin-top: 10px" *ngIf="funcionarios.totalElements > 0">
+        <div class="table-responsive">
+          <table class="table table-sm table-hover table-bordered table-striped">
+            <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">Nome</th>
+              <th scope="col">CPF</th>
+              <th scope="col">Email</th>
+              <th colspan="3"></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
