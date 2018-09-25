@@ -181,7 +181,7 @@ public class ClienteService {
         enderecoRepository.save(dto.getEndereco());
         cliente.setNome(dto.getNome());
         cliente.setCpf(dto.getCpf());
-        cliente.setCpf(dto.getCnpj());
+        cliente.setCnpj(dto.getCnpj());
         cliente.setTelefone(dto.getTelefone());
         cliente.setEmail(dto.getEmail());
         if(dto.getPassword() != null) {
