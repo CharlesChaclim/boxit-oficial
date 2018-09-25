@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {Estoque} from '../../core/model';
 
 @Component({
   selector: 'app-cadastrar',
@@ -6,10 +7,17 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./cadastrar.component.scss']
 })
 export class CadastrarComponent implements OnInit {
+  p = new Estoque();
+  qtd_valid = false;
 
-  constructor() { }
+  constructor() {
+    this.p.qtd = 0;
+  }
 
   ngOnInit() {
   }
 
+  qtdPositiva() {
+    this.qtd_valid = this.p.qtd < 0;
+  }
 }
