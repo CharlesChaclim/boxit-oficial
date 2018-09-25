@@ -3,8 +3,10 @@ package com.uem.boxit.controller;
 import com.uem.boxit.dto.FotoDTO;
 import com.uem.boxit.dto.NewProdutoDTO;
 import com.uem.boxit.dto.SkuDTO;
+import com.uem.boxit.model.Categoria;
 import com.uem.boxit.model.Produto;
 import com.uem.boxit.service.ProdutoService;
+import com.uem.boxit.exception.ObjectNotFoundException;
 import com.uem.boxit.storage.S3;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -41,6 +43,15 @@ public class ProdutoController {
     public ResponseEntity<Produto> getOne(@PathVariable Integer id) {
         Optional<Produto> p = produtoService.getOne(id);
         return p.isPresent() ? ResponseEntity.ok(p.get()) : ResponseEntity.notFound().build();
+    }
+
+    @GetMapping("/filtrar")
+    public Page<Produto> filtrar(Pageable pageable, @RequestParam(required = false) String nome, @RequestParam(required = false) Categoria categoria, @RequestParam(required = true) Integer enable) {
+        Page<Produto> page = produtoService.filtrar(nome, categoria, enable, pageable);
+        if (page != null)
+            return page;
+        else
+            throw new ObjectNotFoundException("Os argumentos não devem ser nulos");
     }
 
     @PostMapping

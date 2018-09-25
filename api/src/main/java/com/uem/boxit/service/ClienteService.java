@@ -11,6 +11,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
 import javax.transaction.Transactional;
 import java.util.Optional;
@@ -33,10 +34,6 @@ public class ClienteService {
         return clienteRepository.findAll(pageable);
     }
 
-    public Page<Cliente> getAllValido(Pageable pageable) {
-        return clienteRepository.findByEnableIsTrue(pageable);
-    }
-
     public Optional<Cliente> getOne(Integer id){
         return clienteRepository.findById(id);
     }
@@ -51,18 +48,90 @@ public class ClienteService {
         return clienteRepository.findByCnpj(cnpj).isPresent();
     }
 
-    public Boolean emailExist(String email){return clienteRepository.findByEmail(email).isPresent();}
-
     @Transactional
     public Cliente update(Integer id, Cliente cliente){
         Cliente cli = clienteRepository.getOne(id);
         cli.setNomeFantasia(cliente.getNomeFantasia());
         cli.setEndereco(cliente.getEndereco());
+        cli.setCnpj(cliente.getCnpj());
         cli.setCpf(cliente.getCpf());
         cli.setNome(cliente.getNome());
         cli.setTelefone(cliente.getTelefone());
-        cli.setEmail(cli.getEmail());
+        cli.setEmail(cliente.getEmail());
+        if(cliente.getPassword() != null)
+            updatePassword(id, cliente.getPassword());
         return clienteRepository.save(cli);
+    }
+
+    public Page<Cliente> filtrar(String nome, String cnpj, String nomeFantasia, Integer enable, Pageable pageable) {
+        if (enable == 2){
+            if(!StringUtils.isEmpty(nome) && !StringUtils.isEmpty(cnpj) && !StringUtils.isEmpty(nomeFantasia))
+                return clienteRepository.findByNomeFantasiaContainsAndNomeContainsAndCnpjContainsAndEnableIsTrue(nomeFantasia,nome,cnpj,pageable);
+            else if(!StringUtils.isEmpty(cnpj) && !StringUtils.isEmpty(nome)){
+                return clienteRepository.findByCnpjContainsAndEnableIsTrueAndNomeContains(cnpj,nome,pageable);
+            }
+            else if(!StringUtils.isEmpty(cnpj) && !StringUtils.isEmpty(nomeFantasia)){
+                return clienteRepository.findByCnpjContainsAndEnableIsTrueAndNomeFantasiaContains(cnpj,nomeFantasia,pageable);
+            }
+            else if(!StringUtils.isEmpty(nome) && !StringUtils.isEmpty(nomeFantasia)){
+                return clienteRepository.findByNomeContainsAndEnableIsTrueAndNomeFantasiaContains(nome, nomeFantasia, pageable);
+            }
+            else if(!StringUtils.isEmpty(cnpj)){
+                return clienteRepository.findByCnpjContainsAndEnableIsTrue(cnpj, pageable);
+            }
+            else if(!StringUtils.isEmpty(nome)){
+                return clienteRepository.findByNomeContainsAndEnableIsTrue(nome, pageable);
+            }
+            else if(!StringUtils.isEmpty(nomeFantasia)){
+                return clienteRepository.findByNomeFantasiaContainsAndEnableIsTrue(nomeFantasia, pageable);
+            }
+            else return clienteRepository.findByEnableIsTrue(pageable);
+        }
+        else if(enable == 1){
+            if(!StringUtils.isEmpty(nome) && !StringUtils.isEmpty(cnpj) && !StringUtils.isEmpty(nomeFantasia))
+                return clienteRepository.findByNomeFantasiaContainsAndNomeContainsAndCnpjContainsAndEnableIsFalse(nomeFantasia,nome,cnpj,pageable);
+            else if(!StringUtils.isEmpty(cnpj) && !StringUtils.isEmpty(nome)){
+                return clienteRepository.findByCnpjContainsAndEnableIsFalseAndNomeContains(cnpj,nome,pageable);
+            }
+            else if(!StringUtils.isEmpty(cnpj) && !StringUtils.isEmpty(nomeFantasia)){
+                return clienteRepository.findByCnpjContainsAndEnableIsFalseAndNomeFantasiaContains(cnpj,nomeFantasia,pageable);
+            }
+            else if(!StringUtils.isEmpty(nome) && !StringUtils.isEmpty(nomeFantasia)){
+                return clienteRepository.findByNomeContainsAndEnableIsFalseAndNomeFantasiaContains(nome, nomeFantasia, pageable);
+            }
+            else if(!StringUtils.isEmpty(cnpj)){
+                return clienteRepository.findByCnpjContainsAndEnableIsFalse(cnpj, pageable);
+            }
+            else if(!StringUtils.isEmpty(nome)){
+                return clienteRepository.findByNomeContainsAndEnableIsFalse(nome, pageable);
+            }
+            else if(!StringUtils.isEmpty(nomeFantasia)){
+                return clienteRepository.findByNomeFantasiaContainsAndEnableIsFalse(nomeFantasia, pageable);
+            }
+            else return clienteRepository.findByEnableIsFalse(pageable);
+        }else{
+            if(!StringUtils.isEmpty(nome) && !StringUtils.isEmpty(cnpj) && !StringUtils.isEmpty(nomeFantasia))
+                return clienteRepository.findByNomeFantasiaContainsAndNomeContainsAndCnpjContains(nomeFantasia,nome,cnpj,pageable);
+            else if(!StringUtils.isEmpty(cnpj) && !StringUtils.isEmpty(nome)){
+                return clienteRepository.findByCnpjContainsAndNomeContains(cnpj,nome,pageable);
+            }
+            else if(!StringUtils.isEmpty(cnpj) && !StringUtils.isEmpty(nomeFantasia)){
+                return clienteRepository.findByCnpjContainsAndNomeFantasiaContains(cnpj,nomeFantasia,pageable);
+            }
+            else if(!StringUtils.isEmpty(nome) && !StringUtils.isEmpty(nomeFantasia)){
+                return clienteRepository.findByNomeContainsAndNomeFantasiaContains(nome, nomeFantasia, pageable);
+            }
+            else if(!StringUtils.isEmpty(cnpj)){
+                return clienteRepository.findByCnpjContains(cnpj, pageable);
+            }
+            else if(!StringUtils.isEmpty(nome)){
+                return clienteRepository.findByNomeContains(nome, pageable);
+            }
+            else if(!StringUtils.isEmpty(nomeFantasia)){
+                return clienteRepository.findByNomeFantasiaContains(nomeFantasia, pageable);
+            }
+            else return getAll(pageable);
+        }
     }
 
     @Transactional
@@ -79,9 +148,13 @@ public class ClienteService {
         clienteRepository.save(cliente);
     }
 
-    public void delete(Integer id){
+    @Transactional
+    public void atualizarEnable(Integer id, Boolean enable){
         Cliente cliente = clienteRepository.getOne(id);
-        cliente.setEnable(false);
+        if(!enable)
+            cliente.setEnable(true);
+        else
+            cliente.setEnable(false);
         clienteRepository.save(cliente);
     }
 
