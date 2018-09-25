@@ -81,3 +81,7 @@ export class Estoque {
   fotos: Array<string>;
   categoriaId: number;
 }
+
+export class Categoria {
+  nome: string;
+}
