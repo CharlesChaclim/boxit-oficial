@@ -16,6 +16,7 @@ import {ToastrModule} from 'ngx-toastr';
 import {HttpClientModule} from '@angular/common/http';
 import {FuncionarioModule} from '../funcionario/funcionario.module';
 import {AuthModule} from '../auth/auth.module';
+import {CategoriaModule} from '../categoria/categoria.module';
 
 registerLocaleData(localePt, 'pt-BR');
 
@@ -23,6 +24,7 @@ registerLocaleData(localePt, 'pt-BR');
   imports: [
     CommonModule,
     EstoqueModule,
+    CategoriaModule,
     ClienteModule,
     AppRouting,
     NgbModule.forRoot(),

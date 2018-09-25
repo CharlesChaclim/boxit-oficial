@@ -63,22 +63,6 @@ export class ListFuncionarioComponent implements OnInit {
     }
   }
 
-  delete(id: string) {
-    this.funcionarioService.delete(id)
-      .subscribe(
-        () => {
-          this.toastr.success('Funcionário deletado com sucesso!');
-          if (this.filtred) {
-            this.filtrar((this.funcionarios.number + 1).toString(), this.funcionarios.size.toString());
-          } else {
-            this.populate((this.funcionarios.number + 1).toString(), this.funcionarios.size.toString());
-          }
-        }, err => {
-          this.toastr.error('Erro ao deletar funcionário');
-        }
-      );
-  }
-
   updateEnabled(id: string, enable: boolean) {
     this.funcionarioService.updateEnable(id, enable).subscribe(
       r => {

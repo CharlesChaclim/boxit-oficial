@@ -7,7 +7,8 @@ import {EditarComponent} from './editar/editar.component';
 const routes: Routes = [
   {path: 'estoque/new', component: CadastrarComponent},
   {path: 'estoque', component: ListarComponent},
-  {path: 'estoque/:id', component: EditarComponent}
+  {path: 'estoque/:id', component: EditarComponent},
+  {path: 'estoque/:id/:edit', component: EditarComponent}
 ];
 
 export const EstoqueRoute: ModuleWithProviders = RouterModule.forChild(routes);

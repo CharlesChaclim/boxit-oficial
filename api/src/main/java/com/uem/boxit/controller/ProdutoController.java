@@ -1,20 +1,17 @@
 package com.uem.boxit.controller;
 
-import com.uem.boxit.dto.FotoDTO;
-import com.uem.boxit.dto.NewProdutoDTO;
-import com.uem.boxit.dto.SkuDTO;
-import com.uem.boxit.model.Categoria;
+import com.uem.boxit.dto.*;
+import com.uem.boxit.exception.ObjectNotFoundException;
 import com.uem.boxit.model.Produto;
 import com.uem.boxit.service.ProdutoService;
-import com.uem.boxit.exception.ObjectNotFoundException;
 import com.uem.boxit.storage.S3;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.io.IOException;
@@ -46,7 +43,7 @@ public class ProdutoController {
     }
 
     @GetMapping("/filtrar")
-    public Page<Produto> filtrar(Pageable pageable, @RequestParam(required = false) String nome, @RequestParam(required = false) Categoria categoria, @RequestParam(required = true) Integer enable) {
+    public Page<Produto> filtrar(Pageable pageable, @RequestParam(required = false) String nome, @RequestParam(required = false) String categoria, @RequestParam(required = true) Integer enable) {
         Page<Produto> page = produtoService.filtrar(nome, categoria, enable, pageable);
         if (page != null)
             return page;
@@ -62,6 +59,12 @@ public class ProdutoController {
         return ResponseEntity.created(uri).build();
     }
 
+    @PostMapping("/nome")
+    public ResponseEntity<Boolean> nomeExist(@RequestBody NomeDTO dto) {
+        Boolean exist = produtoService.nomeExist(dto.getNome());
+        return ResponseEntity.ok(exist);
+    }
+
     @PostMapping("/sku")
     public ResponseEntity<Boolean> skuExist(@RequestBody SkuDTO dto) {
         Boolean exist = produtoService.skuExist(dto.getSku());
@@ -74,9 +77,9 @@ public class ProdutoController {
         return ResponseEntity.ok(prod);
     }
 
-    @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deactivate(@PathVariable Integer id) {
-        produtoService.deletar(id);
+    @PutMapping("/{id}/enable")
+    public ResponseEntity atualizarEnable(@PathVariable Integer id, @RequestBody EnableDTO dto) {
+        produtoService.atualizarEnable(id, dto.getEnabled());
         return ResponseEntity.ok().build();
     }
 

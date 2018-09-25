@@ -11,9 +11,9 @@ export class MaskDirective {
   private static readonly NUMERIC = '9';
   private static readonly ALPHANUMERIC = '?';
   private static readonly REGEX_MAP = new Map([
-    [MaskDirective.ALPHA, /\w/],
+    [MaskDirective.ALPHA, /[a-zA-ZçÇ]/],
     [MaskDirective.NUMERIC, /\d/],
-    [MaskDirective.ALPHANUMERIC, /\w|\d/],
+    [MaskDirective.ALPHANUMERIC, /\w/],
   ]);
 
   private value: string = null;

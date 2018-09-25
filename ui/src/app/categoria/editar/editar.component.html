@@ -1,0 +1,34 @@
+<div class="col-12 offset-lg-1 col-lg-10">
+  <div class="card">
+    <div class="card-header text-center">
+      <h3>Editar Categoria</h3>
+    </div>
+    <div class="card-body">
+      <form #cform="ngForm">
+        <div class="form-group row">
+          <label class="col-md-2 col-form-label">Nome <span class="text-danger">*</span></label>
+          <div class="col-md-10">
+            <input type="text" class="form-control" (invalid)="nome_valido" (blur)="confirmaNome()"
+                   required [(ngModel)]="c.nome" name="namae" #namae="ngModel"
+                   [ngClass]="((namae.invalid && namae.touched) || nome_valido) ? 'is-invalid' : ''" [disabled]="!edit">
+          </div>
+        </div>
+
+        <div class="row" *ngIf="edit">
+          <div class="col">
+            <button href="#" class="btn btn-block btn-primary" (click)="editar()" type="submit"
+                    [disabled]="cform.invalid || nome_valido">Atualizar</button>
+          </div>
+          <div class="col">
+            <button class="btn btn-secondary btn-block" (click)="back()"><i class="fal fa-arrow-left"></i> Voltar</button>
+          </div>
+        </div>
+        <div class="row" *ngIf="!edit">
+          <div class="col">
+            <button class="btn btn-secondary btn-block" (click)="back()"><i class="fal fa-arrow-left"></i> Voltar</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

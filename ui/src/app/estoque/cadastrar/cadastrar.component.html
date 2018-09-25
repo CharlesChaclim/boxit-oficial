@@ -10,8 +10,10 @@
             <div class="form-group row">
               <label class="col-md-4 col-form-label">Nome <span class="text-danger">*</span></label>
               <div class="col-md-8">
-                <input type="text" class="form-control" [(ngModel)]="p.nome" placeholder="Memória RAM" name="nome" #nome="ngModel"
-                       [ngClass]="(nome.invalid && nome.touched) ? 'is-invalid' : ''">
+                <input type="text" class="form-control" required [(ngModel)]="p.nome" placeholder="Memória RAM"
+                       name="nome" #nome="ngModel" (invalid)="nome_valido" (blur)="confirmaNome()"
+                       [ngClass]="((nome.invalid && nome.touched) || nome_valido) ? 'is-invalid' : ''">
+                <span class="text-danger" *ngIf="nome_valido">Nome já utilizado!</span>
               </div>
             </div>
             <div class="form-group row">
@@ -19,8 +21,9 @@
               <div class="col-md-8">
                 <input type="text" class="form-control" required [(ngModel)]="p.preco"
                        placeholder="R$ 9.999,99" currencyMask name="preco" #preco="ngModel"
-                       [options]="{prefix: 'R$ ', thousands: '.', decimal: ','}"
-                       [ngClass]="(preco.invalid && preco.touched) ? 'is-invalid' : ''">
+                       [options]="{prefix: 'R$ ', thousands: '.', decimal: ','} " (blur)="precoPositivo()"
+                       [ngClass]="((preco.invalid && preco.touched) || preco_valido) ? 'is-invalid' : ''"
+                autocomplete="off">
               </div>
             </div>
             <div class="form-group row">
@@ -28,39 +31,51 @@
               <div class="col-md-8">
                 <input type="number" class="form-control" required [(ngModel)]="p.qtd"
                        placeholder="999" name="qtd" #qtd="ngModel" (blur)="qtdPositiva()"
-                       [ngClass]="((qtd.invalid && qtd.touched) || qtd_valid) ? 'is-invalid' : ''">
+                       [ngClass]="((qtd.invalid && qtd.touched) || qtd_valida) ? 'is-invalid' : ''">
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-md-4 col-form-label">Un/Lote <span class="text-danger">*</span></label>
+              <div class="col-md-8">
+                <input type="number" class="form-control" required [(ngModel)]="p.unidadeLote"
+                       placeholder="999" name="unidadeLote" #unidadeLote="ngModel" (blur)="lotePositivo()"
+                       [ngClass]="((unidadeLote.invalid && unidadeLote.touched) || lote_valido) ? 'is-invalid' : ''">
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-md-4 col-form-label">Código do Produto <span class="text-danger">*</span></label>
+              <div class="col-md-8">
+                <input type="text" class="form-control" required [spMask]="skuMask" maxlength="8" minlength="5"
+                       [spKeepMask]="true" required [(ngModel)]="p.sku" placeholder="AAA-9999" name="sku" #sku="ngModel"
+                       (invalid)="sku_valido" (blur)="confirmaSku()"
+                       [ngClass]="((sku.invalid && sku.touched) || sku_valido) ? 'is-invalid' : ''">
+                <span class="text-danger" *ngIf="sku_valido">Código já utilizado!</span>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-md-4 col-form-label">Categoria <span class="text-danger">*</span></label>
+              <div class="col-md-8">
+                <select class="custom-select" name="categoria" #cat="ngModel" required [(ngModel)]="p.categoriaId" [ngModelOptions]="{standalone: true}">
+                  <option *ngFor="let c of categoria" value="{{c.id}}">{{c.nome}}</option>
+                </select>
               </div>
             </div>
           </div>
           <div class="col-md-6">
             <div class="form-group row">
-              <label class="col-md-3 col-form-label">Bairro </label>
+              <label class="col-md-3 col-form-label">Descrição <span class="text-danger">*</span></label>
               <div class="col-md-9">
-                <input type="text" class="form-control" [(ngModel)]="c.bairro"
-                       placeholder="Centro"
-                       name="bairro" #bairro="ngModel">
+                <input type="text" class="form-control" required [(ngModel)]="p.descricao"
+                       placeholder="Informações do produto" name="descricao" #descricao="ngModel"
+                       [ngClass]="(descricao.invalid && descricao.touched) ? 'is-invalid' : ''">
               </div>
             </div>
           </div>
         </div>
-
-
-
-        <div class="form-group row">
-          <label class="col-md-2 col-form-label">Email <span class="text-danger">*</span></label>
-          <div class="col-md-10">
-            <input type="text" pattern="^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$"
-                   class="form-control" required [(ngModel)]="c.email" placeholder="test@gmail.com" name="email"
-                   #email="ngModel" (blur)="confimaemail()" (invalid)="emailvalid" [ngClass]="(emailvalid || (email.invalid && email.touched)) ? 'is-invalid' : ''">
-            <span class="text-danger" *ngIf="showEmailError">Email já cadastrado!</span>
-          </div>
-        </div>
-
-
         <div class="row">
           <div class="col">
             <button href="#" class="btn btn-block btn-primary" (click)="cadastrar()" type="submit"
-                    [disabled]="pform.invalid">Cadastrar
+                    [disabled]="pform.invalid || preco_valido || qtd_valida || lote_valido || cat.invalid">Cadastrar
             </button>
           </div>
           <div class="col">
