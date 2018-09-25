@@ -1,9 +1,6 @@
 package com.uem.boxit.controller;
 
-import com.uem.boxit.dto.CnpjDTO;
-import com.uem.boxit.dto.EmailDTO;
-import com.uem.boxit.dto.NewClienteDTO;
-import com.uem.boxit.dto.NewPasswordDTO;
+import com.uem.boxit.dto.*;
 import com.uem.boxit.event.SendConfirmationCodeEvent;
 import com.uem.boxit.exception.ObjectNotFoundException;
 import com.uem.boxit.model.Cliente;
@@ -38,15 +35,20 @@ public class ClienteController {
         return clienteService.getAll(pageable);
     }
 
-    @GetMapping("/enable")
-    public Page<Cliente> listAllValido(Pageable pageable) {
-        return clienteService.getAllValido(pageable);
-    }
-
     @GetMapping("/{id}")
     public ResponseEntity<Cliente> getOne(@PathVariable Integer id){
         Optional<Cliente> cliente = clienteService.getOne(id);
         return cliente.isPresent() ? ResponseEntity.ok(cliente.get()) : ResponseEntity.notFound().build();
+    }
+
+    @GetMapping("/filtro")
+    public Page<Cliente> filtto(Pageable pageable, @RequestParam(required = false) String nome, @RequestParam(required = false) String cnpj, @RequestParam(required = false) String nomeFantasia, @RequestParam(required = true) Integer enable) {
+        Page<Cliente> page = clienteService.filtrar(nome, cnpj, nomeFantasia, enable, pageable);
+        if (page != null)
+            return page;
+        else
+            throw new ObjectNotFoundException("Os argumentos não devem ser nulos");
+
     }
 
     @PostMapping
@@ -69,12 +71,6 @@ public class ClienteController {
         return ResponseEntity.ok(exist);
     }
 
-    @PostMapping("/email")
-    public ResponseEntity<Boolean> emailExist(@RequestBody EmailDTO dto){
-        Boolean exist = clienteService.emailExist(dto.getEmail());
-        return ResponseEntity.ok(exist);
-    }
-
     @PutMapping("/{id}")
     public ResponseEntity<Cliente> update(@PathVariable Integer id, @RequestBody Cliente cliente){
         Cliente cli = clienteService.update(id, cliente);
@@ -93,9 +89,9 @@ public class ClienteController {
         return ResponseEntity.ok().build();
     }
 
-    @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deactivate(@PathVariable Integer id) {
-        clienteService.delete(id);
+    @PutMapping("/{id}/enable")
+    public ResponseEntity atualizarEnable(@PathVariable Integer id, @RequestBody EnableDTO dto) {
+        clienteService.atualizarEnable(id, dto.getEnabled());
         return ResponseEntity.ok().build();
     }
 }
