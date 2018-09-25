@@ -5,13 +5,19 @@ import {ViewFuncionarioComponent} from './view-funcionario/view-funcionario.comp
 import {RouterModule} from '@angular/router';
 import {FuncionarioRoute} from './funcionario.routing';
 import {FormsModule} from '@angular/forms';
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import {SharedModule} from '../shared/shared.module';
+import {SweetAlert2Module} from '@toverux/ngx-sweetalert2';
 
 @NgModule({
   imports: [
     CommonModule,
     RouterModule,
     FuncionarioRoute,
-    FormsModule
+    FormsModule,
+    SharedModule,
+    NgbModule,
+    SweetAlert2Module
   ],
   declarations: [
     ListFuncionarioComponent,

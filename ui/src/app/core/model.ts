@@ -54,6 +54,8 @@ export class Funcionario {
   email: string;
   nome: string;
   telefone: string;
+  username: string;
+  password: string;
 }
 
 export class Page {

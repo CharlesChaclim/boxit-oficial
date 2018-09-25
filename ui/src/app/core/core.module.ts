@@ -27,9 +27,9 @@ registerLocaleData(localePt, 'pt-BR');
     AppRouting,
     NgbModule.forRoot(),
     SweetAlert2Module.forRoot({
-      buttonsStyling: false,
-      confirmButtonClass: 'btn btn-primary',
-      cancelButtonClass: 'btn btn-secondary'
+      cancelButtonText: 'Voltar',
+      confirmButtonText: 'Confirmar',
+      showCancelButton: true
     }),
     CurrencyMaskModule,
     HttpClientModule,

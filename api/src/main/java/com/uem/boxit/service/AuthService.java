@@ -3,12 +3,14 @@ package com.uem.boxit.service;
 import com.uem.boxit.config.property.BoxItApiProperty;
 import com.uem.boxit.mail.SendGridEmailService;
 import com.uem.boxit.model.Cliente;
+import com.uem.boxit.model.Usuario;
 import com.uem.boxit.repository.ClienteRepository;
 import com.uem.boxit.repository.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.*;
 
 @Service
@@ -41,6 +43,13 @@ public class AuthService {
 
     public void updateResetToken(Cliente cli) {
         clienteRepository.save(cli);
+    }
+
+    @Transactional
+    public void updateEnable(Integer id, Boolean enabled) {
+        Usuario u = usuarioRepository.getOne(id);
+        u.setEnable(enabled);
+        usuarioRepository.save(u);
     }
 
     public Optional<Cliente> findByConfirmationCode(String code) {

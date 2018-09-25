@@ -7,7 +7,6 @@ import com.uem.boxit.repository.FuncionarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
@@ -35,20 +34,20 @@ public class FuncionarioService {
 
     public Page<Funcionario> filter(String nome, String cpf, String email, Pageable pageable) {
         if (!StringUtils.isEmpty(nome) && !StringUtils.isEmpty(cpf) && !StringUtils.isEmpty(email))
-            return funcionarioRepository.findAllByNomeLikeOrCpfLikeOrEmailLike(nome, cpf, email, pageable);
+            return funcionarioRepository.findByNomeContainsOrCpfContainsOrEmailContains(nome, cpf, email, pageable);
         else if (!StringUtils.isEmpty(nome) && !StringUtils.isEmpty(cpf))
-            return funcionarioRepository.findAllByNomeLikeOrCpfLike(nome, cpf, pageable);
+            return funcionarioRepository.findByNomeContainsOrCpfContains(nome, cpf, pageable);
         else if (!StringUtils.isEmpty(nome) && !StringUtils.isEmpty(email))
-            return funcionarioRepository.findAllByNomeLikeOrEmailLike(nome, email, pageable);
+            return funcionarioRepository.findByNomeContainsOrEmailContains(nome, email, pageable);
         else if (!StringUtils.isEmpty(cpf) && !StringUtils.isEmpty(email))
-            return funcionarioRepository.findAllByCpfLikeOrEmailLike(cpf, email, pageable);
+            return funcionarioRepository.findByCpfContainsOrEmailContains(cpf, email, pageable);
         else if (!StringUtils.isEmpty(nome))
-            return funcionarioRepository.findAllByNomeLike(nome, pageable);
+            return funcionarioRepository.findByNomeContains(nome, pageable);
         else if (!StringUtils.isEmpty(email))
-            return funcionarioRepository.findAllByEmailLike(email, pageable);
-        else if (!StringUtils.isEmpty(cpf))
-            return funcionarioRepository.findAllByCpfLike(cpf, pageable);
-        else
+            return funcionarioRepository.findByEmailContains(email, pageable);
+        else if (!StringUtils.isEmpty(cpf)) {
+            return funcionarioRepository.findByCpfContains(cpf, pageable);
+        } else
             return null;
     }
 
@@ -77,10 +76,10 @@ public class FuncionarioService {
         f.setPassword(encoder.encode(password));
     }
 
+    @Transactional
     public void delete(Integer id) {
         Funcionario f = funcionarioRepository.getOne(id);
-        f.setEnable(false);
-        funcionarioRepository.save(f);
+        funcionarioRepository.delete(f);
     }
 
     private Function<NewFuncionarioDTO, Funcionario> toFuncionario = dto -> {

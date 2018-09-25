@@ -32,7 +32,6 @@ public class Usuario implements Serializable {
     @JsonIgnore
     private String password;
 
-    @JsonIgnore
     private Boolean enable;
     private String telefone;
 

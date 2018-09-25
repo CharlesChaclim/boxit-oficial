@@ -1,6 +1,7 @@
 package com.uem.boxit.controller;
 
 import com.uem.boxit.dto.EmailDTO;
+import com.uem.boxit.dto.EnableDTO;
 import com.uem.boxit.dto.UsernameDTO;
 import com.uem.boxit.exception.ObjectNotFoundException;
 import com.uem.boxit.model.Cliente;
@@ -76,5 +77,11 @@ public class AuthController {
         } else {
             throw new ObjectNotFoundException("O código que você está usando não foi encontrado.");
         }
+    }
+
+    @PutMapping("/{id}/enabled")
+    public ResponseEntity updateEnabled(@PathVariable Integer id, @RequestBody EnableDTO dto) {
+        authService.updateEnable(id, dto.getEnabled());
+        return ResponseEntity.ok().build();
     }
 }

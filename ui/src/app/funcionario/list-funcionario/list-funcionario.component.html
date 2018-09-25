@@ -1,49 +1,87 @@
 <section class="col-12 offset-lg-1 col-lg-10">
-  <div class="card bg-light">
+  <div class="card bg-light" style="margin-top: 10px">
     <div class="card-header">
       <div class="row">
         <div class="col-12 col-lg">
           <h3>Lista de Funcionários</h3>
         </div>
         <div class="col-12 col-lg">
-          <h3>Filtrar</h3>
+          <h5>Filtrar</h5> (<small>Digite o filtro desejado que já será efetuado o filtro</small>)
+          <br/>
           <div class="row">
             <div class="col">
-              <input type="text" class="form-control" #nome name="nome" id="nome" placeholder="Nome"
-                     (keyup)="filtrar(nome.value, cpf.value, email.value)">
+              <input type="text" class="form-control" [(ngModel)]="name" name="nome" id="nome" placeholder="Nome"
+                     (keyup)="filtrar(null, '20')">
             </div>
             <div class="col">
-              <input type="text" class="form-control" #cpf ngModel name="cpf" id="cpf" placeholder="CPF"
-                     (keyup)="filtrar(nome.value, cpf.value, email.value)">
+              <input type="text" class="form-control" [(ngModel)]="cpf" name="cpf" id="cpf" placeholder="CPF"
+                     (keyup)="filtrar(null, '20')" [spMask]="cpfMask" maxlength="14" minlength="14"
+                     [spKeepMask]="true" placeholder="000.000.000-00">
             </div>
             <div class="col">
-              <input type="text" class="form-control" #email ngModel name="email" id="email" placeholder="Email"
-                     (keyup)="filtrar(nome.value, cpf.value, email.value)">
+              <input type="text" class="form-control" [(ngModel)]="email" name="email" id="email" placeholder="Email"
+                     (keyup)="filtrar(null, '20')">
             </div>
           </div>
         </div>
       </div>
     </div>
     <div class="card-body">
-      <div class="col-12" style="margin-top: 10px" *ngIf="funcionarios.totalElements > 0">
+      <div class="col-12" *ngIf="funcionarios?.totalElements > 0">
         <div class="table-responsive">
-          <table class="table table-sm table-hover table-bordered table-striped">
+          <table class="table table-sm table-hover table-bordered table-striped text-center">
             <thead>
             <tr>
-              <th scope="col">#</th>
               <th scope="col">Nome</th>
               <th scope="col">CPF</th>
               <th scope="col">Email</th>
+              <th scope="col">Ativo</th>
               <th colspan="3"></th>
             </tr>
             </thead>
             <tbody>
-            <tr>
+            <tr *ngFor="let funcionario of funcionarios.content">
+              <td>{{funcionario.nome}}</td>
+              <td>{{funcionario.cpf}}</td>
+              <td>{{funcionario.email}}</td>
+              <td><span class="badge badge-pill" [ngClass]="funcionario.enable ? 'badge-success' : 'badge-warning'" ngbTooltip="{{funcionario.enable ? 'Desativar' : 'Ativar'}}"
+                        style="cursor:pointer;" placement="top" (click)="updateEnabled(funcionario.id, !funcionario.enable)">
+                {{funcionario.enable ? 'Ativo' : 'Inativo'}}</span></td>
+              <td><button class="btn btn-primary" routerLink="{{funcionario.id}}"><i class="fal fa-plus"></i></button></td>
+              <td><button class="btn btn-secondary" routerLink="{{funcionario.id}}/edit"><i class="fal fa-edit"></i></button></td>
+              <td><button class="btn btn-danger" [swal]="deleteSwal" (confirm)="delete(funcionario.id)"><i class="fal fa-trash-alt"></i></button></td>
+              <swal #deleteSwal title="Confirmar exclusão" text="Essa ação não poderá ser desfeita! Tem certeza?" type="warning"></swal>
             </tr>
             </tbody>
           </table>
         </div>
       </div>
+      <div class="col-12 text-center" *ngIf="!(funcionarios?.totalElements > 0)">
+        <span>Nenhum funcionário cadastrado no momento!</span>
+      </div>
+    </div>
+    <div class="card-footer">
+      <button class="btn btn-primary" routerLink="new"><i class="fas fa-plus"></i> Novo Funcionário</button>
+    </div>
+  </div>
+  <div class="row" style="margin-top: 10px;">
+    <div class="col-12 col-md-6 text-white">
+      <ngb-pagination
+        [collectionSize]="funcionarios?.totalElements"
+        [page]="funcionarios?.number + 1"
+        [pageSize]="funcionarios?.size"
+        [rotate]="true"
+        [maxSize]="5"
+        (pageChange)="loadPage($event)"
+        [boundaryLinks]="true"
+        *ngIf="funcionarios?.totalPages > 1"
+      ></ngb-pagination>
+    </div>
+    <div class="col-12 col-md-6 text-white">
+      Funcionários por página:
+      <select class="custom-select col-6" (change)="changeSize($event.target.value)">
+        <option *ngFor="let size of sizes" value="{{size}}" [selected]="size == funcionarios?.size">{{size}}</option>
+      </select>
     </div>
   </div>
 </section>
