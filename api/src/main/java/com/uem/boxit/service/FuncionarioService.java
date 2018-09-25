@@ -48,7 +48,7 @@ public class FuncionarioService {
         else if (!StringUtils.isEmpty(cpf)) {
             return funcionarioRepository.findByCpfContains(cpf, pageable);
         } else
-            return null;
+            return getAll(pageable);
     }
 
     public Funcionario create(NewFuncionarioDTO dto) {
