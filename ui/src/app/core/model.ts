@@ -18,7 +18,6 @@ export class Cliente {
 export class ClienteEdit {
   cpf:	string;
   email:	string;
-senha: string;
   cnpj: string;
   nome:	string;
   nomeFantasia:	string;

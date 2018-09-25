@@ -50,6 +50,8 @@ public class ClienteService {
 
     @Transactional
     public Cliente update(Integer id, Cliente cliente){
+        if(cliente.getPassword() != null)
+            updatePassword(id, cliente.getPassword());
         Cliente cli = clienteRepository.getOne(id);
         cli.setNomeFantasia(cliente.getNomeFantasia());
         cli.setEndereco(cliente.getEndereco());
@@ -58,8 +60,6 @@ public class ClienteService {
         cli.setNome(cliente.getNome());
         cli.setTelefone(cliente.getTelefone());
         cli.setEmail(cliente.getEmail());
-        if(cliente.getPassword() != null)
-            updatePassword(id, cliente.getPassword());
         return clienteRepository.save(cli);
     }
 
