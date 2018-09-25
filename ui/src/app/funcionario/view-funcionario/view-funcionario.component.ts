@@ -5,7 +5,6 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {ToastrService} from 'ngx-toastr';
 import {ErrorHandleService} from '../../core/error-handle.service';
 import {MyMaskUtil} from '../../shared/mask/my-mask.util';
-import {filter} from 'rxjs/operators';
 
 @Component({
   selector: 'app-view-funcionario',

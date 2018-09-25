@@ -7,6 +7,14 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
+import javax.validation.ConstraintViolation;
+import javax.validation.ConstraintViolationException;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
+
 @RestControllerAdvice
 public class CustomExceptionHandler extends ResponseEntityExceptionHandler {
 
@@ -28,4 +36,14 @@ public class CustomExceptionHandler extends ResponseEntityExceptionHandler {
         return new ResponseEntity<>(apiError, new HttpHeaders(), apiError.getStatus());
     }
 
+    @ExceptionHandler(ConstraintViolationException.class)
+    ResponseEntity<Object> handleConstraintViolation(ConstraintViolationException e) {
+        Set<ConstraintViolation<?>> constraintViolations = e.getConstraintViolations();
+        List<String> messages = new ArrayList<>(constraintViolations.size());
+        messages.addAll(constraintViolations.stream()
+                .map(constraintViolation -> String.format("%s", constraintViolation.getMessage()))
+                .collect(Collectors.toList()));
+        StandError apiError = new StandError(HttpStatus.BAD_REQUEST, e.getLocalizedMessage(), messages);
+        return new ResponseEntity<>(apiError, new HttpHeaders(), apiError.getStatus());
+    }
 }
