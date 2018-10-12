@@ -53,10 +53,6 @@ export class EstoqueService {
     return this.http.post(this.url, JSON.stringify(produto), {headers: headers});
   }
 
-  deletar(id: string) {
-    return this.http.delete(this.url + id);
-  }
-
   updateEnable(id: string, enabled: boolean) {
     const headers = new HttpHeaders().set('Content-type', 'application/json');
     return this.http.put(this.url + id + '/enable', {enabled}, {headers: headers});

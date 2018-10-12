@@ -16,8 +16,16 @@ export class ClienteService {
     private router: Router
   ) { }
 
-  getAll() {
-    return this.http.get(this.url);
+  listAll(page: string, size: string) {
+    let params = new HttpParams();
+    if (page) {
+      page = (+page - 1).toString();
+      params = params.append('page', page);
+    }
+    if (size) {
+      params = params.append('size', size);
+    }
+    return this.http.get<Page>(this.url, {params: params});
   }
 
   atualizarEnable(id: string, enabled: boolean) {

@@ -100,3 +100,11 @@ export class Categoria {
 export class CategoriaEdit {
   nome: string;
 }
+
+export class Relatorio {
+  dataInicio: string;
+  dataFim: string;
+  tipo: number;
+  estado: string;
+  cidade: string;
+}
