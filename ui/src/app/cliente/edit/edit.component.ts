@@ -5,13 +5,11 @@ import {CorreiosService} from '../../shared/correios.service';
 import {ClienteService} from '../cliente.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import swal from 'sweetalert2';
-import {ToastrService} from 'ngx-toastr';
 import {ErrorHandleService} from '../../core/error-handle.service';
 
 @Component({
   selector: 'app-edit',
-  templateUrl: './edit.component.html',
-  styleUrls: ['./edit.component.scss']
+  templateUrl: './edit.component.html'
 })
 export class EditComponent implements OnInit {
   public cpfMask = MyMaskUtil.CPF_MASK_GENERATOR;
@@ -33,7 +31,6 @@ export class EditComponent implements OnInit {
     private servico: ClienteService,
     private router: Router,
     private errHandle: ErrorHandleService,
-    private toast: ToastrService,
     private activatedRoute: ActivatedRoute
   ) {
   }
@@ -156,7 +153,6 @@ export class EditComponent implements OnInit {
       }
     );
   }
-
   back() {
     history.back();
   }

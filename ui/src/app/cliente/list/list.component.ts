@@ -2,14 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import {Page} from '../../core/model';
 import {MyMaskUtil} from '../../shared/mask/my-mask.util';
 import * as _ from 'lodash';
-import {ToastrService} from 'ngx-toastr';
 import {ClienteService} from '../cliente.service';
 import swal from 'sweetalert2';
 
 @Component({
   selector: 'app-list',
-  templateUrl: './list.component.html',
-  styleUrls: ['./list.component.scss']
+  templateUrl: './list.component.html'
 })
 export class ListComponent implements OnInit {
 
@@ -23,8 +21,7 @@ export class ListComponent implements OnInit {
   filtrado = false;
   vazio = 0;
   constructor(
-    private clienteService: ClienteService,
-    private toast: ToastrService
+    private clienteService: ClienteService
   ) { }
 
   ngOnInit() {

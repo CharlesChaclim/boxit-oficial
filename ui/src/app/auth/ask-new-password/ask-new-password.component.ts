@@ -7,8 +7,7 @@ import {NgForm} from '@angular/forms';
 
 @Component({
   selector: 'app-ask-new-password',
-  templateUrl: './ask-new-password.component.html',
-  styleUrls: ['./ask-new-password.component.scss']
+  templateUrl: './ask-new-password.component.html'
 })
 export class AskNewPasswordComponent implements OnInit {
   loading = false;
@@ -27,7 +26,7 @@ export class AskNewPasswordComponent implements OnInit {
     this.loading = true;
     this.auth.requestResetPassword(email)
       .subscribe(
-        resp => {
+        () => {
           this.loading = false;
           this.toast.success('Verifique o email ' + email + ' para poder redefinir sua senha');
           this.router.navigate(['/login']);

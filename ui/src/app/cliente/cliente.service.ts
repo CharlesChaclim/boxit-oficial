@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
-import {Router} from '@angular/router';
 import {Cliente, ClienteEdit, Page} from '../core/model';
 import {environment} from '../../environments/environment';
 
@@ -13,13 +12,7 @@ export class ClienteService {
 
   constructor(
     private http: HttpClient,
-    private router: Router
   ) { }
-
-  getAll() {
-    return this.http.get(this.url);
-  }
-
   atualizarEnable(id: string, enabled: boolean) {
     const headers = new HttpHeaders().set('Content-type', 'application/json');
     return this.http.put(this.url + id + '/enable', {enabled}, {headers: headers});
