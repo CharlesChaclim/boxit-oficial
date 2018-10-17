@@ -8,6 +8,7 @@ export class MyMaskUtil {
   private static CPF = '999.999.999-99';
   private static CNPJ = '99.999.999/9999-99';
   private static SKU = 'AAA-9999';
+  private static BOLETO = '99999.99999 99999.999999 99999.999999 9 99999999999999';
 
   public static PHONE_MASK_GENERATOR: MaskGenerator = {
     generateMask: () =>  MyMaskUtil.PHONE_SMALL,
@@ -23,6 +24,10 @@ export class MyMaskUtil {
 
   public static CEP_MASK_GENERATOR: MaskGenerator = {
     generateMask: () =>  MyMaskUtil.CEP,
+  };
+
+  public static BOLETO_MASK_GENERATOR: MaskGenerator = {
+    generateMask: () =>  MyMaskUtil.BOLETO,
   };
 
   public static CPF_MASK_GENERATOR: MaskGenerator = {

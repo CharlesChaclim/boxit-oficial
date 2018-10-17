@@ -4,7 +4,6 @@ import com.uem.boxit.dto.*;
 import com.uem.boxit.event.SendConfirmationCodeEvent;
 import com.uem.boxit.exception.ObjectNotFoundException;
 import com.uem.boxit.model.Cliente;
-import com.uem.boxit.model.Usuario;
 import com.uem.boxit.service.ClienteService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationEventPublisher;

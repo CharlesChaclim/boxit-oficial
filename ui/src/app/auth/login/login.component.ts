@@ -4,12 +4,10 @@ import {AuthService} from '../auth.service';
 import {Router} from '@angular/router';
 import {ErrorHandleService} from '../../core/error-handle.service';
 import {NgForm} from '@angular/forms';
-import {ToastrService} from 'ngx-toastr';
 
 @Component({
   selector: 'app-login',
-  templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss']
+  templateUrl: './login.component.html'
 })
 export class LoginComponent implements OnInit {
   login = new Login();
@@ -31,5 +29,4 @@ export class LoginComponent implements OnInit {
       this.errHandle.handle(err);
     });
   }
-
 }
