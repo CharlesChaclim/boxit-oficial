@@ -1,17 +1,48 @@
-<div class="row">
-  <div class="col-12 col-md-6">
-    <div class="form-group row">
-      <label for="start" class="col-xl-5 col-form-label">Início das inscrições</label>
-      <div class="col-xl-7">
-        <div class="input-group">
-          <input placeholder="dd/mm/yyyy" type="text" class="form-control" ngbDatepicker #sd="ngbDatepicker"
-                 id="start" name="start" required formControlName="registrationStart" [readonly]="!edit && !new" maxlength="10">
-          <div class="input-group-append">
-            <button class="btn btn-outline-secondary" (click)="sd.toggle()" type="button" style="cursor:pointer;" [disabled]="!this.edit && !this.new">
-              <i class="fal fa-calendar-alt"></i>
+<div class="col-12 offset-lg-1 col-lg-10">
+  <div class="card">
+    <div class="card-header text-center">
+      <h3>Gerar Relatórios</h3>
+    </div>
+    <div class="card-body">
+      <form #rform="ngForm">
+        <div class="form-row">
+          <div class="col-md-6">
+            <div class="form-group row">
+              <label class="col-md-3 col-form-label">Data de Início <span class="text-danger">*</span></label>
+              <div class="col-md-9">
+                <div class="input-group mb-3">
+                  <input type="text" class="form-control" ngbDatepicker #d="ngbDatepicker" (click)="d.toggle()"/>
+                </div>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-md-3 col-form-label">Data de Fim <span class="text-danger">*</span></label>
+              <div class="col-md-9">
+                <div class="input-group mb-3">
+                  <input type="text" class="form-control" ngbDatepicker #d="ngbDatepicker" (click)="d.toggle()"/>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="form-group row">
+              <label class="col-md-3 col-form-label">Descrição <span class="text-danger">*</span></label>
+              <div class="col-md-9">
+                <input type="text" class="form-control" required [(ngModel)]="p.descricao"
+                       placeholder="Informações do produto" name="descricao" #descricao="ngModel"
+                       [ngClass]="(descricao.invalid && descricao.touched) ? 'is-invalid' : ''">
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <button href="#" class="btn btn-block btn-primary" (click)="cadastrar()" type="submit"
+                    [disabled]="pform.invalid || preco_valido || qtd_valida || lote_valido || cat.invalid">Cadastrar
             </button>
           </div>
         </div>
-      </div>
+      </form>
     </div>
   </div>
+</div>
