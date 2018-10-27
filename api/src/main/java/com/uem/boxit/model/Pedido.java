@@ -18,9 +18,7 @@ public class Pedido {
     private Double frete;
 
     @ManyToOne
-    @JoinColumn(name = "user_id")
-    private Usuario user;
-
-
+    @JoinColumn(name = "cliente_id")
+    private Cliente cliente;
 
 }

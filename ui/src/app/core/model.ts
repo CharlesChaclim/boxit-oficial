@@ -108,3 +108,8 @@ export class Relatorio {
   estado: string;
   cidade: string;
 }
+
+export class Pagamento {
+  dataPagamento: Date;
+  nrBoleto: string;
+}

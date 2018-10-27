@@ -15,7 +15,7 @@ public class Pagamento {
     private String nome;
 
     @JsonIgnore
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "pedido_id")
     @MapsId
     private Pedido pedido;
@@ -23,5 +23,13 @@ public class Pagamento {
     @Temporal(TemporalType.TIMESTAMP)
     private Date dataPagamento;
 
-    private Double precoPago;
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date dataVencimento;
+
+    private Boolean pago;
+    private Double preco;
+    private Double juros;
+    private Double multa;
+    private Double precoTotal;
+    private String nrBoleto;
 }

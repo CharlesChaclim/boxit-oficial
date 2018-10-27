@@ -148,7 +148,7 @@ export class EditComponent implements OnInit {
         this.router.navigate(['/cliente']);
       }, () => {
         swal('Erro!',
-          'Falha no banco de dados\n Tente mais tarde',
+          'CNPJ ou CPF Inválido',
           'error');
       }
     );

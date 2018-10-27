@@ -9,34 +9,52 @@
             <label class="col-md-3 col-form-label">Número do Boleto <span class="text-danger">*</span></label>
             <div class="col-md-9">
               <input type="text" class="form-control" required [spMask]="boletoMask" maxlength="54" minlength="54" (blur)="confimaboleto()"
-                     [spKeepMask]="true" [(ngModel)]="fboleto" placeholder="99999.99999 99999.999999 99999.999999 9 99999999999999" name="boleto" #boleto="ngModel"
+                     [spKeepMask]="true" [(ngModel)]="p.nrBoleto" placeholder="99999.99999 99999.999999 99999.999999 9 99999999999999" name="boleto" #boleto="ngModel"
                      [ngClass]="((boleto.invalid && boleto.touched) || boletovalid) ? 'is-invalid' : ''">
             </div>
           </div>
           <div class="form-group row">
-            <label class="col-md-3 col-form-label">CNPJ <span class="text-danger">*</span></label>
+            <label class="col-md-3 col-form-label">CNPJ </label>
             <div class="col-md-9">
-              <input type="text" class="form-control" required [spMask]="cnpjMask" maxlength="18" minlength="18" (blur)="confimacnpj()"
-                     [spKeepMask]="true" [(ngModel)]="c.cnpj" placeholder="00.000.000/0000-00" name="cnpj" #cnpj="ngModel"
-                     [ngClass]="((cnpj.invalid && cnpj.touched) || cnpjvalid) ? 'is-invalid' : ''">
+              <input type="text" class="form-control" [disabled]="true" name="fcnpj"  [(ngModel)]="fcnpj">
             </div>
           </div>
 
           <div class="form-group row">
-            <label class="col-md-3 col-form-label">Valor da Conta<span class="text-danger">*</span></label>
+            <label class="col-md-3 col-form-label">Preço da Conta</label>
             <div class="col-md-9">
-              <input type="text" class="form-control" [(ngModel)]="fpreco" required name="preco" #preco="ngModel"
-                     placeholder="R$ 00,00" currencyMask autocomplete="off"
-                     [options]="{prefix: 'R$ ', thousands: '.', decimal: ','} " (blur)="precoPositivo()"
-                     [ngClass]="((preco.invalid && preco.touched) || preco_valido) ? 'is-invalid' : ''">
+              <input type="text" class="form-control" [disabled]="true" name="fpreco"  [(ngModel)]="fpreco">
             </div>
           </div>
+
+        <div class="form-group row">
+          <label class="col-md-3 col-form-label">Multa</label>
+          <div class="col-md-9">
+            <input type="text" class="form-control" [disabled]="true" name="fmulta"  [(ngModel)]="fmulta">
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <label class="col-md-3 col-form-label">Juros</label>
+          <div class="col-md-9">
+            <input type="text" class="form-control" [disabled]="true" name="fjuros"  [(ngModel)]="fjuros">
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <label class="col-md-3 col-form-label">Preço Total</label>
+          <div class="col-md-9">
+            <input type="text" class="form-control" [disabled]="true" name="ftotal"  [(ngModel)]="ftotal">
+          </div>
+        </div>
 
           <div class="form-group row">
             <label class="col-md-3 col-form-label">Data do Recebimento <span class="text-danger">*</span></label>
             <div class="col-md-9">
               <div class="input-group mb-3">
-                <input type="text" class="form-control" ngbDatepicker #d="ngbDatepicker" (click)="d.toggle()"/>
+                <input type="text" class="form-control" required [(ngModel)]="fd" ngbDatepicker
+                       #d="ngbDatepicker" (click)="d.toggle()" (dateSelect)="calculaMultaJuros()" (navigate)="fd = $event.next"
+                       [ngModelOptions]="{standalone: true}"/>
               </div>
             </div>
           </div>
@@ -44,7 +62,7 @@
       <div class="row">
         <div class="col">
           <button href="#" class="btn btn-block btn-primary"  type="submit"
-                  [disabled]="pform.invalid || preco_valido || cnpjvalid || boletovalid">Registrar
+                  [disabled]="pform.invalid || boletovalid || datavalid" (click)="registrar()">Registrar
           </button>
         </div>
         <div class="col">
