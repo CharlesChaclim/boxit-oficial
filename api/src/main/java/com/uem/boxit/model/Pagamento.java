@@ -14,10 +14,8 @@ public class Pagamento {
     private Integer id;
     private String nome;
 
-    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "pedido_id")
-    @MapsId
     private Pedido pedido;
 
     @Temporal(TemporalType.TIMESTAMP)

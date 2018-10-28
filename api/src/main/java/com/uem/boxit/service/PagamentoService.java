@@ -3,7 +3,9 @@ package com.uem.boxit.service;
 
 import com.uem.boxit.dto.UpdatePagamentoDTO;
 import com.uem.boxit.model.Pagamento;
+import com.uem.boxit.model.Pedido;
 import com.uem.boxit.repository.PagamentoRepository;
+import com.uem.boxit.repository.PedidoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,6 +19,9 @@ public class PagamentoService {
     @Autowired
     private PagamentoRepository pagamentoRepository;
 
+    @Autowired
+    private PedidoRepository pedidoRepository;
+
     public Optional<Pagamento> getBoleto(String numero){
         return pagamentoRepository.findByNrBoleto(numero);
     }
@@ -29,6 +34,7 @@ public class PagamentoService {
 
     private Function<UpdatePagamentoDTO, Pagamento> fromUpdateDTO = dto -> {
         Pagamento pagamento = pagamentoRepository.getByNrBoleto(dto.getNrBoleto());
+        Pedido pedido = pedidoRepository.getOne(pagamento.getPedido().getId());
         double multa=0;
         double juros;
         double diff = Math.abs(dto.getDataPagamento().getTime() - pagamento.getDataVencimento().getTime());
@@ -41,6 +47,12 @@ public class PagamentoService {
         pagamento.setDataPagamento(dto.getDataPagamento());
         pagamento.setPago(true);
         pagamento.setPrecoTotal(pagamento.getPreco()+juros+multa);
+        pedido.setRecebido(pedido.getRecebido()+pagamento.getPreco()+juros+multa);
+        if(multa > 0) {
+            pedido.setMulta(pedido.getMulta() + multa);
+            pedido.setJuros(pedido.getJuros() + juros);
+            pedido.setPrecoTotal(pedido.getPrecoTotal() + juros + multa);
+        }
         return pagamento;
     };
 }

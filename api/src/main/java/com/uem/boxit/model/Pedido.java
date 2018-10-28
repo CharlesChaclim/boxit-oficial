@@ -17,6 +17,12 @@ public class Pedido {
     private Date createAt;
     private Double frete;
 
+    private Double preco;
+    private Double precoTotal;
+    private Double multa;
+    private Double juros;
+    private Double recebido;
+
     @ManyToOne
     @JoinColumn(name = "cliente_id")
     private Cliente cliente;
