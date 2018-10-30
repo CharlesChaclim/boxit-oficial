@@ -17,6 +17,7 @@ export class PagamentoService {
     return this.http.get<any>(this.url + numero);
   }
 
+
   update(pagamento: Pagamento) {
     const headers = new HttpHeaders().set('Content-type', 'application/json');
     return this.http.put(this.url, JSON.stringify(pagamento), {headers: headers});

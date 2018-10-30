@@ -1,0 +1,40 @@
+<section class="col-12 offset-lg-1 col-lg-10">
+  <div class="card bg-light" style="margin-top: 10px">
+    <div class="card-header">
+      <div class="row">
+        <div class="col-12 col-md-5">
+          <h3>Detalhes do Pedido</h3>
+        </div>
+      </div>
+    </div>
+    <div class="card-body">
+      <div class="col-12" *ngIf="itens?.totalElements > 0">
+        <div class="table-responsive">
+          <table class="table table-sm table-hover table-bordered table-striped text-center">
+            <thead>
+            <tr>
+              <th scope="col">Nome</th>
+              <th scope="col">Preço</th>
+              <th scope="col">Quantidade</th>
+              <th scope="col">Preço Total</th>
+              <th colspan="4"></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let item of itens.content">
+              <td>{{item.nome}}</td>
+              <td>{{item.preco}}</td>
+              <td>{{item.quantidade}}</td>
+              <td>{{item.quantidade}}</td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col">
+    <button class="btn btn-secondary btn-block" (click)="back()"><i class="fal fa-arrow-left"></i> Voltar</button>
+  </div>
+</section>
+

@@ -13,15 +13,18 @@
                      [ngClass]="((boleto.invalid && boleto.touched) || boletovalid) ? 'is-invalid' : ''">
             </div>
           </div>
-        <!--
           <div class="form-group row">
             <label class="col-md-3 col-form-label">CNPJ </label>
             <div class="col-md-9">
               <input type="text" class="form-control" [disabled]="true" name="fcnpj"  [(ngModel)]="fcnpj">
             </div>
           </div>
-        -->
-
+        <div class="form-group row">
+          <label class="col-md-3 col-form-label">Nome </label>
+          <div class="col-md-9">
+            <input type="text" class="form-control" [disabled]="true" name="fnome"  [(ngModel)]="fnome">
+          </div>
+        </div>
           <div class="form-group row">
             <label class="col-md-3 col-form-label">Preço da Conta</label>
             <div class="col-md-9">

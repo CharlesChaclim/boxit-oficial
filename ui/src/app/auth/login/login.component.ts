@@ -4,6 +4,7 @@ import {AuthService} from '../auth.service';
 import {Router} from '@angular/router';
 import {ErrorHandleService} from '../../core/error-handle.service';
 import {NgForm} from '@angular/forms';
+import {MyMaskUtil} from '../../shared/mask/my-mask.util';
 
 @Component({
   selector: 'app-login',
@@ -11,6 +12,7 @@ import {NgForm} from '@angular/forms';
 })
 export class LoginComponent implements OnInit {
   login = new Login();
+  public personMask = MyMaskUtil.PERSON_MASK_GENERATOR;
 
   constructor(
     private auth: AuthService,

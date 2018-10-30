@@ -10,11 +10,8 @@
   <div class="collapse navbar-collapse" id="navbarText" [ngbCollapse]="!navbar">
     <ul class="navbar-nav ml-auto">
       <li ngbDropdown class="nav-item dropdown">
-        <a id="topbar-pagamento" class="dropdown-toggle" style="cursor: pointer;" role="button" ngbDropdownToggle><i
-          class="fal fa-user"></i> Pagamento</a>
-        <div ngbDropdownMenu aria-labelledby="topbar-pagamento" class="dropdown-menu">
-          <a (click)="toggle()" class="dropdown-item" routerLink="/pagamento"><i class="fal fa-list-ul"></i> Pagamento</a>
-        </div>
+      <li class="nav-item">
+        <a (click)="toggle()" class="dropdown-item" routerLink="/pagamento"><i class="fal fa-list-ul"></i> Pagamento</a>
       </li>
       <li ngbDropdown class="nav-item dropdown">
         <a id="topbar-cliente" class="dropdown-toggle" style="cursor: pointer;" role="button" ngbDropdownToggle><i
@@ -41,8 +38,12 @@
           <a (click)="toggle()" class="dropdown-item" routerLink="/categoria"><i class="fal fa-list-ul"></i> Categorias</a>
         </div>
       </li>
-      <li class="nav-item">
-        <a (click)="toggle()" routerLink="faq" class="text-dark" style="text-decoration: none;"><i class="fal fa-question-circle"></i> FAQ</a>
+      <li ngbDropdown class="nav-item dropdown">
+        <a id="topbar-user" class="dropdown-toggle" style="cursor: pointer;" role="button" ngbDropdownToggle><i
+          class="fal fa-user"></i>&nbsp;Minha Conta</a>
+        <div ngbDropdownMenu aria-labelledby="topbar-pedido" class="dropdown-menu">
+          <a (click)="toggle()" class="dropdown-item" routerLink="/pedido"><i class="fal fa-list-ul"></i> Pedidos</a>
+        </div>
       </li>
     </ul>
   </div>

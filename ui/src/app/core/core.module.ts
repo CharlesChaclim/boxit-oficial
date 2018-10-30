@@ -16,6 +16,7 @@ import {FuncionarioModule} from '../funcionario/funcionario.module';
 import {AuthModule} from '../auth/auth.module';
 import {CategoriaModule} from '../categoria/categoria.module';
 import {RelatorioModule} from '../relatorio/relatorio.module';
+import {PedidoModule} from '../pedido/pedido.module';
 
 
 registerLocaleData(localePt, 'pt-BR');
@@ -25,6 +26,7 @@ registerLocaleData(localePt, 'pt-BR');
     CommonModule,
     EstoqueModule,
     CategoriaModule,
+    PedidoModule,
     ClienteModule,
     AppRouting,
     NgbModule.forRoot(),

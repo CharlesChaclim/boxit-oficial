@@ -23,6 +23,7 @@ export class PagamentoComponent implements OnInit {
   datavalid = true;
   fpreco: number;
   fcnpj: string;
+  fnome: string;
   fmulta: number;
   fjuros: number;
   ftotal: number;
@@ -47,7 +48,8 @@ export class PagamentoComponent implements OnInit {
           );
           this.boletovalid = true;
         } else if (r) {
-          this.fcnpj = r.cnpj;
+          this.fcnpj = r.pedido.cliente.cnpj;
+          this.fnome = r.pedido.cliente.nome;
           this.ftotal = this.fpreco = r.preco;
           this.fvencimento = r.dataVencimento;
           this.boletovalid = false;
