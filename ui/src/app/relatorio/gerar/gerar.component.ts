@@ -3,6 +3,8 @@ import {EstoqueService} from '../../estoque/estoque.service';
 import {ClienteService} from '../../cliente/cliente.service';
 import {Relatorio} from '../../core/model';
 import {RelatorioService} from '../relatorio.service';
+import {Router} from '@angular/router';
+import {ToastrService} from 'ngx-toastr';
 
 @Component({
   selector: 'app-gerar',
@@ -19,6 +21,8 @@ export class GerarComponent implements OnInit {
     private relatorioService: RelatorioService,
     private estoqueService: EstoqueService,
     private clienteService: ClienteService,
+    private router: Router,
+    private toastr: ToastrService
   ) { }
 
   ngOnInit() {
@@ -44,5 +48,19 @@ export class GerarComponent implements OnInit {
         this.cliente = s.content;
       }
     );
+  }
+
+  /*cadastrar() {
+    this.relatorioService.criar(this.r).subscribe(
+      s => {
+        this.router.navigate(['/relatorio']);
+      }, e => {
+        console.log(e);
+      }
+    );
+  }*/
+
+  back() {
+    history.back();
   }
 }

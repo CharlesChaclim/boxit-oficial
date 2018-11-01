@@ -11,7 +11,9 @@
               <label class="col-md-3 col-form-label">Data de Início <span class="text-danger">*</span></label>
               <div class="col-md-9">
                 <div class="input-group mb-3">
-                  <input type="text" class="form-control" ngbDatepicker #d="ngbDatepicker" (click)="d.toggle()"/>
+                  <input type="text" class="form-control" required [(ngModel)]="r.dataInicio"
+                         placeholder="aaaa-mm-dd" name="dataInicio" ngbDatepicker #dataInicio="ngbDatepicker" (click)="dataInicio.toggle()"
+                         (blur)="dataInicioMenorFim()" [ngClass]="(data_valida) ? 'is-invalid' : ''"/>
                 </div>
               </div>
             </div>
@@ -19,7 +21,9 @@
               <label class="col-md-3 col-form-label">Data de Fim <span class="text-danger">*</span></label>
               <div class="col-md-9">
                 <div class="input-group mb-3">
-                  <input type="text" class="form-control" ngbDatepicker #d="ngbDatepicker" (click)="d.toggle()"/>
+                  <input type="text" class="form-control" required [(ngModel)]="r.dataFim"
+                         placeholder="aaaa-mm-dd" name="dataFim" ngbDatepicker #dataFim="ngbDatepicker" (click)="dataFim.toggle()"
+                         (blur)="dataInicioMenorFim()" [ngClass]="(data_valida) ? 'is-invalid' : ''"/>
                 </div>
               </div>
             </div>
@@ -28,7 +32,7 @@
             <div class="form-group row">
               <label class="col-md-3 col-form-label">Descrição <span class="text-danger">*</span></label>
               <div class="col-md-9">
-                <input type="text" class="form-control" required [(ngModel)]="p.descricao"
+                <input type="text" class="form-control" required [(ngModel)]="r.cidade"
                        placeholder="Informações do produto" name="descricao" #descricao="ngModel"
                        [ngClass]="(descricao.invalid && descricao.touched) ? 'is-invalid' : ''">
               </div>
@@ -38,7 +42,7 @@
         <div class="row">
           <div class="col">
             <button href="#" class="btn btn-block btn-primary" (click)="cadastrar()" type="submit"
-                    [disabled]="pform.invalid || preco_valido || qtd_valida || lote_valido || cat.invalid">Cadastrar
+                    [disabled]="rform.invalid || data_valida">Cadastrar
             </button>
           </div>
         </div>
