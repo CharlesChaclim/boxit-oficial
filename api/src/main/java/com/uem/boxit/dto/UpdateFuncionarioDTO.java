@@ -13,7 +13,6 @@ public class UpdateFuncionarioDTO {
     private String telefone;
     private String email;
     private String cargo;
-    private String username;
     private String password;
 
 }

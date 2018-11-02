@@ -98,17 +98,12 @@ export class AuthService {
     return this.jwtPayload && this.jwtPayload.authorities.includes(permissao);
   }
 
-  getPermissao() {
-    return this.jwtPayload != null ? this.jwtPayload.authorities : false;
-  }
-
   temQualquerPermissao(roles) {
     for (const role of roles) {
       if (this.temPermissao(role)) {
         return true;
       }
     }
-
     return false;
   }
 

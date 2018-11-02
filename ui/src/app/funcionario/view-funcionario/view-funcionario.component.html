@@ -45,14 +45,6 @@
           </div>
         </div>
 
-        <div class="form-group row">
-          <label class="col-md-2 col-form-label">Username <span class="text-danger">*</span></label>
-          <div class="col-md-10">
-            <input type="text" class="form-control" required [(ngModel)]="f.username" name="username" #username="ngModel" (invalid)="usernameValid" (blur)="confirmaUsername()"
-                   [ngClass]="(username.invalid && username.touched) ? 'is-invalid' : ''" [disabled]="view">
-            <span class="text-danger" *ngIf="usernameValid">Username já cadastrado!</span>
-          </div>
-        </div>
         <div class="custom-control custom-checkbox" *ngIf="edit">
           <input type="checkbox" class="custom-control-input" [(ngModel)]="changePass" (change)="clear()"
                  [ngModelOptions]="{standalone: true}" aria-label="Checkbox for Change Password" id="changePass">

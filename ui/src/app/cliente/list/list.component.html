@@ -29,13 +29,12 @@
 
           <div class="row">
             <div class="col">
-              <input type="text" class="form-control" [(ngModel)]="nomeFantasia" name="nomeFantasia" id="nomeFantasia" placeholder="Nome Fantasia"
-                     (keyup)="filtrar(null, '20')">
+              <input type="text" class="form-control" [(ngModel)]="nomeFantasia" name="nomeFantasia" id="nomeFantasia"
+                     placeholder="Nome Fantasia" (keyup)="filtrar(null, '20')">
             </div>
             <div class="col">
-              <input type="text" class="form-control" [(ngModel)]="cnpj" name="cnpj" id="cnpj"
-                     (keyup)="filtrar(null, '20')" [spMask]="cnpjMask" maxlength="18" minlength="18"
-                     [spKeepMask]="true" placeholder="CNPJ">
+              <input type="text" class="form-control" [(ngModel)]="cnpj" name="cnpj" id="cnpj" (keyup)="filtrar(null, '20')"
+                     [spMask]="cnpjMask" maxlength="18" minlength="18" [spKeepMask]="true" placeholder="CNPJ">
             </div>
             <div class="col">
               <input type="text" class="form-control" [(ngModel)]="name" name="nome" id="nome" placeholder="Nome do Responsável"

@@ -1,6 +1,5 @@
 package com.uem.boxit.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -11,17 +10,23 @@ import java.util.Date;
 public class Pagamento {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    private String nome;
 
-    @JsonIgnore
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "pedido_id")
-    @MapsId
     private Pedido pedido;
 
     @Temporal(TemporalType.TIMESTAMP)
     private Date dataPagamento;
 
-    private Double precoPago;
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date dataVencimento;
+
+    private Boolean pago;
+    private Double preco;
+    private Double juros;
+    private Double multa;
+    private Double precoTotal;
+    private String nrBoleto;
 }

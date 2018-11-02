@@ -87,7 +87,7 @@ public class FuncionarioService {
 
     private Function<NewFuncionarioDTO, Funcionario> toFuncionario = dto -> {
         Funcionario f = new Funcionario();
-        f.setUsername(dto.getUsername());
+        f.setUsername(dto.getCpf());
         f.setPassword(encoder.encode(dto.getPassword()));
         f.setNome(dto.getNome());
         f.setCpf(dto.getCpf());
@@ -117,7 +117,7 @@ public class FuncionarioService {
         f.setTelefone(dto.getTelefone());
         if (dto.getPassword() != null)
             f.setPassword(encoder.encode(dto.getPassword()));
-        f.setUsername(dto.getUsername());
+        f.setUsername(dto.getCpf());
         f.setEmail(dto.getEmail());
         return f;
     };
