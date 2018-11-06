@@ -27,6 +27,8 @@ export class GerarComponent implements OnInit {
   dataFclick = false;
   data_valida = false;
   type: number;
+  typeC: number;
+  typeE: number;
 
   constructor(
     private relatorioService: RelatorioService,
@@ -66,7 +68,7 @@ export class GerarComponent implements OnInit {
   }
 
   getEstoque() {
-    this.estoqueService.listAll(null, '100').subscribe(
+    this.estoqueService.listAll(null, '1000').subscribe(
       s => {
         this.estoque = s.content;
       }
@@ -74,22 +76,16 @@ export class GerarComponent implements OnInit {
   }
 
   getCliente() {
-    this.clienteService.listAll(null, '100').subscribe(
+    this.clienteService.listAll(null, '1000').subscribe(
       s => {
         this.cliente = s.content;
       }
     );
   }
 
-  /*cadastrar() {
-    this.relatorioService.criar(this.r).subscribe(
-      s => {
-        this.router.navigate(['/relatorio']);
-      }, e => {
-        console.log(e);
-      }
-    );
-  }*/
+  gerarPDF() {
+
+  }
 
   back() {
     history.back();
