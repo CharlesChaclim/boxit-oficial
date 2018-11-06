@@ -11,9 +11,9 @@
               <label class="col-md-3 col-form-label">Data de Início <span class="text-danger">*</span></label>
               <div class="col-md-9">
                 <div class="input-group mb-3">
-                  <input type="text" class="form-control" required [(ngModel)]="r.dataInicio"
-                         placeholder="aaaa-mm-dd" name="dataInicio" ngbDatepicker #dataInicio="ngbDatepicker" (click)="dataInicio.toggle()"
-                         (blur)="dataInicioMenorFim()" [ngClass]="(data_valida) ? 'is-invalid' : ''"/>
+                  <input type="text" class="form-control" required [(ngModel)]="dataI" placeholder="dd/mm/aaaa" name="dataInicio" ngbDatepicker #dataInicio="ngbDatepicker"
+                         (click)="dataInicio.toggle()" (dateSelect)="dataPreenchidaInicio()" (navigate)="dataF = $event.next" [ngModelOptions]="{standalone: true}"
+                         [ngClass]="((data_valida && !inicio) || (!data_valida && inicio)) ? 'is-invalid' : ''"/>
                 </div>
               </div>
             </div>
@@ -21,28 +21,44 @@
               <label class="col-md-3 col-form-label">Data de Fim <span class="text-danger">*</span></label>
               <div class="col-md-9">
                 <div class="input-group mb-3">
-                  <input type="text" class="form-control" required [(ngModel)]="r.dataFim"
-                         placeholder="aaaa-mm-dd" name="dataFim" ngbDatepicker #dataFim="ngbDatepicker" (click)="dataFim.toggle()"
-                         (blur)="dataInicioMenorFim()" [ngClass]="(data_valida) ? 'is-invalid' : ''"/>
+                  <input type="text" class="form-control" required [(ngModel)]="dataF" placeholder="dd/mm/aaaa" name="dataFim" ngbDatepicker #dataFim="ngbDatepicker"
+                         (click)="dataFim.toggle()" (dateSelect)="dataPreenchidaFim()" (navigate)="dataF = $event.next" [ngModelOptions]="{standalone: true}"
+                         [ngClass]="((data_valida && !inicio) || (!data_valida && inicio)) ? 'is-invalid' : ''"/>
                 </div>
               </div>
             </div>
           </div>
           <div class="col-md-6">
             <div class="form-group row">
-              <label class="col-md-3 col-form-label">Descrição <span class="text-danger">*</span></label>
+              <label class="col-md-3 col-form-label">Tipo de Relatório<span class="text-danger">*</span></label>
               <div class="col-md-9">
-                <input type="text" class="form-control" required [(ngModel)]="r.cidade"
-                       placeholder="Informações do produto" name="descricao" #descricao="ngModel"
-                       [ngClass]="(descricao.invalid && descricao.touched) ? 'is-invalid' : ''">
+                <select class="custom-select" name="categoria" #cat="ngModel" required [(ngModel)]="type" [ngModelOptions]="{standalone: true}">
+                  <option selected>Escolha um relatório</option>
+                  <option value="1">Histórico do Comprador</option>
+                  <option value="2">Receitas</option>
+                  <option value="3">Controle de Estoque</option>
+                  <option value="4">Contas a Receber</option>
+                  <option value="5">Tendências</option>
+                </select>
+              </div>
+            </div>
+            <div class="form-group row" *ngIf="type == 1">
+              <label class="col-md-3 col-form-label">Tipo <span class="text-danger">*</span></label>
+              <div class="col-md-9">
+                <select class="custom-select" name="categoria" #cat="ngModel" required [(ngModel)]="type" [ngModelOptions]="{standalone: true}">
+                  <option value="1">historico</option>
+                  <option value="2">produto</option>
+                  <option value="3">cliente</option>
+                </select>
               </div>
             </div>
           </div>
+
         </div>
         <div class="row">
           <div class="col">
             <button href="#" class="btn btn-block btn-primary" (click)="cadastrar()" type="submit"
-                    [disabled]="rform.invalid || data_valida">Cadastrar
+                    [disabled]="rform.invalid || !data_valida">Cadastrar
             </button>
           </div>
         </div>
