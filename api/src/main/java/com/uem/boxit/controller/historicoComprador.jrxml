@@ -1,0 +1,605 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="historicoComprador" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="7c8cef70-6660-4aa4-a2c0-07779dfb50fc">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<style name="table">
+		<box>
+			<pen lineWidth="1.0" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_TH" mode="Opaque" backcolor="#F0F8FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_CH" mode="Opaque" backcolor="#BFE1FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 1">
+		<box>
+			<pen lineWidth="1.0" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 1_TH" mode="Opaque" backcolor="#F0F8FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 1_CH" mode="Opaque" backcolor="#BFE1FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 1_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 2">
+		<box>
+			<pen lineWidth="1.0" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 2_TH" mode="Opaque" backcolor="#F0F8FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 2_CH" mode="Opaque" backcolor="#BFE1FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 2_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+		<conditionalStyle>
+			<conditionExpression><![CDATA[new Boolean($V{REPORT_COUNT}.intValue()%2==0)]]></conditionExpression>
+			<style backcolor="#EFF7FF"/>
+		</conditionalStyle>
+	</style>
+	<style name="table 3">
+		<box>
+			<pen lineWidth="1.0" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 3_TH" mode="Opaque" backcolor="#73B0E6">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 3_CH" mode="Opaque" backcolor="#CFDBE6">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 3_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 4">
+		<box>
+			<pen lineWidth="1.0" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 4_TH" mode="Opaque" backcolor="#F0F8FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 4_CH" mode="Opaque" backcolor="#BFE1FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 4_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+		<conditionalStyle>
+			<conditionExpression><![CDATA[new Boolean($V{REPORT_COUNT}.intValue()%2==0)]]></conditionExpression>
+			<style backcolor="#EFF7FF"/>
+		</conditionalStyle>
+	</style>
+	<style name="table 5">
+		<box>
+			<pen lineWidth="1.0" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 5_TH" mode="Opaque" backcolor="#73B0E6">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 5_CH" mode="Opaque" backcolor="#CFDBE6">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 5_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+		<conditionalStyle>
+			<conditionExpression><![CDATA[new Boolean($V{REPORT_COUNT}.intValue()%2==0)]]></conditionExpression>
+			<style backcolor="#F3F6F8"/>
+		</conditionalStyle>
+	</style>
+	<subDataset name="table1" uuid="bb0549dc-fc7a-44dd-b6c1-51da58d354c3">
+		<parameter name="pedido_id" class="java.lang.String">
+			<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+		</parameter>
+		<queryString>
+			<![CDATA[SELECT
+     pedido.juros,
+     pedido.multa,
+     pedido.preco as tpreco,
+     pedido.preco_total,
+     pedido.recebido,
+     item_pedido.preco as ipreco,
+     item_pedido.quantidade,
+     produto.nome,
+     pedido.id,
+     pedido.create_at,
+     produto.preco as ppreco
+FROM
+     produto,item_pedido,pedido
+where  produto.id = item_pedido.produto_id and
+item_pedido.pedido_id = pedido.id and pedido.id = $P{pedido_id};]]>
+		</queryString>
+		<field name="juros" class="java.lang.Double">
+			<fieldDescription><![CDATA[]]></fieldDescription>
+		</field>
+		<field name="multa" class="java.lang.Double">
+			<fieldDescription><![CDATA[]]></fieldDescription>
+		</field>
+		<field name="tpreco" class="java.lang.Double"/>
+		<field name="preco_total" class="java.lang.Double">
+			<fieldDescription><![CDATA[]]></fieldDescription>
+		</field>
+		<field name="recebido" class="java.lang.Double">
+			<fieldDescription><![CDATA[]]></fieldDescription>
+		</field>
+		<field name="ipreco" class="java.lang.Double"/>
+		<field name="quantidade" class="java.lang.Integer">
+			<fieldDescription><![CDATA[]]></fieldDescription>
+		</field>
+		<field name="nome" class="java.lang.String">
+			<fieldDescription><![CDATA[]]></fieldDescription>
+		</field>
+		<field name="id" class="java.lang.Integer">
+			<fieldDescription><![CDATA[]]></fieldDescription>
+		</field>
+		<field name="create_at" class="java.sql.Timestamp">
+			<fieldDescription><![CDATA[]]></fieldDescription>
+		</field>
+		<field name="ppreco" class="java.lang.Double"/>
+	</subDataset>
+	<subDataset name="table2" uuid="fe5d4438-90ac-4521-bf5c-37907433b40c">
+		<parameter name="CNPJ" class="java.lang.String">
+			<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+		</parameter>
+		<parameter name="start" class="java.lang.String">
+			<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+		</parameter>
+		<parameter name="end" class="java.lang.String">
+			<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+		</parameter>
+		<queryString>
+			<![CDATA[SELECT
+     SUM(pedido.preco),
+     SUM(pedido.preco_total),
+     SUM(pedido.recebido),
+     COUNT(pedido.preco)
+FROM
+     pedido, usuario
+     where cliente_id = usuario.id and usuario.cnpj = $P{CNPJ} and pedido.create_at >= $P{start} and pedido.create_at <= $P{end};]]>
+		</queryString>
+		<field name="SUM(pedido.preco)" class="java.lang.Double"/>
+		<field name="SUM(pedido.preco_total)" class="java.lang.Double"/>
+		<field name="SUM(pedido.recebido)" class="java.lang.Double"/>
+		<field name="COUNT(pedido.preco)" class="java.lang.Long"/>
+	</subDataset>
+	<parameter name="start" class="java.lang.String"/>
+	<parameter name="end" class="java.lang.String"/>
+	<parameter name="CNPJ" class="java.lang.String"/>
+	<parameter name="vstart" class="java.lang.String"/>
+	<parameter name="vend" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[SELECT
+     usuario.nome, pedido.id
+from
+     usuario inner join pedido on usuario.id = pedido.cliente_id
+WHERE
+     usuario.cnpj = $P{CNPJ} and pedido.create_at >= $P{start} and pedido.create_at <= $P{end};]]>
+	</queryString>
+	<field name="nome" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="id" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch">
+			<staticText>
+				<reportElement x="17" y="18" width="103" height="20" uuid="966b9e53-18bb-4d4b-a052-641f309848e1"/>
+				<text><![CDATA[Nome do Comprador:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="17" y="38" width="32" height="20" uuid="c9148900-35a0-4542-add9-9aca710918c6"/>
+				<text><![CDATA[CNPJ:]]></text>
+			</staticText>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="349" y="20" width="100" height="20" uuid="8c87d560-2db8-4334-a212-3fe1cdd26db4"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="449" y="0" width="66" height="20" uuid="d02fd34e-6304-437e-bab4-1a227cc2ae83"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA["Pagina "+$V{PAGE_NUMBER}+" de"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="515" y="0" width="40" height="20" uuid="9facb61e-1d3e-42fc-bdfa-e0aebdc14d5e"/>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="265" y="20" width="84" height="20" uuid="84faab0a-d761-4de5-bde7-89661f14867d"/>
+				<text><![CDATA[Data de Emissão:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="265" y="40" width="41" height="20" uuid="94a61eec-e55f-46f0-b456-621f9766e6e0"/>
+				<text><![CDATA[Periodo:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="120" y="18" width="100" height="20" uuid="28bb526e-e51f-40f2-8d1b-58c0f65c157b"/>
+				<textFieldExpression><![CDATA[$F{nome}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="306" y="40" width="51" height="20" uuid="ffa6d258-097c-4e0d-9a3c-efc7620185c3"/>
+				<textFieldExpression><![CDATA[$P{vstart}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="361" y="40" width="53" height="20" uuid="acf14828-0a78-4437-a291-d455b761f25e"/>
+				<textFieldExpression><![CDATA[$P{vend}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="357" y="40" width="4" height="20" uuid="908043f9-185f-4a8f-86e2-ce9c8c0b5e17"/>
+				<text><![CDATA[-]]></text>
+			</staticText>
+			<textField pattern="XX.XXX.XXX/YYYY-ZZ">
+				<reportElement x="49" y="38" width="100" height="20" uuid="09e3bcf4-d32a-490a-9b33-d1d40f2b9dac"/>
+				<textFieldExpression><![CDATA[$P{CNPJ}]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="35" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="555" height="35" uuid="e1b14131-0269-4ddf-875a-e77348400ddb"/>
+				<textElement textAlignment="Center">
+					<font size="24"/>
+				</textElement>
+				<text><![CDATA[RELATÓRIO DE HISTÓRICO DE COMPRADOR]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<detail>
+		<band height="131" splitType="Stretch">
+			<componentElement>
+				<reportElement key="table 3" style="table 3" x="17" y="10" width="523" height="106" uuid="1fcfb0f4-ea69-4218-99b6-6ee83ad6baff"/>
+				<jr:table xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
+					<datasetRun subDataset="table1" uuid="b3bfb532-8ae9-4c7c-b5b2-7d620073a831">
+						<datasetParameter name="pedido_id">
+							<datasetParameterExpression><![CDATA[$F{id}]]></datasetParameterExpression>
+						</datasetParameter>
+						<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+					</datasetRun>
+					<jr:columnGroup width="171" uuid="ab02ce83-ef48-44d1-a50c-cdf15282fffd">
+						<jr:tableFooter style="table 3_TH" height="60" rowSpan="1">
+							<line>
+								<reportElement x="0" y="30" width="171" height="1" uuid="22bd150c-b1d5-4657-8e46-956f3f7fcdc2"/>
+							</line>
+							<staticText>
+								<reportElement x="0" y="0" width="90" height="31" uuid="188815e9-3ddc-43d6-990d-3e226c22e178"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font size="9"/>
+								</textElement>
+								<text><![CDATA[Status]]></text>
+							</staticText>
+							<staticText>
+								<reportElement x="0" y="31" width="90" height="29" uuid="2567a0f2-4030-46b2-b5f8-02aedad40372"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font size="9"/>
+								</textElement>
+								<text><![CDATA[Multa]]></text>
+							</staticText>
+							<textField pattern="¤ #,##0.00">
+								<reportElement x="90" y="31" width="81" height="29" uuid="32d5181f-6336-42c3-83f9-faa22e04b167"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font size="9"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{multa}]]></textFieldExpression>
+							</textField>
+							<textField>
+								<reportElement x="90" y="1" width="81" height="30" uuid="19a87de5-1e24-48f6-a135-1842d975f762"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font size="9"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{recebido}.doubleValue() == $F{preco_total}.doubleValue()?"Pago":$F{recebido}.doubleValue() > 0?"Em Pagamento":"Não Pago"]]></textFieldExpression>
+							</textField>
+						</jr:tableFooter>
+						<jr:column width="90" uuid="eb8163b2-4d30-45cb-a416-2c972555a76f">
+							<jr:tableHeader style="table 3_TH" height="30" rowSpan="1">
+								<staticText>
+									<reportElement x="0" y="0" width="90" height="30" uuid="25c6059d-cee5-415f-984a-82d06b8120a7"/>
+									<textElement textAlignment="Center" verticalAlignment="Middle"/>
+									<text><![CDATA[Nr da Compra]]></text>
+								</staticText>
+							</jr:tableHeader>
+							<jr:detailCell style="table 3_TD" height="33" rowSpan="1">
+								<textField>
+									<reportElement stretchType="RelativeToBandHeight" isPrintRepeatedValues="false" x="0" y="0" width="90" height="33" uuid="ecd0f6a0-18b1-4a20-8d6f-6896a50accdd"/>
+									<textElement textAlignment="Center" verticalAlignment="Middle"/>
+									<textFieldExpression><![CDATA[$P{pedido_id}]]></textFieldExpression>
+								</textField>
+							</jr:detailCell>
+						</jr:column>
+						<jr:column width="81" uuid="63db5b5a-ad43-453a-bf50-05e7942dcb94">
+							<jr:tableHeader style="table 3_TH" height="30" rowSpan="1">
+								<staticText>
+									<reportElement x="0" y="0" width="81" height="30" uuid="2e0c170f-13c8-4b3f-8d9c-ad7caa3085a5"/>
+									<textElement textAlignment="Center" verticalAlignment="Middle"/>
+									<text><![CDATA[Data da Compra]]></text>
+								</staticText>
+							</jr:tableHeader>
+							<jr:detailCell style="table 3_TD" height="33" rowSpan="1">
+								<textField pattern="dd/MM/yyyy" isBlankWhenNull="false">
+									<reportElement positionType="Float" stretchType="RelativeToBandHeight" isPrintRepeatedValues="false" x="0" y="0" width="81" height="33" uuid="4f2a5ab8-4b2f-4094-b0f0-9221da97595d"/>
+									<textElement textAlignment="Center" verticalAlignment="Middle"/>
+									<textFieldExpression><![CDATA[$F{create_at}]]></textFieldExpression>
+								</textField>
+							</jr:detailCell>
+						</jr:column>
+					</jr:columnGroup>
+					<jr:columnGroup width="170" uuid="b24f16ce-311a-43e2-8771-b492392afe15">
+						<jr:tableFooter style="table 3_TH" height="60" rowSpan="1">
+							<staticText>
+								<reportElement x="0" y="31" width="90" height="29" uuid="c5bff1fa-bab3-4a3d-b9da-6c75b5c1f9a2"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font size="9"/>
+								</textElement>
+								<text><![CDATA[Juros]]></text>
+							</staticText>
+							<line>
+								<reportElement x="0" y="30" width="170" height="1" uuid="c5a6b506-94ee-4766-b192-2d19d08faada"/>
+							</line>
+							<staticText>
+								<reportElement x="0" y="0" width="90" height="30" uuid="70479729-60f9-4822-a17a-d5593e4cd467"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font size="9"/>
+								</textElement>
+								<text><![CDATA[Valor da Compra]]></text>
+							</staticText>
+							<textField pattern="¤ #,##0.00">
+								<reportElement x="90" y="31" width="80" height="29" uuid="d57c667d-f5bf-4cb1-b714-e689fd1100db"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font size="9"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{juros}]]></textFieldExpression>
+							</textField>
+							<textField pattern="¤ #,##0.00">
+								<reportElement x="90" y="0" width="80" height="30" uuid="b7bba435-e03a-4191-8f57-bb453027881e"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font size="9"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{tpreco}]]></textFieldExpression>
+							</textField>
+						</jr:tableFooter>
+						<jr:column width="90" uuid="83be0c3a-de34-4ade-aebc-26d00d58d4cf">
+							<jr:tableHeader style="table 3_TH" height="30" rowSpan="1">
+								<staticText>
+									<reportElement x="0" y="0" width="90" height="30" uuid="5df64262-605f-4d2a-8d4a-613e37089e91"/>
+									<textElement textAlignment="Center" verticalAlignment="Middle"/>
+									<text><![CDATA[Item]]></text>
+								</staticText>
+							</jr:tableHeader>
+							<jr:detailCell style="table 3_TD" height="33" rowSpan="1">
+								<textField>
+									<reportElement x="0" y="0" width="90" height="33" uuid="c28a71c0-cf41-4ff9-8616-e8de5ee68c33"/>
+									<textElement textAlignment="Center" verticalAlignment="Middle"/>
+									<textFieldExpression><![CDATA[$F{nome}]]></textFieldExpression>
+								</textField>
+							</jr:detailCell>
+						</jr:column>
+						<jr:column width="80" uuid="f94431df-f210-46b6-b061-d978c771b2d1">
+							<jr:tableHeader style="table 3_TH" height="30" rowSpan="1">
+								<staticText>
+									<reportElement x="0" y="0" width="80" height="30" uuid="c9703dae-b544-4ea2-915c-cdc5c330c7f2"/>
+									<textElement textAlignment="Center" verticalAlignment="Middle"/>
+									<text><![CDATA[Quantidade]]></text>
+								</staticText>
+							</jr:tableHeader>
+							<jr:detailCell style="table 3_TD" height="33" rowSpan="1">
+								<textField>
+									<reportElement x="0" y="0" width="80" height="33" uuid="7ca22347-bd9b-4e98-b90e-ddb5e5fc6c56"/>
+									<textElement textAlignment="Center" verticalAlignment="Middle"/>
+									<textFieldExpression><![CDATA[$F{quantidade}]]></textFieldExpression>
+								</textField>
+							</jr:detailCell>
+						</jr:column>
+					</jr:columnGroup>
+					<jr:columnGroup width="180" uuid="d172f096-2513-4f84-9c55-146a95ca3988">
+						<jr:tableFooter style="table 3_TH" height="60" rowSpan="1">
+							<staticText>
+								<reportElement x="0" y="0" width="90" height="30" uuid="9c012347-f7f6-489f-a738-8dbbd340592e"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font size="9"/>
+								</textElement>
+								<text><![CDATA[Valor Recebido]]></text>
+							</staticText>
+							<line>
+								<reportElement x="0" y="30" width="180" height="1" uuid="17c86ccb-0e9c-4710-b929-30f5fd7db74b"/>
+							</line>
+							<staticText>
+								<reportElement x="0" y="30" width="90" height="30" uuid="59a38d1a-7233-46f0-a8a7-9d6a0552464b"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font size="9"/>
+								</textElement>
+								<text><![CDATA[Valor Total]]></text>
+							</staticText>
+							<textField pattern="¤ #,##0.00">
+								<reportElement x="90" y="0" width="90" height="30" uuid="95ecf0b6-5688-4eaf-8dfd-78c9ef5c75ac"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font size="9"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{recebido}]]></textFieldExpression>
+							</textField>
+							<textField pattern="¤ #,##0.00">
+								<reportElement x="90" y="31" width="90" height="29" uuid="eb0819f7-c578-45ee-acc5-8d256a7e6c4c"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font size="9"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{preco_total}]]></textFieldExpression>
+							</textField>
+						</jr:tableFooter>
+						<jr:column width="90" uuid="8f196b23-57c5-42c4-8fe7-b040d6c6775a">
+							<jr:tableHeader style="table 3_TH" height="30" rowSpan="1">
+								<staticText>
+									<reportElement x="0" y="0" width="90" height="30" uuid="3dd3c2db-3d4a-4bd0-91e4-5064a5943efc"/>
+									<textElement textAlignment="Center" verticalAlignment="Middle"/>
+									<text><![CDATA[Preço]]></text>
+								</staticText>
+							</jr:tableHeader>
+							<jr:detailCell style="table 3_TD" height="33" rowSpan="1">
+								<textField pattern="¤ #,##0.00">
+									<reportElement x="0" y="0" width="90" height="33" uuid="8220b833-bd82-45fa-a3e4-6ae8a32efcf2"/>
+									<textElement textAlignment="Center" verticalAlignment="Middle"/>
+									<textFieldExpression><![CDATA[$F{ppreco}]]></textFieldExpression>
+								</textField>
+							</jr:detailCell>
+						</jr:column>
+						<jr:column width="90" uuid="7c287463-9008-4257-a182-b5a0cec50e20">
+							<jr:tableHeader style="table 3_TH" height="30" rowSpan="1">
+								<staticText>
+									<reportElement x="0" y="0" width="90" height="30" uuid="54732752-10f8-4915-9e4c-0791adf2bd95"/>
+									<textElement textAlignment="Center" verticalAlignment="Middle"/>
+									<text><![CDATA[Preço Total]]></text>
+								</staticText>
+							</jr:tableHeader>
+							<jr:detailCell style="table 3_TD" height="33" rowSpan="1">
+								<textField pattern="¤ #,##0.00">
+									<reportElement x="0" y="0" width="90" height="33" uuid="13827bc7-16ef-48fe-8743-4e4ef24b4551"/>
+									<textElement textAlignment="Center" verticalAlignment="Middle"/>
+									<textFieldExpression><![CDATA[$F{ipreco}]]></textFieldExpression>
+								</textField>
+							</jr:detailCell>
+						</jr:column>
+					</jr:columnGroup>
+				</jr:table>
+			</componentElement>
+		</band>
+	</detail>
+	<lastPageFooter>
+		<band height="78">
+			<staticText>
+				<reportElement x="0" y="55" width="555" height="23" uuid="dc8720d1-2cc0-44bb-a725-cb41c0f423e0"/>
+				<textElement textAlignment="Center" verticalAlignment="Bottom"/>
+				<text><![CDATA[Obs: Valor da(s) Compra(s) é o valor da(s) venda(s) e o Valor Total é a soma do Valor da(s) venda(s) mais juros e multa.]]></text>
+			</staticText>
+			<componentElement>
+				<reportElement key="table 5" style="table 5" x="107" y="0" width="199" height="50" uuid="7c85d62c-c63f-4189-a271-51d09c2a9bbd"/>
+				<jr:table xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
+					<datasetRun subDataset="table2" uuid="1bcf3be4-7bab-49b0-87f7-e1a4ed7e9a64">
+						<datasetParameter name="CNPJ">
+							<datasetParameterExpression><![CDATA[$P{CNPJ}]]></datasetParameterExpression>
+						</datasetParameter>
+						<datasetParameter name="start">
+							<datasetParameterExpression><![CDATA[$P{start}]]></datasetParameterExpression>
+						</datasetParameter>
+						<datasetParameter name="end">
+							<datasetParameterExpression><![CDATA[$P{end}]]></datasetParameterExpression>
+						</datasetParameter>
+						<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+					</datasetRun>
+					<jr:column width="90" uuid="7d57ae7e-a235-4556-9770-bfce3236c025">
+						<jr:tableHeader style="table 5_TH" height="30" rowSpan="1">
+							<staticText>
+								<reportElement x="0" y="0" width="90" height="30" uuid="da5d8f8d-37fe-4205-9672-ceb861235dc5"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<text><![CDATA[Nr de Compras]]></text>
+							</staticText>
+						</jr:tableHeader>
+						<jr:detailCell style="table 5_TD" height="20" rowSpan="1">
+							<textField>
+								<reportElement x="0" y="0" width="90" height="20" uuid="2ae9b852-d487-4305-87cc-b5e233cb8531"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<textFieldExpression><![CDATA[$F{COUNT(pedido.preco)}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="90" uuid="1b0f1361-7552-4281-b603-ac80b17c4033">
+						<jr:tableHeader style="table 5_TH" height="30" rowSpan="1">
+							<textField>
+								<reportElement x="0" y="0" width="90" height="30" uuid="e1d71e3d-4391-4930-9c37-cfa720b6cf9b"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<textFieldExpression><![CDATA[$F{COUNT(pedido.preco)}.doubleValue() > 1 ?"Valor das Compras":"Valor da Compra"]]></textFieldExpression>
+							</textField>
+						</jr:tableHeader>
+						<jr:detailCell style="table 5_TD" height="20" rowSpan="1">
+							<textField>
+								<reportElement x="0" y="0" width="90" height="20" uuid="7ed178d7-21ff-4546-9c9c-2e1d51951c4f"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<textFieldExpression><![CDATA[$F{SUM(pedido.preco)}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="90" uuid="37450a55-75c2-435a-b56d-416211fb569a">
+						<jr:tableHeader style="table 5_TH" height="30" rowSpan="1">
+							<staticText>
+								<reportElement x="0" y="0" width="90" height="30" uuid="52d29d41-aa09-4110-818c-8dcec76d68d3"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<text><![CDATA[Valor Recebido]]></text>
+							</staticText>
+						</jr:tableHeader>
+						<jr:detailCell style="table 5_TD" height="20" rowSpan="1">
+							<textField>
+								<reportElement x="0" y="0" width="90" height="20" uuid="e43b53b0-4ac6-4056-b3a9-558d9a7cc880"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<textFieldExpression><![CDATA[$F{SUM(pedido.recebido)}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="90" uuid="766629f3-71f8-4ef3-a28b-6c6dfe9b3fb3">
+						<jr:tableHeader style="table 5_TH" height="30" rowSpan="1">
+							<staticText>
+								<reportElement x="0" y="0" width="90" height="30" uuid="267b1c42-92e1-45b3-b7e0-f80d9fac630a"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<text><![CDATA[Valor Total]]></text>
+							</staticText>
+						</jr:tableHeader>
+						<jr:detailCell style="table 5_TD" height="20" rowSpan="1">
+							<textField>
+								<reportElement x="0" y="0" width="90" height="20" uuid="39782939-a8ea-448a-970f-565472707def"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<textFieldExpression><![CDATA[$F{SUM(pedido.preco_total)}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+				</jr:table>
+			</componentElement>
+		</band>
+	</lastPageFooter>
+</jasperReport>
