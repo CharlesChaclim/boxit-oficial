@@ -59,14 +59,23 @@ export class PagamentoComponent implements OnInit {
             'Boleto não encontrado',
             'error'
           );
+          this.ftotal = 0;
+          this.fpreco = 0;
+          this.fcnpj = null;
+          this.fnome = null;
           this.boletovalid = true;
         }
     );
+    this.fmulta = 0;
+    this.fjuros = 0;
     this.fd = 0;
     this.datavalid = true;
   }
 
   calculaMultaJuros() {
+    this.fmulta = 0;
+    this.fjuros = 0;
+    this.ftotal = 0;
     this.datavalid = false;
     const data = new Date(this.fd.year, this.fd.month - 1, this.fd.day);
     this.p.dataPagamento = data;
@@ -76,12 +85,12 @@ export class PagamentoComponent implements OnInit {
     const days = splitted[splitted.length - 1].split('T', 1);
     const day = toNumbers(days[0])[0];
     const fvencimento = new Date(year, month - 1, day);
-    const diff = Math.abs(this.p.dataPagamento.getTime() - fvencimento.getTime());
+    const diff = this.p.dataPagamento.getTime() - fvencimento.getTime();
     const diffDays = Math.ceil(diff / (1000 * 3600 * 24));
-    if (diffDays > 0) {
+    if (diffDays > 1) {
       this.fmulta = (this.fpreco * 0.02);
+      this.fjuros = (diffDays * 0.00033 * this.fpreco);
     }
-    this.fjuros = (diffDays * 0.00033 * this.fpreco);
     this.ftotal = this.fpreco + this.fjuros + this.fmulta;
   }
 
@@ -90,7 +99,6 @@ export class PagamentoComponent implements OnInit {
       swal('Sucesso!',
         'Pagamento Registrado',
         'success');
-      this.router.navigate(['/cliente']);
       }, () => {
       swal('Erro!',
         'Falha no banco de dados\n Tente mais tarde',

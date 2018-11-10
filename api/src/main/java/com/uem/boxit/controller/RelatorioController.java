@@ -21,8 +21,9 @@ import java.util.HashMap;
 )
 public class RelatorioController {
 
-    @PutMapping()
-    public void mostraRelatorio(@RequestBody RelatorioDTO dto) throws JRException {
+    @PutMapping
+    public void mostraRelatorio(@RequestBody RelatorioDTO dto) {
+        System.out.println("eba");
         Connection conexao = Conexao.conector();
         DateFormat date = new SimpleDateFormat("yyyy-MM-dd");
         DateFormat vdate = new SimpleDateFormat("dd/MM/yyyy");
@@ -36,10 +37,12 @@ public class RelatorioController {
         parametros.put("vstart",vstart);
         parametros.put("vend",vend);
         JasperPrint print = null;
+        /*
         if(dto.getTipo() == 3) {
             parametros.put("CNPJ", dto.getCNPJ());
             print = JasperFillManager.fillReport("C:\\Users\\Jukios\\Desktop\\boxit-oficial\\api\\src\\main\\java\\com\\uem\\boxit\\controller\\historicoComprador.jasper", parametros, conexao);
         }
         JasperViewer.viewReport(print, false);
+        */
     }
 }

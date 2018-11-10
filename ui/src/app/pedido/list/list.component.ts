@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import {Page} from '../../core/model';
 import * as _ from 'lodash';
 import {PedidoService} from '../pedido.service';
+import swal from 'sweetalert2';
+import {a} from '@angular/core/src/render3';
 
 @Component({
   selector: 'app-list',
@@ -29,6 +31,15 @@ export class ListComponent implements OnInit {
         }
         this.pedidos = r;
       }
+    );
+  }
+
+  rastreamento() {
+    swal(  {
+      html: 'Clique no botão abaixo e você será direcionado para o site da Transportadora',
+      showCloseButton: true,
+      confirmButtonText: '<a href="https://www.directlog.com.br/" target="_blank" style="color: #FFFF">Rastrear</a>'
+    }
     );
   }
 

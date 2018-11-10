@@ -59,6 +59,8 @@ export class GerarComponent implements OnInit {
       this.inicio = true;
       const dataIni = new Date(this.dataI.year, this.dataI.month - 1, this.dataI.day);
       const dataFin = new Date(this.dataF.year, this.dataF.month - 1, this.dataF.day);
+      this.r.dataFim = dataFin;
+      this.r.dataInicio = dataIni;
       const diff = dataFin.getTime() - dataIni.getTime();
       const diffDays = Math.ceil(diff / (1000 * 3600 * 24));
       if (diffDays >= 0) {
@@ -84,7 +86,7 @@ export class GerarComponent implements OnInit {
   }
 
   gerarPDF() {
-
+    this.relatorioService.geraRelatorio(this.r);
   }
 
   back() {

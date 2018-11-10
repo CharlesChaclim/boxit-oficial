@@ -213,8 +213,8 @@ FROM
 	<parameter name="start" class="java.lang.String"/>
 	<parameter name="end" class="java.lang.String"/>
 	<parameter name="CNPJ" class="java.lang.String"/>
-	<parameter name="vstart" class="java.util.Date"/>
-	<parameter name="vend" class="java.util.Date"/>
+	<parameter name="vstart" class="java.lang.String"/>
+	<parameter name="vend" class="java.lang.String"/>
 	<queryString>
 		<![CDATA[SELECT
      usuario.nome, pedido.id
