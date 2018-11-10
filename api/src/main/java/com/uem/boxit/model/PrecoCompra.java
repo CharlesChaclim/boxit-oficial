@@ -16,6 +16,9 @@ public class PrecoCompra {
     @JoinColumn(name = "produto_id")
     private Produto produto;
 
-    Date dataAtualização;
-    int preco;
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date dataAtualizacao;
+
+    private int quantidade;
+    private int preco;
 }
