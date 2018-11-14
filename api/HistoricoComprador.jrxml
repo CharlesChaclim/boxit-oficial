@@ -147,11 +147,11 @@
      pedido.preco_total,
      pedido.recebido,
      item_pedido.preco as ipreco,
+     item_pedido.desconto as desconto,
      item_pedido.quantidade,
      produto.nome,
      pedido.id,
-     pedido.create_at,
-     produto.preco as ppreco
+     pedido.create_at
 FROM
      produto,item_pedido,pedido
 where  produto.id = item_pedido.produto_id and
@@ -171,6 +171,9 @@ item_pedido.pedido_id = pedido.id and pedido.id = $P{pedido_id};]]>
 			<fieldDescription><![CDATA[]]></fieldDescription>
 		</field>
 		<field name="ipreco" class="java.lang.Double"/>
+		<field name="desconto" class="java.lang.Double">
+			<fieldDescription><![CDATA[]]></fieldDescription>
+		</field>
 		<field name="quantidade" class="java.lang.Integer">
 			<fieldDescription><![CDATA[]]></fieldDescription>
 		</field>
@@ -183,7 +186,6 @@ item_pedido.pedido_id = pedido.id and pedido.id = $P{pedido_id};]]>
 		<field name="create_at" class="java.sql.Timestamp">
 			<fieldDescription><![CDATA[]]></fieldDescription>
 		</field>
-		<field name="ppreco" class="java.lang.Double"/>
 	</subDataset>
 	<subDataset name="table2" uuid="fe5d4438-90ac-4521-bf5c-37907433b40c">
 		<parameter name="CNPJ" class="java.lang.String">
@@ -487,7 +489,7 @@ WHERE
 								<textField pattern="¤ #,##0.00">
 									<reportElement x="0" y="0" width="90" height="33" uuid="8220b833-bd82-45fa-a3e4-6ae8a32efcf2"/>
 									<textElement textAlignment="Center" verticalAlignment="Middle"/>
-									<textFieldExpression><![CDATA[$F{ppreco}]]></textFieldExpression>
+									<textFieldExpression><![CDATA[$F{ipreco}]]></textFieldExpression>
 								</textField>
 							</jr:detailCell>
 						</jr:column>
@@ -500,10 +502,10 @@ WHERE
 								</staticText>
 							</jr:tableHeader>
 							<jr:detailCell style="table 3_TD" height="33" rowSpan="1">
-								<textField pattern="¤ #,##0.00">
-									<reportElement x="0" y="0" width="90" height="33" uuid="13827bc7-16ef-48fe-8743-4e4ef24b4551"/>
+								<textField>
+									<reportElement x="0" y="0" width="90" height="33" uuid="3192091a-d65f-4d2e-8f4d-f284e5c30340"/>
 									<textElement textAlignment="Center" verticalAlignment="Middle"/>
-									<textFieldExpression><![CDATA[$F{ipreco}]]></textFieldExpression>
+									<textFieldExpression><![CDATA[$F{quantidade}*($F{ipreco}-$F{desconto})]]></textFieldExpression>
 								</textField>
 							</jr:detailCell>
 						</jr:column>
