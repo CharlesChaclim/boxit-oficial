@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="RelatorioReceitas" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="b139b194-6ce3-48db-bff2-af0dcec9efce">
-	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.zoom" value="2.0"/>
 	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
 	<style name="table">
@@ -275,7 +275,7 @@ WHERE
 	<title>
 		<band height="79" splitType="Stretch">
 			<textField pattern="dd/MM/yyyy">
-				<reportElement x="107" y="30" width="53" height="20" uuid="9db83e07-8813-4742-ab57-5026c6c48388"/>
+				<reportElement x="111" y="30" width="53" height="20" uuid="9db83e07-8813-4742-ab57-5026c6c48388"/>
 				<textFieldExpression><![CDATA[$P{vend}]]></textFieldExpression>
 			</textField>
 			<staticText>
@@ -292,7 +292,7 @@ WHERE
 				<text><![CDATA[Periodo:]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="103" y="30" width="4" height="20" uuid="a0d727a8-0e7c-4543-98ec-0af576530fcb"/>
+				<reportElement x="107" y="30" width="4" height="20" uuid="a0d727a8-0e7c-4543-98ec-0af576530fcb"/>
 				<text><![CDATA[-]]></text>
 			</staticText>
 			<textField pattern="dd/MM/yyyy">

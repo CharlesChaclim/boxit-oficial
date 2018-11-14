@@ -15,7 +15,6 @@ export class RelatorioService {
 
   geraRelatorio(relatorio: Relatorio) {
     const headers = new HttpHeaders().set('Content-type', 'application/json');
-    console.log(relatorio.CNPJ);
     return this.http.put(this.url, JSON.stringify(relatorio), {headers: headers});
   }
 }

@@ -4,10 +4,13 @@ import com.uem.boxit.dto.RelatorioDTO;
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.export.JRPdfExporter;
+import net.sf.jasperreports.export.*;
 import net.sf.jasperreports.view.JasperViewer;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.File;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.text.DateFormat;
@@ -23,8 +26,9 @@ public class RelatorioController {
 
     @PutMapping
     public void mostraRelatorio(@RequestBody RelatorioDTO dto) {
-        System.out.println("eba");
-        Connection conexao = Conexao.conector();
+        String caminho = new File("./").getAbsolutePath();
+        caminho = caminho.substring(0, caminho.length() - 1);
+
         DateFormat date = new SimpleDateFormat("yyyy-MM-dd");
         DateFormat vdate = new SimpleDateFormat("dd/MM/yyyy");
         String start = date.format(dto.getDataInicio());
@@ -36,13 +40,37 @@ public class RelatorioController {
         parametros.put("end",end);
         parametros.put("vstart",vstart);
         parametros.put("vend",vend);
-        JasperPrint print = null;
-        /*
-        if(dto.getTipo() == 3) {
-            parametros.put("CNPJ", dto.getCNPJ());
-            print = JasperFillManager.fillReport("C:\\Users\\Jukios\\Desktop\\boxit-oficial\\api\\src\\main\\java\\com\\uem\\boxit\\controller\\historicoComprador.jasper", parametros, conexao);
+        JasperPrint print;
+        if(dto.getTipo() == 5) {
+            try {
+                print = JasperFillManager.fillReport(caminho+"RelatorioReceitas.jasper", parametros, Conexao.getConnection());
+                JRPdfExporter exporter = new JRPdfExporter();
+                ExporterInput exporterInput = new SimpleExporterInput(print);
+                exporter.setExporterInput(exporterInput);
+                OutputStreamExporterOutput exporterOutput = new SimpleOutputStreamExporterOutput(caminho+"RelatorioReceitas.pdf");
+                exporter.setExporterOutput(exporterOutput);
+                SimplePdfExporterConfiguration configuration = new SimplePdfExporterConfiguration();
+                exporter.setConfiguration(configuration);
+                exporter.exportReport();
+            } catch (JRException e) {
+                e.printStackTrace();
+            }
         }
-        JasperViewer.viewReport(print, false);
-        */
+        else if(dto.getTipo() == 3) {
+            parametros.put("CNPJ", dto.getCNPJ());
+            try {
+                print = JasperFillManager.fillReport(caminho+"HistoricoComprador.jasper", parametros, Conexao.getConnection());
+                JRPdfExporter exporter = new JRPdfExporter();
+                ExporterInput exporterInput = new SimpleExporterInput(print);
+                exporter.setExporterInput(exporterInput);
+                OutputStreamExporterOutput exporterOutput = new SimpleOutputStreamExporterOutput(caminho+"HistoricoComprador.pdf");
+                exporter.setExporterOutput(exporterOutput);
+                SimplePdfExporterConfiguration configuration = new SimplePdfExporterConfiguration();
+                exporter.setConfiguration(configuration);
+                exporter.exportReport();
+            } catch (JRException e) {
+                e.printStackTrace();
+            }
+        }
     }
 }

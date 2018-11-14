@@ -1,17 +1,13 @@
 package com.uem.boxit.controller;
 
-import com.uem.boxit.model.ItemPedido;
 import com.uem.boxit.model.Pedido;
 import com.uem.boxit.service.PedidoService;
-import org.hibernate.mapping.Any;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Optional;
 
 @RestController
 @RequestMapping(
