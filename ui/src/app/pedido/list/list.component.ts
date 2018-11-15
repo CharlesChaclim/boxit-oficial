@@ -3,7 +3,6 @@ import {Page} from '../../core/model';
 import * as _ from 'lodash';
 import {PedidoService} from '../pedido.service';
 import swal from 'sweetalert2';
-import {a} from '@angular/core/src/render3';
 
 @Component({
   selector: 'app-list',

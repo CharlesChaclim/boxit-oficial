@@ -109,4 +109,19 @@ export class PagamentoComponent implements OnInit {
   back() {
     history.back();
   }
+
+  help() {
+    swal({
+        title: 'Ajuda',
+        html: 'Para dar baixa em um boleto digite o número do mesmo e selecione a data da realização do pagamento.' +
+          '<br> <br>' +
+          'O campo Preço da Compra se refere ao valor do boleto.' +
+          '<br> <br>' +
+          'O campo Preço Total se refere ao valor do boleto mais juros e multa caso o boleto seja pague depois do dia do vencimento.' +
+          '<br> <br>' +
+          'Observação apenas os campos "Número do Boleto" e "Data do Pagamento" são editaveis os outros campos são meramente informativos.',
+        type: 'info'
+      }
+    );
+  }
 }

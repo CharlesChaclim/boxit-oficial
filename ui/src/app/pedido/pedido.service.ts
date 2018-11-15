@@ -8,6 +8,7 @@ import {environment} from '../../environments/environment';
 })
 export class PedidoService {
   private url = `${environment.api_url}pedido/`;
+  private url2 = `${environment.api_url}pagamento/`;
 
   constructor(
     private http: HttpClient,
@@ -26,11 +27,11 @@ export class PedidoService {
     return this.http.get<Page>(this.url, {params: params});
   }
 
-  listPedido(idPedido: string) {
-    return this.http.get<Page>(this.url + idPedido);
+  listPedido() {
+    return this.http.get<Page>(this.url + 'pedido');
   }
 
-//  getOne(id: string) {
-  //  return this.http.get<ClienteEdit>(this.url + id);
-//  }
+  listPagamento() {
+    return this.http.get<Page>(this.url2);
+  }
 }

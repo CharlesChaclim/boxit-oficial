@@ -1,6 +1,10 @@
 <div class="col-12 offset-lg-1 col-lg-10">
   <div class="card">
     <div class="card-header text-center">
+      <div class="col-12 col-md-12">
+        <a (click)="help()" class="text-dark" style="text-decoration: none; float: right"><i
+          class="fal fa-question-circle"></i></a>
+      </div>
       <h3>{{title}}</h3>
     </div>
     <div class="card-body">
@@ -45,7 +49,7 @@
             <div class="form-group row">
               <label class="col-md-3 col-form-label">Bairro </label>
               <div class="col-md-9">
-                <input type="text" class="form-control" [(ngModel)]="c.endereco.bairro" placeholder="Centro" name="bairro"
+                <input type="text" class="form-control" [(ngModel)]="c.endereco.bairro" name="bairro"
                        #bairro="ngModel" [disabled]="!edit">
               </div>
             </div>
@@ -80,7 +84,7 @@
             <div class="form-group row">
               <label class="col-md-4 col-form-label">Número</label>
               <div class="col-md-8">
-                <input type="number" class="form-control" [(ngModel)]="c.endereco.numero" placeholder="1029"
+                <input type="number" class="form-control" [(ngModel)]="c.endereco.numero"
                        name="numero" #numero="ngModel" [disabled]="!edit">
               </div>
             </div>
@@ -89,7 +93,7 @@
             <div class="form-group row">
               <label class="col-md-3 col-form-label">Complemento</label>
               <div class="col-md-9">
-                <input type="text" class="form-control" [(ngModel)]="c.endereco.complemento" placeholder="Ponto de referência"
+                <input type="text" class="form-control" [(ngModel)]="c.endereco.complemento"
                        name="complemento" #complemento="ngModel"
                        [ngClass]="(complemento.invalid && complemento.touched) ? 'is-invalid' : ''" [disabled]="!edit">
               </div>

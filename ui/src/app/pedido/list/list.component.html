@@ -16,15 +16,15 @@
               <th scope="col">Data da Compra</th>
               <th scope="col">Valor Total da Compra</th>
               <th scope="col">Valor Pago</th>
-              <th scope="col">Status</th>
+              <th scope="col">Estado</th>
               <th colspan="4"></th>
             </tr>
             </thead>
             <tbody>
             <tr *ngFor="let pedido of pedidos.content">
-              <td>{{pedido.createAt}}</td>
-              <td>{{pedido.precoTotal}}</td>
-              <td>{{pedido.recebido}}</td>
+              <td>{{pedido.createAt | date : "dd/MM/yyyy"}}</td>
+              <td>R$ {{pedido.precoTotal}}</td>
+              <td>R$ {{pedido.recebido}}</td>
               <td *ngIf="pedido.recebido == 0">Não Pago</td>
               <td *ngIf="(pedido.recebido != 0) && (pedido.recebido != pedido.precoTotal)">Processando</td>
               <td *ngIf="pedido.recebido == pedido.precoTotal">Pago</td>
