@@ -4,6 +4,8 @@ import com.uem.boxit.dto.UpdatePagamentoDTO;
 import com.uem.boxit.model.Pagamento;
 import com.uem.boxit.service.PagamentoService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -24,6 +26,11 @@ public class PagamentoController {
     public ResponseEntity<Pagamento> getboleto(@PathVariable String boleto) {
         Optional<Pagamento> p = pagamentoService.getBoleto(boleto);
         return p.isPresent() ? ResponseEntity.ok(p.get()) : ResponseEntity.notFound().build();
+    }
+
+    @GetMapping
+    public Page<Pagamento> listAll(Pageable pageable) {
+        return pagamentoService.getAll(pageable);
     }
 
     @PutMapping()
