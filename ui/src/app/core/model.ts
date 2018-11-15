@@ -102,9 +102,10 @@ export class CategoriaEdit {
 }
 
 export class Relatorio {
-  dataInicio: string;
-  dataFim: string;
+  dataInicio: Date;
+  dataFim: Date;
   tipo: number;
+  CNPJ: string;
   estado: string;
   cidade: string;
 }

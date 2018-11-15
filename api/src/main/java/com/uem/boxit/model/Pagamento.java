@@ -29,4 +29,5 @@ public class Pagamento {
     private Double multa;
     private Double precoTotal;
     private String nrBoleto;
+
 }

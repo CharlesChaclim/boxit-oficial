@@ -91,4 +91,17 @@ export class ListComponent implements OnInit {
       }
     );
   }
+
+  help() {
+    swal({
+      title: 'Ajuda',
+      html: 'O botão <button class="btn btn-primary"><i class="fal fa-eye"></i></button> permite você ver o cadastro do cliente.' +
+        '<br> <br> ' +
+      'O botão <button class="btn btn-secondary"><i class="fal fa-edit"></i></button> permite você editar o cadastro do cliente.' +
+        '<br> <br>' +
+        'O botão <span class="badge badge-pill badge-success">Ativo</span>/<span class="badge badge-pill badge-warning">Inativo</span> ' +
+        'permite você desativar/ativar o cadastro do cliente, assim como informar o estado do cadastro.',
+      type: 'info'}
+    );
+  }
 }

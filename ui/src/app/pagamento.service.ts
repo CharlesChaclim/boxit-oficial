@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
+import {environment} from '../environments/environment';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Pagamento} from './core/model';
-import {environment} from '../environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -16,7 +16,6 @@ export class PagamentoService {
   getBoleto(numero: string) {
     return this.http.get<any>(this.url + numero);
   }
-
 
   update(pagamento: Pagamento) {
     const headers = new HttpHeaders().set('Content-type', 'application/json');

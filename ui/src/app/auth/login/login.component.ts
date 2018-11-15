@@ -5,6 +5,7 @@ import {Router} from '@angular/router';
 import {ErrorHandleService} from '../../core/error-handle.service';
 import {NgForm} from '@angular/forms';
 import {MyMaskUtil} from '../../shared/mask/my-mask.util';
+import swal from "sweetalert2";
 
 @Component({
   selector: 'app-login',
@@ -30,5 +31,15 @@ export class LoginComponent implements OnInit {
       form.reset({username: this.login.username});
       this.errHandle.handle(err);
     });
+  }
+
+  help() {
+    swal({
+        title: 'Ajuda',
+        html: 'O campo username deve ser preenchido com o CNPJ informado no cadastro, mas caso seja um funcionário da nossa empressa' +
+          ' preencha o campo com o seu CPF.',
+        type: 'info'
+      }
+    );
   }
 }

@@ -7,6 +7,8 @@ import com.uem.boxit.model.Pedido;
 import com.uem.boxit.repository.PagamentoRepository;
 import com.uem.boxit.repository.PedidoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -30,6 +32,10 @@ public class PagamentoService {
     public Pagamento update(UpdatePagamentoDTO pagamento){
         Pagamento pag = fromUpdateDTO.apply(pagamento);
         return pagamentoRepository.save(pag);
+    }
+
+    public Page<Pagamento> getAll(Pageable pageable) {
+        return pagamentoRepository.findAll(pageable);
     }
 
     private Function<UpdatePagamentoDTO, Pagamento> fromUpdateDTO = dto -> {

@@ -156,4 +156,27 @@ export class EditComponent implements OnInit {
   back() {
     history.back();
   }
+  help() {
+    if (!this.edit) {
+      swal({
+          title: 'Ajuda',
+          html: 'Não é possível editar o conteúdo desta página pois ela é só para visualização e não para edição',
+          type: 'info'
+        }
+      );
+    } else {
+      swal({
+          title: 'Ajuda',
+          html: 'O nome fantasia é o nome da empresa.' +
+            '<br> <br>' +
+            'O logadouro é o nome da rua/avenida/rodovia/estrada que a empresa é sediada.' +
+            '<br> <br>' +
+            'Os campos com * ao seu lado são obrigatórios.' +
+            '<br> <br>' +
+            'Caso deixe vazio o campo senha a antiga permanecerá.',
+          type: 'info'
+        }
+      );
+    }
+  }
 }
