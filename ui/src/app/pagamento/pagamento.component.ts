@@ -24,6 +24,7 @@ export class PagamentoComponent implements OnInit {
   fpreco: number;
   fcnpj: string;
   fnome: string;
+  criado: Date;
   fmulta: number;
   fjuros: number;
   ftotal: number;
@@ -50,6 +51,7 @@ export class PagamentoComponent implements OnInit {
         } else if (r) {
           this.fcnpj = r.pedido.cliente.cnpj;
           this.fnome = r.pedido.cliente.nome;
+          this.criado = r.pedido.createAt;
           this.ftotal = this.fpreco = r.preco;
           this.fvencimento = r.dataVencimento;
           this.boletovalid = false;
@@ -79,17 +81,33 @@ export class PagamentoComponent implements OnInit {
     this.datavalid = false;
     const data = new Date(this.fd.year, this.fd.month - 1, this.fd.day);
     this.p.dataPagamento = data;
-    const splitted = this.fvencimento.toString().split('-', 3);
-    const year = toNumbers(splitted[0])[0];
-    const month = toNumbers(splitted[1])[0];
-    const days = splitted[splitted.length - 1].split('T', 1);
-    const day = toNumbers(days[0])[0];
+    let splitted = this.fvencimento.toString().split('-', 3);
+    let year = toNumbers(splitted[0])[0];
+    let month = toNumbers(splitted[1])[0];
+    let days = splitted[splitted.length - 1].split('T', 1);
+    let day = toNumbers(days[0])[0];
     const fvencimento = new Date(year, month - 1, day);
-    const diff = this.p.dataPagamento.getTime() - fvencimento.getTime();
-    const diffDays = Math.ceil(diff / (1000 * 3600 * 24));
-    if (diffDays > 1) {
+    let diff = this.p.dataPagamento.getTime() - fvencimento.getTime();
+    let diffDays = Math.ceil(diff / (1000 * 3600 * 24));
+    if (diffDays > 0) {
       this.fmulta = (this.fpreco * 0.02);
       this.fjuros = (diffDays * 0.00033 * this.fpreco);
+    } else {
+      splitted = this.criado.toString().split('-', 3);
+      year = toNumbers(splitted[0])[0];
+      month = toNumbers(splitted[1])[0];
+      days = splitted[splitted.length - 1].split('T', 1);
+      day = toNumbers(days[0])[0];
+      const fcriado = new Date(year, month - 1, day);
+      diff = this.p.dataPagamento.getTime() - fcriado.getTime();
+      diffDays = Math.ceil(diff / (1000 * 3600 * 24));
+      if (diffDays < 0) {
+        swal('Erro!',
+          'Data de pagamento inserido é invalida pois é antes mesmo da criação do boleto',
+          'error');
+        this.datavalid = true;
+        return;
+      }
     }
     this.ftotal = this.fpreco + this.fjuros + this.fmulta;
   }
