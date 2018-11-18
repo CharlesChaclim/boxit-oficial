@@ -124,5 +124,5 @@ export class RegisterComponent implements OnInit {
         type: 'info'
       }
     );
-}
+  }
 }

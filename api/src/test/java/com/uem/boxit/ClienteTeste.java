@@ -31,6 +31,11 @@ public class ClienteTeste extends BoxitApplicationTests{
         Assertions.assertThat(clienteService.getOne(id).get().getNome()).isEqualTo(nomeFantasia);
     }
 
+    @Test
+    public void getOneCnpj(){
+        Assertions.assertThat(clienteService.getOneCnpj("98.648.174/0001-60")).isEqualTo(11);
+    }
+
 
     @Test
     public void create(){

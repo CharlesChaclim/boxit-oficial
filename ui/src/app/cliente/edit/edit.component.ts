@@ -6,6 +6,7 @@ import {ClienteService} from '../cliente.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import swal from 'sweetalert2';
 import {ErrorHandleService} from '../../core/error-handle.service';
+import {AuthService} from '../../auth/auth.service';
 
 @Component({
   selector: 'app-edit',
@@ -25,14 +26,23 @@ export class EditComponent implements OnInit {
   csenha = null;
   edit = false;
   title: string;
+  podeEdit = false;
 
   constructor(
     private correiosService: CorreiosService,
     private servico: ClienteService,
     private router: Router,
     private errHandle: ErrorHandleService,
-    private activatedRoute: ActivatedRoute
+    private activatedRoute: ActivatedRoute,
+    private auth: AuthService
   ) {
+    const user = this.auth.jwtPayload.user_name;
+    console.log(user.length);
+    if (user.length > 17) {
+      this.podeEdit = true;
+    } else {
+      this.podeEdit = false;
+    }
   }
 
   ngOnInit() {

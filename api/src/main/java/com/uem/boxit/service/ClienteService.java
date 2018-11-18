@@ -39,6 +39,10 @@ public class ClienteService {
         return clienteRepository.findById(id);
     }
 
+    public Integer getOneCnpj(String cnpj){
+        return clienteRepository.findByCnpj(cnpj).get().getId();
+    }
+
     @Transactional
     public Cliente create(NewClienteDTO dto){
         Cliente cliente = toCliente.apply(dto);

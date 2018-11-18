@@ -46,7 +46,6 @@ export class ViewComponent implements OnInit {
       r => {
         this.boletos = r;
         for (const i of this.boletos.content) {
-          console.log(this.temBoleto);
           if (i.pedido.id == this.id) {
             this.temBoleto = true;
             break;

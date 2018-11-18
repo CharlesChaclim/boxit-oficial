@@ -5,7 +5,7 @@ import {Router} from '@angular/router';
 import {ErrorHandleService} from '../../core/error-handle.service';
 import {NgForm} from '@angular/forms';
 import {MyMaskUtil} from '../../shared/mask/my-mask.util';
-import swal from "sweetalert2";
+import swal from 'sweetalert2';
 
 @Component({
   selector: 'app-login',
