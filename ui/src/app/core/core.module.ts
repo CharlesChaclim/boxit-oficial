@@ -11,12 +11,13 @@ import {FooterComponent} from './footer/footer.component';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {SweetAlert2Module} from '@toverux/ngx-sweetalert2';
 import {CurrencyMaskModule} from 'ng2-currency-mask';
-import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {ToastrModule} from 'ngx-toastr';
 import {HttpClientModule} from '@angular/common/http';
 import {FuncionarioModule} from '../funcionario/funcionario.module';
 import {AuthModule} from '../auth/auth.module';
 import {CategoriaModule} from '../categoria/categoria.module';
+import {RelatorioModule} from '../relatorio/relatorio.module';
+import {PedidoModule} from '../pedido/pedido.module';
+
 
 registerLocaleData(localePt, 'pt-BR');
 
@@ -25,6 +26,7 @@ registerLocaleData(localePt, 'pt-BR');
     CommonModule,
     EstoqueModule,
     CategoriaModule,
+    PedidoModule,
     ClienteModule,
     AppRouting,
     NgbModule.forRoot(),
@@ -36,6 +38,7 @@ registerLocaleData(localePt, 'pt-BR');
     CurrencyMaskModule,
     HttpClientModule,
     FuncionarioModule,
+    RelatorioModule,
     AuthModule
   ],
   declarations: [

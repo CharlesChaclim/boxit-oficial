@@ -2,6 +2,11 @@
   <div class="card bg-light" style="margin-top: 10px">
     <div class="card-header">
       <div class="row">
+        <div class="col-12 col-md-12">
+          <a (click)="help()" class="text-dark" style="text-decoration: none; float: right"><i
+            class="fal fa-question-circle"></i></a>
+        </div>
+
         <div class="col-12 col-md-4">
           <h3>Lista de Clientes</h3>
         </div>
@@ -11,17 +16,20 @@
               <h5>Filtrar</h5>
             </div>
             <div class="col-md-8">
-                Estado do Cadastro:
+              Estado do Cadastro:
               <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" (click)="(enable=3) && filtrar(null, '20')" name="inlineRadioOptions" id="inlineRadio1" value="option1" checked>
+                <input class="form-check-input" type="radio" (click)="(enable=3) && filtrar(null, '20')"
+                       name="inlineRadioOptions" id="inlineRadio1" value="option1" checked>
                 <label class="form-check-label" for="inlineRadio1">Todos</label>
               </div>
               <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" (click)="(enable=2) && filtrar(null, '20')" name="inlineRadioOptions" id="inlineRadio2" value="option2">
+                <input class="form-check-input" type="radio" (click)="(enable=2) && filtrar(null, '20')"
+                       name="inlineRadioOptions" id="inlineRadio2" value="option2">
                 <label class="form-check-label" for="inlineRadio2">Ativados</label>
               </div>
               <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" (click)="(enable=1) && filtrar(null, '20')" name="inlineRadioOptions" id="inlineRadio3" value="option3">
+                <input class="form-check-input" type="radio" (click)="(enable=1) && filtrar(null, '20')"
+                       name="inlineRadioOptions" id="inlineRadio3" value="option3">
                 <label class="form-check-label" for="inlineRadio3">Desativados</label>
               </div>
             </div>
@@ -29,16 +37,17 @@
 
           <div class="row">
             <div class="col">
-              <input type="text" class="form-control" [(ngModel)]="nomeFantasia" name="nomeFantasia" id="nomeFantasia" placeholder="Nome Fantasia"
-                     (keyup)="filtrar(null, '20')">
+              <input type="text" class="form-control" [(ngModel)]="nomeFantasia" name="nomeFantasia" id="nomeFantasia"
+                     placeholder="Nome Fantasia" (keyup)="filtrar(null, '20')">
             </div>
             <div class="col">
               <input type="text" class="form-control" [(ngModel)]="cnpj" name="cnpj" id="cnpj"
-                     (keyup)="filtrar(null, '20')" [spMask]="cnpjMask" maxlength="18" minlength="18"
-                     [spKeepMask]="true" placeholder="CNPJ">
+                     (keyup)="filtrar(null, '20')"
+                     [spMask]="cnpjMask" maxlength="18" minlength="18" [spKeepMask]="true" placeholder="CNPJ">
             </div>
             <div class="col">
-              <input type="text" class="form-control" [(ngModel)]="name" name="nome" id="nome" placeholder="Nome do Responsável"
+              <input type="text" class="form-control" [(ngModel)]="name" name="nome" id="nome"
+                     placeholder="Nome do Responsável"
                      (keyup)="filtrar(null, '20')">
             </div>
           </div>

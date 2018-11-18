@@ -1,17 +1,81 @@
-<div class="row">
-  <div class="col-12 col-md-6">
-    <div class="form-group row">
-      <label for="start" class="col-xl-5 col-form-label">Início das inscrições</label>
-      <div class="col-xl-7">
-        <div class="input-group">
-          <input placeholder="dd/mm/yyyy" type="text" class="form-control" ngbDatepicker #sd="ngbDatepicker"
-                 id="start" name="start" required formControlName="registrationStart" [readonly]="!edit && !new" maxlength="10">
-          <div class="input-group-append">
-            <button class="btn btn-outline-secondary" (click)="sd.toggle()" type="button" style="cursor:pointer;" [disabled]="!this.edit && !this.new">
-              <i class="fal fa-calendar-alt"></i>
-            </button>
+<div class="col-12 offset-lg-1 col-lg-10">
+  <div class="card">
+    <div class="card-header text-center">
+      <h3>Gerar Relatórios</h3>
+    </div>
+    <div class="card-body">
+      <form #rform="ngForm">
+        <div class="form-row">
+          <div class="col-md-6">
+            <div class="form-group row">
+              <label class="col-md-3 col-form-label">Data de Início <span class="text-danger">*</span></label>
+              <div class="col-md-9">
+                <div class="input-group mb-3">
+                  <input type="text" class="form-control" required [(ngModel)]="dataI" placeholder="dd/mm/aaaa" name="dataInicio" ngbDatepicker #dataInicio="ngbDatepicker"
+                         (click)="dataInicio.toggle()" (dateSelect)="dataPreenchidaInicio()" (navigate)="dataF = $event.next" [ngModelOptions]="{standalone: true}"
+                         [ngClass]="((data_valida && !inicio) || (!data_valida && inicio)) ? 'is-invalid' : ''"/>
+                </div>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-md-3 col-form-label">Data de Fim <span class="text-danger">*</span></label>
+              <div class="col-md-9">
+                <div class="input-group mb-3">
+                  <input type="text" class="form-control" required [(ngModel)]="dataF" placeholder="dd/mm/aaaa" name="dataFim" ngbDatepicker #dataFim="ngbDatepicker"
+                         (click)="dataFim.toggle()" (dateSelect)="dataPreenchidaFim()" (navigate)="dataF = $event.next" [ngModelOptions]="{standalone: true}"
+                         [ngClass]="((data_valida && !inicio) || (!data_valida && inicio)) ? 'is-invalid' : ''"/>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="form-group row">
+              <label class="col-md-3 col-form-label">Tipo de Relatório <span class="text-danger">*</span></label>
+              <div class="col-md-9">
+                <select class="custom-select" name="relatorio" #ret="ngModel" required [(ngModel)]="r.tipo" [ngModelOptions]="{standalone: true}">
+                  <option value="">Escolha um relatório</option>
+                  <option value="1">Contas a Receber</option>
+                  <option value="2">Controle de Estoque</option>
+                  <option value="3">Histórico do Comprador</option>
+                  <option value="4">Histórico do Produto</option>
+                  <option value="5">Receitas</option>
+                  <option value="6">Tendências</option>
+                </select>
+              </div>
+            </div>
+            <div class="form-group row" *ngIf="r.tipo == 3">
+              <label class="col-md-3 col-form-label">CNPJ do Cliente <span class="text-danger">*</span></label>
+              <div class="col-md-9">
+                <select class="custom-select" name="cliente" #cli="ngModel" required [(ngModel)]="r.CNPJ" [ngModelOptions]="{standalone: true}">
+                  <option value="">Escolha um cliente</option>
+                  <option *ngFor="let c of cliente" value="{{c.cnpj}}">{{c.cnpj}}</option>
+                </select>
+              </div>
+            </div>
+            <div class="form-group row" *ngIf="r.tipo == 2 || r.tipo == 4">
+              <label class="col-md-3 col-form-label">Código do Produto <span class="text-danger">*</span></label>
+              <div class="col-md-9">
+                <select class="custom-select" name="produto" #prod="ngModel" required [(ngModel)]="typeE" [ngModelOptions]="{standalone: true}">
+                  <option value="">Escolha um produto</option>
+                  <option *ngFor="let e of estoque" value="{{e.sku}}">{{e.sku}}</option>
+                </select>
+              </div>
+            </div>
           </div>
         </div>
-      </div>
+        <div class="row">
+          <div class="col">
+            <button href="#" class="btn btn-block btn-primary" (click)="gerarPDF()" type="submit"
+                    [disabled]="rform.invalid || !data_valida || ret.invalid">Gerar PDF
+            </button>
+          </div>
+          <div class="col">
+            <div>
+              <button class="btn btn-secondary btn-block" (click)="back()"><i class="fal fa-arrow-left"></i> Voltar</button>
+            </div>
+          </div>
+        </div>
+      </form>
     </div>
   </div>
+</div>

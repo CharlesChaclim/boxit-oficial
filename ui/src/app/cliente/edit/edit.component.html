@@ -1,6 +1,10 @@
 <div class="col-12 offset-lg-1 col-lg-10">
   <div class="card">
     <div class="card-header text-center">
+      <div class="col-12 col-md-12">
+        <a (click)="help()" class="text-dark" style="text-decoration: none; float: right"><i
+          class="fal fa-question-circle"></i></a>
+      </div>
       <h3>{{title}}</h3>
     </div>
     <div class="card-body">
@@ -9,9 +13,9 @@
         <div class="form-group row">
           <label class="col-md-2 col-form-label">CNPJ <span class="text-danger">*</span></label>
           <div class="col-md-10">
-            <input type="text" class="form-control" required [spMask]="cnpjMask" maxlength="18" minlength="18" (blur)="confimacnpj()" (invalid)="cnpjvalid"
+            <input type="text" class="form-control" required [spMask]="cnpjMask" maxlength="18" minlength="18" (blur)="confimacnpj()"
                    [spKeepMask]="true" [(ngModel)]="c.cnpj" placeholder="00.000.000/0000-00" name="cnpj" #cnpj="ngModel"
-                   [ngClass]="((cnpj.invalid && cnpj.touched) || cnpjvalid) ? 'is-invalid' : ''" [disabled]="!edit">
+                   [ngClass]="((cnpj.invalid && cnpj.touched) || cnpjvalid) ? 'is-invalid' : ''" [disabled]="!edit || podeEdit">
           </div>
         </div>
         <div class="form-group row">
@@ -35,8 +39,7 @@
             <div class="form-group row">
               <label class="col-md-4 col-form-label">Logadouro <span class="text-danger">*</span></label>
               <div class="col-md-8">
-                <input type="text" class="form-control" required [(ngModel)]="c.endereco.endereco"
-                       placeholder="AV. Brasil"
+                <input type="text" class="form-control" required [(ngModel)]="c.endereco.endereco" placeholder="AV. Brasil"
                        name="logadouro" #logadouro="ngModel"
                        [ngClass]="(logadouro.invalid && logadouro.touched) ? 'is-invalid' : ''" [disabled]="!edit">
               </div>
@@ -46,9 +49,8 @@
             <div class="form-group row">
               <label class="col-md-3 col-form-label">Bairro </label>
               <div class="col-md-9">
-                <input type="text" class="form-control" [(ngModel)]="c.endereco.bairro"
-                       placeholder="Centro"
-                       name="bairro" #bairro="ngModel" [disabled]="!edit">
+                <input type="text" class="form-control" [(ngModel)]="c.endereco.bairro" name="bairro"
+                       #bairro="ngModel" [disabled]="!edit">
               </div>
             </div>
           </div>
@@ -60,8 +62,8 @@
               <label class="col-md-4 col-form-label">Cidade <span class="text-danger">*</span></label>
               <div class="col-md-8">
                 <input type="text" class="form-control" required [(ngModel)]="c.endereco.cidade" placeholder="Maringá"
-                       name="cidade"
-                       #cidade="ngModel" [ngClass]="(cidade.invalid && cidade.touched) ? 'is-invalid' : ''" [disabled]="!edit">
+                       name="cidade" #cidade="ngModel"
+                       [ngClass]="(cidade.invalid && cidade.touched) ? 'is-invalid' : ''" [disabled]="!edit">
               </div>
             </div>
           </div>
@@ -70,8 +72,8 @@
               <label class="col-md-3 col-form-label">Estado <span class="text-danger">*</span></label>
               <div class="col-md-9">
                 <input type="text" class="form-control" required [(ngModel)]="c.endereco.estado" placeholder="Paraná"
-                       name="estado" [disabled]="!edit"
-                       #estado="ngModel" [ngClass]="(estado.invalid && estado.touched) ? 'is-invalid' : ''">
+                       name="estado" [disabled]="!edit" #estado="ngModel"
+                       [ngClass]="(estado.invalid && estado.touched) ? 'is-invalid' : ''">
               </div>
             </div>
           </div>
@@ -83,7 +85,6 @@
               <label class="col-md-4 col-form-label">Número</label>
               <div class="col-md-8">
                 <input type="number" class="form-control" [(ngModel)]="c.endereco.numero"
-                       placeholder="1029"
                        name="numero" #numero="ngModel" [disabled]="!edit">
               </div>
             </div>
@@ -92,7 +93,7 @@
             <div class="form-group row">
               <label class="col-md-3 col-form-label">Complemento</label>
               <div class="col-md-9">
-                <input type="text" class="form-control" [(ngModel)]="c.endereco.complemento" placeholder="Ponto de referência"
+                <input type="text" class="form-control" [(ngModel)]="c.endereco.complemento"
                        name="complemento" #complemento="ngModel"
                        [ngClass]="(complemento.invalid && complemento.touched) ? 'is-invalid' : ''" [disabled]="!edit">
               </div>
@@ -133,7 +134,7 @@
           <div class="col-md-10">
             <input type="text" pattern="^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$"
                    class="form-control" required [(ngModel)]="c.email" placeholder="test@gmail.com" name="email"
-                   #email="ngModel" (blur)="confimaemail()" (invalid)="emailvalid"
+                   #email="ngModel" (blur)="confimaemail()"
                    [ngClass]="(emailvalid || (email.invalid && email.touched)) ? 'is-invalid' : ''" [disabled]="!edit">
           </div>
         </div>
@@ -141,15 +142,14 @@
         <div class="form-group row" *ngIf="edit">
           <label class="col-md-2 col-form-label">Senha </label>
           <div class="col-md-10">
-            <input type="password" class="form-control" [(ngModel)]="c.password" placeholder="********"
-                   name="password" #password="ngModel" >
+            <input type="password" class="form-control" [(ngModel)]="c.password" placeholder="********" name="password"
+                   #password="ngModel" >
           </div>
         </div>
         <div class="form-group row" *ngIf="edit">
           <label class="col-md-2 col-form-label" style="font-size: 15px">Confirme sua senha </label>
           <div class="col-md-10">
-            <input type="password" class="form-control" [(ngModel)]="csenha" placeholder="********"
-                   name="csenha"
+            <input type="password" class="form-control" [(ngModel)]="csenha" placeholder="********" name="csenha"
                    #csenhaf="ngModel" [ngClass]="(confirmasenha()) ? 'is-invalid' : ''">
           </div>
         </div>

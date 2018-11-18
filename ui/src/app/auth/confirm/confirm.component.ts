@@ -7,8 +7,7 @@ import {NgForm} from '@angular/forms';
 
 @Component({
   selector: 'app-confirm',
-  templateUrl: './confirm.component.html',
-  styleUrls: ['./confirm.component.scss']
+  templateUrl: './confirm.component.html'
 })
 export class ConfirmComponent implements OnInit {
   loading = false;

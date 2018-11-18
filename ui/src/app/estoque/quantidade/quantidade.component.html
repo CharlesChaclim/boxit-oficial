@@ -1,0 +1,36 @@
+<div class="col-12 offset-lg-1 col-lg-10">
+  <div class="card">
+    <div class="card-header text-center">
+      <h3>Alterar Quantidade de Produto</h3>
+    </div>
+    <div class="card-body">
+      <form #qform="ngForm">
+        <div class="form-row">
+          <div class="col-md-6">
+            <div class="form-group row">
+              <label class="col-md-4 col-form-label">Nome <span class="text-danger">*</span></label>
+              <div class="col-md-8">
+                <input type="text" class="form-control" required [(ngModel)]="p.nome" placeholder="Memória RAM"
+                       name="nome" #nome="ngModel" (invalid)="nome_valido" (blur)="confirmaNome()"
+                       [ngClass]="((nome.invalid && nome.touched) || nome_valido) ? 'is-invalid' : ''">
+                <span class="text-danger" *ngIf="nome_valido">Nome já utilizado!</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <button href="#" class="btn btn-block btn-primary" (click)="cadastrar()" type="submit"
+                    [disabled]="qform.invalid || preco_valido || qtd_valida || lote_valido || cat.invalid">Cadastrar
+            </button>
+          </div>
+          <div class="col">
+            <div>
+              <button class="btn btn-secondary btn-block" (click)="back()"><i class="fal fa-arrow-left"></i> Voltar</button>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

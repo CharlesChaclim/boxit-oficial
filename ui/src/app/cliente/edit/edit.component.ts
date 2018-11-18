@@ -5,13 +5,12 @@ import {CorreiosService} from '../../shared/correios.service';
 import {ClienteService} from '../cliente.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import swal from 'sweetalert2';
-import {ToastrService} from 'ngx-toastr';
 import {ErrorHandleService} from '../../core/error-handle.service';
+import {AuthService} from '../../auth/auth.service';
 
 @Component({
   selector: 'app-edit',
-  templateUrl: './edit.component.html',
-  styleUrls: ['./edit.component.scss']
+  templateUrl: './edit.component.html'
 })
 export class EditComponent implements OnInit {
   public cpfMask = MyMaskUtil.CPF_MASK_GENERATOR;
@@ -27,15 +26,23 @@ export class EditComponent implements OnInit {
   csenha = null;
   edit = false;
   title: string;
+  podeEdit = false;
 
   constructor(
     private correiosService: CorreiosService,
     private servico: ClienteService,
     private router: Router,
     private errHandle: ErrorHandleService,
-    private toast: ToastrService,
-    private activatedRoute: ActivatedRoute
+    private activatedRoute: ActivatedRoute,
+    private auth: AuthService
   ) {
+    const user = this.auth.jwtPayload.user_name;
+    console.log(user.length);
+    if (user.length > 17) {
+      this.podeEdit = true;
+    } else {
+      this.podeEdit = false;
+    }
   }
 
   ngOnInit() {
@@ -151,13 +158,35 @@ export class EditComponent implements OnInit {
         this.router.navigate(['/cliente']);
       }, () => {
         swal('Erro!',
-          'Falha no banco de dados\n Tente mais tarde',
+          'CNPJ ou CPF Inválido',
           'error');
       }
     );
   }
-
   back() {
     history.back();
+  }
+  help() {
+    if (!this.edit) {
+      swal({
+          title: 'Ajuda',
+          html: 'Não é possível editar o conteúdo desta página pois ela é só para visualização e não para edição',
+          type: 'info'
+        }
+      );
+    } else {
+      swal({
+          title: 'Ajuda',
+          html: 'O nome fantasia é o nome da empresa.' +
+            '<br> <br>' +
+            'O logadouro é o nome da rua/avenida/rodovia/estrada que a empresa é sediada.' +
+            '<br> <br>' +
+            'Os campos com * ao seu lado são obrigatórios.' +
+            '<br> <br>' +
+            'Caso deixe vazio o campo senha a antiga permanecerá.',
+          type: 'info'
+        }
+      );
+    }
   }
 }

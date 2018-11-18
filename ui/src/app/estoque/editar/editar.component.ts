@@ -1,6 +1,5 @@
 import {Component, OnInit} from '@angular/core';
 import {Estoque, EstoqueEdit} from '../../core/model';
-import {MyMaskUtil} from '../../shared/mask/my-mask.util';
 import {EstoqueService} from '../estoque.service';
 import {CategoriaService} from '../../categoria/categoria.service';
 import {ActivatedRoute, Router} from '@angular/router';
@@ -20,7 +19,6 @@ export class EditarComponent implements OnInit {
   sku: string;
   nome_valido = false;
   preco_valido = false;
-  qtd_valida = false;
   lote_valido = false;
   categoria: any;
   edit = false;
@@ -68,10 +66,6 @@ export class EditarComponent implements OnInit {
 
   precoPositivo() {
     this.preco_valido = this.p.preco < 0;
-  }
-
-  qtdPositiva() {
-    this.qtd_valida = this.p.qtd <= 0;
   }
 
   lotePositivo() {

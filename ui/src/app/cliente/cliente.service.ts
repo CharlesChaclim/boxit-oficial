@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
-import {Router} from '@angular/router';
 import {Cliente, ClienteEdit, Page} from '../core/model';
 import {environment} from '../../environments/environment';
 
@@ -13,7 +12,6 @@ export class ClienteService {
 
   constructor(
     private http: HttpClient,
-    private router: Router
   ) { }
 
   listAll(page: string, size: string) {
@@ -51,6 +49,10 @@ export class ClienteService {
 
   getOne(id: string) {
     return this.http.get<ClienteEdit>(this.url + id);
+  }
+
+  getOneCnpj(cnpj: string) {
+    return this.http.post(this.url + 'oneCnpj', {cnpj});
   }
 
   emailExist(email: string) {

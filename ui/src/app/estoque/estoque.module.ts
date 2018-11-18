@@ -10,6 +10,7 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {SharedModule} from '../shared/shared.module';
 import {SweetAlert2Module} from '@toverux/ngx-sweetalert2';
 import {CurrencyMaskModule} from 'ng2-currency-mask';
+import { QuantidadeComponent } from './quantidade/quantidade.component';
 
 @NgModule({
   imports: [
@@ -25,7 +26,8 @@ import {CurrencyMaskModule} from 'ng2-currency-mask';
   declarations: [
     ListarComponent,
     CadastrarComponent,
-    EditarComponent
+    EditarComponent,
+    QuantidadeComponent
   ]
 })
 export class EstoqueModule { }

@@ -39,6 +39,10 @@ public class ClienteService {
         return clienteRepository.findById(id);
     }
 
+    public Integer getOneCnpj(String cnpj){
+        return clienteRepository.findByCnpj(cnpj).get().getId();
+    }
+
     @Transactional
     public Cliente create(NewClienteDTO dto){
         Cliente cliente = toCliente.apply(dto);
@@ -167,7 +171,7 @@ public class ClienteService {
         cliente.setCpf(dto.getCpf());
         cliente.setTelefone(dto.getTelefone());
         cliente.setEmail(dto.getEmail());
-        cliente.setUsername(dto.getCnpj().replace(".","").replace("/","").replace("-",""));
+        cliente.setUsername(dto.getCnpj());
         cliente.setEnable(false);
         cliente.setRole(Role.CLIENTE);
         cliente.setConfirmCode(UUID.randomUUID().toString());
@@ -182,6 +186,7 @@ public class ClienteService {
         cliente.setNome(dto.getNome());
         cliente.setCpf(dto.getCpf());
         cliente.setCnpj(dto.getCnpj());
+        cliente.setUsername(dto.getCnpj());
         cliente.setTelefone(dto.getTelefone());
         cliente.setEmail(dto.getEmail());
         if(dto.getPassword() != null) {

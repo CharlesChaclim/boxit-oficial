@@ -1,6 +1,10 @@
 <div class="col-12 offset-lg-1 col-lg-10">
   <div class="card">
     <div class="card-header text-center">
+      <div class="col-12 col-md-12">
+        <a (click)="help()" class="text-dark" style="text-decoration: none; float: right"><i
+          class="fal fa-question-circle"></i></a>
+      </div>
       <h3>Cadastro de Cliente</h3>
     </div>
     <div class="card-body">
@@ -9,10 +13,9 @@
         <div class="form-group row">
           <label class="col-md-2 col-form-label">CNPJ <span class="text-danger">*</span></label>
           <div class="col-md-10">
-            <input type="text" class="form-control" required [spMask]="cnpjMask" maxlength="18" minlength="18" (blur)="confimacnpj()" (invalid)="cnpjvalid"
+            <input type="text" class="form-control" required [spMask]="cnpjMask" maxlength="18" minlength="18" (blur)="confimacnpj()"
                    [spKeepMask]="true" [(ngModel)]="c.cnpj" placeholder="00.000.000/0000-00" name="cnpj" #cnpj="ngModel"
                    [ngClass]="((cnpj.invalid && cnpj.touched) || cnpjvalid) ? 'is-invalid' : ''">
-            <span class="text-danger" *ngIf="showCnpjError">CNPJ já cadastrado!</span>
           </div>
         </div>
         <div class="form-group row">
@@ -135,8 +138,7 @@
           <div class="col-md-10">
             <input type="text" pattern="^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$"
                    class="form-control" required [(ngModel)]="c.email" placeholder="test@gmail.com" name="email"
-                   #email="ngModel" (blur)="confimaemail()" (invalid)="emailvalid" [ngClass]="(emailvalid || (email.invalid && email.touched)) ? 'is-invalid' : ''">
-            <span class="text-danger" *ngIf="showEmailError">Email já cadastrado!</span>
+                   #email="ngModel" (blur)="confimaemail()" [ngClass]="(emailvalid || (email.invalid && email.touched)) ? 'is-invalid' : ''">
           </div>
         </div>
 

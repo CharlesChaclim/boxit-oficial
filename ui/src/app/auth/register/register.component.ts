@@ -11,8 +11,7 @@ import {ErrorHandleService} from '../../core/error-handle.service';
 
 @Component({
   selector: 'app-register',
-  templateUrl: './register.component.html',
-  styleUrls: ['./register.component.scss']
+  templateUrl: './register.component.html'
 })
 export class RegisterComponent implements OnInit {
 
@@ -73,7 +72,9 @@ export class RegisterComponent implements OnInit {
           );
           this.showCnpjError = true;
           this.cnpjvalid = true;
-        } else {this.cnpjvalid = false; }
+        } else {
+          this.cnpjvalid = false;
+        }
         this.showCnpjError = false;
       }
     );
@@ -90,7 +91,9 @@ export class RegisterComponent implements OnInit {
           );
           this.showEmailError = true;
           this.emailvalid = true;
-        } else {this.emailvalid = false; }
+        } else {
+          this.emailvalid = false;
+        }
         this.showEmailError = false;
       }
     );
@@ -108,5 +111,18 @@ export class RegisterComponent implements OnInit {
 
   back() {
     history.back();
+  }
+
+  help() {
+    swal({
+        title: 'Ajuda',
+        html: 'O nome fantasia é o nome da empresa.' +
+          '<br> <br>' +
+          'O logadouro é o nome da rua/avenida/rodovia/estrada que a empresa é sediada.' +
+          '<br> <br>' +
+          'Os campos com * ao seu lado são obrigatórios.',
+        type: 'info'
+      }
+    );
   }
 }

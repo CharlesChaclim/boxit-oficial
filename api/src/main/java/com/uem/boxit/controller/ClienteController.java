@@ -4,7 +4,6 @@ import com.uem.boxit.dto.*;
 import com.uem.boxit.event.SendConfirmationCodeEvent;
 import com.uem.boxit.exception.ObjectNotFoundException;
 import com.uem.boxit.model.Cliente;
-import com.uem.boxit.model.Usuario;
 import com.uem.boxit.service.ClienteService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationEventPublisher;
@@ -40,6 +39,11 @@ public class ClienteController {
     public ResponseEntity<Cliente> getOne(@PathVariable Integer id) {
         Optional<Cliente> cliente = clienteService.getOne(id);
         return cliente.isPresent() ? ResponseEntity.ok(cliente.get()) : ResponseEntity.notFound().build();
+    }
+
+    @PostMapping("/oneCnpj")
+    public Integer getOneCnpj(@RequestBody CnpjDTO dto) {
+        return clienteService.getOneCnpj(dto.getCnpj());
     }
 
     @GetMapping("/filtro")

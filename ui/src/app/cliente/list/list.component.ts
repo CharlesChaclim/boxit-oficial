@@ -2,14 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import {Page} from '../../core/model';
 import {MyMaskUtil} from '../../shared/mask/my-mask.util';
 import * as _ from 'lodash';
-import {ToastrService} from 'ngx-toastr';
 import {ClienteService} from '../cliente.service';
 import swal from 'sweetalert2';
 
 @Component({
   selector: 'app-list',
-  templateUrl: './list.component.html',
-  styleUrls: ['./list.component.scss']
+  templateUrl: './list.component.html'
 })
 export class ListComponent implements OnInit {
 
@@ -23,8 +21,7 @@ export class ListComponent implements OnInit {
   filtrado = false;
   vazio = 0;
   constructor(
-    private clienteService: ClienteService,
-    private toast: ToastrService
+    private clienteService: ClienteService
   ) { }
 
   ngOnInit() {
@@ -92,6 +89,19 @@ export class ListComponent implements OnInit {
           this.populate((this.clientes.number + 1).toString(), this.clientes.size.toString());
         }
       }
+    );
+  }
+
+  help() {
+    swal({
+      title: 'Ajuda',
+      html: 'O botão <button class="btn btn-primary"><i class="fal fa-eye"></i></button> permite você ver o cadastro do cliente.' +
+        '<br> <br> ' +
+      'O botão <button class="btn btn-secondary"><i class="fal fa-edit"></i></button> permite você editar o cadastro do cliente.' +
+        '<br> <br>' +
+        'O botão <span class="badge badge-pill badge-success">Ativo</span>/<span class="badge badge-pill badge-warning">Inativo</span> ' +
+        'permite você desativar/ativar o cadastro do cliente, assim como informar o estado do cadastro.',
+      type: 'info'}
     );
   }
 }
