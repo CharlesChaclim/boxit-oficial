@@ -115,7 +115,7 @@ public class ProdutoService {
         PrecoCompra c = new PrecoCompra();
         Calendar calendario = Calendar.getInstance();
         Date data = calendario.getTime();
-        if ((qtd.getMotivo() != 1) || (qtd.getMotivo() != 4)) {
+        if ((qtd.getMotivo() != 1) && (qtd.getMotivo() != 4)) {
             qtd.setQtd(qtd.getQtd() * -1);
         }
         p.setQtd(qtd.getQtd() + p.getQtd());
