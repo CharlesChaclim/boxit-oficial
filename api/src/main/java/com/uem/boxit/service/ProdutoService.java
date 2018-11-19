@@ -116,7 +116,6 @@ public class ProdutoService {
         Calendar calendario = Calendar.getInstance();
         Date data = calendario.getTime();
         p.setQtd(qtd.getQtd() + p.getQtd());
-
         if (qtd.getMotivo() == 1) {
             c.setDataAtualizacao(data);
             c.setPreco(qtd.getPrecoCompra());

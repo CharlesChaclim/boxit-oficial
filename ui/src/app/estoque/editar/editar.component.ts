@@ -70,7 +70,7 @@ export class EditarComponent implements OnInit {
   }
 
   descontoValido() {
-    this.desconto_valido = this.p.desconto < this.p.preco;
+    this.desconto_valido = (this.p.desconto >= 0) && (this.p.desconto <= 100);
   }
 
   lotePositivo() {
