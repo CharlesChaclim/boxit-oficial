@@ -1,27 +1,37 @@
 package com.uem.boxit.service;
 
 import com.uem.boxit.dto.NewProdutoDTO;
-import com.uem.boxit.model.Categoria;
+import com.uem.boxit.dto.UpdateQtdDTO;
+import com.uem.boxit.model.PrecoCompra;
 import com.uem.boxit.model.Produto;
+import com.uem.boxit.model.Quantidade;
 import com.uem.boxit.repository.CategoriaRepository;
+import com.uem.boxit.repository.PrecoCompraRepository;
 import com.uem.boxit.repository.ProdutoRepository;
+import com.uem.boxit.repository.QuantidadeRepository;
 import com.uem.boxit.storage.S3;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.http.impl.cookie.DateUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Optional;
+import java.time.LocalDateTime;
+import java.util.*;
 import java.util.function.Function;
 
 @Service
 public class ProdutoService {
     @Autowired
     private ProdutoRepository produtoRepository;
+
+    @Autowired
+    private PrecoCompraRepository precoCompraRepository;
+
+    @Autowired
+    private QuantidadeRepository quantidadeRepository;
 
     @Autowired
     private CategoriaRepository categoriaRepository;
@@ -59,6 +69,7 @@ public class ProdutoService {
         p.setDescricao(produto.getDescricao());
         p.setUnidadeLote(produto.getUnidadeLote());
         p.setQtd(produto.getQtd());
+        p.setDesconto(produto.getDesconto());
         return produtoRepository.save(p);
     }
 
@@ -98,6 +109,30 @@ public class ProdutoService {
     }
 
     @Transactional
+    public Produto atualizarQuantidade(Integer id, UpdateQtdDTO qtd) {
+        Produto p = produtoRepository.getOne(id);
+        Quantidade q = new Quantidade();
+        PrecoCompra c = new PrecoCompra();
+        Calendar calendario = Calendar.getInstance();
+        Date data = calendario.getTime();
+        p.setQtd(qtd.getQtd() + p.getQtd());
+
+        if (qtd.getMotivo() == 1) {
+            c.setDataAtualizacao(data);
+            c.setPreco(qtd.getPrecoCompra());
+            c.setProduto(p);
+            c.setQuantidade(qtd.getQtd());
+            precoCompraRepository.save(c);
+        }
+        q.setMotivo(qtd.getMotivo());
+        q.setMotivoOutro(qtd.getMotivoOutro());
+        q.setPreco(qtd.getPrecoCompra());
+        q.setQuantidade(qtd.getQtd());
+        quantidadeRepository.save(q);
+        return produtoRepository.save(p);
+    }
+
+    @Transactional
     public void atualizarEnable(Integer id, Boolean enable){
         Produto produto = produtoRepository.getOne(id);
         if(!enable)
@@ -114,7 +149,7 @@ public class ProdutoService {
         p.setPreco(dto.getPreco());
         p.setDescricao(dto.getDescricao());
         p.setUnidadeLote(dto.getUnidadeLote());
-        p.setQtd(dto.getQtd());
+        p.setQtd(0);
         p.setSku(dto.getSku());
         if (dto.getFotos() != null) {
             Map<String, String> fotos = new HashMap<>();
@@ -122,6 +157,7 @@ public class ProdutoService {
             p.setFotos(fotos);
         }
         p.setEnable(true);
+        p.setDesconto(0.0);
         return p;
     };
 }

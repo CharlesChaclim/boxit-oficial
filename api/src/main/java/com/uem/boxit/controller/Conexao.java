@@ -12,7 +12,7 @@ public class Conexao {
     public static Connection getConnection() {
         String datasource = "jdbc:mysql://localhost:3306/boxit_api??createDatabaseIfNotExist=true&useSSL=false&useTimezone=true&serverTimezone=GMT-3&allowPublicKeyRetrieval=true";
         String username = "root";
-        String password = "password";
+        String password = "root";
         if (connection == null) {
             try {
                 connection = DriverManager.getConnection(datasource, username, password);

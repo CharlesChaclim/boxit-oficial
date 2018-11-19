@@ -17,7 +17,6 @@ export class CadastrarComponent implements OnInit {
   sku: string;
   nome_valido = false;
   preco_valido = false;
-  qtd_valida = false;
   lote_valido = false;
   sku_valido = false;
   categoria: any;
@@ -37,10 +36,6 @@ export class CadastrarComponent implements OnInit {
 
   precoPositivo() {
     this.preco_valido = this.p.preco < 0;
-  }
-
-  qtdPositiva() {
-    this.qtd_valida = this.p.qtd <= 0;
   }
 
   lotePositivo() {

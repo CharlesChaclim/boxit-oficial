@@ -33,7 +33,7 @@ public class ClienteTeste extends BoxitApplicationTests{
 
     @Test
     public void getOneCnpj(){
-        Assertions.assertThat(clienteService.getOneCnpj("98.648.174/0001-60")).isEqualTo(11);
+        Assertions.assertThat(clienteService.getOneCnpj("78.966.326/0001-65")).isEqualTo(11);
     }
 
 
@@ -73,7 +73,7 @@ public class ClienteTeste extends BoxitApplicationTests{
 
     @Test
     public void cnpjExist() {
-        String cnpj = "30.437.467/0001-64";
+        String cnpj = "78.966.326/0001-65";
         Assertions.assertThat(clienteService.cnpjExist(cnpj)).isEqualTo(true);
     }
 

@@ -1,0 +1,1088 @@
+#
+# There is insufficient memory for the Java Runtime Environment to continue.
+# Native memory allocation (mmap) failed to map 95944704 bytes for committing reserved memory.
+# Possible reasons:
+#   The system is out of physical RAM or swap space
+#   In 32 bit mode, the process size limit was hit
+# Possible solutions:
+#   Reduce memory load on the system
+#   Increase physical memory or swap space
+#   Check if swap backing store is full
+#   Use 64 bit Java on a 64 bit OS
+#   Decrease Java heap size (-Xmx/-Xms)
+#   Decrease number of Java threads
+#   Decrease Java thread stack sizes (-Xss)
+#   Set larger code cache with -XX:ReservedCodeCacheSize=
+# This output file may be truncated or incomplete.
+#
+#  Out of Memory Error (os_linux.cpp:2743), pid=3550, tid=0x00007f187c10e700
+#
+# JRE version: Java(TM) SE Runtime Environment (8.0_191-b12) (build 1.8.0_191-b12)
+# Java VM: Java HotSpot(TM) 64-Bit Server VM (25.191-b12 mixed mode linux-amd64 compressed oops)
+# Failed to write core dump. Core dumps have been disabled. To enable core dumping, try "ulimit -c unlimited" before starting Java again
+#
+
+---------------  T H R E A D  ---------------
+
+Current thread (0x00007f1894087000):  VMThread [stack: 0x00007f187c00f000,0x00007f187c10f000] [id=3558]
+
+Stack: [0x00007f187c00f000,0x00007f187c10f000],  sp=0x00007f187c10d430,  free space=1017k
+Native frames: (J=compiled Java code, j=interpreted, Vv=VM code, C=native code)
+V  [libjvm.so+0xace425]  VMError::report_and_die()+0x2c5
+V  [libjvm.so+0x4deb77]  report_vm_out_of_memory(char const*, int, unsigned long, VMErrorType, char const*)+0x67
+V  [libjvm.so+0x90c570]  os::pd_commit_memory(char*, unsigned long, unsigned long, bool)+0x100
+V  [libjvm.so+0x903eaf]  os::commit_memory(char*, unsigned long, unsigned long, bool)+0x1f
+V  [libjvm.so+0x988346]  PSVirtualSpace::expand_by(unsigned long)+0x56
+V  [libjvm.so+0x9895d8]  PSYoungGen::resize(unsigned long, unsigned long)+0xd8
+V  [libjvm.so+0x985d66]  PSScavenge::invoke_no_policy()+0x1356
+V  [libjvm.so+0x98610c]  PSScavenge::invoke()+0x4c
+V  [libjvm.so+0x935fb8]  ParallelScavengeHeap::failed_mem_allocate(unsigned long)+0x68
+V  [libjvm.so+0xacff53]  VM_ParallelGCFailedAllocation::doit()+0x93
+V  [libjvm.so+0xad50f6]  VM_Operation::evaluate()+0x46
+V  [libjvm.so+0xad347d]  VMThread::evaluate_operation(VM_Operation*) [clone .constprop.44]+0xcd
+V  [libjvm.so+0xad3a3b]  VMThread::loop()+0x37b
+V  [libjvm.so+0xad3de8]  VMThread::run()+0x78
+V  [libjvm.so+0x909c92]  java_start(Thread*)+0x102
+
+VM_Operation (0x00007f183c1f9370): ParallelGCFailedAllocation, mode: safepoint, requested by thread 0x00007f18462b5000
+
+
+---------------  P R O C E S S  ---------------
+
+Java Threads: ( => current thread )
+  0x00007f1894019000 JavaThread "DestroyJavaVM" [_thread_blocked, id=3551, stack(0x00007f189cb74000,0x00007f189cc74000)]
+  0x00007f1846423800 JavaThread "http-nio-8080-AsyncTimeout" daemon [_thread_blocked, id=3608, stack(0x00007f1820969000,0x00007f1820a6a000)]
+  0x00007f1846422000 JavaThread "http-nio-8080-Acceptor-0" daemon [_thread_in_native, id=3607, stack(0x00007f1820a6a000,0x00007f1820b6b000)]
+  0x00007f184641f800 JavaThread "http-nio-8080-ClientPoller-1" daemon [_thread_blocked, id=3606, stack(0x00007f1820b6b000,0x00007f1820c6c000)]
+  0x00007f1846404800 JavaThread "http-nio-8080-ClientPoller-0" daemon [_thread_blocked, id=3605, stack(0x00007f1820c6c000,0x00007f1820d6d000)]
+  0x00007f18463e9800 JavaThread "http-nio-8080-exec-10" daemon [_thread_blocked, id=3604, stack(0x00007f1820d6d000,0x00007f1820e6e000)]
+  0x00007f18463e7800 JavaThread "http-nio-8080-exec-9" daemon [_thread_blocked, id=3603, stack(0x00007f1820e6e000,0x00007f1820f6f000)]
+  0x00007f18463e5800 JavaThread "http-nio-8080-exec-8" daemon [_thread_blocked, id=3602, stack(0x00007f1820f6f000,0x00007f1821070000)]
+  0x00007f18463e3800 JavaThread "http-nio-8080-exec-7" daemon [_thread_blocked, id=3601, stack(0x00007f1821070000,0x00007f1821171000)]
+  0x00007f18463e1800 JavaThread "http-nio-8080-exec-6" daemon [_thread_blocked, id=3600, stack(0x00007f1821171000,0x00007f1821272000)]
+  0x00007f18463df800 JavaThread "http-nio-8080-exec-5" daemon [_thread_blocked, id=3599, stack(0x00007f1821272000,0x00007f1821373000)]
+  0x00007f18463de000 JavaThread "http-nio-8080-exec-4" daemon [_thread_blocked, id=3598, stack(0x00007f1821373000,0x00007f1821474000)]
+  0x00007f18463dc000 JavaThread "http-nio-8080-exec-3" daemon [_thread_blocked, id=3597, stack(0x00007f1821474000,0x00007f1821575000)]
+  0x00007f184636a000 JavaThread "http-nio-8080-exec-2" daemon [_thread_blocked, id=3596, stack(0x00007f1821575000,0x00007f1821676000)]
+  0x00007f1846368800 JavaThread "http-nio-8080-exec-1" daemon [_thread_blocked, id=3595, stack(0x00007f1821676000,0x00007f1821777000)]
+  0x00007f1846364000 JavaThread "NioBlockingSelector.BlockPoller-1" daemon [_thread_blocked, id=3594, stack(0x00007f1821777000,0x00007f1821878000)]
+  0x00007f1846345800 JavaThread "pool-3-thread-1" [_thread_blocked, id=3593, stack(0x00007f1821878000,0x00007f1821979000)]
+  0x00007f18462c0800 JavaThread "Live Reload Server" daemon [_thread_in_native, id=3592, stack(0x00007f1821b79000,0x00007f1821c7a000)]
+  0x00007f18462b5000 JavaThread "File Watcher" daemon [_thread_blocked, id=3590, stack(0x00007f183c0fa000,0x00007f183c1fb000)]
+  0x00007f1845ed9000 JavaThread "java-sdk-http-connection-reaper" daemon [_thread_blocked, id=3589, stack(0x00007f1822ea9000,0x00007f1822faa000)]
+  0x00007f1845550800 JavaThread "HikariPool-1 housekeeper" daemon [_thread_blocked, id=3579, stack(0x00007f183c1fb000,0x00007f183c2fc000)]
+  0x00007f1845307000 JavaThread "Abandoned connection cleanup thread" daemon [_thread_blocked, id=3578, stack(0x00007f183c8fc000,0x00007f183c9fd000)]
+  0x00007f18452f8800 JavaThread "container-0" [_thread_blocked, id=3577, stack(0x00007f183c9fd000,0x00007f183cafe000)]
+  0x00007f18452f5000 JavaThread "ContainerBackgroundProcessor[StandardEngine[Tomcat]]" daemon [_thread_blocked, id=3576, stack(0x00007f183cafe000,0x00007f183cbff000)]
+  0x00007f18940cf800 JavaThread "Service Thread" daemon [_thread_blocked, id=3568, stack(0x00007f1876f2a000,0x00007f187702b000)]
+  0x00007f18940cc800 JavaThread "C1 CompilerThread2" daemon [_thread_blocked, id=3567, stack(0x00007f187702c000,0x00007f187712c000)]
+  0x00007f18940ca800 JavaThread "C2 CompilerThread1" daemon [_thread_blocked, id=3566, stack(0x00007f187712d000,0x00007f187722d000)]
+  0x00007f18940c8000 JavaThread "C2 CompilerThread0" daemon [_thread_blocked, id=3565, stack(0x00007f187722e000,0x00007f187732e000)]
+  0x00007f18940c6000 JavaThread "Signal Dispatcher" daemon [_thread_blocked, id=3564, stack(0x00007f187732e000,0x00007f187742f000)]
+  0x00007f1894093000 JavaThread "Finalizer" daemon [_thread_blocked, id=3563, stack(0x00007f1877dfe000,0x00007f1877eff000)]
+  0x00007f1894090800 JavaThread "Reference Handler" daemon [_thread_blocked, id=3559, stack(0x00007f1877eff000,0x00007f1878000000)]
+
+Other Threads:
+=>0x00007f1894087000 VMThread [stack: 0x00007f187c00f000,0x00007f187c10f000] [id=3558]
+  0x00007f18940d4800 WatcherThread [stack: 0x00007f1876e2a000,0x00007f1876f2a000] [id=3569]
+
+VM state:at safepoint (normal execution)
+
+VM Mutex/Monitor currently owned by a thread:  ([mutex/lock_event])
+[0x00007f1894015400] Threads_lock - owner thread: 0x00007f1894087000
+[0x00007f1894015900] Heap_lock - owner thread: 0x00007f18462b5000
+
+Heap:
+ PSYoungGen      total 553984K, used 5813K [0x00000000d6b80000, 0x00000000fa480000, 0x0000000100000000)
+  eden space 527360K, 0% used [0x00000000d6b80000,0x00000000d6b80000,0x00000000f6e80000)
+  from space 26624K, 21% used [0x00000000f7080000,0x00000000f762d770,0x00000000f8a80000)
+  to   space 14336K, 0% used [0x00000000f9680000,0x00000000f9680000,0x00000000fa480000)
+ ParOldGen       total 127488K, used 63863K [0x0000000084200000, 0x000000008be80000, 0x00000000d6b80000)
+  object space 127488K, 50% used [0x0000000084200000,0x000000008805dcc8,0x000000008be80000)
+ Metaspace       used 82066K, capacity 85288K, committed 85336K, reserved 1124352K
+  class space    used 10775K, capacity 11335K, committed 11352K, reserved 1048576K
+
+Card table byte_map: [0x00007f189947b000,0x00007f189985b000] byte_map_base: 0x00007f189905a000
+
+Marking Bits: (ParMarkBitMap*) 0x00007f189c023d40
+ Begin Bits: [0x00007f187c210000, 0x00007f187e108000)
+ End Bits:   [0x00007f187e108000, 0x00007f1880000000)
+
+Polling page: 0x00007f189cc93000
+
+CodeCache: size=245760Kb used=24382Kb max_used=25620Kb free=221377Kb
+ bounds [0x00007f1885000000, 0x00007f1886930000, 0x00007f1894000000]
+ total_blobs=8367 nmethods=7488 adapters=791
+ compilation: enabled
+
+Compilation events (10 events):
+Event: 1083,989 Thread 0x00007f18940cc800 8952       3       java.util.concurrent.ThreadPoolExecutor::runStateOf (5 bytes)
+Event: 1083,989 Thread 0x00007f18940cc800 nmethod 8952 0x00007f188554e350 code [0x00007f188554e4a0, 0x00007f188554e5d0]
+Event: 1128,018 Thread 0x00007f18940cc800 8953       1       java.util.GregorianCalendar::getCalendarType (3 bytes)
+Event: 1128,923 Thread 0x00007f18940cc800 nmethod 8953 0x00007f188622d050 code [0x00007f188622d1a0, 0x00007f188622d2b0]
+Event: 1131,016 Thread 0x00007f18940cc800 8954       3       java.util.concurrent.atomic.AtomicBoolean::set (14 bytes)
+Event: 1131,071 Thread 0x00007f18940ca800 8955       4       sun.reflect.DelegatingMethodAccessorImpl::invoke (10 bytes)
+Event: 1131,071 Thread 0x00007f18940c8000 8956       4       java.lang.reflect.Method::invoke (62 bytes)
+Event: 1131,310 Thread 0x00007f18940cc800 nmethod 8954 0x00007f188622ccd0 code [0x00007f188622ce40, 0x00007f188622cff0]
+Event: 1132,139 Thread 0x00007f18940ca800 nmethod 8955 0x00007f1885b53cd0 code [0x00007f1885b53e20, 0x00007f1885b53e98]
+Event: 1132,866 Thread 0x00007f18940c8000 nmethod 8956 0x00007f1885c21610 code [0x00007f1885c217a0, 0x00007f1885c21a10]
+
+GC Heap History (10 events):
+Event: 3,588 GC heap after
+Heap after GC invocations=11 (full 2):
+ PSYoungGen      total 334336K, used 16358K [0x00000000d6b80000, 0x00000000f2500000, 0x0000000100000000)
+  eden space 317952K, 0% used [0x00000000d6b80000,0x00000000d6b80000,0x00000000ea200000)
+  from space 16384K, 99% used [0x00000000ea200000,0x00000000eb1f9878,0x00000000eb200000)
+  to   space 18944K, 0% used [0x00000000f1280000,0x00000000f1280000,0x00000000f2500000)
+ ParOldGen       total 84992K, used 17609K [0x0000000084200000, 0x0000000089500000, 0x00000000d6b80000)
+  object space 84992K, 20% used [0x0000000084200000,0x0000000085332468,0x0000000089500000)
+ Metaspace       used 42785K, capacity 44452K, committed 44632K, reserved 1087488K
+  class space    used 5549K, capacity 5866K, committed 5976K, reserved 1048576K
+}
+Event: 5,715 GC heap before
+{Heap before GC invocations=12 (full 2):
+ PSYoungGen      total 334336K, used 334310K [0x00000000d6b80000, 0x00000000f2500000, 0x0000000100000000)
+  eden space 317952K, 100% used [0x00000000d6b80000,0x00000000ea200000,0x00000000ea200000)
+  from space 16384K, 99% used [0x00000000ea200000,0x00000000eb1f9878,0x00000000eb200000)
+  to   space 18944K, 0% used [0x00000000f1280000,0x00000000f1280000,0x00000000f2500000)
+ ParOldGen       total 84992K, used 17609K [0x0000000084200000, 0x0000000089500000, 0x00000000d6b80000)
+  object space 84992K, 20% used [0x0000000084200000,0x0000000085332468,0x0000000089500000)
+ Metaspace       used 56744K, capacity 59000K, committed 59028K, reserved 1099776K
+  class space    used 7457K, capacity 7868K, committed 7896K, reserved 1048576K
+Event: 6,460 GC heap after
+Heap after GC invocations=12 (full 2):
+ PSYoungGen      total 427520K, used 18938K [0x00000000d6b80000, 0x00000000f5d80000, 0x0000000100000000)
+  eden space 408576K, 0% used [0x00000000d6b80000,0x00000000d6b80000,0x00000000efa80000)
+  from space 18944K, 99% used [0x00000000f1280000,0x00000000f24fe930,0x00000000f2500000)
+  to   space 24576K, 0% used [0x00000000efa80000,0x00000000efa80000,0x00000000f1280000)
+ ParOldGen       total 84992K, used 26241K [0x0000000084200000, 0x0000000089500000, 0x00000000d6b80000)
+  object space 84992K, 30% used [0x0000000084200000,0x0000000085ba07c8,0x0000000089500000)
+ Metaspace       used 56744K, capacity 59000K, committed 59028K, reserved 1099776K
+  class space    used 7457K, capacity 7868K, committed 7896K, reserved 1048576K
+}
+Event: 6,460 GC heap before
+{Heap before GC invocations=13 (full 3):
+ PSYoungGen      total 427520K, used 18938K [0x00000000d6b80000, 0x00000000f5d80000, 0x0000000100000000)
+  eden space 408576K, 0% used [0x00000000d6b80000,0x00000000d6b80000,0x00000000efa80000)
+  from space 18944K, 99% used [0x00000000f1280000,0x00000000f24fe930,0x00000000f2500000)
+  to   space 24576K, 0% used [0x00000000efa80000,0x00000000efa80000,0x00000000f1280000)
+ ParOldGen       total 84992K, used 26241K [0x0000000084200000, 0x0000000089500000, 0x00000000d6b80000)
+  object space 84992K, 30% used [0x0000000084200000,0x0000000085ba07c8,0x0000000089500000)
+ Metaspace       used 56744K, capacity 59000K, committed 59028K, reserved 1099776K
+  class space    used 7457K, capacity 7868K, committed 7896K, reserved 1048576K
+Event: 6,957 GC heap after
+Heap after GC invocations=13 (full 3):
+ PSYoungGen      total 427520K, used 0K [0x00000000d6b80000, 0x00000000f5d80000, 0x0000000100000000)
+  eden space 408576K, 0% used [0x00000000d6b80000,0x00000000d6b80000,0x00000000efa80000)
+  from space 18944K, 0% used [0x00000000f1280000,0x00000000f1280000,0x00000000f2500000)
+  to   space 24576K, 0% used [0x00000000efa80000,0x00000000efa80000,0x00000000f1280000)
+ ParOldGen       total 127488K, used 42311K [0x0000000084200000, 0x000000008be80000, 0x00000000d6b80000)
+  object space 127488K, 33% used [0x0000000084200000,0x0000000086b51d00,0x000000008be80000)
+ Metaspace       used 56744K, capacity 59000K, committed 59028K, reserved 1099776K
+  class space    used 7457K, capacity 7868K, committed 7896K, reserved 1048576K
+}
+Event: 10,220 GC heap before
+{Heap before GC invocations=14 (full 3):
+ PSYoungGen      total 427520K, used 408576K [0x00000000d6b80000, 0x00000000f5d80000, 0x0000000100000000)
+  eden space 408576K, 100% used [0x00000000d6b80000,0x00000000efa80000,0x00000000efa80000)
+  from space 18944K, 0% used [0x00000000f1280000,0x00000000f1280000,0x00000000f2500000)
+  to   space 24576K, 0% used [0x00000000efa80000,0x00000000efa80000,0x00000000f1280000)
+ ParOldGen       total 127488K, used 42311K [0x0000000084200000, 0x000000008be80000, 0x00000000d6b80000)
+  object space 127488K, 33% used [0x0000000084200000,0x0000000086b51d00,0x000000008be80000)
+ Metaspace       used 70774K, capacity 73440K, committed 73688K, reserved 1114112K
+  class space    used 9410K, capacity 9876K, committed 9944K, reserved 1048576K
+Event: 10,237 GC heap after
+Heap after GC invocations=14 (full 3):
+ PSYoungGen      total 433152K, used 22911K [0x00000000d6b80000, 0x00000000fb180000, 0x0000000100000000)
+  eden space 408576K, 0% used [0x00000000d6b80000,0x00000000d6b80000,0x00000000efa80000)
+  from space 24576K, 93% used [0x00000000efa80000,0x00000000f10dfe70,0x00000000f1280000)
+  to   space 27648K, 0% used [0x00000000f9680000,0x00000000f9680000,0x00000000fb180000)
+ ParOldGen       total 127488K, used 42319K [0x0000000084200000, 0x000000008be80000, 0x00000000d6b80000)
+  object space 127488K, 33% used [0x0000000084200000,0x0000000086b53d00,0x000000008be80000)
+ Metaspace       used 70774K, capacity 73440K, committed 73688K, reserved 1114112K
+  class space    used 9410K, capacity 9876K, committed 9944K, reserved 1048576K
+}
+Event: 11,701 GC heap before
+{Heap before GC invocations=15 (full 3):
+ PSYoungGen      total 433152K, used 431487K [0x00000000d6b80000, 0x00000000fb180000, 0x0000000100000000)
+  eden space 408576K, 100% used [0x00000000d6b80000,0x00000000efa80000,0x00000000efa80000)
+  from space 24576K, 93% used [0x00000000efa80000,0x00000000f10dfe70,0x00000000f1280000)
+  to   space 27648K, 0% used [0x00000000f9680000,0x00000000f9680000,0x00000000fb180000)
+ ParOldGen       total 127488K, used 42319K [0x0000000084200000, 0x000000008be80000, 0x00000000d6b80000)
+  object space 127488K, 33% used [0x0000000084200000,0x0000000086b53d00,0x000000008be80000)
+ Metaspace       used 77262K, capacity 80190K, committed 80344K, reserved 1118208K
+  class space    used 10196K, capacity 10700K, committed 10712K, reserved 1048576K
+Event: 11,721 GC heap after
+Heap after GC invocations=15 (full 3):
+ PSYoungGen      total 541696K, used 14029K [0x00000000d6b80000, 0x00000000fa480000, 0x0000000100000000)
+  eden space 527360K, 0% used [0x00000000d6b80000,0x00000000d6b80000,0x00000000f6e80000)
+  from space 14336K, 97% used [0x00000000f9680000,0x00000000fa433768,0x00000000fa480000)
+  to   space 26624K, 0% used [0x00000000f7080000,0x00000000f7080000,0x00000000f8a80000)
+ ParOldGen       total 127488K, used 54722K [0x0000000084200000, 0x000000008be80000, 0x00000000d6b80000)
+  object space 127488K, 42% used [0x0000000084200000,0x0000000087770970,0x000000008be80000)
+ Metaspace       used 77262K, capacity 80190K, committed 80344K, reserved 1118208K
+  class space    used 10196K, capacity 10700K, committed 10712K, reserved 1048576K
+}
+Event: 1146,932 GC heap before
+{Heap before GC invocations=16 (full 3):
+ PSYoungGen      total 541696K, used 541389K [0x00000000d6b80000, 0x00000000fa480000, 0x0000000100000000)
+  eden space 527360K, 100% used [0x00000000d6b80000,0x00000000f6e80000,0x00000000f6e80000)
+  from space 14336K, 97% used [0x00000000f9680000,0x00000000fa433768,0x00000000fa480000)
+  to   space 26624K, 0% used [0x00000000f7080000,0x00000000f7080000,0x00000000f8a80000)
+ ParOldGen       total 127488K, used 54722K [0x0000000084200000, 0x000000008be80000, 0x00000000d6b80000)
+  object space 127488K, 42% used [0x0000000084200000,0x0000000087770970,0x000000008be80000)
+ Metaspace       used 82066K, capacity 85288K, committed 85336K, reserved 1124352K
+  class space    used 10775K, capacity 11335K, committed 11352K, reserved 1048576K
+
+Deoptimization events (10 events):
+Event: 156,223 Thread 0x00007f18463de000 Uncommon trap: reason=bimorphic action=maybe_recompile pc=0x00007f188513511c method=java.util.regex.Pattern$5.isSatisfiedBy(I)Z @ 5
+Event: 156,223 Thread 0x00007f18463de000 Uncommon trap: reason=bimorphic action=maybe_recompile pc=0x00007f188513511c method=java.util.regex.Pattern$5.isSatisfiedBy(I)Z @ 5
+Event: 156,223 Thread 0x00007f18463de000 Uncommon trap: reason=bimorphic action=maybe_recompile pc=0x00007f188513511c method=java.util.regex.Pattern$5.isSatisfiedBy(I)Z @ 5
+Event: 156,363 Thread 0x00007f18463de000 Uncommon trap: reason=unstable_if action=reinterpret pc=0x00007f1885b53e50 method=java.util.IdentityHashMap.maskNull(Ljava/lang/Object;)Ljava/lang/Object; @ 1
+Event: 156,493 Thread 0x00007f18463e1800 Uncommon trap: reason=null_check action=make_not_entrant pc=0x00007f188636cdec method=java.lang.Class.privateGetMethodRecursive(Ljava/lang/String;[Ljava/lang/Class;ZLjava/lang/Class$MethodArray;)Ljava/lang/reflect/Method; @ 35
+Event: 156,493 Thread 0x00007f18463e1800 Uncommon trap: reason=null_check action=make_not_entrant pc=0x00007f18865296f4 method=java.lang.Class.privateGetDeclaredConstructors(Z)[Ljava/lang/reflect/Constructor; @ 35
+Event: 156,496 Thread 0x00007f18463e1800 Uncommon trap: reason=unstable_if action=reinterpret pc=0x00007f18868f212c method=org.springframework.core.annotation.AnnotationUtils.findAnnotation(Ljava/lang/reflect/AnnotatedElement;Ljava/lang/Class;Ljava/util/Set;)Ljava/lang/annotation/Annotation; @ 8
+Event: 161,862 Thread 0x00007f18463e3800 Uncommon trap: reason=unstable_if action=reinterpret pc=0x00007f1885950944 method=java.nio.Buffer.limit(I)Ljava/nio/Buffer; @ 33
+Event: 161,864 Thread 0x00007f18463e3800 Uncommon trap: reason=unstable_if action=reinterpret pc=0x00007f18859ac650 method=java.nio.Buffer.<init>(IIII)V @ 66
+Event: 162,097 Thread 0x00007f18463e7800 Uncommon trap: reason=unstable_if action=reinterpret pc=0x00007f1886870190 method=org.springframework.core.annotation.AnnotationUtils.findAnnotation(Ljava/lang/reflect/AnnotatedElement;Ljava/lang/Class;Ljava/util/Set;)Ljava/lang/annotation/Annotation; @ 8
+
+Classes redefined (0 events):
+No events
+
+Internal exceptions (10 events):
+Event: 156,220 Thread 0x00007f18463de000 Exception <a 'java/lang/ClassNotFoundException': org/springframework/security/oauth2/provider/ClientDetailsServiceCustomizer> (0x00000000df9190f0) thrown at [/HUDSON/workspace/8-2-build-linux-amd64/jdk8u191/11894/hotspot/src/share/vm/classfile/systemDicti
+Event: 156,422 Thread 0x00007f18463de000 Exception <a 'java/lang/ClassNotFoundException': java/lang/ObjectCustomizer> (0x00000000e03fb6c8) thrown at [/HUDSON/workspace/8-2-build-linux-amd64/jdk8u191/11894/hotspot/src/share/vm/classfile/systemDictionary.cpp, line 210]
+Event: 156,422 Thread 0x00007f18463de000 Exception <a 'java/lang/ClassNotFoundException': com/fasterxml/jackson/databind/JsonSerializerCustomizer> (0x00000000e0440db8) thrown at [/HUDSON/workspace/8-2-build-linux-amd64/jdk8u191/11894/hotspot/src/share/vm/classfile/systemDictionary.cpp, line 210]
+Event: 156,423 Thread 0x00007f18463de000 Exception <a 'java/lang/ClassNotFoundException': com/fasterxml/jackson/databind/ser/std/StdSerializerCustomizer> (0x00000000e049a5b8) thrown at [/HUDSON/workspace/8-2-build-linux-amd64/jdk8u191/11894/hotspot/src/share/vm/classfile/systemDictionary.cpp, li
+Event: 156,423 Thread 0x00007f18463de000 Exception <a 'java/lang/ClassNotFoundException': org/springframework/security/oauth2/common/OAuth2AccessTokenJackson2SerializerCustomizer> (0x00000000e0502b30) thrown at [/HUDSON/workspace/8-2-build-linux-amd64/jdk8u191/11894/hotspot/src/share/vm/classfil
+Event: 156,424 Thread 0x00007f18463de000 Exception <a 'java/lang/ClassNotFoundException': com/fasterxml/jackson/databind/jsonFormatVisitors/JsonFormatVisitableCustomizer> (0x00000000e0561778) thrown at [/HUDSON/workspace/8-2-build-linux-amd64/jdk8u191/11894/hotspot/src/share/vm/classfile/systemD
+Event: 156,424 Thread 0x00007f18463de000 Exception <a 'java/lang/ClassNotFoundException': com/fasterxml/jackson/databind/jsonschema/SchemaAwareCustomizer> (0x00000000e05aac38) thrown at [/HUDSON/workspace/8-2-build-linux-amd64/jdk8u191/11894/hotspot/src/share/vm/classfile/systemDictionary.cpp, l
+Event: 156,425 Thread 0x00007f18463de000 Exception <a 'java/lang/ClassNotFoundException': com/fasterxml/jackson/databind/jsonFormatVisitors/JsonFormatVisitableCustomizer> (0x00000000e0601e88) thrown at [/HUDSON/workspace/8-2-build-linux-amd64/jdk8u191/11894/hotspot/src/share/vm/classfile/systemD
+Event: 162,146 Thread 0x00007f18463e7800 Exception <a 'java/lang/NoSuchMethodError': java.lang.Object.lambda$mapIfAllPresent$6(Ljava/util/Optional;Ljava/util/function/BiFunction;Ljava/lang/Object;)Ljava/util/Optional;> (0x00000000e17ea278) thrown at [/HUDSON/workspace/8-2-build-linux-amd64/jdk8u
+Event: 162,146 Thread 0x00007f18463e7800 Exception <a 'java/lang/NoSuchMethodError': java.lang.Object.lambda$null$5(Ljava/util/function/BiFunction;Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;> (0x00000000e17eed80) thrown at [/HUDSON/workspace/8-2-build-linux-amd64/jdk8u191/11894/hotsp
+
+Events (10 events):
+Event: 643,363 Thread 0x00007f18940cc800 flushing nmethod 0x00007f1886366a10
+Event: 643,364 Thread 0x00007f18940cc800 flushing nmethod 0x00007f1886528710
+Event: 705,642 Thread 0x00007f18940cc800 flushing nmethod 0x00007f18867cd050
+Event: 705,642 Thread 0x00007f18940cc800 flushing nmethod 0x00007f1886807150
+Event: 705,642 Thread 0x00007f18940cc800 flushing nmethod 0x00007f1886807950
+Event: 705,642 Thread 0x00007f18940cc800 flushing nmethod 0x00007f188680ad10
+Event: 705,643 Thread 0x00007f18940cc800 flushing nmethod 0x00007f188686c6d0
+Event: 705,644 Thread 0x00007f18940cc800 flushing nmethod 0x00007f18868ae410
+Event: 705,644 Thread 0x00007f18940cc800 flushing nmethod 0x00007f18868e9590
+Event: 1146,650 Executing VM operation: ParallelGCFailedAllocation
+
+
+Dynamic libraries:
+00400000-00401000 r-xp 00000000 08:11 10361525                           /usr/lib/jvm/java-8-oracle/jre/bin/java
+00600000-00601000 r--p 00000000 08:11 10361525                           /usr/lib/jvm/java-8-oracle/jre/bin/java
+00601000-00602000 rw-p 00001000 08:11 10361525                           /usr/lib/jvm/java-8-oracle/jre/bin/java
+0091a000-0093b000 rw-p 00000000 00:00 0                                  [heap]
+84200000-8be80000 rw-p 00000000 00:00 0 
+8be80000-d6b80000 ---p 00000000 00:00 0 
+d6b80000-fa480000 rw-p 00000000 00:00 0 
+100000000-100b16000 rw-p 00000000 00:00 0 
+100b16000-140000000 ---p 00000000 00:00 0 
+7f17fc000000-7f17fc021000 rw-p 00000000 00:00 0 
+7f17fc021000-7f1800000000 ---p 00000000 00:00 0 
+7f1800000000-7f1800054000 rw-p 00000000 00:00 0 
+7f1800054000-7f1804000000 ---p 00000000 00:00 0 
+7f1804000000-7f180407e000 rw-p 00000000 00:00 0 
+7f180407e000-7f1808000000 ---p 00000000 00:00 0 
+7f1808000000-7f1808047000 rw-p 00000000 00:00 0 
+7f1808047000-7f180c000000 ---p 00000000 00:00 0 
+7f180c000000-7f180c4d5000 rw-p 00000000 00:00 0 
+7f180c4d5000-7f1810000000 ---p 00000000 00:00 0 
+7f1810000000-7f1810039000 rw-p 00000000 00:00 0 
+7f1810039000-7f1814000000 ---p 00000000 00:00 0 
+7f1814000000-7f1814021000 rw-p 00000000 00:00 0 
+7f1814021000-7f1818000000 ---p 00000000 00:00 0 
+7f1818000000-7f1818021000 rw-p 00000000 00:00 0 
+7f1818021000-7f181c000000 ---p 00000000 00:00 0 
+7f181c000000-7f181c438000 rw-p 00000000 00:00 0 
+7f181c438000-7f1820000000 ---p 00000000 00:00 0 
+7f1820369000-7f18203a9000 rw-p 00000000 00:00 0 
+7f18203a9000-7f1820569000 ---p 00000000 00:00 0 
+7f1820569000-7f1820769000 rw-p 00000000 00:00 0 
+7f1820769000-7f1820969000 rw-p 00000000 00:00 0 
+7f1820969000-7f182096c000 ---p 00000000 00:00 0 
+7f182096c000-7f1820a6a000 rw-p 00000000 00:00 0 
+7f1820a6a000-7f1820a6d000 ---p 00000000 00:00 0 
+7f1820a6d000-7f1820b6b000 rw-p 00000000 00:00 0 
+7f1820b6b000-7f1820b6e000 ---p 00000000 00:00 0 
+7f1820b6e000-7f1820c6c000 rw-p 00000000 00:00 0 
+7f1820c6c000-7f1820c6f000 ---p 00000000 00:00 0 
+7f1820c6f000-7f1820d6d000 rw-p 00000000 00:00 0 
+7f1820d6d000-7f1820d70000 ---p 00000000 00:00 0 
+7f1820d70000-7f1820e6e000 rw-p 00000000 00:00 0 
+7f1820e6e000-7f1820e71000 ---p 00000000 00:00 0 
+7f1820e71000-7f1820f6f000 rw-p 00000000 00:00 0 
+7f1820f6f000-7f1820f72000 ---p 00000000 00:00 0 
+7f1820f72000-7f1821070000 rw-p 00000000 00:00 0 
+7f1821070000-7f1821073000 ---p 00000000 00:00 0 
+7f1821073000-7f1821171000 rw-p 00000000 00:00 0 
+7f1821171000-7f1821174000 ---p 00000000 00:00 0 
+7f1821174000-7f1821272000 rw-p 00000000 00:00 0 
+7f1821272000-7f1821275000 ---p 00000000 00:00 0 
+7f1821275000-7f1821373000 rw-p 00000000 00:00 0 
+7f1821373000-7f1821376000 ---p 00000000 00:00 0 
+7f1821376000-7f1821474000 rw-p 00000000 00:00 0 
+7f1821474000-7f1821477000 ---p 00000000 00:00 0 
+7f1821477000-7f1821575000 rw-p 00000000 00:00 0 
+7f1821575000-7f1821578000 ---p 00000000 00:00 0 
+7f1821578000-7f1821676000 rw-p 00000000 00:00 0 
+7f1821676000-7f1821679000 ---p 00000000 00:00 0 
+7f1821679000-7f1821777000 rw-p 00000000 00:00 0 
+7f1821777000-7f182177a000 ---p 00000000 00:00 0 
+7f182177a000-7f1821878000 rw-p 00000000 00:00 0 
+7f1821878000-7f182187b000 ---p 00000000 00:00 0 
+7f182187b000-7f1821b79000 rw-p 00000000 00:00 0 
+7f1821b79000-7f1821b7c000 ---p 00000000 00:00 0 
+7f1821b7c000-7f1821e7a000 rw-p 00000000 00:00 0 
+7f1821e7a000-7f182207a000 rw-p 00000000 00:00 0 
+7f182207a000-7f182227a000 rw-p 00000000 00:00 0 
+7f182227a000-7f182247a000 rw-p 00000000 00:00 0 
+7f182247a000-7f1822491000 r-xp 00000000 08:11 11539179                   /lib/x86_64-linux-gnu/libresolv-2.27.so
+7f1822491000-7f1822691000 ---p 00017000 08:11 11539179                   /lib/x86_64-linux-gnu/libresolv-2.27.so
+7f1822691000-7f1822692000 r--p 00017000 08:11 11539179                   /lib/x86_64-linux-gnu/libresolv-2.27.so
+7f1822692000-7f1822693000 rw-p 00018000 08:11 11539179                   /lib/x86_64-linux-gnu/libresolv-2.27.so
+7f1822693000-7f1822695000 rw-p 00000000 00:00 0 
+7f1822695000-7f182269a000 r-xp 00000000 08:11 11539128                   /lib/x86_64-linux-gnu/libnss_dns-2.27.so
+7f182269a000-7f182289a000 ---p 00005000 08:11 11539128                   /lib/x86_64-linux-gnu/libnss_dns-2.27.so
+7f182289a000-7f182289b000 r--p 00005000 08:11 11539128                   /lib/x86_64-linux-gnu/libnss_dns-2.27.so
+7f182289b000-7f182289c000 rw-p 00006000 08:11 11539128                   /lib/x86_64-linux-gnu/libnss_dns-2.27.so
+7f182289c000-7f182289e000 r-xp 00000000 08:11 11539136                   /lib/x86_64-linux-gnu/libnss_mdns4_minimal.so.2
+7f182289e000-7f1822a9d000 ---p 00002000 08:11 11539136                   /lib/x86_64-linux-gnu/libnss_mdns4_minimal.so.2
+7f1822a9d000-7f1822a9e000 r--p 00001000 08:11 11539136                   /lib/x86_64-linux-gnu/libnss_mdns4_minimal.so.2
+7f1822a9e000-7f1822a9f000 rw-p 00002000 08:11 11539136                   /lib/x86_64-linux-gnu/libnss_mdns4_minimal.so.2
+7f1822a9f000-7f1822c9f000 rw-p 00000000 00:00 0 
+7f1822ca9000-7f1822ea9000 rw-p 00000000 00:00 0 
+7f1822ea9000-7f1822eac000 ---p 00000000 00:00 0 
+7f1822eac000-7f18231aa000 rw-p 00000000 00:00 0 
+7f18231aa000-7f18231c1000 r-xp 00000000 08:11 11542895                   /lib/x86_64-linux-gnu/libgcc_s.so.1
+7f18231c1000-7f18233c0000 ---p 00017000 08:11 11542895                   /lib/x86_64-linux-gnu/libgcc_s.so.1
+7f18233c0000-7f18233c1000 r--p 00016000 08:11 11542895                   /lib/x86_64-linux-gnu/libgcc_s.so.1
+7f18233c1000-7f18233c2000 rw-p 00017000 08:11 11542895                   /lib/x86_64-linux-gnu/libgcc_s.so.1
+7f18233c2000-7f18233fa000 r-xp 00000000 08:11 10621570                   /usr/lib/jvm/java-8-oracle/jre/lib/amd64/libsunec.so
+7f18233fa000-7f18235f9000 ---p 00038000 08:11 10621570                   /usr/lib/jvm/java-8-oracle/jre/lib/amd64/libsunec.so
+7f18235f9000-7f18235fe000 r--p 00037000 08:11 10621570                   /usr/lib/jvm/java-8-oracle/jre/lib/amd64/libsunec.so
+7f18235fe000-7f1823600000 rw-p 0003c000 08:11 10621570                   /usr/lib/jvm/java-8-oracle/jre/lib/amd64/libsunec.so
+7f1823600000-7f1823800000 rw-p 00000000 00:00 0 
+7f1823800000-7f1823a00000 rw-p 00000000 00:00 0 
+7f1823a00000-7f1823c00000 rw-p 00000000 00:00 0 
+7f1823c00000-7f1823e00000 rw-p 00000000 00:00 0 
+7f1823e00000-7f1824000000 rw-p 00000000 00:00 0 
+7f1824000000-7f1824021000 rw-p 00000000 00:00 0 
+7f1824021000-7f1828000000 ---p 00000000 00:00 0 
+7f1828000000-7f1828021000 rw-p 00000000 00:00 0 
+7f1828021000-7f182c000000 ---p 00000000 00:00 0 
+7f182c000000-7f182c021000 rw-p 00000000 00:00 0 
+7f182c021000-7f1830000000 ---p 00000000 00:00 0 
+7f1830000000-7f1830021000 rw-p 00000000 00:00 0 
+7f1830021000-7f1834000000 ---p 00000000 00:00 0 
+7f1834000000-7f183404e000 rw-p 00000000 00:00 0 
+7f183404e000-7f1838000000 ---p 00000000 00:00 0 
+7f1838000000-7f1838401000 rw-p 00000000 00:00 0 
+7f1838401000-7f183c000000 ---p 00000000 00:00 0 
+7f183c0de000-7f183c0f1000 r--s 00345000 08:11 10361669                   /usr/lib/jvm/java-8-oracle/jre/lib/resources.jar
+7f183c0f1000-7f183c0f6000 r--s 0003f000 08:11 10361700                   /usr/lib/jvm/java-8-oracle/jre/lib/ext/sunjce_provider.jar
+7f183c0f6000-7f183c0fa000 r--s 0003a000 08:11 10361697                   /usr/lib/jvm/java-8-oracle/jre/lib/ext/sunpkcs11.jar
+7f183c0fa000-7f183c0fd000 ---p 00000000 00:00 0 
+7f183c0fd000-7f183c1fb000 rw-p 00000000 00:00 0 
+7f183c1fb000-7f183c1fe000 ---p 00000000 00:00 0 
+7f183c1fe000-7f183c4fc000 rw-p 00000000 00:00 0 
+7f183c4fc000-7f183c6fc000 rw-p 00000000 00:00 0 
+7f183c6fc000-7f183c8fc000 rw-p 00000000 00:00 0 
+7f183c8fc000-7f183c8ff000 ---p 00000000 00:00 0 
+7f183c8ff000-7f183c9fd000 rw-p 00000000 00:00 0 
+7f183c9fd000-7f183ca00000 ---p 00000000 00:00 0 
+7f183ca00000-7f183cafe000 rw-p 00000000 00:00 0 
+7f183cafe000-7f183cb01000 ---p 00000000 00:00 0 
+7f183cb01000-7f183cdff000 rw-p 00000000 00:00 0 
+7f183cdff000-7f183cfff000 rw-p 00000000 00:00 0 
+7f183cfff000-7f1840000000 rw-p 00000000 00:00 0 
+7f1840000000-7f1840021000 rw-p 00000000 00:00 0 
+7f1840021000-7f1844000000 ---p 00000000 00:00 0 
+7f1844000000-7f184642a000 rw-p 00000000 00:00 0 
+7f184642a000-7f1848000000 ---p 00000000 00:00 0 
+7f1848000000-7f1848021000 rw-p 00000000 00:00 0 
+7f1848021000-7f184c000000 ---p 00000000 00:00 0 
+7f184c000000-7f184c021000 rw-p 00000000 00:00 0 
+7f184c021000-7f1850000000 ---p 00000000 00:00 0 
+7f1850000000-7f18525dd000 rw-p 00000000 00:00 0 
+7f18525dd000-7f1854000000 ---p 00000000 00:00 0 
+7f1854000000-7f1854eb4000 rw-p 00000000 00:00 0 
+7f1854eb4000-7f1858000000 ---p 00000000 00:00 0 
+7f1858000000-7f1858021000 rw-p 00000000 00:00 0 
+7f1858021000-7f185c000000 ---p 00000000 00:00 0 
+7f185c000000-7f185e5c7000 rw-p 00000000 00:00 0 
+7f185e5c7000-7f1860000000 ---p 00000000 00:00 0 
+7f1860000000-7f1860021000 rw-p 00000000 00:00 0 
+7f1860021000-7f1864000000 ---p 00000000 00:00 0 
+7f1864000000-7f1864021000 rw-p 00000000 00:00 0 
+7f1864021000-7f1868000000 ---p 00000000 00:00 0 
+7f1868000000-7f1868021000 rw-p 00000000 00:00 0 
+7f1868021000-7f186c000000 ---p 00000000 00:00 0 
+7f186c000000-7f186c29c000 rw-p 00000000 00:00 0 
+7f186c29c000-7f1870000000 ---p 00000000 00:00 0 
+7f1870000000-7f1870021000 rw-p 00000000 00:00 0 
+7f1870021000-7f1874000000 ---p 00000000 00:00 0 
+7f1874001000-7f1874003000 r--s 00009000 08:11 10361690                   /usr/lib/jvm/java-8-oracle/jre/lib/ext/sunec.jar
+7f1874003000-7f1874006000 ---p 00000000 00:00 0 
+7f1874006000-7f1874104000 rw-p 00000000 00:00 0 
+7f1874104000-7f1874107000 r--s 0001a000 08:11 10361747                   /usr/lib/jvm/java-8-oracle/jre/lib/jce.jar
+7f1874107000-7f187410c000 r--s 002f9000 08:11 10361629                   /usr/lib/jvm/java-8-oracle/jre/lib/charsets.jar
+7f187410c000-7f1874111000 r--s 000a0000 08:11 10361688                   /usr/lib/jvm/java-8-oracle/jre/lib/jsse.jar
+7f1874111000-7f1874311000 rw-p 00000000 00:00 0 
+7f1874311000-7f1874511000 rw-p 00000000 00:00 0 
+7f1874511000-7f1874711000 rw-p 00000000 00:00 0 
+7f1874711000-7f1874911000 rw-p 00000000 00:00 0 
+7f1874911000-7f1874b11000 rw-p 00000000 00:00 0 
+7f1874b11000-7f1874b22000 r-xp 00000000 08:11 10622145                   /usr/lib/jvm/java-8-oracle/jre/lib/amd64/libnio.so
+7f1874b22000-7f1874d21000 ---p 00011000 08:11 10622145                   /usr/lib/jvm/java-8-oracle/jre/lib/amd64/libnio.so
+7f1874d21000-7f1874d22000 r--p 00010000 08:11 10622145                   /usr/lib/jvm/java-8-oracle/jre/lib/amd64/libnio.so
+7f1874d22000-7f1874d23000 rw-p 00011000 08:11 10622145                   /usr/lib/jvm/java-8-oracle/jre/lib/amd64/libnio.so
+7f1874d23000-7f1874f23000 rw-p 00000000 00:00 0 
+7f1874f23000-7f1875123000 rw-p 00000000 00:00 0 
+7f1875123000-7f1875323000 rw-p 00000000 00:00 0 
+7f1875323000-7f1875523000 rw-p 00000000 00:00 0 
+7f1875523000-7f1875723000 rw-p 00000000 00:00 0 
+7f1875723000-7f18757b9000 r--s 0110e000 08:11 10361693                   /usr/lib/jvm/java-8-oracle/jre/lib/ext/jfxrt.jar
+7f18757b9000-7f18757cf000 r-xp 00000000 08:11 10622088                   /usr/lib/jvm/java-8-oracle/jre/lib/amd64/libnet.so
+7f18757cf000-7f18759ce000 ---p 00016000 08:11 10622088                   /usr/lib/jvm/java-8-oracle/jre/lib/amd64/libnet.so
+7f18759ce000-7f18759cf000 r--p 00015000 08:11 10622088                   /usr/lib/jvm/java-8-oracle/jre/lib/amd64/libnet.so
+7f18759cf000-7f18759d0000 rw-p 00016000 08:11 10622088                   /usr/lib/jvm/java-8-oracle/jre/lib/amd64/libnet.so
+7f18759d0000-7f18759d8000 r-xp 00000000 08:11 10622153                   /usr/lib/jvm/java-8-oracle/jre/lib/amd64/libmanagement.so
+7f18759d8000-7f1875bd8000 ---p 00008000 08:11 10622153                   /usr/lib/jvm/java-8-oracle/jre/lib/amd64/libmanagement.so
+7f1875bd8000-7f1875bd9000 r--p 00008000 08:11 10622153                   /usr/lib/jvm/java-8-oracle/jre/lib/amd64/libmanagement.so
+7f1875bd9000-7f1875bda000 rw-p 00009000 08:11 10622153                   /usr/lib/jvm/java-8-oracle/jre/lib/amd64/libmanagement.so
+7f1875bda000-7f1875dda000 rw-p 00000000 00:00 0 
+7f1875dda000-7f1875fda000 rw-p 00000000 00:00 0 
+7f1875fda000-7f1875fdd000 ---p 00000000 00:00 0 
+7f1875fdd000-7f18760db000 rw-p 00000000 00:00 0 
+7f18760db000-7f18760e2000 r--s 00000000 08:11 7736059                    /usr/lib/x86_64-linux-gnu/gconv/gconv-modules.cache
+7f18760e2000-7f1876108000 r--p 00000000 08:11 8786097                    /usr/share/locale-langpack/pt_BR/LC_MESSAGES/libc.mo
+7f1876108000-7f187610b000 ---p 00000000 00:00 0 
+7f187610b000-7f1876209000 rw-p 00000000 00:00 0 
+7f1876209000-7f187620c000 ---p 00000000 00:00 0 
+7f187620c000-7f187630a000 rw-p 00000000 00:00 0 
+7f187630a000-7f1876314000 r--s 00116000 08:11 10361699                   /usr/lib/jvm/java-8-oracle/jre/lib/ext/localedata.jar
+7f1876314000-7f1876330000 r--s 00393000 08:11 10361692                   /usr/lib/jvm/java-8-oracle/jre/lib/ext/cldrdata.jar
+7f1876330000-7f1876332000 r--s 00003000 08:11 4461048                    /home/elio/.m2/repository/org/apache/logging/log4j/log4j-to-slf4j/2.10.0/log4j-to-slf4j-2.10.0.jar
+7f1876332000-7f1876335000 r--s 0001a000 08:11 4862514                    /home/elio/.m2/repository/com/amazonaws/aws-java-sdk-macie/1.11.414/aws-java-sdk-macie-1.11.414.jar
+7f1876335000-7f187633f000 r--s 00081000 08:11 4862528                    /home/elio/.m2/repository/software/amazon/ion/ion-java/1.0.2/ion-java-1.0.2.jar
+7f187633f000-7f1876346000 r--s 0003f000 08:11 5645073                    /home/elio/.m2/repository/com/amazonaws/aws-java-sdk-datapipeline/1.11.414/aws-java-sdk-datapipeline-1.11.414.jar
+7f1876346000-7f1876349000 r--s 00017000 08:11 4862508                    /home/elio/.m2/repository/com/amazonaws/aws-java-sdk-dlm/1.11.414/aws-java-sdk-dlm-1.11.414.jar
+7f1876349000-7f187634b000 r--s 00009000 08:11 5779974                    /home/elio/.m2/repository/com/amazonaws/aws-java-sdk-marketplacecommerceanalytics/1.11.414/aws-java-sdk-marketplacecommerceanalytics-1.11.414.jar
+7f187634b000-7f187634e000 r--s 0000b000 08:11 3408031                    /home/elio/.m2/repository/io/springfox/springfox-spi/2.9.2/springfox-spi-2.9.2.jar
+7f187634e000-7f187635e000 r--s 00075000 08:11 4461184                    /home/elio/.m2/repository/org/mockito/mockito-core/2.15.0/mockito-core-2.15.0.jar
+7f187635e000-7f1876360000 r--s 00008000 08:11 3408064                    /home/elio/.m2/repository/org/springframework/security/spring-security-jwt/1.0.9.RELEASE/spring-security-jwt-1.0.9.RELEASE.jar
+7f1876360000-7f187636c000 r--s 00099000 08:11 5779950                    /home/elio/.m2/repository/com/amazonaws/aws-java-sdk-ecs/1.11.414/aws-java-sdk-ecs-1.11.414.jar
+7f187636c000-7f1876370000 r--s 0001e000 08:11 4990177                    /home/elio/.m2/repository/com/amazonaws/aws-java-sdk-iot1clickdevices/1.11.414/aws-java-sdk-iot1clickdevices-1.11.414.jar
+7f1876370000-7f187637d000 r--s 0006c000 08:11 4461163                    /home/elio/.m2/repository/org/springframework/security/spring-security-web/5.0.8.RELEASE/spring-security-web-5.0.8.RELEASE.jar
+7f187637d000-7f187638e000 r--s 000a6000 08:11 5779942                    /home/elio/.m2/repository/com/amazonaws/aws-java-sdk-codedeploy/1.11.414/aws-java-sdk-codedeploy-1.11.414.jar
+7f187638e000-7f187639d000 r--s 000b3000 08:11 4461131                    /home/elio/.m2/repository/org/springframework/spring-webmvc/5.0.9.RELEASE/spring-webmvc-5.0.9.RELEASE.jar
+7f187639d000-7f18763aa000 r--s 0008c000 08:11 5779936                    /home/elio/.m2/repository/com/amazonaws/aws-java-sdk-autoscaling/1.11.414/aws-java-sdk-autoscaling-1.11.414.jar
+7f18763aa000-7f18763c4000 r--s 0011b000 08:11 4461108                    /home/elio/.m2/repository/org/springframework/spring-web/5.0.9.RELEASE/spring-web-5.0.9.RELEASE.jar
+7f18763c4000-7f18763c9000 r--s 00029000 08:11 4990185                    /home/elio/.m2/repository/com/amazonaws/aws-java-sdk-fms/1.11.414/aws-java-sdk-fms-1.11.414.jar
+7f18763c9000-7f18763ca000 r--s 00007000 08:11 5377064                    /home/elio/.m2/repository/io/netty/netty-resolver/4.1.29.Final/netty-resolver-4.1.29.Final.jar
+7f18763ca000-7f18763cc000 r--s 00008000 08:11 5382305                    /home/elio/.m2/repository/com/amazonaws/aws-java-sdk-marketplaceentitlement/1.11.414/aws-java-sdk-marketplaceentitlement-1.11.414.jar
+7f18763cc000-7f18763d9000 r--s 00085000 08:11 5898434                    /home/elio/.m2/repository/com/amazonaws/aws-java-sdk-workdocs/1.11.414/aws-java-sdk-workdocs-1.11.414.jar
+7f18763d9000-7f18763f2000 r--s 001bf000 08:11 3278741                    /home/elio/.m2/repository/org/aspectj/aspectjweaver/1.8.13/aspectjweaver-1.8.13.jar
+7f18763f2000-7f18763f6000 r--s 0001e000 08:11 4990191                    /home/elio/.m2/repository/com/amazonaws/aws-java-sdk-autoscalingplans/1.11.414/aws-java-sdk-autoscalingplans-1.11.414.jar
+7f18763f6000-7f18763f9000 r--s 0000e000 08:11 3278900                    /home/elio/.m2/repository/io/springfox/springfox-swagger2/2.9.2/springfox-swagger2-2.9.2.jar
+7f18763f9000-7f1876400000 r--s 0004a000 08:11 5382299                    /home/elio/.m2/repository/com/amazonaws/aws-java-sdk-dax/1.11.414/aws-java-sdk-dax-1.11.414.jar
+7f1876400000-7f1876409000 r--s 000ed000 08:11 4461040                    /home/elio/.m2/repository/mysql/mysql-connector-java/5.1.47/mysql-connector-java-5.1.47.jar
+7f1876409000-7f1876416000 r--s 0006a000 08:11 5898415                    /home/elio/.m2/repository/com/amazonaws/aws-java-sdk-stepfunctions/1.11.414/aws-java-sdk-stepfunctions-1.11.414.jar
+7f1876416000-7f187641b000 r--s 0003a000 08:11 4461124                    /home/elio/.m2/repository/org/apache/tomcat/embed/tomcat-embed-websocket/8.5.34/tomcat-embed-websocket-8.5.34.jar
+7f187641b000-7f1876434000 r--s 00114000 08:11 5779930                    /home/elio/.m2/repository/com/amazonaws/aws-java-sdk-kinesis/1.11.414/aws-java-sdk-kinesis-1.11.414.jar
+7f1876434000-7f1876470000 r--s 00290000 08:11 4461084                    /home/elio/.m2/repository/net/bytebuddy/byte-buddy/1.7.11/byte-buddy-1.7.11.jar
+7f1876470000-7f187647e000 r--s 00093000 08:11 5512200                    /home/elio/.m2/repository/com/amazonaws/aws-java-sdk-elasticbeanstalk/1.11.414/aws-java-sdk-elasticbeanstalk-1.11.414.jar
+7f187647e000-7f1876483000 r--s 0002b000 08:11 5382303                    /home/elio/.m2/repository/com/amazonaws/aws-java-sdk-athena/1.11.414/aws-java-sdk-athena-1.11.414.jar
+7f1876483000-7f1876487000 r--s 00019000 08:11 3408033                    /home/elio/.m2/repository/io/springfox/springfox-core/2.9.2/springfox-core-2.9.2.jar
+7f1876487000-7f18764af000 r--s 001e1000 08:11 5779978                    /home/elio/.m2/repository/com/amazonaws/aws-java-sdk-iot/1.11.414/aws-java-sdk-iot-1.11.414.jar
+7f18764af000-7f18764b7000 r--s 00052000 08:11 5779958                    /home/elio/.m2/repository/com/amazonaws/aws-java-sdk-workspaces/1.11.414/aws-java-sdk-workspaces-1.11.414.jar
+7f18764b7000-7f18764e0000 r--s 001c0000 08:11 5779956                    /home/elio/.m2/repository/com/amazonaws/aws-java-sdk-ssm/1.11.414/aws-java-sdk-ssm-1.11.414.jar
+7f18764e0000-7f18764e3000 r--s 00012000 08:11 3408039                    /home/elio/.m2/repository/io/springfox/springfox-schema/2.9.2/springfox-schema-2.9.2.jar
+7f18764e3000-7f18764f2000 r--s 000af000 08:11 5122327                    /home/elio/.m2/repository/com/amazonaws/aws-java-sdk-sagemaker/1.11.414/aws-java-sdk-sagemaker-1.11.414.jar
+7f18764f2000-7f18764f7000 r--s 0002a000 08:11 5645088                    /home/elio/.m2/repository/com/amazonaws/aws-java-sdk-budgets/1.11.414/aws-java-sdk-budgets-1.11.414.jar
+7f18764f7000-7f1876504000 r--s 0006a000 08:11 4461047                    /home/elio/.m2/repository/org/springframework/security/oauth/spring-security-oauth2/2.2.1.RELEASE/spring-security-oauth2-2.2.1.RELEASE.jar
+7f1876504000-7f1876506000 r--s 0000a000 08:11 4461068                    /home/elio/.m2/repository/org/springframework/spring-aspects/5.0.9.RELEASE/spring-aspects-5.0.9.RELEASE.jar
+7f1876506000-7f187650b000 r--s 00032000 08:11 5779955                    /home/elio/.m2/repository/com/amazonaws/aws-java-sdk-cloudhsm/1.11.414/aws-java-sdk-cloudhsm-1.11.414.jar
+7f187650b000-7f1876518000 r--s 00070000 08:11 5645077                    /home/elio/.m2/repository/com/amazonaws/aws-java-sdk-elasticloadbalancingv2/1.11.414/aws-java-sdk-elasticloadbalancingv2-1.11.414.jar
+7f1876518000-7f1876522000 r--s 0006a000 08:11 5779948                    /home/elio/.m2/repository/com/amazonaws/aws-java-sdk-lambda/1.11.414/aws-java-sdk-lambda-1.11.414.jar
+7f1876522000-7f1876528000 r--s 00039000 08:11 5382286                    /home/elio/.m2/repository/com/amazonaws/aws-java-sdk-mediapackage/1.11.414/aws-java-sdk-mediapackage-1.11.414.jar
+7f1876528000-7f1876535000 r--s 00108000 08:11 2883659                    /home/elio/.m2/repository/com/lowagie/itext/2.1.7.js6/itext-2.1.7.js6.jar
+7f1876535000-7f1876537000 r--s 0000e000 08:11 5898428                    /home/elio/.m2/repository/com/amazonaws/aws-java-sdk-lex/1.11.414/aws-java-sdk-lex-1.11.414.jar
+7f1876537000-7f1876543000 r--s 00082000 08:11 4990179                    /home/elio/.m2/repository/com/amazonaws/aws-java-sdk-iotanalytics/1.11.414/aws-java-sdk-iotanalytics-1.11.414.jar
+7f1876543000-7f187654b000 r--s 00037000 08:11 4461037                    /home/elio/.m2/repository/org/springframework/spring-tx/5.0.9.RELEASE/spring-tx-5.0.9.RELEASE.jar
+7f187654b000-7f1876558000 r--s 00081000 08:11 5251247                    /home/elio/.m2/repository/io/netty/netty-common/4.1.29.Final/netty-common-4.1.29.Final.jar
+7f1876558000-7f1876566000 r--s 0007e000 08:11 5779966                    /home/elio/.m2/repository/com/amazonaws/aws-java-sdk-codecommit/1.11.414/aws-java-sdk-codecommit-1.11.414.jar
+7f1876566000-7f187656d000 r--s 0003c000 08:11 5251234                    /home/elio/.m2/repository/com/amazonaws/aws-java-sdk-kinesisvideo/1.11.414/aws-java-sdk-kinesisvideo-1.11.414.jar
+7f187656d000-7f187656f000 r--s 00005000 08:11 2752773                    /home/elio/.m2/repository/stax/stax-api/1.0.1/stax-api-1.0.1.jar
+7f187656f000-7f1876571000 r--s 00000000 08:11 3278733                    /home/elio/.m2/repository/org/slf4j/jul-to-slf4j/1.7.25/jul-to-slf4j-1.7.25.jar
+7f1876571000-7f1876573000 r--s 0000d000 08:11 5898418                    /home/elio/.m2/repository/com/amazonaws/aws-java-sdk-costandusagereport/1.11.414/aws-java-sdk-costandusagereport-1.11.414.jar
+7f1876573000-7f1876575000 r--s 00001000 08:11 4461185                    /home/elio/.m2/repository/com/fasterxml/jackson/module/jackson-module-parameter-names/2.9.6/jackson-module-parameter-names-2.9.6.jar
+7f1876575000-7f1876577000 r--s 0000f000 08:11 4862518                    /home/elio/.m2/repository/com/amazonaws/aws-java-sdk-mediatailor/1.11.414/aws-java-sdk-mediatailor-1.11.414.jar
+7f1876577000-7f1876579000 r--s 00004000 08:11 3803559                    /home/elio/.m2/repository/javax/xml/stream/stax-api/1.0-2/stax-api-1.0-2.jar
+7f1876579000-7f1876582000 r--s 00051000 08:11 4990193                    /home/elio/.m2/repository/com/amazonaws/aws-java-sdk-workmail/1.11.414/aws-java-sdk-workmail-1.11.414.jar
+7f1876582000-7f187658a000 r--s 00057000 08:11 5645083                    /home/elio/.m2/repository/com/amazonaws/aws-java-sdk-elastictranscoder/1.11.414/aws-java-sdk-elastictranscoder-1.11.414.jar
+7f187658a000-7f1876590000 r--s 00034000 08:11 5779920                    /home/elio/.m2/repository/com/amazonaws/aws-java-sdk-cognitosync/1.11.414/aws-java-sdk-cognitosync-1.11.414.jar
+7f1876590000-7f1876591000 r--s 00000000 08:11 3409482                    /home/elio/.m2/repository/javax/inject/javax.inject/1/javax.inject-1.jar
+7f1876591000-7f18765a7000 r--s 0010f000 08:11 5512197                    /home/elio/.m2/repository/com/amazonaws/aws-java-sdk-rds/1.11.414/aws-java-sdk-rds-1.11.414.jar
+7f18765a7000-7f18765b1000 r--s 0005f000 08:11 5779938                    /home/elio/.m2/repository/com/amazonaws/aws-java-sdk-cloudsearch/1.11.414/aws-java-sdk-cloudsearch-1.11.414.jar
+7f18765b1000-7f18765fc000 r--s 002ff000 08:11 3408070                    /home/elio/.m2/repository/org/bouncycastle/bcprov-jdk15on/1.56/bcprov-jdk15on-1.56.jar
+7f18765fc000-7f1876611000 r--s 00103000 08:11 5382277                    /home/elio/.m2/repository/com/amazonaws/aws-java-sdk-mediaconvert/1.11.414/aws-java-sdk-mediaconvert-1.11.414.jar
+7f1876611000-7f1876612000 r--s 00000000 08:11 4461099                    /home/elio/.m2/repository/org/springframework/boot/spring-boot-starter-validation/2.0.5.RELEASE/spring-boot-starter-validation-2.0.5.RELEASE.jar
+7f1876612000-7f1876614000 r--s 0000a000 08:11 5779935                    /home/elio/.m2/repository/com/amazonaws/aws-java-sdk-cloudwatchmetrics/1.11.414/aws-java-sdk-cloudwatchmetrics-1.11.414.jar
+7f1876614000-7f187661f000 r--s 00069000 08:11 4461041                    /home/elio/.m2/repository/ch/qos/logback/logback-core/1.2.3/logback-core-1.2.3.jar
+7f187661f000-7f1876620000 r--s 00002000 08:11 4461110                    /home/elio/.m2/repository/com/sendgrid/java-http-client/4.1.0/java-http-client-4.1.0.jar
+7f1876620000-7f1876622000 r--s 0000e000 08:11 3278799                    /home/elio/.m2/repository/javax/activation/activation/1.1/activation-1.1.jar
+7f1876622000-7f1876627000 r--s 00026000 08:11 5512178                    /home/elio/.m2/repository/com/amazonaws/aws-java-sdk-servermigration/1.11.414/aws-java-sdk-servermigration-1.11.414.jar
+7f1876627000-7f1876629000 r--s 00004000 08:11 3278903                    /home/elio/.m2/repository/io/swagger/swagger-annotations/1.5.20/swagger-annotations-1.5.20.jar
+7f1876629000-7f1876630000 r--s 00042000 08:11 4329832                    /home/elio/.m2/repository/org/yaml/snakeyaml/1.19/snakeyaml-1.19.jar
+7f1876630000-7f1876633000 r--s 0002b000 08:11 4461075                    /home/elio/.m2/repository/org/jboss/jandex/2.0.3.Final/jandex-2.0.3.Final.jar
+7f1876633000-7f1876648000 r--s 000f5000 08:11 5779932                    /home/elio/.m2/repository/com/amazonaws/aws-java-sdk-opsworks/1.11.414/aws-java-sdk-opsworks-1.11.414.jar
+7f1876648000-7f187664b000 r--s 00011000 08:11 4862523                    /home/elio/.m2/repository/com/amazonaws/aws-java-sdk-pi/1.11.414/aws-java-sdk-pi-1.11.414.jar
+7f187664b000-7f187665d000 r--s 000d7000 08:11 5898412                    /home/elio/.m2/repository/com/amazonaws/aws-java-sdk-lightsail/1.11.414/aws-java-sdk-lightsail-1.11.414.jar
+7f187665d000-7f1876661000 r--s 00022000 08:11 5898416                    /home/elio/.m2/repository/com/amazonaws/aws-java-sdk-health/1.11.414/aws-java-sdk-health-1.11.414.jar
+7f1876661000-7f1876666000 r--s 0002b000 08:11 3408042                    /home/elio/.m2/repository/io/springfox/springfox-spring-web/2.9.2/springfox-spring-web-2.9.2.jar
+7f1876666000-7f1876677000 r--s 0016e000 08:11 2752764                    /home/elio/.m2/repository/org/jfree/jfreechart/1.0.19/jfreechart-1.0.19.jar
+7f1876677000-7f187667f000 r--s 00048000 08:11 5645089                    /home/elio/.m2/repository/com/amazonaws/aws-java-sdk-sns/1.11.414/aws-java-sdk-sns-1.11.414.jar
+7f187667f000-7f1876692000 r--s 000be000 08:11 5512198                    /home/elio/.m2/repository/com/amazonaws/aws-java-sdk-redshift/1.11.414/aws-java-sdk-redshift-1.11.414.jar
+7f1876692000-7f1876694000 r--s 00004000 08:11 3408050                    /home/elio/.m2/repository/org/mapstruct/mapstruct/1.2.0.Final/mapstruct-1.2.0.Final.jar
+7f1876694000-7f187669f000 r--s 0009e000 08:11 4461133                    /home/elio/.m2/repository/org/springframework/security/spring-security-config/5.0.8.RELEASE/spring-security-config-5.0.8.RELEASE.jar
+7f187669f000-7f18766a3000 r--s 00029000 08:11 5382293                    /home/elio/.m2/repository/com/amazonaws/aws-java-sdk-cloudhsmv2/1.11.414/aws-java-sdk-cloudhsmv2-1.11.414.jar
+7f18766a3000-7f18766af000 r--s 00083000 08:11 5779924                    /home/elio/.m2/repository/com/amazonaws/aws-java-sdk-cloudformation/1.11.414/aws-java-sdk-cloudformation-1.11.414.jar
+7f18766af000-7f18766b5000 r--s 00031000 08:11 5898392                    /home/elio/.m2/repository/com/amazonaws/aws-java-sdk-acm/1.11.414/aws-java-sdk-acm-1.11.414.jar
+7f18766b5000-7f18766cd000 r--s 0012f000 08:11 5382310                    /home/elio/.m2/repository/com/amazonaws/aws-java-sdk-pinpoint/1.11.414/aws-java-sdk-pinpoint-1.11.414.jar
+7f18766cd000-7f18766d1000 r--s 00035000 08:11 3408062                    /home/elio/.m2/repository/org/codehaus/jackson/jackson-core-asl/1.9.13/jackson-core-asl-1.9.13.jar
+7f18766d1000-7f18766df000 r--s 00089000 08:11 5779944                    /home/elio/.m2/repository/com/amazonaws/aws-java-sdk-codepipeline/1.11.414/aws-java-sdk-codepipeline-1.11.414.jar
+7f18766df000-7f18766e6000 r--s 00038000 08:11 5779916                    /home/elio/.m2/repository/com/amazonaws/aws-java-sdk-events/1.11.414/aws-java-sdk-events-1.11.414.jar
+7f18766e6000-7f1876749000 r--s 00a62000 08:11 2883656                    /home/elio/.m2/repository/com/ibm/icu/icu4j/57.1/icu4j-57.1.jar
+7f1876749000-7f1876752000 r--s 00059000 08:11 4461057                    /home/elio/.m2/repository/org/springframework/spring-jdbc/5.0.9.RELEASE/spring-jdbc-5.0.9.RELEASE.jar
+7f1876752000-7f1876759000 r--s 0004a000 08:11 5779952                    /home/elio/.m2/repository/com/amazonaws/aws-java-sdk-ecr/1.11.414/aws-java-sdk-ecr-1.11.414.jar
+7f1876759000-7f1876766000 r--s 0007a000 08:11 5898433                    /home/elio/.m2/repository/com/amazonaws/aws-java-sdk-organizations/1.11.414/aws-java-sdk-organizations-1.11.414.jar
+7f1876766000-7f187676a000 r--s 00013000 08:11 5382311                    /home/elio/.m2/repository/com/amazonaws/aws-java-sdk-resourcegroupstaggingapi/1.11.414/aws-java-sdk-resourcegroupstaggingapi-1.11.414.jar
+7f187676a000-7f187676e000 r--s 0002b000 08:11 4461083                    /home/elio/.m2/repository/org/springframework/spring-orm/5.0.9.RELEASE/spring-orm-5.0.9.RELEASE.jar
+7f187676e000-7f1876775000 r--s 014dc000 08:11 5898432                    /home/elio/.m2/repository/com/amazonaws/aws-java-sdk-models/1.11.414/aws-java-sdk-models-1.11.414.jar
+7f1876775000-7f1876777000 r--s 0000f000 08:11 3278754                    /home/elio/.m2/repository/org/jboss/logging/jboss-logging/3.3.2.Final/jboss-logging-3.3.2.Final.jar
+7f1876777000-7f1876779000 r--s 002c4000 08:11 3408051                    /home/elio/.m2/repository/io/springfox/springfox-swagger-ui/2.9.2/springfox-swagger-ui-2.9.2.jar
+7f1876779000-7f187677b000 r--s 00005000 08:11 4198097                    /home/elio/.m2/repository/javax/annotation/javax.annotation-api/1.3.2/javax.annotation-api-1.3.2.jar
+7f187677b000-7f1876781000 r--s 00039000 08:11 4461051                    /home/elio/.m2/repository/org/apache/logging/log4j/log4j-api/2.10.0/log4j-api-2.10.0.jar
+7f1876781000-7f1876787000 r--s 00041000 08:11 4461044                    /home/elio/.m2/repository/ch/qos/logback/logback-classic/1.2.3/logback-classic-1.2.3.jar
+7f1876787000-7f187678d000 r--s 0002b000 08:11 2752758                    /home/elio/.m2/repository/commons-digester/commons-digester/2.1/commons-digester-2.1.jar
+7f187678d000-7f1876795000 r--s 0004e000 08:11 5898420                    /home/elio/.m2/repository/com/amazonaws/aws-java-sdk-codebuild/1.11.414/aws-java-sdk-codebuild-1.11.414.jar
+7f1876795000-7f18767b0000 r--s 0012d000 08:11 5898396                    /home/elio/.m2/repository/com/amazonaws/aws-java-sdk-cognitoidp/1.11.414/aws-java-sdk-cognitoidp-1.11.414.jar
+7f18767b0000-7f187682e000 r--s 005f0000 08:11 4461132                    /home/elio/.m2/repository/org/hibernate/hibernate-core/5.2.17.Final/hibernate-core-5.2.17.Final.jar
+7f187682e000-7f187682f000 r--s 00000000 08:11 4461094                    /home/elio/.m2/repository/org/springframework/boot/spring-boot-starter-security/2.0.5.RELEASE/spring-boot-starter-security-2.0.5.RELEASE.jar
+7f187682f000-7f1876835000 r--s 00033000 08:11 5645092                    /home/elio/.m2/repository/com/amazonaws/aws-java-sdk-cloudtrail/1.11.414/aws-java-sdk-cloudtrail-1.11.414.jar
+7f1876835000-7f1876837000 r--s 0000c000 08:11 4461155                    /home/elio/.m2/repository/org/objenesis/objenesis/2.6/objenesis-2.6.jar
+7f1876837000-7f1876841000 r--s 00063000 08:11 5779970                    /home/elio/.m2/repository/com/amazonaws/aws-java-sdk-elasticsearch/1.11.414/aws-java-sdk-elasticsearch-1.11.414.jar
+7f1876841000-7f1876847000 r--s 0002e000 08:11 5382297                    /home/elio/.m2/repository/com/amazonaws/aws-java-sdk-migrationhub/1.11.414/aws-java-sdk-migrationhub-1.11.414.jar
+7f1876847000-7f187684f000 r--s 0004a000 08:11 5898403                    /home/elio/.m2/repository/com/amazonaws/aws-java-sdk-discovery/1.11.414/aws-java-sdk-discovery-1.11.414.jar
+7f187684f000-7f1876850000 r--s 00000000 08:11 4461180                    /home/elio/.m2/repository/org/springframework/boot/spring-boot-starter/2.0.5.RELEASE/spring-boot-starter-2.0.5.RELEASE.jar
+7f1876850000-7f187685d000 r--s 0007f000 08:11 5645081                    /home/elio/.m2/repository/com/amazonaws/aws-java-sdk-elasticache/1.11.414/aws-java-sdk-elasticache-1.11.414.jar
+7f187685d000-7f18768be000 r--s 004e6000 08:11 3803566                    /home/elio/.m2/repository/net/sf/jasperreports/jasperreports/6.7.0/jasperreports-6.7.0.jar
+7f18768be000-7f18768c3000 r--s 00025000 08:11 4862527                    /home/elio/.m2/repository/com/amazonaws/aws-java-sdk-iot1clickprojects/1.11.414/aws-java-sdk-iot1clickprojects-1.11.414.jar
+7f18768c3000-7f18768c7000 r--s 0001c000 08:11 4990197                    /home/elio/.m2/repository/com/amazonaws/aws-java-sdk-cloud9/1.11.414/aws-java-sdk-cloud9-1.11.414.jar
+7f18768c7000-7f18768ca000 r--s 00010000 08:11 3278768                    /home/elio/.m2/repository/org/hibernate/common/hibernate-commons-annotations/5.0.1.Final/hibernate-commons-annotations-5.0.1.Final.jar
+7f18768ca000-7f18768cb000 r--s 00000000 08:11 4461056                    /home/elio/.m2/repository/org/springframework/boot/spring-boot-starter-aop/2.0.5.RELEASE/spring-boot-starter-aop-2.0.5.RELEASE.jar
+7f18768cb000-7f18768cc000 r--s 00007000 08:11 4461074                    /home/elio/.m2/repository/com/sendgrid/sendgrid-java/4.2.1/sendgrid-java-4.2.1.jar
+7f18768cc000-7f18768e3000 r--s 00173000 08:11 4461093                    /home/elio/.m2/repository/org/projectlombok/lombok/1.16.22/lombok-1.16.22.jar
+7f18768e3000-7f18768e7000 r--s 00024000 08:11 5122321                    /home/elio/.m2/repository/com/amazonaws/aws-java-sdk-resourcegroups/1.11.414/aws-java-sdk-resourcegroups-1.11.414.jar
+7f18768e7000-7f18768e8000 r--s 00000000 08:11 4461061                    /home/elio/.m2/repository/org/springframework/boot/spring-boot-starter-mail/2.0.5.RELEASE/spring-boot-starter-mail-2.0.5.RELEASE.jar
+7f18768e8000-7f18768ec000 r--s 00026000 08:11 4990199                    /home/elio/.m2/repository/com/amazonaws/aws-java-sdk-serverlessapplicationrepository/1.11.414/aws-java-sdk-serverlessapplicationrepository-1.11.414.jar
+7f18768ec000-7f18768f2000 r--s 00030000 08:11 5382307                    /home/elio/.m2/repository/com/amazonaws/aws-java-sdk-codestar/1.11.414/aws-java-sdk-codestar-1.11.414.jar
+7f18768f2000-7f18768f3000 r--s 00000000 08:11 4461034                    /home/elio/.m2/repository/org/springframework/boot/spring-boot-starter-data-jpa/2.0.5.RELEASE/spring-boot-starter-data-jpa-2.0.5.RELEASE.jar
+7f18768f3000-7f18768f9000 r--s 0002d000 08:11 4461114                    /home/elio/.m2/repository/org/springframework/boot/spring-boot-devtools/2.0.5.RELEASE/spring-boot-devtools-2.0.5.RELEASE.jar
+7f18768f9000-7f18768fe000 r--s 00017000 08:11 4461071                    /home/elio/.m2/repository/org/hibernate/javax/persistence/hibernate-jpa-2.1-api/1.0.2.Final/hibernate-jpa-2.1-api-1.0.2.Final.jar
+7f18768fe000-7f187690b000 r--s 000af000 08:11 4461198                    /home/elio/.m2/repository/org/apache/httpcomponents/httpclient/4.5.6/httpclient-4.5.6.jar
+7f187690b000-7f187690d000 r--s 00006000 08:11 3278777                    /home/elio/.m2/repository/javax/transaction/javax.transaction-api/1.2/javax.transaction-api-1.2.jar
+7f187690d000-7f187690f000 r--s 00009000 08:11 3278730                    /home/elio/.m2/repository/org/slf4j/slf4j-api/1.7.25/slf4j-api-1.7.25.jar
+7f187690f000-7f1876923000 r--s 000bc000 08:11 5779926                    /home/elio/.m2/repository/com/amazonaws/aws-java-sdk-cloudfront/1.11.414/aws-java-sdk-cloudfront-1.11.414.jar
+7f1876923000-7f1876930000 r--s 00083000 08:11 2752756                    /home/elio/.m2/repository/commons-collections/commons-collections/3.2.2/commons-collections-3.2.2.jar
+7f1876930000-7f1876936000 r--s 0003d000 08:11 5377067                    /home/elio/.m2/repository/com/amazonaws/aws-java-sdk-mq/1.11.414/aws-java-sdk-mq-1.11.414.jar
+7f1876936000-7f1876945000 r--s 00099000 08:11 5898397                    /home/elio/.m2/repository/com/amazonaws/aws-java-sdk-dms/1.11.414/aws-java-sdk-dms-1.11.414.jar
+7f1876945000-7f187694a000 r--s 0004b000 08:11 4461203                    /home/elio/.m2/repository/com/fasterxml/jackson/core/jackson-core/2.9.6/jackson-core-2.9.6.jar
+7f187694a000-7f187694c000 r--s 00005000 08:11 5122325                    /home/elio/.m2/repository/com/amazonaws/aws-java-sdk-translate/1.11.414/aws-java-sdk-translate-1.11.414.jar
+7f187694c000-7f187694d000 r--s 00000000 08:11 4461122                    /home/elio/.m2/repository/org/springframework/boot/spring-boot-starter-tomcat/2.0.5.RELEASE/spring-boot-starter-tomcat-2.0.5.RELEASE.jar
+7f187694d000-7f1876952000 r--s 00038000 08:11 5382319                    /home/elio/.m2/repository/com/amazonaws/aws-java-sdk-support/1.11.414/aws-java-sdk-support-1.11.414.jar
+7f1876952000-7f18769c3000 r--s 00665000 08:11 3803557                    /home/elio/.m2/repository/org/codehaus/groovy/groovy-all/2.4.15/groovy-all-2.4.15.jar
+7f18769c3000-7f18769c9000 r--s 00039000 08:11 5898425                    /home/elio/.m2/repository/com/amazonaws/aws-java-sdk-shield/1.11.414/aws-java-sdk-shield-1.11.414.jar
+7f18769c9000-7f18769cb000 r--s 00009000 08:11 4461153                    /home/elio/.m2/repository/net/bytebuddy/byte-buddy-agent/1.7.11/byte-buddy-agent-1.7.11.jar
+7f18769cb000-7f18769ce000 r--s 0000d000 08:11 5382289                    /home/elio/.m2/repository/com/amazonaws/aws-java-sdk-pricing/1.11.414/aws-java-sdk-pricing-1.11.414.jar
+7f18769ce000-7f18769d1000 r--s 00011000 08:11 4862516                    /home/elio/.m2/repository/com/amazonaws/aws-java-sdk-eks/1.11.414/aws-java-sdk-eks-1.11.414.jar
+7f18769d1000-7f18769f2000 r--s 000fe000 08:11 4461119                    /home/elio/.m2/repository/org/springframework/boot/spring-boot-autoconfigure/2.0.5.RELEASE/spring-boot-autoconfigure-2.0.5.RELEASE.jar
+7f18769f2000-7f18769ff000 r--s 0008f000 08:11 5779922                    /home/elio/.m2/repository/com/amazonaws/aws-java-sdk-directconnect/1.11.414/aws-java-sdk-directconnect-1.11.414.jar
+7f18769ff000-7f1876a0e000 r--s 0009f000 08:11 4862520                    /home/elio/.m2/repository/com/amazonaws/aws-java-sdk-neptune/1.11.414/aws-java-sdk-neptune-1.11.414.jar
+7f1876a0e000-7f1876a1a000 r--s 00083000 08:11 5779951                    /home/elio/.m2/repository/com/amazonaws/aws-java-sdk-directory/1.11.414/aws-java-sdk-directory-1.11.414.jar
+7f1876a1a000-7f1876a2c000 r--s 000c4000 08:11 5382323                    /home/elio/.m2/repository/com/amazonaws/aws-java-sdk-servicecatalog/1.11.414/aws-java-sdk-servicecatalog-1.11.414.jar
+7f1876a2c000-7f1876a30000 r--s 00022000 08:11 3408029                    /home/elio/.m2/repository/io/swagger/swagger-models/1.5.20/swagger-models-1.5.20.jar
+7f1876a30000-7f1876a3b000 r--s 00074000 08:11 5898430                    /home/elio/.m2/repository/com/amazonaws/aws-java-sdk-mechanicalturkrequester/1.11.414/aws-java-sdk-mechanicalturkrequester-1.11.414.jar
+7f1876a3b000-7f1876a41000 r--s 00038000 08:11 4990187                    /home/elio/.m2/repository/com/amazonaws/aws-java-sdk-connect/1.11.414/aws-java-sdk-connect-1.11.414.jar
+7f1876a41000-7f1876a5d000 r--s 0010d000 08:11 5645071                    /home/elio/.m2/repository/com/amazonaws/aws-java-sdk-iam/1.11.414/aws-java-sdk-iam-1.11.414.jar
+7f1876a5d000-7f1876a63000 r--s 00033000 08:11 4990180                    /home/elio/.m2/repository/com/amazonaws/aws-java-sdk-secretsmanager/1.11.414/aws-java-sdk-secretsmanager-1.11.414.jar
+7f1876a63000-7f1876a69000 r--s 00038000 08:11 5645097                    /home/elio/.m2/repository/com/amazonaws/aws-java-sdk-cloudwatch/1.11.414/aws-java-sdk-cloudwatch-1.11.414.jar
+7f1876a69000-7f1876a73000 r--s 000ab000 08:11 4461073                    /home/elio/.m2/repository/org/javassist/javassist/3.22.0-GA/javassist-3.22.0-GA.jar
+7f1876a73000-7f1876a7a000 r--s 00045000 08:11 5512181                    /home/elio/.m2/repository/com/amazonaws/aws-java-sdk-sqs/1.11.414/aws-java-sdk-sqs-1.11.414.jar
+7f1876a7a000-7f1876a84000 r--s 00068000 08:11 5779962                    /home/elio/.m2/repository/com/amazonaws/aws-java-sdk-machinelearning/1.11.414/aws-java-sdk-machinelearning-1.11.414.jar
+7f1876a84000-7f1876a97000 r--s 000ac000 08:11 5779934                    /home/elio/.m2/repository/com/amazonaws/aws-java-sdk-ses/1.11.414/aws-java-sdk-ses-1.11.414.jar
+7f1876a97000-7f1876aa1000 r--s 00072000 08:11 5645067                    /home/elio/.m2/repository/com/amazonaws/aws-java-sdk-glacier/1.11.414/aws-java-sdk-glacier-1.11.414.jar
+7f1876aa1000-7f1876aa5000 r--s 0001a000 08:11 5512192                    /home/elio/.m2/repository/com/amazonaws/aws-java-sdk-sts/1.11.414/aws-java-sdk-sts-1.11.414.jar
+7f1876aa5000-7f1876aab000 r--s 0003a000 08:11 5382288                    /home/elio/.m2/repository/com/amazonaws/aws-java-sdk-costexplorer/1.11.414/aws-java-sdk-costexplorer-1.11.414.jar
+7f1876aab000-7f1876ab3000 r--s 0004e000 08:11 5377066                    /home/elio/.m2/repository/com/amazonaws/aws-java-sdk-appsync/1.11.414/aws-java-sdk-appsync-1.11.414.jar
+7f1876ab3000-7f1876ab6000 r--s 00029000 08:11 2752770                    /home/elio/.m2/repository/stax/stax/1.2.0/stax-1.2.0.jar
+7f1876ab6000-7f1876ac8000 r--s 000ce000 08:11 5779968                    /home/elio/.m2/repository/com/amazonaws/aws-java-sdk-devicefarm/1.11.414/aws-java-sdk-devicefarm-1.11.414.jar
+7f1876ac8000-7f1876acf000 r--s 0004b000 08:11 4461069                    /home/elio/.m2/repository/commons-codec/commons-codec/1.11/commons-codec-1.11.jar
+7f1876acf000-7f1876ad3000 r--s 00020000 08:11 4461063                    /home/elio/.m2/repository/com/zaxxer/HikariCP/2.7.9/HikariCP-2.7.9.jar
+7f1876ad3000-7f1876add000 r--s 00066000 08:11 5122323                    /home/elio/.m2/repository/com/amazonaws/aws-java-sdk-comprehend/1.11.414/aws-java-sdk-comprehend-1.11.414.jar
+7f1876add000-7f1876ae8000 r--s 0007b000 08:11 5898422                    /home/elio/.m2/repository/com/amazonaws/aws-java-sdk-appstream/1.11.414/aws-java-sdk-appstream-1.11.414.jar
+7f1876ae8000-7f1876aec000 r--s 00017000 08:11 3408041                    /home/elio/.m2/repository/io/springfox/springfox-swagger-common/2.9.2/springfox-swagger-common-2.9.2.jar
+7f1876aec000-7f1876af6000 r--s 00057000 08:11 5645075                    /home/elio/.m2/repository/com/amazonaws/aws-java-sdk-elasticloadbalancing/1.11.414/aws-java-sdk-elasticloadbalancing-1.11.414.jar
+7f1876af6000-7f1876b0f000 r--s 0010b000 08:11 5779928                    /home/elio/.m2/repository/com/amazonaws/aws-java-sdk-clouddirectory/1.11.414/aws-java-sdk-clouddirectory-1.11.414.jar
+7f1876b0f000-7f1876b1c000 r--s 00088000 08:11 4990201                    /home/elio/.m2/repository/com/amazonaws/aws-java-sdk-alexaforbusiness/1.11.414/aws-java-sdk-alexaforbusiness-1.11.414.jar
+7f1876b1c000-7f1876b20000 r--s 0001c000 08:11 5382291                    /home/elio/.m2/repository/com/amazonaws/aws-java-sdk-mobile/1.11.414/aws-java-sdk-mobile-1.11.414.jar
+7f1876b20000-7f1876b23000 r--s 0001a000 08:11 5382280                    /home/elio/.m2/repository/com/amazonaws/aws-java-sdk-mediastore/1.11.414/aws-java-sdk-mediastore-1.11.414.jar
+7f1876b23000-7f1876b2f000 r--s 00089000 08:11 5382273                    /home/elio/.m2/repository/com/amazonaws/aws-java-sdk-guardduty/1.11.414/aws-java-sdk-guardduty-1.11.414.jar
+7f1876b2f000-7f1876b50000 r--s 00157000 08:11 5645099                    /home/elio/.m2/repository/com/amazonaws/aws-java-sdk-dynamodb/1.11.414/aws-java-sdk-dynamodb-1.11.414.jar
+7f1876b50000-7f1876b61000 r--s 00097000 08:11 3408067                    /home/elio/.m2/repository/org/bouncycastle/bcpkix-jdk15on/1.56/bcpkix-jdk15on-1.56.jar
+7f1876b61000-7f1876b64000 r--s 0000e000 08:11 4198101                    /home/elio/.m2/repository/com/fasterxml/jackson/core/jackson-annotations/2.9.0/jackson-annotations-2.9.0.jar
+7f1876b64000-7f1876b72000 r--s 000b1000 08:11 3408059                    /home/elio/.m2/repository/org/codehaus/jackson/jackson-mapper-asl/1.9.13/jackson-mapper-asl-1.9.13.jar
+7f1876b72000-7f1876b74000 r--s 00000000 08:11 3408048                    /home/elio/.m2/repository/org/springframework/plugin/spring-plugin-metadata/1.2.0.RELEASE/spring-plugin-metadata-1.2.0.RELEASE.jar
+7f1876b74000-7f1876b7c000 r--s 00059000 08:11 5377062                    /home/elio/.m2/repository/io/netty/netty-handler/4.1.29.Final/netty-handler-4.1.29.Final.jar
+7f1876b7c000-7f1876b85000 r--s 0005e000 08:11 5645095                    /home/elio/.m2/repository/com/amazonaws/aws-java-sdk-logs/1.11.414/aws-java-sdk-logs-1.11.414.jar
+7f1876b85000-7f1876b88000 r--s 00011000 08:11 5122329                    /home/elio/.m2/repository/com/amazonaws/aws-java-sdk-iotjobsdataplane/1.11.414/aws-java-sdk-iotjobsdataplane-1.11.414.jar
+7f1876b88000-7f1876b8b000 r--s 00016000 08:11 4461117                    /home/elio/.m2/repository/com/fasterxml/jackson/datatype/jackson-datatype-jsr310/2.9.6/jackson-datatype-jsr310-2.9.6.jar
+7f1876b8b000-7f1876ba3000 r--s 00114000 08:11 4461112                    /home/elio/.m2/repository/org/springframework/spring-core/5.0.9.RELEASE/spring-core-5.0.9.RELEASE.jar
+7f1876ba3000-7f1876ba5000 r--s 00014000 08:11 4461046                    /home/elio/.m2/repository/org/springframework/boot/spring-boot-configuration-processor/2.0.5.RELEASE/spring-boot-configuration-processor-2.0.5.RELEASE.jar
+7f1876ba5000-7f1876baa000 r--s 00068000 08:11 3278761                    /home/elio/.m2/repository/antlr/antlr/2.7.7/antlr-2.7.7.jar
+7f1876baa000-7f1876bae000 r--s 00016000 08:11 5512191                    /home/elio/.m2/repository/com/amazonaws/aws-java-sdk-importexport/1.11.414/aws-java-sdk-importexport-1.11.414.jar
+7f1876bae000-7f1876bb3000 r--s 00012000 08:11 4461116                    /home/elio/.m2/repository/javax/validation/validation-api/2.0.1.Final/validation-api-2.0.1.Final.jar
+7f1876bb3000-7f1876bd0000 r--s 000fe000 08:11 4461126                    /home/elio/.m2/repository/org/hibernate/validator/hibernate-validator/6.0.12.Final/hibernate-validator-6.0.12.Final.jar
+7f1876bd0000-7f1876bd2000 r--s 00010000 08:11 5382281                    /home/elio/.m2/repository/com/amazonaws/aws-java-sdk-mediastoredata/1.11.414/aws-java-sdk-mediastoredata-1.11.414.jar
+7f1876bd2000-7f1876bd3000 r--s 00000000 08:11 4461039                    /home/elio/.m2/repository/org/springframework/boot/spring-boot-starter-jdbc/2.0.5.RELEASE/spring-boot-starter-jdbc-2.0.5.RELEASE.jar
+7f1876bd3000-7f1876be4000 r--s 000c0000 08:11 5512182                    /home/elio/.m2/repository/com/amazonaws/aws-java-sdk-storagegateway/1.11.414/aws-java-sdk-storagegateway-1.11.414.jar
+7f1876be4000-7f1876be6000 r--s 00005000 08:11 5122332                    /home/elio/.m2/repository/com/amazonaws/aws-java-sdk-sagemakerruntime/1.11.414/aws-java-sdk-sagemakerruntime-1.11.414.jar
+7f1876be6000-7f1876bed000 r--s 00049000 08:11 4862526                    /home/elio/.m2/repository/org/apache/httpcomponents/httpcore/4.4.10/httpcore-4.4.10.jar
+7f1876bed000-7f1876bf3000 r--s 0003a000 08:11 5779918                    /home/elio/.m2/repository/com/amazonaws/aws-java-sdk-cognitoidentity/1.11.414/aws-java-sdk-cognitoidentity-1.11.414.jar
+7f1876bf3000-7f1876bfa000 r--s 00046000 08:11 5382315                    /home/elio/.m2/repository/com/amazonaws/aws-java-sdk-xray/1.11.414/aws-java-sdk-xray-1.11.414.jar
+7f1876bfa000-7f1876bfb000 r--s 00000000 08:11 4461042                    /home/elio/.m2/repository/org/springframework/boot/spring-boot-starter-logging/2.0.5.RELEASE/spring-boot-starter-logging-2.0.5.RELEASE.jar
+7f1876bfb000-7f1876c03000 r--s 0004c000 08:11 4461076                    /home/elio/.m2/repository/org/springframework/data/spring-data-jpa/2.0.10.RELEASE/spring-data-jpa-2.0.10.RELEASE.jar
+7f1876c03000-7f1876c08000 r--s 0002f000 08:11 5898405                    /home/elio/.m2/repository/com/amazonaws/aws-java-sdk-applicationautoscaling/1.11.414/aws-java-sdk-applicationautoscaling-1.11.414.jar
+7f1876c08000-7f1876c1c000 r--s 000cc000 08:11 5512186                    /home/elio/.m2/repository/com/amazonaws/aws-java-sdk-s3/1.11.414/aws-java-sdk-s3-1.11.414.jar
+7f1876c1c000-7f1876c32000 r--s 000ca000 08:11 4461059                    /home/elio/.m2/repository/com/amazonaws/aws-java-sdk-core/1.11.414/aws-java-sdk-core-1.11.414.jar
+7f1876c32000-7f1876c3b000 r--s 00051000 08:11 4461168                    /home/elio/.m2/repository/org/springframework/spring-aop/5.0.9.RELEASE/spring-aop-5.0.9.RELEASE.jar
+7f1876c3b000-7f1876c4a000 r--s 000a0000 08:11 5779946                    /home/elio/.m2/repository/com/amazonaws/aws-java-sdk-config/1.11.414/aws-java-sdk-config-1.11.414.jar
+7f1876c4a000-7f1876c5b000 r--s 000bf000 08:11 5512180                    /home/elio/.m2/repository/com/amazonaws/aws-java-sdk-simpleworkflow/1.11.414/aws-java-sdk-simpleworkflow-1.11.414.jar
+7f1876c5b000-7f1876c77000 r--s 0015f000 08:11 5779980                    /home/elio/.m2/repository/com/amazonaws/aws-java-sdk-api-gateway/1.11.414/aws-java-sdk-api-gateway-1.11.414.jar
+7f1876c77000-7f1876c78000 r--s 00004000 08:11 3408030                    /home/elio/.m2/repository/org/springframework/plugin/spring-plugin-core/1.2.0.RELEASE/spring-plugin-core-1.2.0.RELEASE.jar
+7f1876c78000-7f1876c81000 r--s 00068000 08:11 5251249                    /home/elio/.m2/repository/io/netty/netty-transport/4.1.29.Final/netty-transport-4.1.29.Final.jar
+7f1876c81000-7f1876c94000 r--s 000d9000 08:11 5898394                    /home/elio/.m2/repository/com/amazonaws/aws-java-sdk-gamelift/1.11.414/aws-java-sdk-gamelift-1.11.414.jar
+7f1876c94000-7f1876c98000 r--s 0001e000 08:11 4990189                    /home/elio/.m2/repository/com/amazonaws/aws-java-sdk-transcribe/1.11.414/aws-java-sdk-transcribe-1.11.414.jar
+7f1876c98000-7f1876c9f000 r--s 0004b000 08:11 5898426                    /home/elio/.m2/repository/com/amazonaws/aws-java-sdk-batch/1.11.414/aws-java-sdk-batch-1.11.414.jar
+7f1876c9f000-7f1876ca4000 r--s 00038000 08:11 4461113                    /home/elio/.m2/repository/org/apache/tomcat/embed/tomcat-embed-el/8.5.34/tomcat-embed-el-8.5.34.jar
+7f1876ca4000-7f1876cac000 r--s 00073000 08:11 3676665                    /home/elio/.m2/repository/org/apache/commons/commons-lang3/3.8.1/commons-lang3-3.8.1.jar
+7f1876cac000-7f1876cbd000 r--s 0008a000 08:11 4862533                    /home/elio/.m2/repository/joda-time/joda-time/2.9.9/joda-time-2.9.9.jar
+7f1876cbd000-7f1876cca000 r--s 00075000 08:11 5898438                    /home/elio/.m2/repository/com/amazonaws/aws-java-sdk-swf-libraries/1.11.22/aws-java-sdk-swf-libraries-1.11.22.jar
+7f1876cca000-7f1876cd2000 r--s 00099000 08:11 4461086                    /home/elio/.m2/repository/com/sun/mail/javax.mail/1.6.2/javax.mail-1.6.2.jar
+7f1876cd2000-7f1876cd4000 r--s 00007000 08:11 4461136                    /home/elio/.m2/repository/com/fasterxml/jackson/datatype/jackson-datatype-jdk8/2.9.6/jackson-datatype-jdk8-2.9.6.jar
+7f1876cd4000-7f1876cd6000 r--s 00004000 08:11 4461161                    /home/elio/.m2/repository/org/springframework/spring-jcl/5.0.9.RELEASE/spring-jcl-5.0.9.RELEASE.jar
+7f1876cd6000-7f1876ced000 r--s 0011f000 08:11 5382296                    /home/elio/.m2/repository/com/amazonaws/aws-java-sdk-glue/1.11.414/aws-java-sdk-glue-1.11.414.jar
+7f1876ced000-7f1876d00000 r--s 00137000 08:11 4461199                    /home/elio/.m2/repository/com/fasterxml/jackson/core/jackson-databind/2.9.6/jackson-databind-2.9.6.jar
+7f1876d00000-7f1876d03000 r--s 0000d000 08:11 5898398                    /home/elio/.m2/repository/com/amazonaws/aws-java-sdk-marketplacemeteringservice/1.11.414/aws-java-sdk-marketplacemeteringservice-1.11.414.jar
+7f1876d03000-7f1876d1a000 r--s 00114000 08:11 5382283                    /home/elio/.m2/repository/com/amazonaws/aws-java-sdk-medialive/1.11.414/aws-java-sdk-medialive-1.11.414.jar
+7f1876d1a000-7f1876d20000 r--s 0004b000 08:11 2752766                    /home/elio/.m2/repository/org/jfree/jcommon/1.0.23/jcommon-1.0.23.jar
+7f1876d20000-7f1876d28000 r--s 00046000 08:11 4990195                    /home/elio/.m2/repository/com/amazonaws/aws-java-sdk-servicediscovery/1.11.414/aws-java-sdk-servicediscovery-1.11.414.jar
+7f1876d28000-7f1876d35000 r--s 00095000 08:11 4461162                    /home/elio/.m2/repository/org/springframework/spring-beans/5.0.9.RELEASE/spring-beans-5.0.9.RELEASE.jar
+7f1876d35000-7f1876d3a000 r--s 00041000 08:11 2752774                    /home/elio/.m2/repository/commons-lang/commons-lang/2.6/commons-lang-2.6.jar
+7f1876d3a000-7f1876d4f000 r--s 000d0000 08:11 4461104                    /home/elio/.m2/repository/org/springframework/boot/spring-boot/2.0.5.RELEASE/spring-boot-2.0.5.RELEASE.jar
+7f1876d4f000-7f1876d65000 r--s 000e3000 08:11 5512184                    /home/elio/.m2/repository/com/amazonaws/aws-java-sdk-route53/1.11.414/aws-java-sdk-route53-1.11.414.jar
+7f1876d65000-7f1876d6a000 r--s 00040000 08:11 4461096                    /home/elio/.m2/repository/org/springframework/spring-expression/5.0.9.RELEASE/spring-expression-5.0.9.RELEASE.jar
+7f1876d6a000-7f1876d8d000 r--s 0017c000 08:11 5779973                    /home/elio/.m2/repository/com/amazonaws/aws-java-sdk-waf/1.11.414/aws-java-sdk-waf-1.11.414.jar
+7f1876d8d000-7f1876d99000 r--s 00086000 08:11 5779977                    /home/elio/.m2/repository/com/amazonaws/aws-java-sdk-inspector/1.11.414/aws-java-sdk-inspector-1.11.414.jar
+7f1876d99000-7f1876da9000 r--s 000b5000 08:11 5645080                    /home/elio/.m2/repository/com/amazonaws/aws-java-sdk-emr/1.11.414/aws-java-sdk-emr-1.11.414.jar
+7f1876da9000-7f1876dae000 r--s 00030000 08:11 5382314                    /home/elio/.m2/repository/com/amazonaws/aws-java-sdk-opsworkscm/1.11.414/aws-java-sdk-opsworkscm-1.11.414.jar
+7f1876dae000-7f1876dba000 r--s 0005c000 08:11 4461085                    /home/elio/.m2/repository/org/springframework/security/spring-security-core/5.0.8.RELEASE/spring-security-core-5.0.8.RELEASE.jar
+7f1876dba000-7f1876dfd000 r--s 0036e000 08:11 5645085                    /home/elio/.m2/repository/com/amazonaws/aws-java-sdk-ec2/1.11.414/aws-java-sdk-ec2-1.11.414.jar
+7f1876dfd000-7f1876e08000 r--s 0007a000 08:11 5382309                    /home/elio/.m2/repository/com/amazonaws/aws-java-sdk-lexmodelbuilding/1.11.414/aws-java-sdk-lexmodelbuilding-1.11.414.jar
+7f1876e08000-7f1876e12000 r--s 00080000 08:11 4198099                    /home/elio/.m2/repository/io/netty/netty-codec-http/4.1.29.Final/netty-codec-http-4.1.29.Final.jar
+7f1876e12000-7f1876e29000 r--s 000f2000 08:11 4461079                    /home/elio/.m2/repository/org/springframework/data/spring-data-commons/2.0.10.RELEASE/spring-data-commons-2.0.10.RELEASE.jar
+7f1876e29000-7f1876e2a000 ---p 00000000 00:00 0 
+7f1876e2a000-7f1876f2a000 rw-p 00000000 00:00 0 
+7f1876f2a000-7f1876f2d000 ---p 00000000 00:00 0 
+7f1876f2d000-7f187702b000 rw-p 00000000 00:00 0 
+7f187702b000-7f187702c000 ---p 00000000 00:00 0 
+7f187702c000-7f187702f000 ---p 00000000 00:00 0 
+7f187702f000-7f187712c000 rw-p 00000000 00:00 0 
+7f187712c000-7f187712d000 ---p 00000000 00:00 0 
+7f187712d000-7f1877130000 ---p 00000000 00:00 0 
+7f1877130000-7f187722d000 rw-p 00000000 00:00 0 
+7f187722d000-7f187722e000 ---p 00000000 00:00 0 
+7f187722e000-7f1877231000 ---p 00000000 00:00 0 
+7f1877231000-7f187732e000 rw-p 00000000 00:00 0 
+7f187732e000-7f1877331000 ---p 00000000 00:00 0 
+7f1877331000-7f187742f000 rw-p 00000000 00:00 0 
+7f187742f000-7f1877dfe000 r--p 00000000 08:11 7477969                    /usr/lib/locale/locale-archive
+7f1877dfe000-7f1877e01000 ---p 00000000 00:00 0 
+7f1877e01000-7f1877eff000 rw-p 00000000 00:00 0 
+7f1877eff000-7f1877f02000 ---p 00000000 00:00 0 
+7f1877f02000-7f1878000000 rw-p 00000000 00:00 0 
+7f1878000000-7f1878021000 rw-p 00000000 00:00 0 
+7f1878021000-7f187c000000 ---p 00000000 00:00 0 
+7f187c000000-7f187c001000 r--s 00000000 08:11 4461095                    /home/elio/.m2/repository/org/springframework/boot/spring-boot-starter-json/2.0.5.RELEASE/spring-boot-starter-json-2.0.5.RELEASE.jar
+7f187c001000-7f187c008000 r--s 00047000 08:11 5251240                    /home/elio/.m2/repository/io/netty/netty-codec/4.1.29.Final/netty-codec-4.1.29.Final.jar
+7f187c008000-7f187c00e000 r--s 00033000 08:11 4990181                    /home/elio/.m2/repository/com/amazonaws/aws-java-sdk-acmpca/1.11.414/aws-java-sdk-acmpca-1.11.414.jar
+7f187c00e000-7f187c00f000 ---p 00000000 00:00 0 
+7f187c00f000-7f1880000000 rw-p 00000000 00:00 0 
+7f1880000000-7f1880021000 rw-p 00000000 00:00 0 
+7f1880021000-7f1884000000 ---p 00000000 00:00 0 
+7f1884000000-7f1884005000 r--s 00048000 08:11 3278763                    /home/elio/.m2/repository/dom4j/dom4j/1.6.1/dom4j-1.6.1.jar
+7f1884005000-7f188400e000 r--s 0005b000 08:11 5512196                    /home/elio/.m2/repository/com/amazonaws/aws-java-sdk-kms/1.11.414/aws-java-sdk-kms-1.11.414.jar
+7f188400e000-7f188403d000 r--s 00226000 08:11 3408044                    /home/elio/.m2/repository/com/google/guava/guava/20.0/guava-20.0.jar
+7f188403d000-7f1884041000 r--s 00028000 08:11 4461058                    /home/elio/.m2/repository/org/springframework/spring-context-support/5.0.9.RELEASE/spring-context-support-5.0.9.RELEASE.jar
+7f1884041000-7f188404e000 r--s 00090000 08:11 5898408                    /home/elio/.m2/repository/com/amazonaws/aws-java-sdk-rekognition/1.11.414/aws-java-sdk-rekognition-1.11.414.jar
+7f188404e000-7f1884068000 r--s 000f1000 08:11 4461166                    /home/elio/.m2/repository/org/springframework/spring-context/5.0.9.RELEASE/spring-context-5.0.9.RELEASE.jar
+7f1884068000-7f188406c000 r--s 00024000 08:11 5898411                    /home/elio/.m2/repository/com/amazonaws/aws-java-sdk-polly/1.11.414/aws-java-sdk-polly-1.11.414.jar
+7f188406c000-7f1884070000 r--s 00021000 08:11 5382321                    /home/elio/.m2/repository/com/amazonaws/aws-java-sdk-simpledb/1.11.414/aws-java-sdk-simpledb-1.11.414.jar
+7f1884070000-7f1884075000 r--s 0002d000 08:11 4461123                    /home/elio/.m2/repository/com/amazonaws/aws-java-sdk-signer/1.11.414/aws-java-sdk-signer-1.11.414.jar
+7f1884075000-7f188409f000 r--s 002d5000 08:11 4461107                    /home/elio/.m2/repository/org/apache/tomcat/embed/tomcat-embed-core/8.5.34/tomcat-embed-core-8.5.34.jar
+7f188409f000-7f18840b1000 r--s 00223000 08:11 3803555                    /home/elio/.m2/repository/org/eclipse/jdt/core/compiler/ecj/4.4.2/ecj-4.4.2.jar
+7f18840b1000-7f18840b6000 r--s 00029000 08:11 5779964                    /home/elio/.m2/repository/com/amazonaws/aws-java-sdk-efs/1.11.414/aws-java-sdk-efs-1.11.414.jar
+7f18840b6000-7f1884e26000 rw-p 00000000 00:00 0 
+7f1884e26000-7f1885000000 r--s 03d6c000 08:11 10361631                   /usr/lib/jvm/java-8-oracle/jre/lib/rt.jar
+7f1885000000-7f1886930000 rwxp 00000000 00:00 0 
+7f1886930000-7f1894000000 ---p 00000000 00:00 0 
+7f1894000000-7f1895575000 rw-p 00000000 00:00 0 
+7f1895575000-7f1898000000 ---p 00000000 00:00 0 
+7f1898000000-7f1898002000 r--s 0000b000 08:11 4862529                    /home/elio/.m2/repository/com/fasterxml/jackson/dataformat/jackson-dataformat-cbor/2.9.6/jackson-dataformat-cbor-2.9.6.jar
+7f1898002000-7f1898015000 r--s 000cb000 08:11 5382301                    /home/elio/.m2/repository/com/amazonaws/aws-java-sdk-greengrass/1.11.414/aws-java-sdk-greengrass-1.11.414.jar
+7f1898015000-7f189801c000 r--s 00042000 08:11 5898407                    /home/elio/.m2/repository/com/amazonaws/aws-java-sdk-snowball/1.11.414/aws-java-sdk-snowball-1.11.414.jar
+7f189801c000-7f1898de2000 rw-p 00000000 00:00 0 
+7f1898de2000-7f1898de3000 ---p 00000000 00:00 0 
+7f1898de3000-7f1898ee3000 rw-p 00000000 00:00 0 
+7f1898ee3000-7f1898ee4000 ---p 00000000 00:00 0 
+7f1898ee4000-7f1898fe4000 rw-p 00000000 00:00 0 
+7f1898fe4000-7f1898fe5000 ---p 00000000 00:00 0 
+7f1898fe5000-7f18990e5000 rw-p 00000000 00:00 0 
+7f18990e5000-7f18990e6000 ---p 00000000 00:00 0 
+7f18990e6000-7f1899225000 rw-p 00000000 00:00 0 
+7f1899225000-7f189947b000 ---p 00000000 00:00 0 
+7f189947b000-7f18994ba000 rw-p 00000000 00:00 0 
+7f18994ba000-7f189970f000 ---p 00000000 00:00 0 
+7f189970f000-7f189982d000 rw-p 00000000 00:00 0 
+7f189982d000-7f189985a000 ---p 00000000 00:00 0 
+7f189985a000-7f18998c0000 rw-p 00000000 00:00 0 
+7f18998c0000-7f1899c1b000 ---p 00000000 00:00 0 
+7f1899c1b000-7f1899c35000 r-xp 00000000 08:11 10622029                   /usr/lib/jvm/java-8-oracle/jre/lib/amd64/libzip.so
+7f1899c35000-7f1899e35000 ---p 0001a000 08:11 10622029                   /usr/lib/jvm/java-8-oracle/jre/lib/amd64/libzip.so
+7f1899e35000-7f1899e36000 r--p 0001a000 08:11 10622029                   /usr/lib/jvm/java-8-oracle/jre/lib/amd64/libzip.so
+7f1899e36000-7f1899e37000 rw-p 0001b000 08:11 10622029                   /usr/lib/jvm/java-8-oracle/jre/lib/amd64/libzip.so
+7f1899e37000-7f1899e42000 r-xp 00000000 08:11 11539130                   /lib/x86_64-linux-gnu/libnss_files-2.27.so
+7f1899e42000-7f189a041000 ---p 0000b000 08:11 11539130                   /lib/x86_64-linux-gnu/libnss_files-2.27.so
+7f189a041000-7f189a042000 r--p 0000a000 08:11 11539130                   /lib/x86_64-linux-gnu/libnss_files-2.27.so
+7f189a042000-7f189a043000 rw-p 0000b000 08:11 11539130                   /lib/x86_64-linux-gnu/libnss_files-2.27.so
+7f189a043000-7f189a049000 rw-p 00000000 00:00 0 
+7f189a049000-7f189a060000 r-xp 00000000 08:11 11539124                   /lib/x86_64-linux-gnu/libnsl-2.27.so
+7f189a060000-7f189a25f000 ---p 00017000 08:11 11539124                   /lib/x86_64-linux-gnu/libnsl-2.27.so
+7f189a25f000-7f189a260000 r--p 00016000 08:11 11539124                   /lib/x86_64-linux-gnu/libnsl-2.27.so
+7f189a260000-7f189a261000 rw-p 00017000 08:11 11539124                   /lib/x86_64-linux-gnu/libnsl-2.27.so
+7f189a261000-7f189a263000 rw-p 00000000 00:00 0 
+7f189a263000-7f189a26e000 r-xp 00000000 08:11 11539141                   /lib/x86_64-linux-gnu/libnss_nis-2.27.so
+7f189a26e000-7f189a46d000 ---p 0000b000 08:11 11539141                   /lib/x86_64-linux-gnu/libnss_nis-2.27.so
+7f189a46d000-7f189a46e000 r--p 0000a000 08:11 11539141                   /lib/x86_64-linux-gnu/libnss_nis-2.27.so
+7f189a46e000-7f189a46f000 rw-p 0000b000 08:11 11539141                   /lib/x86_64-linux-gnu/libnss_nis-2.27.so
+7f189a46f000-7f189a477000 r-xp 00000000 08:11 11539126                   /lib/x86_64-linux-gnu/libnss_compat-2.27.so
+7f189a477000-7f189a677000 ---p 00008000 08:11 11539126                   /lib/x86_64-linux-gnu/libnss_compat-2.27.so
+7f189a677000-7f189a678000 r--p 00008000 08:11 11539126                   /lib/x86_64-linux-gnu/libnss_compat-2.27.so
+7f189a678000-7f189a679000 rw-p 00009000 08:11 11539126                   /lib/x86_64-linux-gnu/libnss_compat-2.27.so
+7f189a679000-7f189a6a6000 r-xp 00000000 08:11 10622019                   /usr/lib/jvm/java-8-oracle/jre/lib/amd64/libjava.so
+7f189a6a6000-7f189a8a5000 ---p 0002d000 08:11 10622019                   /usr/lib/jvm/java-8-oracle/jre/lib/amd64/libjava.so
+7f189a8a5000-7f189a8a6000 r--p 0002c000 08:11 10622019                   /usr/lib/jvm/java-8-oracle/jre/lib/amd64/libjava.so
+7f189a8a6000-7f189a8a8000 rw-p 0002d000 08:11 10622019                   /usr/lib/jvm/java-8-oracle/jre/lib/amd64/libjava.so
+7f189a8a8000-7f189a8b5000 r-xp 00000000 08:11 10622025                   /usr/lib/jvm/java-8-oracle/jre/lib/amd64/libverify.so
+7f189a8b5000-7f189aab4000 ---p 0000d000 08:11 10622025                   /usr/lib/jvm/java-8-oracle/jre/lib/amd64/libverify.so
+7f189aab4000-7f189aab6000 r--p 0000c000 08:11 10622025                   /usr/lib/jvm/java-8-oracle/jre/lib/amd64/libverify.so
+7f189aab6000-7f189aab7000 rw-p 0000e000 08:11 10622025                   /usr/lib/jvm/java-8-oracle/jre/lib/amd64/libverify.so
+7f189aab7000-7f189aabe000 r-xp 00000000 08:11 11539181                   /lib/x86_64-linux-gnu/librt-2.27.so
+7f189aabe000-7f189acbd000 ---p 00007000 08:11 11539181                   /lib/x86_64-linux-gnu/librt-2.27.so
+7f189acbd000-7f189acbe000 r--p 00006000 08:11 11539181                   /lib/x86_64-linux-gnu/librt-2.27.so
+7f189acbe000-7f189acbf000 rw-p 00007000 08:11 11539181                   /lib/x86_64-linux-gnu/librt-2.27.so
+7f189acbf000-7f189ae5c000 r-xp 00000000 08:11 11539103                   /lib/x86_64-linux-gnu/libm-2.27.so
+7f189ae5c000-7f189b05b000 ---p 0019d000 08:11 11539103                   /lib/x86_64-linux-gnu/libm-2.27.so
+7f189b05b000-7f189b05c000 r--p 0019c000 08:11 11539103                   /lib/x86_64-linux-gnu/libm-2.27.so
+7f189b05c000-7f189b05d000 rw-p 0019d000 08:11 11539103                   /lib/x86_64-linux-gnu/libm-2.27.so
+7f189b05d000-7f189bd3f000 r-xp 00000000 08:11 10621953                   /usr/lib/jvm/java-8-oracle/jre/lib/amd64/server/libjvm.so
+7f189bd3f000-7f189bf3f000 ---p 00ce2000 08:11 10621953                   /usr/lib/jvm/java-8-oracle/jre/lib/amd64/server/libjvm.so
+7f189bf3f000-7f189bfd5000 r--p 00ce2000 08:11 10621953                   /usr/lib/jvm/java-8-oracle/jre/lib/amd64/server/libjvm.so
+7f189bfd5000-7f189c006000 rw-p 00d78000 08:11 10621953                   /usr/lib/jvm/java-8-oracle/jre/lib/amd64/server/libjvm.so
+7f189c006000-7f189c041000 rw-p 00000000 00:00 0 
+7f189c041000-7f189c228000 r-xp 00000000 08:11 11539040                   /lib/x86_64-linux-gnu/libc-2.27.so
+7f189c228000-7f189c428000 ---p 001e7000 08:11 11539040                   /lib/x86_64-linux-gnu/libc-2.27.so
+7f189c428000-7f189c42c000 r--p 001e7000 08:11 11539040                   /lib/x86_64-linux-gnu/libc-2.27.so
+7f189c42c000-7f189c42e000 rw-p 001eb000 08:11 11539040                   /lib/x86_64-linux-gnu/libc-2.27.so
+7f189c42e000-7f189c432000 rw-p 00000000 00:00 0 
+7f189c432000-7f189c435000 r-xp 00000000 08:11 11539063                   /lib/x86_64-linux-gnu/libdl-2.27.so
+7f189c435000-7f189c634000 ---p 00003000 08:11 11539063                   /lib/x86_64-linux-gnu/libdl-2.27.so
+7f189c634000-7f189c635000 r--p 00002000 08:11 11539063                   /lib/x86_64-linux-gnu/libdl-2.27.so
+7f189c635000-7f189c636000 rw-p 00003000 08:11 11539063                   /lib/x86_64-linux-gnu/libdl-2.27.so
+7f189c636000-7f189c64d000 r-xp 00000000 08:11 10621948                   /usr/lib/jvm/java-8-oracle/jre/lib/amd64/jli/libjli.so
+7f189c64d000-7f189c84c000 ---p 00017000 08:11 10621948                   /usr/lib/jvm/java-8-oracle/jre/lib/amd64/jli/libjli.so
+7f189c84c000-7f189c84d000 r--p 00016000 08:11 10621948                   /usr/lib/jvm/java-8-oracle/jre/lib/amd64/jli/libjli.so
+7f189c84d000-7f189c84e000 rw-p 00017000 08:11 10621948                   /usr/lib/jvm/java-8-oracle/jre/lib/amd64/jli/libjli.so
+7f189c84e000-7f189c868000 r-xp 00000000 08:11 11539173                   /lib/x86_64-linux-gnu/libpthread-2.27.so
+7f189c868000-7f189ca67000 ---p 0001a000 08:11 11539173                   /lib/x86_64-linux-gnu/libpthread-2.27.so
+7f189ca67000-7f189ca68000 r--p 00019000 08:11 11539173                   /lib/x86_64-linux-gnu/libpthread-2.27.so
+7f189ca68000-7f189ca69000 rw-p 0001a000 08:11 11539173                   /lib/x86_64-linux-gnu/libpthread-2.27.so
+7f189ca69000-7f189ca6d000 rw-p 00000000 00:00 0 
+7f189ca6d000-7f189ca94000 r-xp 00000000 08:11 11539012                   /lib/x86_64-linux-gnu/ld-2.27.so
+7f189ca94000-7f189ca95000 r--s 00000000 08:11 4461066                    /home/elio/.m2/repository/org/hibernate/hibernate-java8/5.2.17.Final/hibernate-java8-5.2.17.Final.jar
+7f189ca95000-7f189ca97000 r--s 0000d000 08:11 3803574                    /home/elio/.m2/repository/commons-logging/commons-logging/1.1.1/commons-logging-1.1.1.jar
+7f189ca97000-7f189caa8000 r--s 000c5000 08:11 3803600                    /home/elio/.m2/repository/org/codehaus/castor/castor-xml/1.3.3/castor-xml-1.3.3.jar
+7f189caa8000-7f189cb73000 rw-p 00000000 00:00 0 
+7f189cb73000-7f189cb74000 ---p 00000000 00:00 0 
+7f189cb74000-7f189cb77000 ---p 00000000 00:00 0 
+7f189cb77000-7f189cc78000 rw-p 00000000 00:00 0 
+7f189cc78000-7f189cc7a000 r--s 0000e000 08:11 3278723                    /home/elio/.m2/repository/com/fasterxml/classmate/1.3.4/classmate-1.3.4.jar
+7f189cc7a000-7f189cc7b000 r--s 00000000 08:11 4461100                    /home/elio/.m2/repository/org/springframework/boot/spring-boot-starter-web/2.0.5.RELEASE/spring-boot-starter-web-2.0.5.RELEASE.jar
+7f189cc7b000-7f189cc7d000 r--s 00005000 08:11 4862509                    /home/elio/.m2/repository/com/amazonaws/jmespath-java/1.11.414/jmespath-java-1.11.414.jar
+7f189cc7d000-7f189cc7e000 r--s 00000000 08:11 4461089                    /home/elio/.m2/repository/com/amazonaws/aws-java-sdk/1.11.414/aws-java-sdk-1.11.414.jar
+7f189cc7e000-7f189cc83000 r--s 00038000 08:11 2752755                    /home/elio/.m2/repository/commons-beanutils/commons-beanutils/1.9.3/commons-beanutils-1.9.3.jar
+7f189cc83000-7f189cc87000 r--s 0003f000 08:11 5251238                    /home/elio/.m2/repository/io/netty/netty-buffer/4.1.29.Final/netty-buffer-4.1.29.Final.jar
+7f189cc87000-7f189cc8a000 r--s 0000a000 08:11 3803602                    /home/elio/.m2/repository/org/codehaus/castor/castor-core/1.3.3/castor-core-1.3.3.jar
+7f189cc8a000-7f189cc92000 rw-s 00000000 08:11 4194560                    /tmp/hsperfdata_elio/3550
+7f189cc92000-7f189cc93000 rw-p 00000000 00:00 0 
+7f189cc93000-7f189cc94000 ---p 00000000 00:00 0 
+7f189cc94000-7f189cc95000 r--p 00027000 08:11 11539012                   /lib/x86_64-linux-gnu/ld-2.27.so
+7f189cc95000-7f189cc96000 rw-p 00028000 08:11 11539012                   /lib/x86_64-linux-gnu/ld-2.27.so
+7f189cc96000-7f189cc97000 rw-p 00000000 00:00 0 
+7ffd12746000-7ffd1276e000 rw-p 00000000 00:00 0                          [stack]
+7ffd127c8000-7ffd127cb000 r--p 00000000 00:00 0                          [vvar]
+7ffd127cb000-7ffd127cd000 r-xp 00000000 00:00 0                          [vdso]
+ffffffffff600000-ffffffffff601000 r-xp 00000000 00:00 0                  [vsyscall]
+
+VM Arguments:
+java_command: com.uem.boxit.BoxitApplication
+java_class_path (initial): /home/elio/WebstormProjects/boxit-oficial/api/target/classes:/home/elio/.m2/repository/org/codehaus/castor/castor-core/1.3.3/castor-core-1.3.3.jar:/home/elio/.m2/repository/io/netty/netty-buffer/4.1.29.Final/netty-buffer-4.1.29.Final.jar:/home/elio/.m2/repository/org/codehaus/castor/castor-xml/1.3.3/castor-xml-1.3.3.jar:/home/elio/.m2/repository/commons-beanutils/commons-beanutils/1.9.3/commons-beanutils-1.9.3.jar:/home/elio/.m2/repository/com/amazonaws/aws-java-sdk-snowball/1.11.414/aws-java-sdk-snowball-1.11.414.jar:/home/elio/.m2/repository/com/amazonaws/aws-java-sdk/1.11.414/aws-java-sdk-1.11.414.jar:/home/elio/.m2/repository/com/amazonaws/aws-java-sdk-greengrass/1.11.414/aws-java-sdk-greengrass-1.11.414.jar:/home/elio/.m2/repository/com/amazonaws/jmespath-java/1.11.414/jmespath-java-1.11.414.jar:/home/elio/.m2/repository/com/amazonaws/aws-java-sdk-efs/1.11.414/aws-java-sdk-efs-1.11.414.jar:/home/elio/.m2/repository/org/springframework/boot/spring-boot-starter-web/2.0.5.RELEASE/spring-boot-starter-web-2.0.5.RELEASE.jar:/home/elio/.m2/repository/org/eclipse/jdt/core/compiler/ecj/4.4.2/ecj-4.4.2.jar:/home/elio/.m2/repository/org/apache/tomcat/embed/tomcat-embed-core/8.5.34/tomcat-embed-core-8.5.34.jar:/home/elio/.m2/repository/com/amazonaws/aws-java-sdk-signer/1.11.414/aws-java-sdk-signer-1.11.414.jar:/home/elio/.m2/repository/com/amazonaws/aws-java-sdk-simpledb/1.11.414/aws-java-sdk-simpledb-1.11.414.jar:/home/elio/.m2/repository/com/fasterxml/classmate/1.3.4/classmate-1.3.4.jar:/home/elio/.m2/repository/com/amazonaws/aws-java-sdk-polly/1.11.414/aws-java-sdk-polly-1.11.414.jar:/home/elio/.m2/repository/org/springframework/spring-context/5.0.9.RELEASE/spring-context-5.0.9.RELEASE.jar:/home/elio/.m2/repository/com/amazonaws/aws-java-sdk-rekognition/1.11.414/aws-java-sdk-rekognition-1.11.414.jar:/home/elio/.m2/repository/commons-logging/commons-logging/1.1.1/commons-logging-1.1.1.jar:/home/elio/.m2/repository/org/springframework/spring-c
+Launcher Type: SUN_STANDARD
+
+Environment Variables:
+JAVA_HOME=/usr/lib/jvm/java-8-oracle
+PATH=/home/elio/bin:/home/elio/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/usr/lib/jvm/java-8-oracle/bin:/usr/lib/jvm/java-8-oracle/db/bin:/usr/lib/jvm/java-8-oracle/jre/bin:/usr/lib/jvm/java-8-oracle/bin:/usr/lib/jvm/java-8-oracle/db/bin:/usr/lib/jvm/java-8-oracle/jre/bin
+USERNAME=elio
+SHELL=/bin/bash
+DISPLAY=:0
+
+Signal Handlers:
+SIGSEGV: [libjvm.so+0xaced60], sa_mask[0]=11111111011111111101111111111110, sa_flags=SA_RESTART|SA_SIGINFO
+SIGBUS: [libjvm.so+0xaced60], sa_mask[0]=11111111011111111101111111111110, sa_flags=SA_RESTART|SA_SIGINFO
+SIGFPE: [libjvm.so+0x907ca0], sa_mask[0]=11111111011111111101111111111110, sa_flags=SA_RESTART|SA_SIGINFO
+SIGPIPE: [libjvm.so+0x907ca0], sa_mask[0]=11111111011111111101111111111110, sa_flags=SA_RESTART|SA_SIGINFO
+SIGXFSZ: [libjvm.so+0x907ca0], sa_mask[0]=11111111011111111101111111111110, sa_flags=SA_RESTART|SA_SIGINFO
+SIGILL: [libjvm.so+0x907ca0], sa_mask[0]=11111111011111111101111111111110, sa_flags=SA_RESTART|SA_SIGINFO
+SIGUSR1: SIG_DFL, sa_mask[0]=00000000000000000000000000000000, sa_flags=none
+SIGUSR2: [libjvm.so+0x907b70], sa_mask[0]=00100000000000000000000000000000, sa_flags=SA_RESTART|SA_SIGINFO
+SIGHUP: [libjvm.so+0x908190], sa_mask[0]=11111111011111111101111111111110, sa_flags=SA_RESTART|SA_SIGINFO
+SIGINT: [libjvm.so+0x908190], sa_mask[0]=11111111011111111101111111111110, sa_flags=SA_RESTART|SA_SIGINFO
+SIGTERM: [libjvm.so+0x908190], sa_mask[0]=11111111011111111101111111111110, sa_flags=SA_RESTART|SA_SIGINFO
+SIGQUIT: [libjvm.so+0x908190], sa_mask[0]=11111111011111111101111111111110, sa_flags=SA_RESTART|SA_SIGINFO
+
+
+---------------  S Y S T E M  ---------------
+
+OS:DISTRIB_ID=Ubuntu
+DISTRIB_RELEASE=18.04
+DISTRIB_CODENAME=bionic
+DISTRIB_DESCRIPTION="Ubuntu 18.04.1 LTS"
+
+uname:Linux 4.15.0-39-generic #42-Ubuntu SMP Tue Oct 23 15:48:01 UTC 2018 x86_64
+libc:glibc 2.27 NPTL 2.27 
+rlimit: STACK 8192k, CORE 0k, NPROC 31459, NOFILE 1048576, AS infinity
+load average:11,97 3,71 2,11
+
+/proc/meminfo:
+MemTotal:        8116268 kB
+MemFree:          109032 kB
+MemAvailable:      18380 kB
+Buffers:             432 kB
+Cached:           143496 kB
+SwapCached:         1352 kB
+Active:          6727716 kB
+Inactive:         859372 kB
+Active(anon):    6711832 kB
+Inactive(anon):   839168 kB
+Active(file):      15884 kB
+Inactive(file):    20204 kB
+Unevictable:         284 kB
+Mlocked:             284 kB
+SwapTotal:       2097148 kB
+SwapFree:              0 kB
+Dirty:                52 kB
+Writeback:           200 kB
+AnonPages:       7442556 kB
+Mapped:            79016 kB
+Shmem:            107752 kB
+Slab:             131364 kB
+SReclaimable:      55288 kB
+SUnreclaim:        76076 kB
+KernelStack:       19760 kB
+PageTables:       104352 kB
+NFS_Unstable:          0 kB
+Bounce:                0 kB
+WritebackTmp:          0 kB
+CommitLimit:     6155280 kB
+Committed_AS:   18692820 kB
+VmallocTotal:   34359738367 kB
+VmallocUsed:           0 kB
+VmallocChunk:          0 kB
+HardwareCorrupted:     0 kB
+AnonHugePages:         0 kB
+ShmemHugePages:        0 kB
+ShmemPmdMapped:        0 kB
+CmaTotal:              0 kB
+CmaFree:               0 kB
+HugePages_Total:       0
+HugePages_Free:        0
+HugePages_Rsvd:        0
+HugePages_Surp:        0
+Hugepagesize:       2048 kB
+DirectMap4k:      336864 kB
+DirectMap2M:     7999488 kB
+DirectMap1G:           0 kB
+
+container (cgroup) information:
+container_type: cgroupv1
+cpu_cpuset_cpus: 0-3
+cpu_memory_nodes: 0
+active_processor_count: 4
+cpu_quota: -1
+cpu_period: 100000
+cpu_shares: -1
+memory_limit_in_bytes: -1
+memory_and_swap_limit_in_bytes: -2
+memory_soft_limit_in_bytes: -1
+memory_usage_in_bytes: 7769800704
+memory_max_usage_in_bytes: 800038912
+
+
+CPU:total 4 (initial active 4) (4 cores per cpu, 1 threads per core) family 6 model 158 stepping 9, cmov, cx8, fxsr, mmx, sse, sse2, sse3, ssse3, sse4.1, sse4.2, popcnt, avx, avx2, aes, clmul, erms, rtm, 3dnowpref, lzcnt, tsc, tscinvbit, bmi1, bmi2, adx
+
+/proc/cpuinfo:
+processor	: 0
+vendor_id	: GenuineIntel
+cpu family	: 6
+model		: 158
+model name	: Intel(R) Core(TM) i5-7600K CPU @ 3.80GHz
+stepping	: 9
+microcode	: 0x8e
+cpu MHz		: 808.309
+cache size	: 6144 KB
+physical id	: 0
+siblings	: 4
+core id		: 0
+cpu cores	: 4
+apicid		: 0
+initial apicid	: 0
+fpu		: yes
+fpu_exception	: yes
+cpuid level	: 22
+wp		: yes
+flags		: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush dts acpi mmx fxsr sse sse2 ss ht tm pbe syscall nx pdpe1gb rdtscp lm constant_tsc art arch_perfmon pebs bts rep_good nopl xtopology nonstop_tsc cpuid aperfmperf tsc_known_freq pni pclmulqdq dtes64 monitor ds_cpl vmx est tm2 ssse3 sdbg fma cx16 xtpr pdcm pcid sse4_1 sse4_2 x2apic movbe popcnt tsc_deadline_timer aes xsave avx f16c rdrand lahf_lm abm 3dnowprefetch cpuid_fault invpcid_single pti ssbd ibrs ibpb stibp tpr_shadow vnmi flexpriority ept vpid fsgsbase tsc_adjust bmi1 hle avx2 smep bmi2 erms invpcid rtm mpx rdseed adx smap clflushopt intel_pt xsaveopt xsavec xgetbv1 xsaves dtherm ida arat pln pts hwp hwp_notify hwp_act_window hwp_epp flush_l1d
+bugs		: cpu_meltdown spectre_v1 spectre_v2 spec_store_bypass l1tf
+bogomips	: 7584.00
+clflush size	: 64
+cache_alignment	: 64
+address sizes	: 39 bits physical, 48 bits virtual
+power management:
+
+processor	: 1
+vendor_id	: GenuineIntel
+cpu family	: 6
+model		: 158
+model name	: Intel(R) Core(TM) i5-7600K CPU @ 3.80GHz
+stepping	: 9
+microcode	: 0x8e
+cpu MHz		: 807.652
+cache size	: 6144 KB
+physical id	: 0
+siblings	: 4
+core id		: 1
+cpu cores	: 4
+apicid		: 2
+initial apicid	: 2
+fpu		: yes
+fpu_exception	: yes
+cpuid level	: 22
+wp		: yes
+flags		: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush dts acpi mmx fxsr sse sse2 ss ht tm pbe syscall nx pdpe1gb rdtscp lm constant_tsc art arch_perfmon pebs bts rep_good nopl xtopology nonstop_tsc cpuid aperfmperf tsc_known_freq pni pclmulqdq dtes64 monitor ds_cpl vmx est tm2 ssse3 sdbg fma cx16 xtpr pdcm pcid sse4_1 sse4_2 x2apic movbe popcnt tsc_deadline_timer aes xsave avx f16c rdrand lahf_lm abm 3dnowprefetch cpuid_fault invpcid_single pti ssbd ibrs ibpb stibp tpr_shadow vnmi flexpriority ept vpid fsgsbase tsc_adjust bmi1 hle avx2 smep bmi2 erms invpcid rtm mpx rdseed adx smap clflushopt intel_pt xsaveopt xsavec xgetbv1 xsaves dtherm ida arat pln pts hwp hwp_notify hwp_act_window hwp_epp flush_l1d
+bugs		: cpu_meltdown spectre_v1 spectre_v2 spec_store_bypass l1tf
+bogomips	: 7584.00
+clflush size	: 64
+cache_alignment	: 64
+address sizes	: 39 bits physical, 48 bits virtual
+power management:
+
+processor	: 2
+vendor_id	: GenuineIntel
+cpu family	: 6
+model		: 158
+model name	: Intel(R) Core(TM) i5-7600K CPU @ 3.80GHz
+stepping	: 9
+microcode	: 0x8e
+cpu MHz		: 801.671
+cache size	: 6144 KB
+physical id	: 0
+siblings	: 4
+core id		: 2
+cpu cores	: 4
+apicid		: 4
+initial apicid	: 4
+fpu		: yes
+fpu_exception	: yes
+cpuid level	: 22
+wp		: yes
+flags		: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush dts acpi mmx fxsr sse sse2 ss ht tm pbe syscall nx pdpe1gb rdtscp lm constant_tsc art arch_perfmon pebs bts rep_good nopl xtopology nonstop_tsc cpuid aperfmperf tsc_known_freq pni pclmulqdq dtes64 monitor ds_cpl vmx est tm2 ssse3 sdbg fma cx16 xtpr pdcm pcid sse4_1 sse4_2 x2apic movbe popcnt tsc_deadline_timer aes xsave avx f16c rdrand lahf_lm abm 3dnowprefetch cpuid_fault invpcid_single pti ssbd ibrs ibpb stibp tpr_shadow vnmi flexpriority ept vpid fsgsbase tsc_adjust bmi1 hle avx2 smep bmi2 erms invpcid rtm mpx rdseed adx smap clflushopt intel_pt xsaveopt xsavec xgetbv1 xsaves dtherm ida arat pln pts hwp hwp_notify hwp_act_window hwp_epp flush_l1d
+bugs		: cpu_meltdown spectre_v1 spectre_v2 spec_store_bypass l1tf
+bogomips	: 7584.00
+clflush size	: 64
+cache_alignment	: 64
+address sizes	: 39 bits physical, 48 bits virtual
+power management:
+
+processor	: 3
+vendor_id	: GenuineIntel
+cpu family	: 6
+model		: 158
+model name	: Intel(R) Core(TM) i5-7600K CPU @ 3.80GHz
+stepping	: 9
+microcode	: 0x8e
+cpu MHz		: 837.008
+cache size	: 6144 KB
+physical id	: 0
+siblings	: 4
+core id		: 3
+cpu cores	: 4
+apicid		: 6
+initial apicid	: 6
+fpu		: yes
+fpu_exception	: yes
+cpuid level	: 22
+wp		: yes
+flags		: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush dts acpi mmx fxsr sse sse2 ss ht tm pbe syscall nx pdpe1gb rdtscp lm constant_tsc art arch_perfmon pebs bts rep_good nopl xtopology nonstop_tsc cpuid aperfmperf tsc_known_freq pni pclmulqdq dtes64 monitor ds_cpl vmx est tm2 ssse3 sdbg fma cx16 xtpr pdcm pcid sse4_1 sse4_2 x2apic movbe popcnt tsc_deadline_timer aes xsave avx f16c rdrand lahf_lm abm 3dnowprefetch cpuid_fault invpcid_single pti ssbd ibrs ibpb stibp tpr_shadow vnmi flexpriority ept vpid fsgsbase tsc_adjust bmi1 hle avx2 smep bmi2 erms invpcid rtm mpx rdseed adx smap clflushopt intel_pt xsaveopt xsavec xgetbv1 xsaves dtherm ida arat pln pts hwp hwp_notify hwp_act_window hwp_epp flush_l1d
+bugs		: cpu_meltdown spectre_v1 spectre_v2 spec_store_bypass l1tf
+bogomips	: 7584.00
+clflush size	: 64
+cache_alignment	: 64
+address sizes	: 39 bits physical, 48 bits virtual
+power management:
+
+
+
+Memory: 4k page, physical 8116268k(103860k free), swap 2097148k(0k free)
+
+vm_info: Java HotSpot(TM) 64-Bit Server VM (25.191-b12) for linux-amd64 JRE (1.8.0_191-b12), built on Oct  6 2018 05:43:09 by "java_re" with gcc 7.3.0
+
+time: Sun Nov 18 20:09:27 2018
+elapsed time: 1153 seconds (0d 0h 19m 13s)
+

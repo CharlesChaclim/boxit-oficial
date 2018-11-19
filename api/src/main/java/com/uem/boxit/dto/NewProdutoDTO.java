@@ -17,4 +17,5 @@ public class NewProdutoDTO {
     private String sku;
     private List<String> fotos;
     private Integer categoriaId;
+    private Double desconto;
 }

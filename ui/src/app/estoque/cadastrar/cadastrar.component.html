@@ -27,14 +27,6 @@
               </div>
             </div>
             <div class="form-group row">
-              <label class="col-md-4 col-form-label">Quantidade <span class="text-danger">*</span></label>
-              <div class="col-md-8">
-                <input type="number" class="form-control" required [(ngModel)]="p.qtd"
-                       placeholder="999" name="qtd" #qtd="ngModel" (blur)="qtdPositiva()"
-                       [ngClass]="((qtd.invalid && qtd.touched) || qtd_valida) ? 'is-invalid' : ''">
-              </div>
-            </div>
-            <div class="form-group row">
               <label class="col-md-4 col-form-label">Un/Lote <span class="text-danger">*</span></label>
               <div class="col-md-8">
                 <input type="number" class="form-control" required [(ngModel)]="p.unidadeLote"
@@ -75,7 +67,7 @@
         <div class="row">
           <div class="col">
             <button href="#" class="btn btn-block btn-primary" (click)="cadastrar()" type="submit"
-                    [disabled]="pform.invalid || preco_valido || qtd_valida || lote_valido || cat.invalid">Cadastrar
+                    [disabled]="pform.invalid || preco_valido || lote_valido || cat.invalid">Cadastrar
             </button>
           </div>
           <div class="col">

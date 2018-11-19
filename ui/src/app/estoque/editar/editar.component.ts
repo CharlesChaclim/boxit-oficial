@@ -19,6 +19,7 @@ export class EditarComponent implements OnInit {
   sku: string;
   nome_valido = false;
   preco_valido = false;
+  desconto_valido = false;
   lote_valido = false;
   categoria: any;
   edit = false;
@@ -68,6 +69,10 @@ export class EditarComponent implements OnInit {
     this.preco_valido = this.p.preco < 0;
   }
 
+  descontoValido() {
+    this.desconto_valido = this.p.desconto < this.p.preco;
+  }
+
   lotePositivo() {
     this.lote_valido = this.p.unidadeLote <= 0;
   }
@@ -101,7 +106,7 @@ export class EditarComponent implements OnInit {
   editar() {
     this.estoqueService.update(this.p).subscribe(() => {
         this.router.navigate(['/estoque']);
-        this.toastr.success('Estoque ' + this.p.nome + ' atualizado com sucesso!');
+        this.toastr.success('Produto ' + this.p.nome + ' atualizado com sucesso!');
       }, () => {
         swal('Erro!',
           'Falha no banco de dados\n Tente mais tarde',
