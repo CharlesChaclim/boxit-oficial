@@ -37,7 +37,7 @@ export class QuantidadeComponent implements OnInit {
     this.preco_valido = this.q.precoCompra < 0;
   }
 
-  cadastrar() {
+  atualizar() {
     this.estoqueService.atualizarQtd(this.q, this.prodID).subscribe(
       r => {
         this.router.navigate(['/estoque']);

@@ -2,7 +2,7 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="teste" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="9c1a26bb-16ce-4523-9903-1976b7a9bd56">
 	<property name="ireport.zoom" value="1.0"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="125"/>
+	<property name="ireport.y" value="0"/>
 	<style name="table">
 		<box>
 			<pen lineWidth="1.0" lineColor="#000000"/>
@@ -43,7 +43,27 @@
 			<pen lineWidth="0.5" lineColor="#000000"/>
 		</box>
 	</style>
-	<subDataset name="Table Dataset 1" uuid="ebd2a84d-7df8-43eb-9a54-ca19c816584e">
+	<style name="table 2">
+		<box>
+			<pen lineWidth="1.0" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 2_TH" mode="Opaque" backcolor="#73B0E6">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 2_CH" mode="Opaque" backcolor="#CFDBE6">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 2_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<subDataset name="Entrada" uuid="ebd2a84d-7df8-43eb-9a54-ca19c816584e">
 		<parameter name="end" class="java.lang.String"/>
 		<parameter name="start" class="java.lang.String"/>
 		<parameter name="sku" class="java.lang.String"/>
@@ -77,7 +97,7 @@ WHERE
 			<fieldDescription><![CDATA[]]></fieldDescription>
 		</field>
 	</subDataset>
-	<subDataset name="Table Dataset 2" uuid="66c499ce-3fc3-4606-843a-12ca4d2d53fb">
+	<subDataset name="Saida" uuid="66c499ce-3fc3-4606-843a-12ca4d2d53fb">
 		<parameter name="end" class="java.lang.String"/>
 		<parameter name="start" class="java.lang.String"/>
 		<parameter name="sku" class="java.lang.String"/>
@@ -109,6 +129,31 @@ WHERE
 		<field name="pedido_id" class="java.lang.Integer"/>
 		<field name="pedido_create_at" class="java.sql.Timestamp"/>
 		<field name="item_pedido_desconto" class="java.lang.Double"/>
+	</subDataset>
+	<subDataset name="Total" uuid="dc51a464-57fc-4728-bfc2-0d7a31457cbd">
+		<parameter name="end" class="java.lang.String"/>
+		<parameter name="start" class="java.lang.String"/>
+		<parameter name="sku" class="java.lang.String"/>
+		<queryString>
+			<![CDATA[SELECT
+     produto.`qtd` AS produto_qtd,
+     SUM(item_pedido.preco - item_pedido.desconto),
+     SUM(((item_pedido.preco - item_pedido.desconto) * item_pedido.quantidade) - preco_compra.preco)
+FROM
+     `pedido` pedido INNER JOIN `item_pedido` item_pedido ON pedido.`id` = item_pedido.`pedido_id`
+     INNER JOIN `produto` produto ON item_pedido.`produto_id` = produto.`id`
+     INNER JOIN `preco_compra` preco_compra ON produto.`id` = preco_compra.`produto_id`
+WHERE
+     (data_atualizacao >= $P{start}
+     and data_atualizacao <= $P{end}
+     and produto.sku = $P{sku})
+     or (create_at >= $P{start}
+     and create_at <= $P{end}
+     and produto.sku = $P{sku})]]>
+		</queryString>
+		<field name="produto_qtd" class="java.lang.Integer"/>
+		<field name="SUM(item_pedido.preco - item_pedido.desconto)" class="java.lang.Double"/>
+		<field name="SUM(((item_pedido.preco - item_pedido.desconto) * item_pedido.quantidade) - preco_compra.preco)" class="java.lang.Double"/>
 	</subDataset>
 	<parameter name="vstart" class="java.lang.String"/>
 	<parameter name="vend" class="java.lang.String"/>
@@ -226,7 +271,7 @@ WHERE
 			<componentElement>
 				<reportElement key="table" style="table" x="0" y="10" width="555" height="105" uuid="0622bc33-838d-4620-aaa7-7515bf4e8a67"/>
 				<jr:table xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
-					<datasetRun subDataset="Table Dataset 1" uuid="45938d04-eba0-41c8-ab10-e3df6597c0e8">
+					<datasetRun subDataset="Entrada" uuid="45938d04-eba0-41c8-ab10-e3df6597c0e8">
 						<datasetParameter name="start">
 							<datasetParameterExpression><![CDATA[$P{start}]]></datasetParameterExpression>
 						</datasetParameter>
@@ -304,7 +349,7 @@ WHERE
 			<componentElement>
 				<reportElement key="table 1" style="table 1" x="0" y="31" width="555" height="113" uuid="a7cce2aa-3793-4d62-8510-9d5bc5371df1"/>
 				<jr:table xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
-					<datasetRun subDataset="Table Dataset 2" uuid="1aad7adc-a8cd-4d6d-86a3-56d6a81e847e">
+					<datasetRun subDataset="Saida" uuid="1aad7adc-a8cd-4d6d-86a3-56d6a81e847e">
 						<datasetParameter name="end">
 							<datasetParameterExpression><![CDATA[$P{end}]]></datasetParameterExpression>
 						</datasetParameter>

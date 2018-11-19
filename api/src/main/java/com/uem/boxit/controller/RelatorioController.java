@@ -41,13 +41,13 @@ public class RelatorioController {
         parametros.put("vstart",vstart);
         parametros.put("vend",vend);
         JasperPrint print;
-        if(dto.getTipo() == 5) {
+        if (dto.getTipo() == 2) {
             try {
-                print = JasperFillManager.fillReport(caminho+"RelatorioReceitas.jasper", parametros, Conexao.getConnection());
+                print = JasperFillManager.fillReport(caminho+"RelatorioEstoque.jasper", parametros, Conexao.getConnection());
                 JRPdfExporter exporter = new JRPdfExporter();
                 ExporterInput exporterInput = new SimpleExporterInput(print);
                 exporter.setExporterInput(exporterInput);
-                OutputStreamExporterOutput exporterOutput = new SimpleOutputStreamExporterOutput(caminho+"RelatorioReceitas.pdf");
+                OutputStreamExporterOutput exporterOutput = new SimpleOutputStreamExporterOutput(caminho+"RelatorioEstoque.pdf");
                 exporter.setExporterOutput(exporterOutput);
                 SimplePdfExporterConfiguration configuration = new SimplePdfExporterConfiguration();
                 exporter.setConfiguration(configuration);
@@ -55,8 +55,7 @@ public class RelatorioController {
             } catch (JRException e) {
                 e.printStackTrace();
             }
-        }
-        else if(dto.getTipo() == 3) {
+        } else if (dto.getTipo() == 3) {
             parametros.put("CNPJ", dto.getCNPJ());
             try {
                 print = JasperFillManager.fillReport(caminho+"HistoricoComprador.jasper", parametros, Conexao.getConnection());
@@ -64,6 +63,20 @@ public class RelatorioController {
                 ExporterInput exporterInput = new SimpleExporterInput(print);
                 exporter.setExporterInput(exporterInput);
                 OutputStreamExporterOutput exporterOutput = new SimpleOutputStreamExporterOutput(caminho+"HistoricoComprador.pdf");
+                exporter.setExporterOutput(exporterOutput);
+                SimplePdfExporterConfiguration configuration = new SimplePdfExporterConfiguration();
+                exporter.setConfiguration(configuration);
+                exporter.exportReport();
+            } catch (JRException e) {
+                e.printStackTrace();
+            }
+        } else if (dto.getTipo() == 5) {
+            try {
+                print = JasperFillManager.fillReport(caminho+"RelatorioReceitas.jasper", parametros, Conexao.getConnection());
+                JRPdfExporter exporter = new JRPdfExporter();
+                ExporterInput exporterInput = new SimpleExporterInput(print);
+                exporter.setExporterInput(exporterInput);
+                OutputStreamExporterOutput exporterOutput = new SimpleOutputStreamExporterOutput(caminho+"RelatorioReceitas.pdf");
                 exporter.setExporterOutput(exporterOutput);
                 SimplePdfExporterConfiguration configuration = new SimplePdfExporterConfiguration();
                 exporter.setConfiguration(configuration);
