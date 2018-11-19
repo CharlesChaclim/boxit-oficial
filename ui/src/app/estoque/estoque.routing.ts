@@ -9,8 +9,9 @@ const routes: Routes = [
   {path: 'estoque/new', component: CadastrarComponent},
   {path: 'estoque', component: ListarComponent},
   {path: 'estoque/:id', component: EditarComponent},
-  {path: 'estoque/:id/:edit', component: EditarComponent},
-  {path: 'estoque/:id/:edit/:quantidade', component: QuantidadeComponent}
+  {path: 'estoque/:id/quantidade', component: QuantidadeComponent},
+  {path: 'estoque/:id/:edit', component: EditarComponent}
+
 ];
 
 export const EstoqueRoute: ModuleWithProviders = RouterModule.forChild(routes);

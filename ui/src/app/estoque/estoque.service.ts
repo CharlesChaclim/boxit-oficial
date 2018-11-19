@@ -67,8 +67,8 @@ export class EstoqueService {
     return this.http.put(this.url + produto['id'], JSON.stringify(produto), {headers: headers});
   }
 
-  atualizarQtd(produto: AlterarQuantidade) {
+  atualizarQtd(produto: AlterarQuantidade, id: string) {
     const headers = new HttpHeaders().set('Content-type', 'application/json');
-    return this.http.put(this.url + produto['id'] + '/quantidade', JSON.stringify(produto), {headers: headers});
+    return this.http.put(this.url + id + '/quantidade', JSON.stringify(produto), {headers: headers});
   }
 }

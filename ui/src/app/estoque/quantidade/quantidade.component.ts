@@ -13,13 +13,18 @@ export class QuantidadeComponent implements OnInit {
   q = new AlterarQuantidade();
   qtd_valida = false;
   preco_valido = false;
+  prodID: string;
 
   constructor(
     private estoqueService: EstoqueService,
     private router: Router,
     private toastr: ToastrService,
     private activatedRoute: ActivatedRoute
-  ) { }
+  ) {
+    this.activatedRoute.paramMap.subscribe(params => {
+      this.prodID = params.get('id');
+    });
+  }
 
   ngOnInit() {
   }
@@ -33,10 +38,7 @@ export class QuantidadeComponent implements OnInit {
   }
 
   cadastrar() {
-    if (!((this.q.motivo === 1) || (this.q.motivo === 4))) {
-      this.q.qtd *= -1;
-    }
-    this.estoqueService.atualizarQtd(this.q).subscribe(
+    this.estoqueService.atualizarQtd(this.q, this.prodID).subscribe(
       r => {
         this.router.navigate(['/estoque']);
         this.toastr.success('Produto atualizado com sucesso!');

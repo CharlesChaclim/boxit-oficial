@@ -27,8 +27,6 @@ export class GerarComponent implements OnInit {
   dataFclick = false;
   data_valida = false;
   type: number;
-  typeC: number;
-  typeE: number;
 
   constructor(
     private relatorioService: RelatorioService,

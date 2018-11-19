@@ -10,11 +10,12 @@ export class RelatorioService {
   private url = `${environment.api_url}relatorio/`;
 
   constructor(
-    private http: HttpClient,
+    private http: HttpClient
   ) { }
 
   geraRelatorio(relatorio: Relatorio) {
     const headers = new HttpHeaders().set('Content-type', 'application/json');
+    console.log(relatorio);
     return this.http.put(this.url, JSON.stringify(relatorio), {headers: headers});
   }
 }

@@ -10,9 +10,9 @@ public class Conexao {
     private static Connection connection;
 
     public static Connection getConnection() {
-        String datasource = "jdbc:mysql://localhost:3306/boxit_api??createDatabaseIfNotExist=true&useSSL=false&useTimezone=true&serverTimezone=GMT-3&allowPublicKeyRetrieval=true";
+        String datasource = "jdbc:mysql://localhost:3306/boxit_api?createDatabaseIfNotExist=true&useSSL=false&useTimezone=true&serverTimezone=GMT-3&allowPublicKeyRetrieval=true";
         String username = "root";
-        String password = "root";
+        String password = "";
         if (connection == null) {
             try {
                 connection = DriverManager.getConnection(datasource, username, password);

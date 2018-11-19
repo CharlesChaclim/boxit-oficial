@@ -108,6 +108,7 @@ export class Relatorio {
   dataFim: Date;
   tipo: number;
   CNPJ: string;
+  SKU: string;
   estado: string;
   cidade: string;
 }

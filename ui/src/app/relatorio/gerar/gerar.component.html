@@ -55,7 +55,7 @@
             <div class="form-group row" *ngIf="r.tipo == 2 || r.tipo == 4">
               <label class="col-md-3 col-form-label">Código do Produto <span class="text-danger">*</span></label>
               <div class="col-md-9">
-                <select class="custom-select" name="produto" #prod="ngModel" required [(ngModel)]="typeE" [ngModelOptions]="{standalone: true}">
+                <select class="custom-select" name="produto" #prod="ngModel" required [(ngModel)]="r.SKU" [ngModelOptions]="{standalone: true}">
                   <option value="">Escolha um produto</option>
                   <option *ngFor="let e of estoque" value="{{e.sku}}">{{e.sku}}</option>
                 </select>
@@ -66,7 +66,7 @@
         <div class="row">
           <div class="col">
             <button href="#" class="btn btn-block btn-primary" (click)="gerarPDF()" type="submit"
-                    [disabled]="rform.invalid || !data_valida || ret.invalid || (prod.invalid && (r.tipo == 2 || r.tipo == 4)) || (cli.invalid && r.tipo == 3)">Gerar PDF
+                    [disabled]="rform.invalid || !data_valida || ret.invalid">Gerar PDF
             </button>
           </div>
           <div class="col">

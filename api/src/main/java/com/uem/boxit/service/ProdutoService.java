@@ -115,6 +115,9 @@ public class ProdutoService {
         PrecoCompra c = new PrecoCompra();
         Calendar calendario = Calendar.getInstance();
         Date data = calendario.getTime();
+        if ((qtd.getMotivo() != 1) || (qtd.getMotivo() != 4)) {
+            qtd.setQtd(qtd.getQtd() * -1);
+        }
         p.setQtd(qtd.getQtd() + p.getQtd());
         if (qtd.getMotivo() == 1) {
             c.setDataAtualizacao(data);
@@ -122,10 +125,12 @@ public class ProdutoService {
             c.setProduto(p);
             c.setQuantidade(qtd.getQtd());
             precoCompraRepository.save(c);
+            q.setPreco(qtd.getPrecoCompra());
+        } else if (qtd.getMotivo() == 5) {
+            q.setMotivoOutro(qtd.getMotivoOutro());
         }
         q.setMotivo(qtd.getMotivo());
-        q.setMotivoOutro(qtd.getMotivoOutro());
-        q.setPreco(qtd.getPrecoCompra());
+        q.setProduto(p);
         q.setQuantidade(qtd.getQtd());
         quantidadeRepository.save(q);
         return produtoRepository.save(p);
