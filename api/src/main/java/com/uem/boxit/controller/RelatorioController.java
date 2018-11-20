@@ -38,7 +38,21 @@ public class RelatorioController {
         parametros.put("vstart",vstart);
         parametros.put("vend",vend);
         JasperPrint print;
-        if (dto.getTipo() == 2) {
+        if (dto.getTipo() == 1) {
+            try {
+                print = JasperFillManager.fillReport(caminho+"RelatorioContas.jasper", parametros, Conexao.getConnection());
+                JRPdfExporter exporter = new JRPdfExporter();
+                ExporterInput exporterInput = new SimpleExporterInput(print);
+                exporter.setExporterInput(exporterInput);
+                OutputStreamExporterOutput exporterOutput = new SimpleOutputStreamExporterOutput(caminho+"RelatorioContas.pdf");
+                exporter.setExporterOutput(exporterOutput);
+                SimplePdfExporterConfiguration configuration = new SimplePdfExporterConfiguration();
+                exporter.setConfiguration(configuration);
+                exporter.exportReport();
+            } catch (JRException e) {
+                e.printStackTrace();
+            }
+        } else if (dto.getTipo() == 2) {
             parametros.put("sku", dto.getSku());
             try {
                 print = JasperFillManager.fillReport(caminho+"RelatorioEstoque.jasper", parametros, Conexao.getConnection());

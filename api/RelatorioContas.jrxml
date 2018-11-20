@@ -1,0 +1,291 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="RelatoriosContas" language="groovy" pageWidth="595" pageHeight="842" whenNoDataType="AllSectionsNoDetail" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="4afe3c95-f706-450a-9c48-9344dcf517d4">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="144"/>
+	<style name="table">
+		<box>
+			<pen lineWidth="1.0" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_TH" mode="Opaque" backcolor="#73B0E6">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_CH" mode="Opaque" backcolor="#CFDBE6">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 1">
+		<box>
+			<pen lineWidth="1.0" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 1_TH" mode="Opaque" backcolor="#73B0E6">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 1_CH" mode="Opaque" backcolor="#CFDBE6">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 1_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<subDataset name="Table Dataset 1" uuid="43db5d82-ebfa-442e-ad4c-07fbccfe1f61">
+		<parameter name="start" class="java.lang.String"/>
+		<parameter name="end" class="java.lang.String"/>
+		<queryString>
+			<![CDATA[SELECT
+     pedido.`create_at` AS pedido_create_at,
+     usuario.`cnpj` AS usuario_cnpj,
+     pagamento.`data_vencimento` AS pagamento_data_vencimento,
+     pagamento.`preco_total` AS pagamento_preco_total,
+	pagamento.pago,
+pagamento.id
+FROM
+     `usuario` usuario INNER JOIN `pedido` pedido ON usuario.`id` = pedido.`cliente_id`
+     INNER JOIN `pagamento` pagamento ON pedido.`id` = pagamento.`pedido_id`
+WHERE
+     pedido.`create_at` <= $P{end}
+     and pedido.`create_at` >= $P{start} and pagamento.pago = false]]>
+		</queryString>
+		<field name="pedido_create_at" class="java.sql.Timestamp"/>
+		<field name="usuario_cnpj" class="java.lang.String"/>
+		<field name="pagamento_data_vencimento" class="java.sql.Timestamp"/>
+		<field name="pagamento_preco_total" class="java.lang.Double"/>
+		<field name="pago" class="java.lang.Boolean">
+			<fieldDescription><![CDATA[]]></fieldDescription>
+		</field>
+		<field name="id" class="java.lang.Integer">
+			<fieldDescription><![CDATA[]]></fieldDescription>
+		</field>
+	</subDataset>
+	<subDataset name="sda" uuid="12625567-bb95-4b20-ade0-f5f9bdd134d0">
+		<parameter name="start" class="java.lang.String"/>
+		<parameter name="end" class="java.lang.String"/>
+		<queryString>
+			<![CDATA[SELECT
+     sum(pagamento.preco_total)
+FROM
+     `usuario` usuario INNER JOIN `pedido` pedido ON usuario.`id` = pedido.`cliente_id`
+     INNER JOIN `pagamento` pagamento ON pedido.`id` = pagamento.`pedido_id`
+WHERE
+     pedido.`create_at` <= $P{end}
+     and pedido.`create_at` >= $P{start} and pagamento.pago = false]]>
+		</queryString>
+		<field name="sum(pagamento.preco_total)" class="java.lang.Double"/>
+	</subDataset>
+	<parameter name="vend" class="java.lang.String"/>
+	<parameter name="vstart" class="java.lang.String"/>
+	<parameter name="start" class="java.lang.String"/>
+	<parameter name="end" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[select 1 from dual]]>
+	</queryString>
+	<field name="1" class="java.lang.Long"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="92" splitType="Stretch">
+			<staticText>
+				<reportElement x="10" y="10" width="84" height="20" uuid="b7aa76ad-e7d4-4867-b96d-a73a5138951d"/>
+				<text><![CDATA[Data de Emissão:]]></text>
+			</staticText>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="94" y="10" width="100" height="20" uuid="6c98d662-81b5-4abc-991b-0b817721f036"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="106" y="30" width="53" height="20" uuid="a965c776-c649-4b22-8016-d8429a2eee8e"/>
+				<textFieldExpression><![CDATA[$P{vend}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="10" y="30" width="41" height="20" uuid="4175122e-d044-42bf-99a2-80ed8d2f1fc7"/>
+				<text><![CDATA[Periodo:]]></text>
+			</staticText>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="51" y="30" width="51" height="20" uuid="d2aca6f2-5049-4d46-8873-0207c4fdd189"/>
+				<textFieldExpression><![CDATA[$P{vstart}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="102" y="30" width="4" height="20" uuid="9338e328-0b1f-4962-92d2-fe31e3760886"/>
+				<text><![CDATA[-]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="449" y="0" width="66" height="20" uuid="ee0bcd25-4933-4fe4-9a2a-d20f2e231f68"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA["Pagina "+$V{PAGE_NUMBER}+" de"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="515" y="0" width="40" height="20" uuid="0c268ab4-5032-4caf-8964-cef4941e0c6a"/>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="57" width="555" height="35" uuid="48dd4178-0b78-4931-99a7-92c065bafdd3"/>
+				<textElement textAlignment="Center">
+					<font size="24"/>
+				</textElement>
+				<text><![CDATA[RELATÓRIO DE CONTAS A RECEBER]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="35" splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="61" splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band height="125" splitType="Stretch">
+			<componentElement>
+				<reportElement key="table" style="table" x="0" y="0" width="555" height="125" uuid="c2d5d295-d345-47f7-9507-3b9d2c9f5eac"/>
+				<jr:table xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd" whenNoDataType="AllSectionsNoDetail">
+					<datasetRun subDataset="Table Dataset 1" uuid="7f59f6f3-8994-4c18-bf38-237d7e78af10">
+						<datasetParameter name="start">
+							<datasetParameterExpression><![CDATA[$P{start}]]></datasetParameterExpression>
+						</datasetParameter>
+						<datasetParameter name="end">
+							<datasetParameterExpression><![CDATA[$P{end}]]></datasetParameterExpression>
+						</datasetParameter>
+						<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+					</datasetRun>
+					<jr:column width="107" uuid="829854b0-98c6-4d8e-bb00-f1868d25cfb7">
+						<jr:tableHeader style="table_TH" height="30" rowSpan="1">
+							<staticText>
+								<reportElement x="0" y="0" width="107" height="30" uuid="bbe8c78a-af55-4378-86bc-f8c983fbdf3e"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<text><![CDATA[Número da Compra]]></text>
+							</staticText>
+						</jr:tableHeader>
+						<jr:detailCell style="table_TD" height="30" rowSpan="1">
+							<textField>
+								<reportElement positionType="Float" stretchType="RelativeToBandHeight" x="0" y="0" width="107" height="30" uuid="a893f13b-0b49-49aa-a151-17f6b351fb93"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<textFieldExpression><![CDATA[$F{id}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="104" uuid="20d25c32-e4af-405a-abea-46dd2c93dc2d">
+						<jr:tableHeader style="table_TH" height="30" rowSpan="1">
+							<staticText>
+								<reportElement x="0" y="0" width="104" height="30" uuid="b692a8aa-ec14-4aa0-93b3-b77fcf4eef7a"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<text><![CDATA[CNPJ do Comprador]]></text>
+							</staticText>
+						</jr:tableHeader>
+						<jr:detailCell style="table_TD" height="30" rowSpan="1">
+							<textField>
+								<reportElement x="0" y="0" width="104" height="30" uuid="e87b63cc-2cbb-4709-a2da-cc3a366243d3"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<textFieldExpression><![CDATA[$F{usuario_cnpj}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="123" uuid="cb68710b-ddbc-4803-a8fb-9c9b7ac62ebe">
+						<jr:tableHeader style="table_TH" height="30" rowSpan="1">
+							<staticText>
+								<reportElement x="0" y="0" width="123" height="30" uuid="ff95bd63-53fa-4b98-ac64-95b3193f2a9a"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<text><![CDATA[Data de Compra]]></text>
+							</staticText>
+						</jr:tableHeader>
+						<jr:detailCell style="table_TD" height="30" rowSpan="1">
+							<textField pattern="dd/MM/yyyy">
+								<reportElement x="0" y="0" width="123" height="30" uuid="e858cf40-0f22-4acf-a973-030b8ef4f6d0"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<textFieldExpression><![CDATA[$F{pedido_create_at}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="123" uuid="441338ec-4926-4261-9e3a-0cb243f38877">
+						<jr:tableHeader style="table_TH" height="30" rowSpan="1">
+							<staticText>
+								<reportElement x="0" y="0" width="123" height="30" uuid="bed5e44f-f93a-4468-90a1-3f0b3e4c730b"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<text><![CDATA[Data de Vencimento]]></text>
+							</staticText>
+						</jr:tableHeader>
+						<jr:detailCell style="table_TD" height="30" rowSpan="1">
+							<textField pattern="dd/MM/yyyy">
+								<reportElement x="0" y="0" width="123" height="30" uuid="95c852a7-0d3e-4bcd-a9d1-480daa1a8632"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<textFieldExpression><![CDATA[$F{pagamento_data_vencimento}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="96" uuid="1c797cd0-a098-497b-9f5b-260cbc91871d">
+						<jr:tableHeader style="table_TH" height="30" rowSpan="1">
+							<staticText>
+								<reportElement x="0" y="0" width="96" height="30" uuid="ad900ed8-97cc-48dc-a1b2-4c00ecc573ee"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<text><![CDATA[Valor da Parcela (R$)]]></text>
+							</staticText>
+						</jr:tableHeader>
+						<jr:detailCell style="table_TD" height="30" rowSpan="1">
+							<textField pattern="¤ #,##0.00">
+								<reportElement x="0" y="0" width="85" height="30" uuid="7da3f4a3-2ff5-4ba9-807b-a12fd3d69124"/>
+								<textElement textAlignment="Right" verticalAlignment="Middle"/>
+								<textFieldExpression><![CDATA[$F{pagamento_preco_total}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+				</jr:table>
+			</componentElement>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="79" splitType="Stretch">
+			<componentElement>
+				<reportElement key="table 1" style="table 1" x="324" y="0" width="191" height="60" uuid="6364f32c-af3f-4f56-a484-c761918813e7"/>
+				<jr:table xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
+					<datasetRun subDataset="sda" uuid="9bcc1f4c-484b-487b-96bc-034cfb52fced">
+						<datasetParameter name="start">
+							<datasetParameterExpression><![CDATA[$P{start}]]></datasetParameterExpression>
+						</datasetParameter>
+						<datasetParameter name="end">
+							<datasetParameterExpression><![CDATA[$P{end}]]></datasetParameterExpression>
+						</datasetParameter>
+						<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+					</datasetRun>
+					<jr:column width="90" uuid="622a1323-2253-415c-9eb0-194fb2406fbe">
+						<jr:detailCell style="table 1_TD" height="20" rowSpan="1">
+							<staticText>
+								<reportElement style="table_TH" x="0" y="0" width="90" height="20" uuid="4a1f09c5-64a9-4491-aafb-9b4475e3d802"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<text><![CDATA[Total]]></text>
+							</staticText>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="100" uuid="db7e24a2-80da-4467-92dc-c216c4eb007f">
+						<jr:detailCell style="table 1_TD" height="20" rowSpan="1">
+							<textField pattern="¤ #,##0.00">
+								<reportElement x="0" y="0" width="89" height="20" uuid="1c9f1765-876a-4428-a0cb-27fc94fd6d71"/>
+								<textElement textAlignment="Right" verticalAlignment="Middle"/>
+								<textFieldExpression><![CDATA[$F{sum(pagamento.preco_total)}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+				</jr:table>
+			</componentElement>
+		</band>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>
