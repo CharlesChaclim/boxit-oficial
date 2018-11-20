@@ -7,7 +7,7 @@ import {Router} from '@angular/router';
 import {ToastrService} from 'ngx-toastr';
 import {NgbDateCustomParserFormatter} from '../../shared/dateformat';
 import {NgbDateParserFormatter} from '@ng-bootstrap/ng-bootstrap';
-import swal from "sweetalert2";
+import swal from 'sweetalert2';
 
 @Component({
   selector: 'app-gerar',

@@ -16,6 +16,7 @@ export class EditarComponent implements OnInit {
   catID: string;
   nome_valido = false;
   edit = false;
+  title: string;
 
   constructor(
     private categoriaService: CategoriaService,
@@ -43,6 +44,11 @@ export class EditarComponent implements OnInit {
     this.categoriaService.getOne(this.catID).subscribe(
       s => {
         this.c = s;
+        if (this.edit) {
+          this.title = 'Editar a categoria ' + this.c.nome;
+        } else {
+          this.title = 'Detalhes da categoria ' + this.c.nome;
+        }
       }, () => {
         swal(
           'Erro!',

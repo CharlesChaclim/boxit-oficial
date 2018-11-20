@@ -17,11 +17,8 @@
         <a (click)="toggle()" class="dropdown-item" routerLink="/relatorio/new"><i class="fal fa-clipboard"></i> Relatórios</a>
       </li>
       <li ngbDropdown class="nav-item dropdown" *ngIf="ehGerente || ehFuncionario">
-        <a id="topbar-cliente" class="dropdown-toggle" style="cursor: pointer;" role="button" ngbDropdownToggle><i
+        <a (click)="toggle()" class="dropdown-item" routerLink="/cliente"><i
           class="fal fa-user"></i> Cliente</a>
-        <div ngbDropdownMenu aria-labelledby="topbar-cliente" class="dropdown-menu">
-          <a (click)="toggle()" class="dropdown-item" routerLink="/cliente"><i class="fal fa-list-ul"></i> Listar</a>
-        </div>
       </li>
       <li ngbDropdown class="nav-item dropdown" *ngIf="ehGerente">
         <a id="topbar-funcionario" class="dropdown-toggle" style="cursor: pointer;" role="button" ngbDropdownToggle><i
