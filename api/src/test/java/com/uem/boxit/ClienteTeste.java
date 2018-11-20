@@ -27,96 +27,123 @@ public class ClienteTeste extends BoxitApplicationTests{
     @Test
     public void getOne(){
         int id = 2;
-        String nomeFantasia = "Joana d'Arc";
+        String nomeFantasia = "Senor Abravanel";
         Assertions.assertThat(clienteService.getOne(id).get().getNome()).isEqualTo(nomeFantasia);
     }
 
     @Test
     public void getOneCnpj(){
-        Assertions.assertThat(clienteService.getOneCnpj("78.966.326/0001-65")).isEqualTo(11);
+        Assertions.assertThat(clienteService.getOneCnpj("45.997.418/0001-53")).isEqualTo(2);
     }
 
 
     @Test
     public void create(){
         NewClienteDTO cliente = new NewClienteDTO();
-        cliente.setNomeFantasia("Uem | Universidade Estadual De Maringa");
-        cliente.setCnpj("78.966.326/0001-65");
-        cliente.setCep("87020-900");
-        cliente.setComplemento("");
-        cliente.setEndereco("Av. Colombo");
-        cliente.setBairro("Jd. Universitário");
-        cliente.setNumero("5790");
-        cliente.setCidade("Maringá");
-        cliente.setEstado("Paraná");
-        cliente.setNome("Joana d'Arc");
-        cliente.setCpf("837.498.090-70");
-        cliente.setTelefone("(44) 99828-2751");
-        cliente.setEmail("joansdadadaa@gmail.commjhbb");
+        String nomeFantasia = "Uem | Universidade Estadual De Maringa";
+        String cnpj = "78.966.326/0001-65";
+        String cep ="87020-900";
+        String complemento ="";
+        String endereco ="Av. Colombo";
+        String bairro = "Jd. Universitário";
+        String numero = "5790";
+        String cidade = "Maringá";
+        String estado = "Paraná";
+        String nome = "Joana d'Arc";
+        String cpf = "837.498.090-70";
+        String telefone = "(44) 99828-2751";
+        String email = "joanadarc@gmail.com";
+        cliente.setNomeFantasia(nomeFantasia);
+        cliente.setCnpj(cnpj);
+        cliente.setCep(cep);
+        cliente.setComplemento(complemento);
+        cliente.setEndereco(endereco);
+        cliente.setBairro(bairro);
+        cliente.setNumero(numero);
+        cliente.setCidade(cidade);
+        cliente.setEstado(estado);
+        cliente.setNome(nome);
+        cliente.setCpf(cpf);
+        cliente.setTelefone(telefone);
+        cliente.setEmail(email);
         cliente.setPassword("NewYor22k");
         Cliente cliente2 = clienteService.create(cliente);
-        Assertions.assertThat(cliente2.getNomeFantasia()).isEqualTo("Uem | Universidade Estadual De Maringa");
-        Assertions.assertThat(cliente2.getCnpj()).isEqualTo("78.966.326/0001-65");
-        Assertions.assertThat(cliente2.getEndereco().getCep()).isEqualTo("87020-900");
-        Assertions.assertThat(cliente2.getEndereco().getComplemento()).isEqualTo("");
-        Assertions.assertThat(cliente2.getEndereco().getEndereco()).isEqualTo("Av. Colombo");
-        Assertions.assertThat(cliente2.getEndereco().getBairro()).isEqualTo("Jd. Universitário");
-        Assertions.assertThat(cliente2.getEndereco().getNumero()).isEqualTo("5790");
-        Assertions.assertThat(cliente2.getEndereco().getCidade()).isEqualTo("Maringá");
-        Assertions.assertThat(cliente2.getEndereco().getEstado()).isEqualTo("Paraná");
-        Assertions.assertThat(cliente2.getNome()).isEqualTo("Joana d'Arc");
-        Assertions.assertThat(cliente2.getCpf()).isEqualTo("837.498.090-70");
-        Assertions.assertThat(cliente2.getTelefone()).isEqualTo("(44) 99828-2751");
-        Assertions.assertThat(cliente2.getEmail()).isEqualTo("joansdadadaa@gmail.commjhbb");
+        Assertions.assertThat(cliente2.getNomeFantasia()).isEqualTo(nomeFantasia);
+        Assertions.assertThat(cliente2.getCnpj()).isEqualTo(cnpj);
+        Assertions.assertThat(cliente2.getEndereco().getCep()).isEqualTo(cep);
+        Assertions.assertThat(cliente2.getEndereco().getComplemento()).isEqualTo(complemento);
+        Assertions.assertThat(cliente2.getEndereco().getEndereco()).isEqualTo(endereco);
+        Assertions.assertThat(cliente2.getEndereco().getBairro()).isEqualTo(bairro);
+        Assertions.assertThat(cliente2.getEndereco().getNumero()).isEqualTo(numero);
+        Assertions.assertThat(cliente2.getEndereco().getCidade()).isEqualTo(cidade);
+        Assertions.assertThat(cliente2.getEndereco().getEstado()).isEqualTo(estado);
+        Assertions.assertThat(cliente2.getNome()).isEqualTo(nome);
+        Assertions.assertThat(cliente2.getCpf()).isEqualTo(cpf);
+        Assertions.assertThat(cliente2.getTelefone()).isEqualTo(telefone);
+        Assertions.assertThat(cliente2.getEmail()).isEqualTo(email);
 
     }
 
     @Test
     public void cnpjExist() {
-        String cnpj = "78.966.326/0001-65";
+        String cnpj = "45.997.418/0001-53";
         Assertions.assertThat(clienteService.cnpjExist(cnpj)).isEqualTo(true);
     }
 
     @Test
     public void update(){
         UpdateClienteDTO cliente = new UpdateClienteDTO();
-        cliente.setId(2);
-        cliente.setNomeFantasia("Universidade Estadual De Maringa");
-        cliente.setCnpj("48.718.420/0001-34");
+        int id = 3;
+        String nomeFantasia = "Universidade Estadual De Maringa";
+        String cnpj = "78.966.326/0001-65";
+        String cep ="87020-900";
+        String complemento ="";
+        String enderecof ="Av. Colombo";
+        String bairro = "Jd. Universitário";
+        String numero = "5790";
+        String cidade = "Maringá";
+        String estado = "Paraná";
+        String nome = "Joana d'Arc";
+        String cpf = "837.498.090-70";
+        String telefone = "(44) 99828-2751";
+        String email = "joanadarc@gmail.com";
+        cliente.setId(id);
+        cliente.setNomeFantasia(nomeFantasia);
+        cliente.setCnpj(cnpj);
         Endereco endereco = new Endereco();
-        endereco.setCep("87020-900");
-        endereco.setComplemento("");
-        endereco.setBairro("Jd. Universitário");
-        endereco.setNumero("5790");
-        endereco.setCidade("Maringá");
-        endereco.setEstado("Paraná");
-        endereco.setEndereco("Av. Colombo");
+        endereco.setCep(cep);
+        endereco.setComplemento(complemento);
+        endereco.setBairro(bairro);
+        endereco.setNumero(numero);
+        endereco.setCidade(cidade);
+        endereco.setEstado(estado);
+        endereco.setEndereco(enderecof);
         cliente.setEndereco(endereco);
-        cliente.setNome("Joana d'Arc");
-        cliente.setCpf("837.498.090-70");
-        cliente.setTelefone("(44) 99828-2751");
-        cliente.setEmail("jodsadadana@gmail.commmm");
+        cliente.setNome(nome);
+        cliente.setCpf(cpf);
+        cliente.setTelefone(telefone);
+        cliente.setEmail(email);
         cliente.setPassword("NewYork");
-        Cliente cliente2 = clienteService.update(0,cliente);
-        Assertions.assertThat(cliente2.getNomeFantasia()).isEqualTo("Universidade Estadual De Maringa");
-        Assertions.assertThat(cliente2.getCnpj()).isEqualTo("48.718.420/0001-34");
-        Assertions.assertThat(cliente2.getEndereco().getCep()).isEqualTo("87020-900");
-        Assertions.assertThat(cliente2.getEndereco().getComplemento()).isEqualTo(null);
-        Assertions.assertThat(cliente2.getEndereco().getEndereco()).isEqualTo("Av. Colombo");
-        Assertions.assertThat(cliente2.getEndereco().getBairro()).isEqualTo("Jd. Universitário");
-        Assertions.assertThat(cliente2.getEndereco().getNumero()).isEqualTo("5790");
-        Assertions.assertThat(cliente2.getEndereco().getCidade()).isEqualTo("Maringá");
-        Assertions.assertThat(cliente2.getEndereco().getEstado()).isEqualTo("Paraná");
-        Assertions.assertThat(cliente2.getNome()).isEqualTo("Joana d'Arc");
-        Assertions.assertThat(cliente2.getCpf()).isEqualTo("837.498.090-70");
-        Assertions.assertThat(cliente2.getTelefone()).isEqualTo("(44) 99828-2751");
-        Assertions.assertThat(cliente2.getEmail()).isEqualTo("jodsadadana@gmail.commmm");
+        Cliente cliente2 = clienteService.update(id,cliente);
+        Assertions.assertThat(cliente2.getNomeFantasia()).isEqualTo(nomeFantasia);
+        Assertions.assertThat(cliente2.getCnpj()).isEqualTo(cnpj);
+        Assertions.assertThat(cliente2.getEndereco().getCep()).isEqualTo(cep);
+        Assertions.assertThat(cliente2.getEndereco().getComplemento()).isEqualTo(complemento);
+        Assertions.assertThat(cliente2.getEndereco().getEndereco()).isEqualTo(enderecof);
+        Assertions.assertThat(cliente2.getEndereco().getBairro()).isEqualTo(bairro);
+        Assertions.assertThat(cliente2.getEndereco().getNumero()).isEqualTo(numero);
+        Assertions.assertThat(cliente2.getEndereco().getCidade()).isEqualTo(cidade);
+        Assertions.assertThat(cliente2.getEndereco().getEstado()).isEqualTo(estado);
+        Assertions.assertThat(cliente2.getNome()).isEqualTo(nome);
+        Assertions.assertThat(cliente2.getCpf()).isEqualTo(cpf);
+        Assertions.assertThat(cliente2.getTelefone()).isEqualTo(telefone);
+        Assertions.assertThat(cliente2.getEmail()).isEqualTo(email);
     }
 
     @Test
     public void filtrar() {
-        String nome = "Coca-Cola";
-        String cnpj = "30.437.467/0001-64";
+        String nome = "Senor Abravanel";
+        String cnpj = "45.997.418/0001-53";
         String nomeFantasia = "Coca-Cola";
         Pageable p = new PageRequest(0,20);
         Assertions.assertThat(clienteService.filtrar(nome,cnpj,nomeFantasia,2,p).getContent().get(0).getCnpj()).isEqualTo(cnpj);
@@ -126,7 +153,8 @@ public class ClienteTeste extends BoxitApplicationTests{
     @Test
     public void updateCnpj(){
         Cliente cliente = new Cliente();
-        cliente.setCnpj("30.437.467/0001-64");
-        Assertions.assertThat(clienteService.updateCnpj(2,cliente).getCnpj()).isEqualTo("30.437.467/0001-64");
+        String cnpj = "01.582.705/0001-27";
+        cliente.setCnpj(cnpj);
+        Assertions.assertThat(clienteService.updateCnpj(2,cliente).getCnpj()).isEqualTo(cnpj);
     }
 }
