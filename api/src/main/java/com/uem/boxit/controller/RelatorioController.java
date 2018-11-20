@@ -6,13 +6,10 @@ import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.engine.export.JRPdfExporter;
 import net.sf.jasperreports.export.*;
-import net.sf.jasperreports.view.JasperViewer;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.File;
-import java.sql.Connection;
-import java.sql.DriverManager;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.HashMap;
@@ -24,7 +21,7 @@ import java.util.HashMap;
 )
 public class RelatorioController {
 
-    @PutMapping
+    @PostMapping
     public void mostraRelatorio(@RequestBody RelatorioDTO dto) {
         String caminho = new File("./").getAbsolutePath();
         caminho = caminho.substring(0, caminho.length() - 1);

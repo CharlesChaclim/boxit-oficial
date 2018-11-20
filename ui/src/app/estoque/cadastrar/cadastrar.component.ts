@@ -5,6 +5,7 @@ import {MyMaskUtil} from '../../shared/mask/my-mask.util';
 import {CategoriaService} from '../../categoria/categoria.service';
 import {Router} from '@angular/router';
 import {ToastrService} from 'ngx-toastr';
+import swal from 'sweetalert2';
 
 @Component({
   selector: 'app-cadastrar',
@@ -99,5 +100,26 @@ export class CadastrarComponent implements OnInit {
 
   back() {
     history.back();
+  }
+
+  help() {
+    swal({
+        title: 'Ajuda',
+        html: 'Nome é o nome do produto.' +
+          '<br> <br>' +
+          'Preço é o valor que o produto será vendido por unidade.' +
+          '<br> <br>' +
+          'Un/Lote é a quantidade do produto que cada lote possui.' +
+          '<br> <br>' +
+          'Código do Produto é o identificador do produto.' +
+          '<br> <br>' +
+          'Categoria é o tipo do produto.' +
+          '<br> <br>' +
+          'Descrição é a informação extra do produto.' +
+          '<br> <br>' +
+          'Os campos com * ao seu lado são obrigatórios.',
+        type: 'info'
+      }
+    );
   }
 }
