@@ -1,35 +1,34 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <a class="navbar-brand" routerLink="">
+  <a class="navbar-brand">
     <img src="assets/img/icon.png" width="30" height="30" alt=""> BoxIt
   </a>
-  <button class="navbar-toggler" type="button"
+  <button class="navbar-toggler" type="button" *ngIf="!showHome"
           (click)="toggle()" [attr.aria-expanded]="navbar"
           aria-controls="navbarText" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
-  <div class="collapse navbar-collapse" id="navbarText" [ngbCollapse]="!navbar">
+  <div class="collapse navbar-collapse" id="navbarText" [ngbCollapse]="!navbar" *ngIf="!showHome">
     <ul class="navbar-nav ml-auto">
       <li ngbDropdown class="nav-item dropdown">
-      <li class="nav-item">
+      <li class="nav-item" *ngIf="ehGerente || ehFuncionario">
         <a (click)="toggle()" class="dropdown-item" routerLink="/pagamento"><i class="fal fa-list-ul"></i> Pagamento</a>
       </li>
-      <li ngbDropdown class="nav-item dropdown">
-        <a id="topbar-cliente" class="dropdown-toggle" style="cursor: pointer;" role="button" ngbDropdownToggle><i
-          class="fal fa-user"></i> Cliente</a>
-        <div ngbDropdownMenu aria-labelledby="topbar-cliente" class="dropdown-menu">
-          <a (click)="toggle()" class="dropdown-item" routerLink="/cliente"><i class="fal fa-list-ul"></i> Listar</a>
-        </div>
+      <li class="nav-item" *ngIf="ehGerente || ehFuncionario">
+        <a (click)="toggle()" class="dropdown-item" routerLink="/relatorio/new"><i class="fal fa-clipboard"></i> Relatórios</a>
       </li>
-      <li ngbDropdown class="nav-item dropdown">
+      <li ngbDropdown class="nav-item dropdown" *ngIf="ehGerente || ehFuncionario">
+        <a (click)="toggle()" class="dropdown-item" routerLink="/cliente"><i
+          class="fal fa-user"></i> Cliente</a>
+      </li>
+      <li ngbDropdown class="nav-item dropdown" *ngIf="ehGerente">
         <a id="topbar-funcionario" class="dropdown-toggle" style="cursor: pointer;" role="button" ngbDropdownToggle><i
           class="fal fa-user"></i> Funcionario</a>
         <div ngbDropdownMenu aria-labelledby="topbar-funcionario" class="dropdown-menu">
           <a (click)="toggle()" class="dropdown-item" routerLink="/funcionario"><i class="fal fa-list-ul"></i> Listar</a>
           <a (click)="toggle()" class="dropdown-item" routerLink="/funcionario/new"><i class="fal fa-plus"></i> Novo</a>
-          <a (click)="toggle()" class="dropdown-item" routerLink="/relatorio/new"><i class="fal fa-clipboard"></i> Relatórios</a>
         </div>
       </li>
-      <li ngbDropdown class="nav-item dropdown">
+      <li ngbDropdown class="nav-item dropdown" *ngIf="ehGerente || ehFuncionario">
         <a id="topbar-produto" class="dropdown-toggle" style="cursor: pointer;" role="button" ngbDropdownToggle>
           <i class="fal fa-inventory"></i> Produto</a>
         <div ngbDropdownMenu aria-labelledby="topbar-produto" class="dropdown-menu">
@@ -42,7 +41,12 @@
         <a id="topbar-user" class="dropdown-toggle" style="cursor: pointer;" role="button" ngbDropdownToggle><i
           class="fal fa-user"></i>&nbsp;Minha Conta</a>
         <div ngbDropdownMenu aria-labelledby="topbar-pedido" class="dropdown-menu">
-          <a (click)="toggle()" class="dropdown-item" routerLink="/pedido"><i class="fal fa-list-ul"></i> Pedidos</a>
+          <a (click)="toggle()" class="dropdown-item" routerLink="/pedido" *ngIf="ehCliente"><i class="fal fa-list-ul"></i> Pedidos</a>
+          <a (click)="toggle()" class="dropdown-item" routerLink="/cliente/{{this.caminho}}" *ngIf="ehCliente"><i class="fal fa-eye"></i> Ver Perfil</a>
+          <a (click)="toggle()" class="dropdown-item" routerLink="/cliente/{{this.caminho}}/true" *ngIf="ehCliente"><i class="fal fa-edit"></i> Editar Perfil</a>
+          <a (click)="toggle()" class="dropdown-item" routerLink="/funcionario/{{this.caminho}}" *ngIf="ehFuncionario || ehGerente"><i class="fal fa-eye"></i> Ver Perfil</a>
+          <a (click)="toggle()" class="dropdown-item" routerLink="/funcionario/{{this.caminho}}/true" *ngIf="ehFuncionario || ehGerente"><i class="fal fa-edit"></i> Editar Perfil</a>
+          <a (click)="logout() ; toggle()"  routerLink="/login" class="dropdown-item"><i class="fal fa-sign-out-alt"></i> Sair</a>
         </div>
       </li>
     </ul>

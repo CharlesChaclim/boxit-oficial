@@ -1,27 +1,59 @@
 <div class="col-12 offset-lg-1 col-lg-10">
   <div class="card">
     <div class="card-header text-center">
+      <div class="col-12 col-md-12">
+        <a (click)="help()" class="text-dark" style="text-decoration: none; float: right"><i
+          class="fal fa-question-circle"></i></a>
+      </div>
       <h3>Alterar Quantidade de Produto</h3>
     </div>
     <div class="card-body">
       <form #qform="ngForm">
         <div class="form-row">
-          <div class="col-md-6">
+          <div class="col-md-12">
             <div class="form-group row">
-              <label class="col-md-4 col-form-label">Nome <span class="text-danger">*</span></label>
+              <label class="col-md-4 col-form-label">Motivo <span class="text-danger">*</span></label>
               <div class="col-md-8">
-                <input type="text" class="form-control" required [(ngModel)]="p.nome" placeholder="Memória RAM"
-                       name="nome" #nome="ngModel" (invalid)="nome_valido" (blur)="confirmaNome()"
-                       [ngClass]="((nome.invalid && nome.touched) || nome_valido) ? 'is-invalid' : ''">
-                <span class="text-danger" *ngIf="nome_valido">Nome já utilizado!</span>
+                <select class="custom-select" name="motivo" #mot="ngModel" required [(ngModel)]="q.motivo" [ngModelOptions]="{standalone: true}">
+                  <option value="">Escolha um motivo</option>
+                  <option value="1">Compra de produto</option>
+                  <option value="2">Perda ou Roubo</option>
+                  <option value="3">Contagem incorreta</option>
+                  <option value="4">Devolução</option>
+                  <option value="5">Outros</option>
+                </select>
+              </div>
+            </div>
+            <div class="form-group row" *ngIf="q.motivo == 5">
+              <label class="col-md-4 col-form-label">Descreva o motivo <span class="text-danger">*</span></label>
+              <div class="col-md-8">
+                <input type="text" class="form-control" required [(ngModel)]="q.motivoOutro" placeholder="Outro motivo"
+                       name="nome" #nome="ngModel"
+                       [ngClass]="(nome.invalid && nome.touched) ? 'is-invalid' : ''">
+              </div>
+            </div>
+            <div class="form-group row" *ngIf="q.motivo != 0">
+              <label class="col-md-4 col-form-label">Quantidade <span class="text-danger">*</span></label>
+              <div class="col-md-8">
+                <input type="number" class="form-control" required [(ngModel)]="q.qtd" name="qtd" #qtd="ngModel" (blur)="qtdPositiva()"
+                       [ngClass]="((qtd.invalid && qtd.touched) || qtd_valida) ? 'is-invalid' : ''">
+              </div>
+            </div>
+            <div class="form-group row" *ngIf="q.motivo == 1">
+              <label class="col-md-4 col-form-label">Valor gasto no item <span class="text-danger">*</span></label>
+              <div class="col-md-8">
+                <input type="text" class="form-control" required [(ngModel)]="q.precoCompra"
+                       placeholder="R$ 9.999,99" currencyMask name="precoCompra" #precoCompra="ngModel"
+                       [options]="{prefix: 'R$ ', thousands: '.', decimal: ','} " (blur)="precoPositivo()"
+                       [ngClass]="((precoCompra.invalid && precoCompra.touched) || preco_valido) ? 'is-invalid' : ''">
               </div>
             </div>
           </div>
         </div>
         <div class="row">
           <div class="col">
-            <button href="#" class="btn btn-block btn-primary" (click)="cadastrar()" type="submit"
-                    [disabled]="qform.invalid || preco_valido || qtd_valida || lote_valido || cat.invalid">Cadastrar
+            <button href="#" class="btn btn-block btn-primary" (click)="atualizar()" type="submit"
+                    [disabled]="(preco_valido && q.motivo == 1) || qform.invalid || qtd_valida">Atualizar
             </button>
           </div>
           <div class="col">

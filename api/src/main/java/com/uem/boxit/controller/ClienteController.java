@@ -41,6 +41,11 @@ public class ClienteController {
         return cliente.isPresent() ? ResponseEntity.ok(cliente.get()) : ResponseEntity.notFound().build();
     }
 
+    @PostMapping("/oneCnpj")
+    public Integer getOneCnpj(@RequestBody CnpjDTO dto) {
+        return clienteService.getOneCnpj(dto.getCnpj());
+    }
+
     @GetMapping("/filtro")
     public Page<Cliente> filtto(Pageable pageable, @RequestParam(required = false) String nome, @RequestParam(required = false) String cnpj, @RequestParam(required = false) String nomeFantasia, @RequestParam(required = true) Integer enable) {
         Page<Cliente> page = clienteService.filtrar(nome, cnpj, nomeFantasia, enable, pageable);

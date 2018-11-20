@@ -77,6 +77,12 @@ public class ProdutoController {
         return ResponseEntity.ok(prod);
     }
 
+    @PutMapping("/{id}/quantidade")
+    public ResponseEntity<Produto> atualizarQtd(@PathVariable Integer id, @RequestBody UpdateQtdDTO dto) {
+        Produto prod = produtoService.atualizarQuantidade(id, dto);
+        return ResponseEntity.ok(prod);
+    }
+
     @PutMapping("/{id}/enable")
     public ResponseEntity atualizarEnable(@PathVariable Integer id, @RequestBody EnableDTO dto) {
         produtoService.atualizarEnable(id, dto.getEnabled());

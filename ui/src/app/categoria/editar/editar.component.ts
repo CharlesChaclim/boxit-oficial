@@ -16,6 +16,7 @@ export class EditarComponent implements OnInit {
   catID: string;
   nome_valido = false;
   edit = false;
+  title: string;
 
   constructor(
     private categoriaService: CategoriaService,
@@ -43,6 +44,11 @@ export class EditarComponent implements OnInit {
     this.categoriaService.getOne(this.catID).subscribe(
       s => {
         this.c = s;
+        if (this.edit) {
+          this.title = 'Editar a categoria ' + this.c.nome;
+        } else {
+          this.title = 'Detalhes da categoria ' + this.c.nome;
+        }
       }, () => {
         swal(
           'Erro!',
@@ -85,5 +91,27 @@ export class EditarComponent implements OnInit {
 
   back() {
     history.back();
+  }
+
+  help() {
+    if (!this.edit) {
+      swal({
+          title: 'Ajuda',
+          html: 'Não é possível editar o conteúdo desta página pois ela é só para visualização e não para edição',
+          type: 'info'
+        }
+      );
+    } else {
+      swal({
+          title: 'Ajuda',
+          html: 'Nome é o nome da categoria.' +
+            '<br> <br>' +
+            'Os campos com * ao seu lado são obrigatórios.' +
+            '<br> <br>' +
+            'Caso não altere um campo, esse campo manterá os dados atuais.',
+          type: 'info'
+        }
+      );
+    }
   }
 }

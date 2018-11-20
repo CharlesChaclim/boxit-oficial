@@ -3,11 +3,10 @@ package com.uem.boxit.model;
 import lombok.Data;
 
 import javax.persistence.*;
-import java.util.Date;
 
 @Entity
 @Data
-public class PrecoCompra {
+public class Quantidade {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
@@ -16,9 +15,8 @@ public class PrecoCompra {
     @JoinColumn(name = "produto_id")
     private Produto produto;
 
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date dataAtualizacao;
-
     private int quantidade;
     private double preco;
+    private int motivo;
+    private String motivoOutro;
 }

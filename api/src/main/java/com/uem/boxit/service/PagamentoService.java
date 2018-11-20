@@ -42,12 +42,13 @@ public class PagamentoService {
         Pagamento pagamento = pagamentoRepository.getByNrBoleto(dto.getNrBoleto());
         Pedido pedido = pedidoRepository.getOne(pagamento.getPedido().getId());
         double multa=0;
-        double juros;
-        double diff = Math.abs(dto.getDataPagamento().getTime() - pagamento.getDataVencimento().getTime());
+        double juros=0;
+        double diff = dto.getDataPagamento().getTime() - pagamento.getDataVencimento().getTime();
         double diffDays = Math.ceil(diff / (1000 * 3600 * 24));
-        if(diffDays > 0)
+        if(diffDays > 0) {
             multa = (pagamento.getPreco() * 0.02);
-        juros = (diffDays * 0.00033 * pagamento.getPreco());
+            juros = (diffDays * 0.00033 * pagamento.getPreco());
+        }
         pagamento.setMulta(multa);
         pagamento.setJuros(juros);
         pagamento.setDataPagamento(dto.getDataPagamento());

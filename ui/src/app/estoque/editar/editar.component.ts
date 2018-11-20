@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {Estoque, EstoqueEdit} from '../../core/model';
+import {EstoqueEdit} from '../../core/model';
 import {EstoqueService} from '../estoque.service';
 import {CategoriaService} from '../../categoria/categoria.service';
 import {ActivatedRoute, Router} from '@angular/router';
@@ -19,6 +19,7 @@ export class EditarComponent implements OnInit {
   sku: string;
   nome_valido = false;
   preco_valido = false;
+  desconto_valido = false;
   lote_valido = false;
   categoria: any;
   edit = false;
@@ -68,6 +69,10 @@ export class EditarComponent implements OnInit {
     this.preco_valido = this.p.preco < 0;
   }
 
+  descontoValido() {
+    this.desconto_valido = !((this.p.desconto >= 0) && (this.p.desconto < this.p.preco));
+  }
+
   lotePositivo() {
     this.lote_valido = this.p.unidadeLote <= 0;
   }
@@ -101,7 +106,7 @@ export class EditarComponent implements OnInit {
   editar() {
     this.estoqueService.update(this.p).subscribe(() => {
         this.router.navigate(['/estoque']);
-        this.toastr.success('Estoque ' + this.p.nome + ' atualizado com sucesso!');
+        this.toastr.success('Produto ' + this.p.nome + ' atualizado com sucesso!');
       }, () => {
         swal('Erro!',
           'Falha no banco de dados\n Tente mais tarde',
@@ -114,4 +119,37 @@ export class EditarComponent implements OnInit {
     history.back();
   }
 
+  help() {
+    if (!this.edit) {
+      swal({
+          title: 'Ajuda',
+          html: 'Não é possível editar o conteúdo desta página pois ela é só para visualização e não para edição',
+          type: 'info'
+        }
+      );
+    } else {
+      swal({
+          title: 'Ajuda',
+          html: 'Nome é o nome do produto.' +
+            '<br> <br>' +
+            'Preço é o valor que o produto será vendido por unidade.' +
+            '<br> <br>' +
+            'Desconto é o valor que será reduzido do produto numa compra.' +
+            '<br> <br>' +
+            'Un/Lote é a quantidade do produto que cada lote possui.' +
+            '<br> <br>' +
+            'Categoria é o tipo do produto.' +
+            '<br> <br>' +
+            'Descrição é a informação extra do produto.' +
+            '<br> <br>' +
+            'Os campos com * ao seu lado são obrigatórios.' +
+            '<br> <br>' +
+            'Quantidade e Código do Produto não podem ser alterados nessa tela.' +
+            '<br> <br>' +
+            'Caso não altere um campo, esse campo manterá os dados atuais.',
+          type: 'info'
+        }
+      );
+    }
+  }
 }

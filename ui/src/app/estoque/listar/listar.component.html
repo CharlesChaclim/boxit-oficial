@@ -2,6 +2,10 @@
   <div class="card bg-light" style="margin-top: 10px">
     <div class="card-header">
       <div class="row">
+        <div class="col-12 col-md-12">
+          <a (click)="help()" class="text-dark" style="text-decoration: none; float: right"><i
+            class="fal fa-question-circle"></i></a>
+        </div>
         <div class="col-12 col-md-4">
           <h3>Lista de Produtos</h3>
         </div>
@@ -67,7 +71,7 @@
                 {{produtos.enable ? 'Ativo' : 'Inativo'}}</span></td>
               <td><button class="btn btn-primary" routerLink="{{produtos.id}}"><i class="fal fa-eye"></i></button></td>
               <td><button class="btn btn-secondary" routerLink="{{produtos.id}}/true"><i class="fal fa-edit"></i></button></td>
-              <td><button class="btn btn-danger" routerLink="{{produtos.id}}/true/true"><i class="fal fa-box-usd"></i></button></td>
+              <td><button class="btn btn-danger" routerLink="{{produtos.id}}/quantidade"><i class="fal fa-box-usd"></i></button></td>
             </tr>
             </tbody>
           </table>
