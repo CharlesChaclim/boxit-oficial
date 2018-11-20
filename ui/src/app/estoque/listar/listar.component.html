@@ -65,7 +65,7 @@
               <td>{{produtos.nome}}</td>
               <td>{{produtos.qtd}}</td>
               <td>{{produtos.unidadeLote}}</td>
-              <td>{{produtos.preco}}</td>
+              <td>R$ {{produtos.preco}}</td>
               <td><span class="badge badge-pill" [ngClass]="produtos.enable ? 'badge-success' : 'badge-warning'" ngbTooltip="{{produtos.enable ? 'Desativar' : 'Ativar'}}"
                         style="cursor:pointer;" placement="top" (click)="desativarAtivar(produtos.id, produtos.enable, produtos.nome)">
                 {{produtos.enable ? 'Ativo' : 'Inativo'}}</span></td>

@@ -83,6 +83,10 @@ public class ProdutoTeste extends BoxitApplicationTests{
         produto.setDesconto(desconto);
         produto.setUnidadeLote(lote);
         produto.setDescricao(descricao);
+        Categoria c = new Categoria();
+        String cnome = "mac";
+        Integer cid = 1;
+        produto.setCategoria(c);
         Produto produtoTeste = produtoService.atualizar(id, produto);
         Assertions.assertThat(produtoTeste.getNome()).isEqualTo(nome);
         Assertions.assertThat(produtoTeste.getPreco()).isEqualTo(preco);

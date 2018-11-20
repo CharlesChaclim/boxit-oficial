@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {AlterarQuantidade} from '../../core/model';
+import {AlterarQuantidade, Estoque} from '../../core/model';
 import {EstoqueService} from '../estoque.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {ToastrService} from 'ngx-toastr';
@@ -12,6 +12,7 @@ import swal from 'sweetalert2';
 })
 export class QuantidadeComponent implements OnInit {
   q = new AlterarQuantidade();
+  p = new Estoque();
   qtd_valida = false;
   preco_valido = false;
   prodID: string;
@@ -39,12 +40,31 @@ export class QuantidadeComponent implements OnInit {
   }
 
   atualizar() {
-    this.estoqueService.atualizarQtd(this.q, this.prodID).subscribe(
-      r => {
-        this.router.navigate(['/estoque']);
-        this.toastr.success('Produto atualizado com sucesso!');
-      }, e => {
-        console.log(e);
+    this.estoqueService.getOne(this.prodID).subscribe(
+      s => {
+        this.p = s;
+        if ((this.p.qtd < this.q.qtd) && ((this.q.motivo == 2) || (this.q.motivo == 3) || (this.q.motivo == 5))) {
+          swal(
+            'Erro!',
+            'Quantidade Insuficiente!',
+            'error'
+          );
+        } else {
+          this.estoqueService.atualizarQtd(this.q, this.prodID).subscribe(
+            r => {
+              this.router.navigate(['/estoque']);
+              this.toastr.success('Produto atualizado com sucesso!');
+            }, e => {
+              console.log(e);
+            }
+          );
+        }
+      }, () => {
+        swal(
+          'Erro!',
+          'Erro no servidor!',
+          'error'
+        );
       }
     );
   }
