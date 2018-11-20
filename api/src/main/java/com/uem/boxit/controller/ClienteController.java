@@ -59,12 +59,12 @@ public class ClienteController {
     @PostMapping
     public ResponseEntity<Cliente> create(@RequestBody NewClienteDTO dto) {
         Cliente cliente = clienteService.create(dto);
-        try {
-            publisher.publishEvent(new SendConfirmationCodeEvent(this, cliente.getEmail(), cliente.getConfirmCode()));
-        } catch (Exception e) {
-            clienteService.rollback(cliente);
-            throw new ObjectNotFoundException(e.getLocalizedMessage());
-        }
+//        try {
+//            publisher.publishEvent(new SendConfirmationCodeEvent(this, cliente.getEmail(), cliente.getConfirmCode()));
+//        } catch (Exception e) {
+//            clienteService.rollback(cliente);
+//            throw new ObjectNotFoundException(e.getLocalizedMessage());
+//        }
         URI uri = ServletUriComponentsBuilder.fromCurrentRequestUri().path("/{codigo}")
                 .buildAndExpand(cliente.getId()).toUri();
         return ResponseEntity.created(uri).build();

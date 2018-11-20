@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="teste" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="9c1a26bb-16ce-4523-9903-1976b7a9bd56">
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="teste" language="groovy" pageWidth="595" pageHeight="842" whenNoDataType="AllSectionsNoDetail" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="9c1a26bb-16ce-4523-9903-1976b7a9bd56">
 	<property name="ireport.zoom" value="1.0"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="0"/>
+	<property name="ireport.y" value="139"/>
 	<style name="table">
 		<box>
 			<pen lineWidth="1.0" lineColor="#000000"/>
@@ -195,7 +195,7 @@ WHERE
 		<band splitType="Stretch"/>
 	</background>
 	<title>
-		<band height="79" splitType="Stretch">
+		<band height="128" splitType="Stretch">
 			<textField>
 				<reportElement x="435" y="0" width="80" height="20" uuid="b6b8f5ed-cdab-4bed-aff9-4160e6771b11"/>
 				<textElement textAlignment="Right"/>
@@ -253,24 +253,20 @@ WHERE
 				<reportElement x="339" y="39" width="100" height="20" uuid="8c4bf891-2e8a-4d7b-a7b7-d595a65aeb94"/>
 				<textFieldExpression><![CDATA[$F{catnome}]]></textFieldExpression>
 			</textField>
-		</band>
-	</title>
-	<pageHeader>
-		<band height="35" splitType="Stretch">
 			<staticText>
-				<reportElement x="0" y="0" width="555" height="35" uuid="a7ada801-2f05-491a-ac19-4e7d5702547f"/>
+				<reportElement x="0" y="90" width="555" height="35" uuid="a7ada801-2f05-491a-ac19-4e7d5702547f"/>
 				<textElement textAlignment="Center">
 					<font size="24"/>
 				</textElement>
 				<text><![CDATA[RELATÓRIO DE CONTROLE DE ESTOQUE]]></text>
 			</staticText>
 		</band>
-	</pageHeader>
+	</title>
 	<detail>
 		<band height="133" splitType="Stretch">
 			<componentElement>
 				<reportElement key="table" style="table" x="0" y="10" width="555" height="105" uuid="0622bc33-838d-4620-aaa7-7515bf4e8a67"/>
-				<jr:table xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
+				<jr:table xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd" whenNoDataType="AllSectionsNoDetail">
 					<datasetRun subDataset="Entrada" uuid="45938d04-eba0-41c8-ab10-e3df6597c0e8">
 						<datasetParameter name="start">
 							<datasetParameterExpression><![CDATA[$P{start}]]></datasetParameterExpression>
@@ -348,7 +344,7 @@ WHERE
 		<band height="190">
 			<componentElement>
 				<reportElement key="table 1" style="table 1" x="0" y="31" width="555" height="113" uuid="a7cce2aa-3793-4d62-8510-9d5bc5371df1"/>
-				<jr:table xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
+				<jr:table xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd" whenNoDataType="AllSectionsNoDetail">
 					<datasetRun subDataset="Saida" uuid="1aad7adc-a8cd-4d6d-86a3-56d6a81e847e">
 						<datasetParameter name="end">
 							<datasetParameterExpression><![CDATA[$P{end}]]></datasetParameterExpression>

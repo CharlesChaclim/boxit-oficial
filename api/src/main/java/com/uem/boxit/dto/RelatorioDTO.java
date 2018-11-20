@@ -10,6 +10,7 @@ import java.util.Date;
 public class RelatorioDTO {
     Date dataInicio;
     Date dataFim;
-    String CNPJ;
+    String cnpj;
     Integer tipo;
+    String sku;
 }

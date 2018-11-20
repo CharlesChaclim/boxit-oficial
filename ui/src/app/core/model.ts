@@ -107,10 +107,8 @@ export class Relatorio {
   dataInicio: Date;
   dataFim: Date;
   tipo: number;
-  CNPJ: string;
-  SKU: string;
-  estado: string;
-  cidade: string;
+  cnpj: string;
+  sku: string;
 }
 
 export class Pagamento {
