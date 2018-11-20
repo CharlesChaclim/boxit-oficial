@@ -26,7 +26,11 @@ export class LoginComponent implements OnInit {
   logar(form: NgForm) {
     this.auth.login(this.login.username, this.login.password)
       .then(() => {
-        this.router.navigate(['/cliente']);
+        if (this.login.username.length > 14) {
+          this.router.navigate(['/pedido']);
+        } else {
+          this.router.navigate(['/cliente']);
+        }
       }).catch(err => {
       form.reset({username: this.login.username});
       this.errHandle.handle(err);
