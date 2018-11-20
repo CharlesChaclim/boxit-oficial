@@ -50,7 +50,7 @@
             <div class="form-group row" *ngIf="r.tipo == 3">
               <label class="col-md-3 col-form-label">CNPJ do Cliente <span class="text-danger">*</span></label>
               <div class="col-md-9">
-                <select class="custom-select" name="cliente" #cli="ngModel" required [(ngModel)]="r.CNPJ" [ngModelOptions]="{standalone: true}">
+                <select class="custom-select" name="cliente" #cli="ngModel" required [(ngModel)]="r.cnpj" [ngModelOptions]="{standalone: true}">
                   <option value="">Escolha um cliente</option>
                   <option *ngFor="let c of cliente" value="{{c.cnpj}}">{{c.cnpj}}</option>
                 </select>
@@ -59,7 +59,7 @@
             <div class="form-group row" *ngIf="r.tipo == 2 || r.tipo == 4">
               <label class="col-md-3 col-form-label">Código do Produto <span class="text-danger">*</span></label>
               <div class="col-md-9">
-                <select class="custom-select" name="produto" #prod="ngModel" required [(ngModel)]="r.SKU" [ngModelOptions]="{standalone: true}">
+                <select class="custom-select" name="produto" #prod="ngModel" required [(ngModel)]="r.sku" [ngModelOptions]="{standalone: true}">
                   <option value="">Escolha um produto</option>
                   <option *ngFor="let e of estoque" value="{{e.sku}}">{{e.sku}}</option>
                 </select>

@@ -91,7 +91,6 @@ public class ProdutoService {
         p.setPreco(produto.getPreco());
         p.setDescricao(produto.getDescricao());
         p.setUnidadeLote(produto.getUnidadeLote());
-        p.setQtd(produto.getQtd());
         p.setDesconto(produto.getDesconto());
         return produtoRepository.save(p);
     }
