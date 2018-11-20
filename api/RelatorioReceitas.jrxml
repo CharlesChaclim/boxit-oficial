@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="RelatorioReceitas" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="b139b194-6ce3-48db-bff2-af0dcec9efce">
-	<property name="ireport.zoom" value="2.0"/>
+	<property name="ireport.zoom" value="0.75"/>
 	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
 	<style name="table">
@@ -244,22 +244,20 @@ pedido.`create_at`<=$P{end} and pedido.`create_at` >= $P{start}]]>
      SUM(preco_total),
      SUM(preco_total - recebido),
      COUNT(preco_compra.preco),
-     COUNT(preco_total),
-     SUM(preco_total - preco_compra.preco)
+     COUNT(preco_total)
 FROM
-     preco_compra, pedido
+     preco_compra  right JOIN pedido ON preco_compra.id = pedido.id
 WHERE
      (create_at <= $P{end}
      and create_at >= $P{start}) or
 (data_atualizacao <= $P{end}
      and data_atualizacao >= $P{start})]]>
 		</queryString>
-		<field name="SUM(preco_compra.preco)" class="java.math.BigDecimal"/>
+		<field name="SUM(preco_compra.preco)" class="java.lang.Double"/>
 		<field name="SUM(preco_total)" class="java.lang.Double"/>
 		<field name="SUM(preco_total - recebido)" class="java.lang.Double"/>
 		<field name="COUNT(preco_compra.preco)" class="java.lang.Long"/>
 		<field name="COUNT(preco_total)" class="java.lang.Long"/>
-		<field name="SUM(preco_total - preco_compra.preco)" class="java.lang.Double"/>
 	</subDataset>
 	<parameter name="vend" class="java.lang.String"/>
 	<parameter name="vstart" class="java.lang.String"/>
@@ -273,7 +271,7 @@ WHERE
 		<band splitType="Stretch"/>
 	</background>
 	<title>
-		<band height="79" splitType="Stretch">
+		<band height="95" splitType="Stretch">
 			<textField pattern="dd/MM/yyyy">
 				<reportElement x="111" y="30" width="53" height="20" uuid="9db83e07-8813-4742-ab57-5026c6c48388"/>
 				<textFieldExpression><![CDATA[$P{vend}]]></textFieldExpression>
@@ -307,19 +305,15 @@ WHERE
 				<reportElement x="508" y="10" width="40" height="20" uuid="6be20c44-845d-490a-91fa-46919579ef4d"/>
 				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
 			</textField>
-		</band>
-	</title>
-	<pageHeader>
-		<band height="35" splitType="Stretch">
 			<staticText>
-				<reportElement x="0" y="0" width="555" height="35" uuid="7917b1a7-98c6-4f9e-a53c-a780c813f3f0"/>
+				<reportElement x="0" y="60" width="555" height="35" uuid="7917b1a7-98c6-4f9e-a53c-a780c813f3f0"/>
 				<textElement textAlignment="Center">
 					<font size="24"/>
 				</textElement>
 				<text><![CDATA[RELATÓRIO DE RECEITAS]]></text>
 			</staticText>
 		</band>
-	</pageHeader>
+	</title>
 	<columnHeader>
 		<band height="63">
 			<componentElement>
@@ -351,7 +345,7 @@ WHERE
 								</staticText>
 							</jr:tableHeader>
 							<jr:detailCell style="table 4_TD" height="20" rowSpan="1">
-								<textField>
+								<textField isBlankWhenNull="true">
 									<reportElement style="table" x="0" y="0" width="169" height="20" uuid="a5e13f7f-53ed-4455-a439-e83434403ca2"/>
 									<textElement textAlignment="Center" verticalAlignment="Middle"/>
 									<textFieldExpression><![CDATA[$F{nome}]]></textFieldExpression>
@@ -367,7 +361,7 @@ WHERE
 								</staticText>
 							</jr:tableHeader>
 							<jr:detailCell style="table 4_TD" height="20" rowSpan="1">
-								<textField pattern="dd/MM/yy">
+								<textField pattern="dd/MM/yyyy" isBlankWhenNull="true">
 									<reportElement style="table" x="0" y="0" width="125" height="20" uuid="747792bf-716b-4246-b1ad-c4053c9c1471"/>
 									<textElement textAlignment="Center" verticalAlignment="Middle"/>
 									<textFieldExpression><![CDATA[$F{data_atualizacao}]]></textFieldExpression>
@@ -383,7 +377,7 @@ WHERE
 								</staticText>
 							</jr:tableHeader>
 							<jr:detailCell height="20" rowSpan="1">
-								<textField>
+								<textField isBlankWhenNull="true">
 									<reportElement style="table" x="0" y="0" width="117" height="20" uuid="f30f0748-f1ba-4abb-816a-ee7d1fc0810b"/>
 									<textElement textAlignment="Center" verticalAlignment="Middle"/>
 									<textFieldExpression><![CDATA[""+$F{quantidade}]]></textFieldExpression>
@@ -399,7 +393,7 @@ WHERE
 								</staticText>
 							</jr:tableHeader>
 							<jr:detailCell style="table 4_TD" height="20" rowSpan="1">
-								<textField pattern="¤ #,##0.00">
+								<textField pattern="¤ #,##0.00" isBlankWhenNull="true">
 									<reportElement style="table" x="0" y="0" width="144" height="20" uuid="4b862fe8-da96-45a6-8e31-573e352b5476"/>
 									<textElement textAlignment="Center" verticalAlignment="Middle"/>
 									<textFieldExpression><![CDATA[$F{preco}]]></textFieldExpression>
@@ -445,7 +439,7 @@ WHERE
 								</staticText>
 							</jr:tableHeader>
 							<jr:detailCell style="table 5_TD" height="20" rowSpan="1">
-								<textField>
+								<textField isBlankWhenNull="true">
 									<reportElement x="0" y="0" width="88" height="20" uuid="7b5b779e-0d75-430c-9418-3a1c7b7322fe"/>
 									<textElement textAlignment="Center" verticalAlignment="Middle"/>
 									<textFieldExpression><![CDATA[$F{pedido_id}]]></textFieldExpression>
@@ -461,7 +455,7 @@ WHERE
 								</staticText>
 							</jr:tableHeader>
 							<jr:detailCell style="table 5_TD" height="20" rowSpan="1">
-								<textField pattern="dd/MM/yy">
+								<textField pattern="dd/MM/yyyy" isBlankWhenNull="true">
 									<reportElement x="0" y="0" width="89" height="20" uuid="a8fc4a2c-2cd3-45ec-8523-13c937f06877"/>
 									<textElement textAlignment="Center" verticalAlignment="Middle"/>
 									<textFieldExpression><![CDATA[$F{pedido_create_at}]]></textFieldExpression>
@@ -477,7 +471,7 @@ WHERE
 								</staticText>
 							</jr:tableHeader>
 							<jr:detailCell style="table 5_TD" height="20" rowSpan="1">
-								<textField>
+								<textField isBlankWhenNull="true">
 									<reportElement x="0" y="0" width="108" height="20" uuid="7d3f2984-9035-4500-8f12-3dee73117a42"/>
 									<textElement textAlignment="Center" verticalAlignment="Middle"/>
 									<textFieldExpression><![CDATA[$F{pedido_preco_total}]]></textFieldExpression>
@@ -493,7 +487,7 @@ WHERE
 								</staticText>
 							</jr:tableHeader>
 							<jr:detailCell style="table 5_TD" height="20" rowSpan="1">
-								<textField pattern="¤ #,##0.00">
+								<textField pattern="¤ #,##0.00" isBlankWhenNull="true">
 									<reportElement x="0" y="0" width="127" height="20" uuid="a4ffe781-a504-4c49-be2f-33948501dc97"/>
 									<textElement textAlignment="Center" verticalAlignment="Middle"/>
 									<textFieldExpression><![CDATA[$F{pedido_recebido}]]></textFieldExpression>
@@ -509,7 +503,7 @@ WHERE
 								</staticText>
 							</jr:tableHeader>
 							<jr:detailCell style="table 5_TD" height="20" rowSpan="1">
-								<textField>
+								<textField isBlankWhenNull="true">
 									<reportElement x="0" y="0" width="143" height="20" uuid="215dea26-0244-418f-b620-ef12724c0252"/>
 									<textElement textAlignment="Center" verticalAlignment="Middle"/>
 									<textFieldExpression><![CDATA[$F{usuario_cnpj}]]></textFieldExpression>
@@ -552,7 +546,7 @@ WHERE
 								</staticText>
 							</jr:tableHeader>
 							<jr:detailCell style="table" height="30" rowSpan="1">
-								<textField>
+								<textField isBlankWhenNull="true">
 									<reportElement x="0" y="0" width="90" height="30" uuid="2335c264-6cf4-4037-9b52-53254878aeee"/>
 									<textElement textAlignment="Center" verticalAlignment="Middle"/>
 									<textFieldExpression><![CDATA[$F{COUNT(preco_compra.preco)}]]></textFieldExpression>
@@ -569,10 +563,10 @@ WHERE
 									</staticText>
 								</jr:tableHeader>
 								<jr:detailCell style="table" height="30" rowSpan="1">
-									<textField pattern="¤ #,##0.00">
+									<textField pattern="¤ #,##0.00" isBlankWhenNull="true">
 										<reportElement x="0" y="0" width="90" height="30" uuid="019b791e-11f2-4718-8b4b-936698e6a436"/>
 										<textElement textAlignment="Center" verticalAlignment="Middle"/>
-										<textFieldExpression><![CDATA[$F{SUM(preco_compra.preco)}]]></textFieldExpression>
+										<textFieldExpression><![CDATA[$F{SUM(preco_compra.preco)} == null?0:$F{SUM(preco_compra.preco)}]]></textFieldExpression>
 									</textField>
 								</jr:detailCell>
 							</jr:column>
@@ -586,7 +580,7 @@ WHERE
 								</staticText>
 							</jr:tableHeader>
 							<jr:detailCell style="table" height="30" rowSpan="1">
-								<textField>
+								<textField isBlankWhenNull="true">
 									<reportElement x="0" y="0" width="90" height="30" uuid="31b607d4-1aa0-4a0a-92e5-2a4d60ca8dd7"/>
 									<textElement textAlignment="Center" verticalAlignment="Middle"/>
 									<textFieldExpression><![CDATA[$F{COUNT(preco_total)}]]></textFieldExpression>
@@ -602,10 +596,10 @@ WHERE
 								</staticText>
 							</jr:tableHeader>
 							<jr:detailCell style="table" height="30" rowSpan="1">
-								<textField pattern="¤ #,##0.00">
+								<textField pattern="¤ #,##0.00" isBlankWhenNull="true">
 									<reportElement x="0" y="0" width="96" height="30" uuid="7db4bad6-7d6b-4e7c-9a8c-be91a6768f2a"/>
 									<textElement textAlignment="Center" verticalAlignment="Middle"/>
-									<textFieldExpression><![CDATA[$F{SUM(preco_total)}]]></textFieldExpression>
+									<textFieldExpression><![CDATA[$F{SUM(preco_total)}== null?0:$F{SUM(preco_total)}]]></textFieldExpression>
 								</textField>
 							</jr:detailCell>
 						</jr:column>
@@ -618,10 +612,10 @@ WHERE
 								</staticText>
 							</jr:tableHeader>
 							<jr:detailCell style="table" height="30" rowSpan="1">
-								<textField pattern="¤ #,##0.00">
+								<textField pattern="¤ #,##0.00" isBlankWhenNull="true">
 									<reportElement x="0" y="0" width="93" height="30" uuid="34d0c0bd-fc4e-4d06-a3e7-258df225e480"/>
 									<textElement textAlignment="Center" verticalAlignment="Middle"/>
-									<textFieldExpression><![CDATA[$F{SUM(preco_total - recebido)}]]></textFieldExpression>
+									<textFieldExpression><![CDATA[$F{SUM(preco_total - recebido)}== null?0:$F{SUM(preco_total - recebido)}]]></textFieldExpression>
 								</textField>
 							</jr:detailCell>
 						</jr:column>
@@ -634,10 +628,10 @@ WHERE
 								</staticText>
 							</jr:tableHeader>
 							<jr:detailCell style="table" height="30" rowSpan="1">
-								<textField pattern="¤ #,##0.00">
-									<reportElement x="0" y="0" width="97" height="30" uuid="ae162876-2973-4fec-a05e-42da0bbc8249"/>
+								<textField pattern="¤ #,##0.00" isBlankWhenNull="true">
+									<reportElement x="0" y="0" width="97" height="30" uuid="b855c583-9d8a-4763-9dd3-2b5bee0afae5"/>
 									<textElement textAlignment="Center" verticalAlignment="Middle"/>
-									<textFieldExpression><![CDATA[$F{SUM(preco_total - preco_compra.preco)}]]></textFieldExpression>
+									<textFieldExpression><![CDATA[($F{SUM(preco_total)}== null?0:$F{SUM(preco_total)}) - ($F{SUM(preco_compra.preco)}== null?0:$F{SUM(preco_compra.preco)})]]></textFieldExpression>
 								</textField>
 							</jr:detailCell>
 						</jr:column>

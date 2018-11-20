@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {environment} from '../../environments/environment';
 import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
-import {Estoque, Page} from '../core/model';
+import {AlterarQuantidade, Estoque, Page} from '../core/model';
 
 @Injectable({
   providedIn: 'root'
@@ -65,5 +65,10 @@ export class EstoqueService {
   update(produto: Estoque) {
     const headers = new HttpHeaders().set('Content-type', 'application/json');
     return this.http.put(this.url + produto['id'], JSON.stringify(produto), {headers: headers});
+  }
+
+  atualizarQtd(produto: AlterarQuantidade, id: string) {
+    const headers = new HttpHeaders().set('Content-type', 'application/json');
+    return this.http.put(this.url + id + '/quantidade', JSON.stringify(produto), {headers: headers});
   }
 }

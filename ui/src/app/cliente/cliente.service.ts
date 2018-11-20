@@ -51,6 +51,10 @@ export class ClienteService {
     return this.http.get<ClienteEdit>(this.url + id);
   }
 
+  getOneCnpj(cnpj: string) {
+    return this.http.post(this.url + 'oneCnpj', {cnpj});
+  }
+
   emailExist(email: string) {
     return this.http.post(this.authUrl + 'email' , {email});
   }

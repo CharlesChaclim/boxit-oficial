@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="historicoComprador" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="7c8cef70-6660-4aa4-a2c0-07779dfb50fc">
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="historicoComprador" language="groovy" pageWidth="595" pageHeight="842" whenNoDataType="AllSectionsNoDetail" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" whenResourceMissingType="Empty" uuid="7c8cef70-6660-4aa4-a2c0-07779dfb50fc">
 	<property name="ireport.zoom" value="1.0"/>
 	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
@@ -235,7 +235,7 @@ WHERE
 		<band splitType="Stretch"/>
 	</background>
 	<title>
-		<band height="79" splitType="Stretch">
+		<band height="103" splitType="Stretch">
 			<staticText>
 				<reportElement x="17" y="18" width="103" height="20" uuid="966b9e53-18bb-4d4b-a052-641f309848e1"/>
 				<text><![CDATA[Nome do Comprador:]]></text>
@@ -265,7 +265,7 @@ WHERE
 				<reportElement x="265" y="40" width="41" height="20" uuid="94a61eec-e55f-46f0-b456-621f9766e6e0"/>
 				<text><![CDATA[Periodo:]]></text>
 			</staticText>
-			<textField>
+			<textField isBlankWhenNull="true">
 				<reportElement x="120" y="18" width="100" height="20" uuid="28bb526e-e51f-40f2-8d1b-58c0f65c157b"/>
 				<textFieldExpression><![CDATA[$F{nome}]]></textFieldExpression>
 			</textField>
@@ -285,24 +285,20 @@ WHERE
 				<reportElement x="49" y="38" width="100" height="20" uuid="09e3bcf4-d32a-490a-9b33-d1d40f2b9dac"/>
 				<textFieldExpression><![CDATA[$P{CNPJ}]]></textFieldExpression>
 			</textField>
-		</band>
-	</title>
-	<pageHeader>
-		<band height="35" splitType="Stretch">
 			<staticText>
-				<reportElement x="0" y="0" width="555" height="35" uuid="e1b14131-0269-4ddf-875a-e77348400ddb"/>
+				<reportElement x="0" y="68" width="555" height="35" uuid="e1b14131-0269-4ddf-875a-e77348400ddb"/>
 				<textElement textAlignment="Center">
 					<font size="24"/>
 				</textElement>
 				<text><![CDATA[RELATÓRIO DE HISTÓRICO DE COMPRADOR]]></text>
 			</staticText>
 		</band>
-	</pageHeader>
+	</title>
 	<detail>
 		<band height="131" splitType="Stretch">
 			<componentElement>
-				<reportElement key="table 3" style="table 3" x="17" y="10" width="523" height="106" uuid="1fcfb0f4-ea69-4218-99b6-6ee83ad6baff"/>
-				<jr:table xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
+				<reportElement key="table 3" style="table 3" x="17" y="13" width="523" height="106" uuid="1fcfb0f4-ea69-4218-99b6-6ee83ad6baff"/>
+				<jr:table xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd" whenNoDataType="AllSectionsNoDetail">
 					<datasetRun subDataset="table1" uuid="b3bfb532-8ae9-4c7c-b5b2-7d620073a831">
 						<datasetParameter name="pedido_id">
 							<datasetParameterExpression><![CDATA[$F{id}]]></datasetParameterExpression>
@@ -312,11 +308,11 @@ WHERE
 					<jr:columnGroup width="524" uuid="bccfffbc-c2a4-4229-8a29-ab67d42b0285">
 						<jr:tableHeader style="table 3_TH" height="13" rowSpan="1">
 							<staticText>
-								<reportElement x="1" y="0" width="63" height="13" uuid="188815e9-3ddc-43d6-990d-3e226c22e178"/>
+								<reportElement x="0" y="0" width="65" height="13" uuid="188815e9-3ddc-43d6-990d-3e226c22e178"/>
 								<textElement textAlignment="Center" verticalAlignment="Middle"/>
 								<text><![CDATA[Id da Compra]]></text>
 							</staticText>
-							<textField>
+							<textField isBlankWhenNull="true">
 								<reportElement mode="Transparent" x="416" y="0" width="108" height="13" uuid="19a87de5-1e24-48f6-a135-1842d975f762"/>
 								<textElement textAlignment="Center" verticalAlignment="Middle">
 									<font size="10"/>
@@ -330,7 +326,7 @@ WHERE
 								</textElement>
 								<text><![CDATA[Status da Compra]]></text>
 							</staticText>
-							<textField>
+							<textField isBlankWhenNull="true">
 								<reportElement mode="Transparent" x="65" y="0" width="65" height="13" uuid="7cd34aaa-ff92-49b5-bc18-d449aa23e537"/>
 								<textElement textAlignment="Center" verticalAlignment="Middle"/>
 								<textFieldExpression><![CDATA[$F{id}]]></textFieldExpression>
@@ -340,7 +336,7 @@ WHERE
 								<textElement textAlignment="Center" verticalAlignment="Middle"/>
 								<text><![CDATA[Data da Compra]]></text>
 							</staticText>
-							<textField pattern="dd/MM/yyyy">
+							<textField pattern="dd/MM/yyyy" isBlankWhenNull="true">
 								<reportElement mode="Transparent" x="236" y="0" width="72" height="13" uuid="192830e4-ced5-405a-9520-8c836f6e5ff5"/>
 								<textElement textAlignment="Center" verticalAlignment="Middle"/>
 								<textFieldExpression><![CDATA[$F{create_at}]]></textFieldExpression>
@@ -353,27 +349,27 @@ WHERE
 							</line>
 						</jr:tableHeader>
 						<jr:tableFooter style="table 3_TH" height="32" rowSpan="1">
-							<textField pattern="¤ #,##0.00">
+							<textField pattern="¤ #,##0.00" isBlankWhenNull="true">
 								<reportElement mode="Opaque" x="64" y="16" width="66" height="16" backcolor="#73B0E6" uuid="6e5c97f8-3a29-418a-a502-2789013e9869"/>
 								<textElement textAlignment="Center" verticalAlignment="Middle"/>
 								<textFieldExpression><![CDATA[$F{juros}]]></textFieldExpression>
 							</textField>
-							<textField pattern="¤ #,##0.00">
+							<textField pattern="¤ #,##0.00" isBlankWhenNull="true">
 								<reportElement mode="Opaque" x="194" y="16" width="64" height="16" backcolor="#73B0E6" uuid="09656101-dab3-402a-8132-ef0593ade97b"/>
 								<textElement textAlignment="Center" verticalAlignment="Middle"/>
 								<textFieldExpression><![CDATA[$F{multa}]]></textFieldExpression>
 							</textField>
-							<textField pattern="¤ #,##0.00">
+							<textField pattern="¤ #,##0.00" isBlankWhenNull="true">
 								<reportElement mode="Opaque" x="414" y="1" width="110" height="17" backcolor="#73B0E6" uuid="8e5a0a59-f57e-4736-b51b-6b330282deec"/>
 								<textElement textAlignment="Center" verticalAlignment="Middle"/>
 								<textFieldExpression><![CDATA[$F{tpreco}]]></textFieldExpression>
 							</textField>
-							<textField pattern="¤ #,##0.00">
+							<textField pattern="¤ #,##0.00" isBlankWhenNull="true">
 								<reportElement mode="Opaque" x="314" y="16" width="82" height="16" backcolor="#73B0E6" uuid="bbab81ad-809c-4a69-ba7b-ae0ade29ae87"/>
 								<textElement textAlignment="Center" verticalAlignment="Middle"/>
 								<textFieldExpression><![CDATA[$F{preco_total}]]></textFieldExpression>
 							</textField>
-							<textField pattern="¤ #,##0.00">
+							<textField pattern="¤ #,##0.00" isBlankWhenNull="true">
 								<reportElement mode="Opaque" x="460" y="16" width="64" height="16" backcolor="#73B0E6" uuid="a6804a7d-3a83-4a12-adb6-27ebe0e4235c"/>
 								<textElement textAlignment="Center" verticalAlignment="Middle"/>
 								<textFieldExpression><![CDATA[$F{recebido}]]></textFieldExpression>
@@ -399,7 +395,7 @@ WHERE
 								<text><![CDATA[Recebido]]></text>
 							</staticText>
 							<staticText>
-								<reportElement mode="Opaque" x="259" y="17" width="64" height="15" backcolor="#73B0E6" uuid="950e4bb0-ec4d-4a2d-bbab-1d03a714e819"/>
+								<reportElement mode="Opaque" x="259" y="17" width="55" height="15" backcolor="#73B0E6" uuid="950e4bb0-ec4d-4a2d-bbab-1d03a714e819"/>
 								<textElement textAlignment="Center" verticalAlignment="Middle"/>
 								<text><![CDATA[Valor Total]]></text>
 							</staticText>
@@ -426,7 +422,7 @@ WHERE
 									</staticText>
 								</jr:tableHeader>
 								<jr:detailCell style="table 3_TD" height="33" rowSpan="1">
-									<textField>
+									<textField isBlankWhenNull="true">
 										<reportElement x="0" y="0" width="130" height="33" uuid="c28a71c0-cf41-4ff9-8616-e8de5ee68c33"/>
 										<textElement textAlignment="Center" verticalAlignment="Middle"/>
 										<textFieldExpression><![CDATA[$F{nome}]]></textFieldExpression>
@@ -442,7 +438,7 @@ WHERE
 									</staticText>
 								</jr:tableHeader>
 								<jr:detailCell style="table 3_TD" height="33" rowSpan="1">
-									<textField pattern="¤ #,##0.00">
+									<textField pattern="¤ #,##0.00" isBlankWhenNull="true">
 										<reportElement x="0" y="0" width="106" height="33" uuid="7ca22347-bd9b-4e98-b90e-ddb5e5fc6c56"/>
 										<textElement textAlignment="Center" verticalAlignment="Middle"/>
 										<textFieldExpression><![CDATA[$F{ipreco}]]></textFieldExpression>
@@ -460,7 +456,7 @@ WHERE
 									</staticText>
 								</jr:tableHeader>
 								<jr:detailCell style="table 3_TD" height="33" rowSpan="1">
-									<textField pattern="###0">
+									<textField pattern="###0" isBlankWhenNull="true">
 										<reportElement x="0" y="0" width="73" height="33" uuid="8220b833-bd82-45fa-a3e4-6ae8a32efcf2"/>
 										<textElement textAlignment="Center" verticalAlignment="Middle"/>
 										<textFieldExpression><![CDATA[$F{quantidade}]]></textFieldExpression>
@@ -476,7 +472,7 @@ WHERE
 									</staticText>
 								</jr:tableHeader>
 								<jr:detailCell style="table" height="33" rowSpan="1">
-									<textField pattern="¤ #,##0.00">
+									<textField pattern="¤ #,##0.00" isBlankWhenNull="true">
 										<reportElement x="0" y="0" width="107" height="33" uuid="dc006acf-7ab8-4736-99c6-aef4178d7776"/>
 										<textElement textAlignment="Center" verticalAlignment="Middle"/>
 										<textFieldExpression><![CDATA[$F{desconto}*$F{quantidade}]]></textFieldExpression>
@@ -492,7 +488,7 @@ WHERE
 									</staticText>
 								</jr:tableHeader>
 								<jr:detailCell style="table 3_TD" height="33" rowSpan="1">
-									<textField>
+									<textField isBlankWhenNull="true">
 										<reportElement x="0" y="0" width="108" height="33" uuid="3192091a-d65f-4d2e-8f4d-f284e5c30340"/>
 										<textElement textAlignment="Center" verticalAlignment="Middle"/>
 										<textFieldExpression><![CDATA[$F{quantidade}*($F{ipreco}-$F{desconto})]]></textFieldExpression>
@@ -506,15 +502,15 @@ WHERE
 		</band>
 	</detail>
 	<lastPageFooter>
-		<band height="78">
+		<band height="105">
 			<staticText>
-				<reportElement x="0" y="55" width="555" height="23" uuid="dc8720d1-2cc0-44bb-a725-cb41c0f423e0"/>
+				<reportElement x="0" y="82" width="555" height="23" uuid="dc8720d1-2cc0-44bb-a725-cb41c0f423e0"/>
 				<textElement textAlignment="Center" verticalAlignment="Bottom"/>
 				<text><![CDATA[Obs: Valor da(s) Compra(s) é o valor da(s) venda(s) e o Valor Total é a soma do Valor da(s) venda(s) mais juros e multa.]]></text>
 			</staticText>
 			<componentElement>
-				<reportElement key="table 5" style="table 5" x="107" y="0" width="199" height="50" uuid="7c85d62c-c63f-4189-a271-51d09c2a9bbd"/>
-				<jr:table xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
+				<reportElement key="table 5" style="table 5" x="120" y="17" width="199" height="50" uuid="7c85d62c-c63f-4189-a271-51d09c2a9bbd"/>
+				<jr:table xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd" whenNoDataType="AllSectionsNoDetail">
 					<datasetRun subDataset="table2" uuid="1bcf3be4-7bab-49b0-87f7-e1a4ed7e9a64">
 						<datasetParameter name="CNPJ">
 							<datasetParameterExpression><![CDATA[$P{CNPJ}]]></datasetParameterExpression>
@@ -539,7 +535,7 @@ WHERE
 							<textField>
 								<reportElement x="0" y="0" width="90" height="20" uuid="2ae9b852-d487-4305-87cc-b5e233cb8531"/>
 								<textElement textAlignment="Center" verticalAlignment="Middle"/>
-								<textFieldExpression><![CDATA[$F{COUNT(pedido.preco)}]]></textFieldExpression>
+								<textFieldExpression><![CDATA[$F{COUNT(pedido.preco)} == null?0:$F{COUNT(pedido.preco)}]]></textFieldExpression>
 							</textField>
 						</jr:detailCell>
 					</jr:column>
@@ -552,10 +548,10 @@ WHERE
 							</textField>
 						</jr:tableHeader>
 						<jr:detailCell style="table 5_TD" height="20" rowSpan="1">
-							<textField>
+							<textField pattern="¤ #,##0.00" isBlankWhenNull="false">
 								<reportElement x="0" y="0" width="90" height="20" uuid="7ed178d7-21ff-4546-9c9c-2e1d51951c4f"/>
 								<textElement textAlignment="Center" verticalAlignment="Middle"/>
-								<textFieldExpression><![CDATA[$F{SUM(pedido.preco)}]]></textFieldExpression>
+								<textFieldExpression><![CDATA[$F{SUM(pedido.preco)} == null?0:$F{SUM(pedido.preco)}]]></textFieldExpression>
 							</textField>
 						</jr:detailCell>
 					</jr:column>
@@ -568,10 +564,10 @@ WHERE
 							</staticText>
 						</jr:tableHeader>
 						<jr:detailCell style="table 5_TD" height="20" rowSpan="1">
-							<textField>
+							<textField pattern="¤ #,##0.00">
 								<reportElement x="0" y="0" width="90" height="20" uuid="e43b53b0-4ac6-4056-b3a9-558d9a7cc880"/>
 								<textElement textAlignment="Center" verticalAlignment="Middle"/>
-								<textFieldExpression><![CDATA[$F{SUM(pedido.recebido)}]]></textFieldExpression>
+								<textFieldExpression><![CDATA[$F{SUM(pedido.recebido)} == null?0:$F{SUM(pedido.recebido)}]]></textFieldExpression>
 							</textField>
 						</jr:detailCell>
 					</jr:column>
@@ -584,10 +580,10 @@ WHERE
 							</staticText>
 						</jr:tableHeader>
 						<jr:detailCell style="table 5_TD" height="20" rowSpan="1">
-							<textField>
+							<textField pattern="¤ #,##0.00">
 								<reportElement x="0" y="0" width="90" height="20" uuid="39782939-a8ea-448a-970f-565472707def"/>
 								<textElement textAlignment="Center" verticalAlignment="Middle"/>
-								<textFieldExpression><![CDATA[$F{SUM(pedido.preco_total)}]]></textFieldExpression>
+								<textFieldExpression><![CDATA[$F{SUM(pedido.preco_total)} == null?0:$F{SUM(pedido.preco_total)}]]></textFieldExpression>
 							</textField>
 						</jr:detailCell>
 					</jr:column>

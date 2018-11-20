@@ -21,6 +21,7 @@ public class Produto {
     private String descricao;
     private Integer unidadeLote;
     private Integer qtd;
+    private Double desconto;
 
     @Column(unique = true)
     private String sku;

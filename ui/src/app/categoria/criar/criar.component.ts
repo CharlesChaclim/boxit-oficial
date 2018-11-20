@@ -1,9 +1,9 @@
 import {Component, OnInit} from '@angular/core';
 import {Categoria} from '../../core/model';
 import {CategoriaService} from '../categoria.service';
-import {ActivatedRoute, Router} from '@angular/router';
+import {Router} from '@angular/router';
 import {ToastrService} from 'ngx-toastr';
-import {ErrorHandleService} from '../../core/error-handle.service';
+import swal from 'sweetalert2';
 
 @Component({
   selector: 'app-criar',
@@ -57,4 +57,14 @@ export class CriarComponent implements OnInit {
     history.back();
   }
 
+  help() {
+    swal({
+        title: 'Ajuda',
+        html: 'Nome é o nome da categoria.' +
+          '<br> <br>' +
+          'Os campos com * ao seu lado são obrigatórios.',
+        type: 'info'
+      }
+    );
+  }
 }

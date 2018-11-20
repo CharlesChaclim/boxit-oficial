@@ -7,6 +7,7 @@ import {Router} from '@angular/router';
 import {ToastrService} from 'ngx-toastr';
 import {NgbDateCustomParserFormatter} from '../../shared/dateformat';
 import {NgbDateParserFormatter} from '@ng-bootstrap/ng-bootstrap';
+import swal from 'sweetalert2';
 
 @Component({
   selector: 'app-gerar',
@@ -27,8 +28,6 @@ export class GerarComponent implements OnInit {
   dataFclick = false;
   data_valida = false;
   type: number;
-  typeC: number;
-  typeE: number;
 
   constructor(
     private relatorioService: RelatorioService,
@@ -91,5 +90,26 @@ export class GerarComponent implements OnInit {
 
   back() {
     history.back();
+  }
+
+  help() {
+    swal({
+        title: 'Ajuda',
+        html: 'Data de Início é o período inicial que será gerado o relatório.' +
+          '<br> <br>' +
+          'Data de Fim é o período final que será gerado o relatório.' +
+          '<br> <br>' +
+          'Tipo de Relatório é o tipo de relatório que será gerado.' +
+          '<br> <br>' +
+          'Código do Produto é o identificador do produto que terá o relatório gerado. Habilitada apenas ' +
+          'no tipo de relatório "Controle de Estoque" e "Histórico do Produto".' +
+          '<br> <br>' +
+          'CNPJ do Cliente é o identificador do cliente que terá o relatório gerado. Habilitada apenas ' +
+          'no tipo de relatório "Histórico do Comprador".' +
+          '<br> <br>' +
+          'Os campos com * ao seu lado são obrigatórios.',
+        type: 'info'
+      }
+    );
   }
 }

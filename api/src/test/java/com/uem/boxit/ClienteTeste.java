@@ -31,6 +31,11 @@ public class ClienteTeste extends BoxitApplicationTests{
         Assertions.assertThat(clienteService.getOne(id).get().getNome()).isEqualTo(nomeFantasia);
     }
 
+    @Test
+    public void getOneCnpj(){
+        Assertions.assertThat(clienteService.getOneCnpj("78.966.326/0001-65")).isEqualTo(11);
+    }
+
 
     @Test
     public void create(){
@@ -68,7 +73,7 @@ public class ClienteTeste extends BoxitApplicationTests{
 
     @Test
     public void cnpjExist() {
-        String cnpj = "30.437.467/0001-64";
+        String cnpj = "78.966.326/0001-65";
         Assertions.assertThat(clienteService.cnpjExist(cnpj)).isEqualTo(true);
     }
 

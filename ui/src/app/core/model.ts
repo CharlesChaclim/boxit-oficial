@@ -74,6 +74,7 @@ export class Page {
 export class Estoque {
   nome: string;
   preco: number;
+  desconto: number;
   descricao: string;
   unidadeLote: number;
   qtd: number;
@@ -85,6 +86,7 @@ export class Estoque {
 export class EstoqueEdit {
   nome: string;
   preco: number;
+  desconto: number;
   descricao: string;
   unidadeLote: number;
   qtd: number;
@@ -106,6 +108,7 @@ export class Relatorio {
   dataFim: Date;
   tipo: number;
   CNPJ: string;
+  SKU: string;
   estado: string;
   cidade: string;
 }
@@ -113,4 +116,11 @@ export class Relatorio {
 export class Pagamento {
   dataPagamento: Date;
   nrBoleto: string;
+}
+
+export class AlterarQuantidade {
+  motivo: number;
+  motivoOutro: string;
+  qtd: number;
+  precoCompra: number;
 }

@@ -1,6 +1,10 @@
 <div class="col-12 offset-lg-1 col-lg-10">
   <div class="card">
     <div class="card-header text-center">
+      <div class="col-12 col-md-12">
+        <a (click)="help()" class="text-dark" style="text-decoration: none; float: right"><i
+          class="fal fa-question-circle"></i></a>
+      </div>
       <h3>Gerar Relatórios</h3>
     </div>
     <div class="card-body">
@@ -55,7 +59,7 @@
             <div class="form-group row" *ngIf="r.tipo == 2 || r.tipo == 4">
               <label class="col-md-3 col-form-label">Código do Produto <span class="text-danger">*</span></label>
               <div class="col-md-9">
-                <select class="custom-select" name="produto" #prod="ngModel" required [(ngModel)]="typeE" [ngModelOptions]="{standalone: true}">
+                <select class="custom-select" name="produto" #prod="ngModel" required [(ngModel)]="r.SKU" [ngModelOptions]="{standalone: true}">
                   <option value="">Escolha um produto</option>
                   <option *ngFor="let e of estoque" value="{{e.sku}}">{{e.sku}}</option>
                 </select>

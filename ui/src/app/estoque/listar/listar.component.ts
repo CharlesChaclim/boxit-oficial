@@ -113,4 +113,19 @@ export class ListarComponent implements OnInit {
     );
   }
 
+  help() {
+    swal({
+      title: 'Ajuda',
+      html: 'O botão <button class="btn btn-primary"><i class="fal fa-eye"></i></button> permite você ver o cadastro do produto.' +
+        '<br> <br> ' +
+        'O botão <button class="btn btn-secondary"><i class="fal fa-edit"></i></button> permite você editar o cadastro do produto.' +
+        '<br> <br>' +
+        'O botão <button class="btn btn-danger"><i class="fal fa-box-usd"></i></button> permite você alterar ' +
+        'a quantidade do produto cadastrado.' +
+        '<br> <br>' +
+        'O botão <span class="badge badge-pill badge-success">Ativo</span>/<span class="badge badge-pill badge-warning">Inativo</span> ' +
+        'permite você desativar/ativar o produto, assim como informar o estado do mesmo.',
+      type: 'info'}
+    );
+  }
 }
