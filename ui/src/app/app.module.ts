@@ -5,7 +5,6 @@ import {CoreModule} from './core/core.module';
 import {RouterModule} from '@angular/router';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {ToastrModule} from 'ngx-toastr';
-
 import {PagamentoComponent} from './pagamento/pagamento.component';
 import {SharedModule} from './shared/shared.module';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';

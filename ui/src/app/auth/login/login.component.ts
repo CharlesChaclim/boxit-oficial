@@ -26,10 +26,10 @@ export class LoginComponent implements OnInit {
   logar(form: NgForm) {
     this.auth.login(this.login.username, this.login.password)
       .then(() => {
-        if (this.login.username.length > 14) {
-          this.router.navigate(['/pedido']);
+        if (this.auth.jwtPayload.authorities[0] === 'FUNCIONARIO' || this.auth.jwtPayload.authorities[0] === 'GERENTE') {
+          this.router.navigate(['/estoque']);
         } else {
-          this.router.navigate(['/cliente']);
+          this.router.navigate(['/pedido']);
         }
       }).catch(err => {
       form.reset({username: this.login.username});

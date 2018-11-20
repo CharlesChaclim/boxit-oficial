@@ -124,3 +124,14 @@ export class AlterarQuantidade {
   qtd: number;
   precoCompra: number;
 }
+
+export class Carrinho {
+  id: string;
+  produtoId: string;
+  qty: string;
+}
+
+export class Cart {
+  id: string;
+  items: any;
+}

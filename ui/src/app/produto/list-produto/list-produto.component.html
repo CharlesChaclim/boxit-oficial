@@ -1,0 +1,70 @@
+<section class="col-12 offset-lg-1 col-lg-10">
+  <div class="card bg-light" style="margin-top: 10px">
+    <div class="card-header">
+      <div class="row">
+        <div class="col-12 col-md-8">
+          <h3>Lista de Produtos</h3>
+        </div>
+        <div class="col-12 col-md-4">
+          <div class="row">
+            <div class="col">
+              <input type="text" class="form-control" [(ngModel)]="nome" name="namae" id="namae" placeholder="Nome" (keyup)="filtrar(null, '20')">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="card-body">
+      <div class="col-12" *ngIf="prod?.totalElements > 0">
+        <div class="table-responsive">
+          <table class="table table-sm table-hover table-bordered table-striped text-center">
+            <thead>
+            <tr>
+              <th scope="col">Nome</th>
+              <th scope="col">Quantidade Disponivel</th>
+              <th scope="col">Un/Lote</th>
+              <th scope="col">Preço</th>
+              <th colspan="3">Quantidade</th>
+              <th scope="col">Comprar</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let produtos of prod.content">
+              <td>{{produtos.nome}}</td>
+              <td>{{produtos.qtd}}</td>
+              <td>{{produtos.unidadeLote}}</td>
+              <td>{{produtos.preco | currency:'BRL':true}}</td>
+              <td><button type="button" class="btn btn-primary" (click)="minus()"><i class="fas fa-minus"></i></button></td>
+              <td><input type="number" name="qtd" id="qtd" [(ngModel)]="qtd"></td>
+              <td><button type="button" class="btn btn-primary" (click)="add()"><i class="fas fa-plus"></i></button></td>
+              <td><button type="butto" class="btn btn-primary" (click)="addToCart(produtos.id, qtd)">Adicionar ao carrinho</button></td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="col-12 text-center" *ngIf="!(prod?.totalElements > 0)">
+        <span>Nenhum produto encontrado!</span>
+      </div>
+    </div>
+  </div>
+  <div class="row" style="margin-top: 10px;">
+    <div class="col-12 col-md-6 text-white">
+      <ngb-pagination
+        [collectionSize]="prod?.totalElements"
+        [page]="prod?.number + 1"
+        [pageSize]="prod?.size"
+        [rotate]="true"
+        [maxSize]="5"
+        (pageChange)="loadPage($event)"
+        [boundaryLinks]="true"
+        *ngIf="prod?.totalPages > 1"></ngb-pagination>
+    </div>
+    <div class="col-12 col-md-6 text-white">
+      Produtos por página:
+      <select class="custom-select col-6" (change)="mudarDeTamanho($event.target.value)">
+        <option *ngFor="let tamanho of tamanhos" value="{{tamanhos}}" [selected]=" tamanho == prod?.size">{{tamanho}}</option>
+      </select>
+    </div>
+  </div>
+</section>

@@ -1,5 +1,5 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <a class="navbar-brand">
+  <a class="navbar-brand" routerLink="{{home}}">
     <img src="assets/img/icon.png" width="30" height="30" alt=""> BoxIt
   </a>
   <button class="navbar-toggler" type="button" *ngIf="!showHome"
@@ -19,6 +19,15 @@
       <li ngbDropdown class="nav-item dropdown" *ngIf="ehGerente || ehFuncionario">
         <a (click)="toggle()" class="dropdown-item" routerLink="/cliente"><i
           class="fal fa-user"></i> Cliente</a>
+      </li>
+      <li ngbDropdown class="nav-item" *ngIf="ehCliente">
+        <a id="categorias" class="dropdown-toggle" style="cursor: pointer;" role="button" ngbDropdownToggle><i class="fal fa-list-ul"></i> Categorias</a>
+        <div ngbDropdownMenu aria-labelledby="topbar-funcionario" class="dropdown-menu">
+          <a (click)="toggle(); reload();" class="dropdown-item" routerLink="categoria-produto/{{cat.id}}/{{cat.nome}}" *ngFor="let cat of categoria">{{cat.nome}}</a>
+        </div>
+      </li>
+      <li ngbDropdown class="nav-item dropdown" *ngIf="ehCliente">
+        <a (click)="toggle()" class="dropdown-item" routerLink="/carrinho/{{this.caminho}}"><i class="fal fa-shopping-cart"></i> Carrinho</a>
       </li>
       <li ngbDropdown class="nav-item dropdown" *ngIf="ehGerente">
         <a id="topbar-funcionario" class="dropdown-toggle" style="cursor: pointer;" role="button" ngbDropdownToggle><i

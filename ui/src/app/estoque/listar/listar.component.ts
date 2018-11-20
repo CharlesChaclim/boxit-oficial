@@ -11,7 +11,6 @@ import {CategoriaService} from '../../categoria/categoria.service';
   styleUrls: ['./listar.component.scss']
 })
 export class ListarComponent implements OnInit {
-
   prod: Page;
   name = '';
   categoria = '';

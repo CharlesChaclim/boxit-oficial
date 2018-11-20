@@ -3,6 +3,8 @@ import {LogoutService} from '../../auth/logout.service';
 import {NavigationEnd, Router} from '@angular/router';
 import {AuthService} from '../../auth/auth.service';
 import {ClienteService} from '../../cliente/cliente.service';
+import {FuncionarioService} from '../../funcionario/funcionario.service';
+import {CategoriaService} from '../../categoria/categoria.service';
 
 @Component({
   selector: 'app-topbar',
@@ -14,13 +16,21 @@ export class TopbarComponent implements OnInit {
   ehFuncionario = false;
   ehCliente = false;
   ehGerente = false;
-caminho: any;
+  caminho: any;
   showHome = false;
+  payload: any;
+  categoria: any;
+  home: any;
 
-  constructor(private auth: AuthService,
-              private router: Router,
-              private logoutService: LogoutService,
-              private clienteService: ClienteService) {}
+  constructor(
+    private auth: AuthService,
+    private router: Router,
+    private logoutService: LogoutService,
+    private clienteService: ClienteService,
+    private funcionarioService: FuncionarioService,
+    private categoriaService: CategoriaService
+  ) {
+  }
 
   ngOnInit() {
     this.router.events
@@ -29,6 +39,23 @@ caminho: any;
           this.showHome = this.router.url !== '/';
           this.updateNavbar();
         }
+        this.payload = this.auth.jwtPayload;
+        let authorit = '';
+        if (this.payload === undefined || this.payload === null) {
+          authorit = null;
+        } else {
+          authorit = this.payload.authorities[0];
+        }
+        if (authorit === 'GERENTE' || authorit === 'FUNCIONARIO') {
+          this.home = 'estoque';
+        } else if (authorit === 'CLIENTE') {
+          this.home = 'pedido';
+        } else {
+          this.home = 'login';
+        }
+        this.categoriaService.listAll(null, '100').subscribe(
+           r => { this.categoria = r.content; }
+        );
       });
   }
 
@@ -42,13 +69,19 @@ caminho: any;
       this.showHome = false;
       if (payload.authorities[0] === 'FUNCIONARIO') {
         this.ehFuncionario = true;
-        // add aqui
+        this.funcionarioService.getByCpf(this.auth.jwtPayload.user_name).subscribe(
+          e => {this.caminho = e['id']; }
+        );
       } else if (payload.authorities[0] === 'CLIENTE') {
         this.ehCliente = true;
-        this.clienteService.getOneCnpj(this.auth.jwtPayload.user_name).subscribe((e) => {this.caminho = e; });
+        this.clienteService.getOneCnpj(this.auth.jwtPayload.user_name).subscribe((e) => {
+          this.caminho = e;
+        });
       } else if (payload.authorities[0] === 'GERENTE') {
         this.ehGerente = true;
-        // add aqui
+        this.funcionarioService.getByCpf(this.auth.jwtPayload.user_name).subscribe(
+          e => {this.caminho = e['id']; }
+        );
       }
     } else {
       this.ehFuncionario = false;
@@ -68,5 +101,9 @@ caminho: any;
       .then(() => {
         this.router.navigate(['/login']);
       });
+  }
+
+  reload() {
+    window.location.reload();
   }
 }

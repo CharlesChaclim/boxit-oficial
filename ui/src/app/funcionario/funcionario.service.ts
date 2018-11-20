@@ -40,6 +40,10 @@ export class FuncionarioService {
     return this.http.get<Page>(this.url + 'filter', {params: params});
   }
 
+  getByCpf(cpf: string) {
+    return this.http.get(this.url + cpf + '/cpf');
+  }
+
   emailExist(email: string) {
     return this.http.post(this.authUrl + 'email', {email});
   }

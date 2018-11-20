@@ -17,8 +17,8 @@ import {AuthModule} from '../auth/auth.module';
 import {CategoriaModule} from '../categoria/categoria.module';
 import {RelatorioModule} from '../relatorio/relatorio.module';
 import {PedidoModule} from '../pedido/pedido.module';
-
-
+import {ProdutoModule} from '../produto/produto.module';
+import {CarrinhoModule} from '../carrinho/carrinho.module';
 registerLocaleData(localePt, 'pt-BR');
 
 @NgModule({
@@ -39,7 +39,9 @@ registerLocaleData(localePt, 'pt-BR');
     HttpClientModule,
     FuncionarioModule,
     RelatorioModule,
-    AuthModule
+    ProdutoModule,
+    CarrinhoModule,
+    AuthModule,
   ],
   declarations: [
     NotFoundComponent,
