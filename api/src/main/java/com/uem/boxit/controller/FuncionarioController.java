@@ -37,6 +37,12 @@ public class FuncionarioController {
         return funcionarioService.getAll(pageable);
     }
 
+    @GetMapping("/{cpf}/cpf")
+    public ResponseEntity<Funcionario> getByCpf(@PathVariable String cpf) {
+        Optional<Funcionario> f = this.funcionarioService.getByCnpj(cpf);
+        return f.isPresent() ? ResponseEntity.ok(f.get()) : ResponseEntity.notFound().build();
+    }
+
     @GetMapping("/filter")
     public Page<Funcionario> filter(Pageable pageable, @RequestParam(required = false) String nome, @RequestParam(required = false) String cpf, @RequestParam(required = false) String email) {
         Page<Funcionario> page = funcionarioService.filter(nome, cpf, email, pageable);

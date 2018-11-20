@@ -39,6 +39,10 @@ public class FuncionarioService {
         return funcionarioRepository.findById(id);
     }
 
+    public Optional<Funcionario> getByCnpj(String cpf) {
+        return funcionarioRepository.findByCpf(cpf);
+    }
+
     public Page<Funcionario> filter(String nome, String cpf, String email, Pageable pageable) {
         if (!StringUtils.isEmpty(nome) && !StringUtils.isEmpty(cpf) && !StringUtils.isEmpty(email))
             return funcionarioRepository.findByNomeContainsAndCpfContainsAndEmailContains(nome, cpf, email, pageable);

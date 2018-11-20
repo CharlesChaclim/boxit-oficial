@@ -2,19 +2,16 @@ package com.uem.boxit.service;
 
 import com.uem.boxit.dto.NewProdutoDTO;
 import com.uem.boxit.dto.UpdateQtdDTO;
-import com.uem.boxit.model.PrecoCompra;
-import com.uem.boxit.model.Produto;
-import com.uem.boxit.model.Quantidade;
-import com.uem.boxit.repository.CategoriaRepository;
-import com.uem.boxit.repository.PrecoCompraRepository;
-import com.uem.boxit.repository.ProdutoRepository;
-import com.uem.boxit.repository.QuantidadeRepository;
+import com.uem.boxit.model.*;
+import com.uem.boxit.repository.*;
 import com.uem.boxit.storage.S3;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.http.impl.cookie.DateUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -35,6 +32,12 @@ public class ProdutoService {
 
     @Autowired
     private CategoriaRepository categoriaRepository;
+
+    @Autowired
+    private HistoricoRepository historicoRepository;
+
+    @Autowired
+    private FuncionarioService funcionarioService;
 
     @Autowired
     private S3 s3;
@@ -63,6 +66,26 @@ public class ProdutoService {
     @Transactional
     public Produto atualizar(Integer id, Produto produto) {
         Produto p = produtoRepository.getOne(id);
+        if (!p.getPreco().equals(produto.getPreco())) {
+            Historico historico = new Historico();
+            Object obj = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+            String username;
+            if (obj instanceof UserDetails) {
+                username = ((UserDetails)obj).getUsername();
+            } else {
+                username = obj.toString();
+            }
+            Optional<Funcionario> optional = funcionarioService.getByCnpj(username);
+            Usuario user = new Funcionario();
+            if (optional.isPresent()) {
+                user = optional.get();
+            }
+            historico.setCreateAt(new Date());
+            historico.setPreco(p.getPreco());
+            historico.setProduto(p);
+            historico.setUser(user);
+            historicoRepository.save(historico);
+        }
         p.setNome(produto.getNome());
         p.setCategoria(produto.getCategoria());
         p.setPreco(produto.getPreco());

@@ -8,7 +8,6 @@ import java.util.List;
 @Getter
 @Setter
 public class NewProdutoDTO {
-
     private String nome;
     private Double preco;
     private String descricao;
