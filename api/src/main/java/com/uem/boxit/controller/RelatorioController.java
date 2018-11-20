@@ -39,6 +39,7 @@ public class RelatorioController {
         parametros.put("vend",vend);
         JasperPrint print;
         if (dto.getTipo() == 2) {
+            parametros.put("sku", dto.getSku());
             try {
                 print = JasperFillManager.fillReport(caminho+"RelatorioEstoque.jasper", parametros, Conexao.getConnection());
                 JRPdfExporter exporter = new JRPdfExporter();
@@ -53,7 +54,7 @@ public class RelatorioController {
                 e.printStackTrace();
             }
         } else if (dto.getTipo() == 3) {
-            parametros.put("CNPJ", dto.getCNPJ());
+            parametros.put("CNPJ", dto.getCnpj());
             try {
                 print = JasperFillManager.fillReport(caminho+"HistoricoComprador.jasper", parametros, Conexao.getConnection());
                 JRPdfExporter exporter = new JRPdfExporter();

@@ -86,9 +86,7 @@ export class GerarComponent implements OnInit {
 
   gerarPDF() {
     this.relatorioService.geraRelatorio(this.r).subscribe(
-      resp => {
-        console.log(resp);
-      }
+      resp => { }
     );
   }
 
